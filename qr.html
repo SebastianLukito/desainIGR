@@ -22,8 +22,11 @@
                     <input type="text" id="url" name="url" placeholder="Masukkan URL-nya di sini">
                 </div>
                 <div class="logo-section">
-                    <label for="logo">Unggah Logo:</label>
-                    <input type="file" id="logo" name="logo">
+                    <label for="logo-drop">Unggah Logo:</label>
+                    <div id="logo-drop" class="drop-section">
+                        <p>Drag & Drop Logo-nya di sini</p>
+                    </div>
+                    <input type="file" id="logo" name="logo" accept=".png, .jpg, .jpeg, .ico" style="display: none;">
                     <label for="logo-size">Ukuran Logo (1-10):</label>
                     <input type="number" id="logo-size" name="logo-size" min="1" max="10" value="4">
                     <label for="padding">Ukuran Background Logo:</label>

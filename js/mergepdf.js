@@ -8,7 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const loadingPopup = document.getElementById('loading-popup');
     let files = [];
 
-    dropSection.addEventListener('click', function () {
+    dropSection.addEventListener('click', function (e) {
+        if (e.target.tagName === 'BUTTON') {
+            return; // Prevent triggering file input if buttons are clicked
+        }
         pdfInput.click();
     });
 
@@ -47,9 +50,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function displayFiles(files) {
         fileList.innerHTML = '';
-        files.forEach(file => {
+        files.forEach((file, index) => {
             const fileItem = document.createElement('div');
             fileItem.classList.add('file-item');
+            fileItem.setAttribute('data-index', index);
 
             const fileIcon = document.createElement('img');
             fileIcon.src = 'assets/img/pdf.png'; // Path to your PDF icon
@@ -58,8 +62,31 @@ document.addEventListener('DOMContentLoaded', function () {
             const fileName = document.createElement('span');
             fileName.textContent = truncateFileName(file.name, 15);
 
+            const buttonContainer = document.createElement('div');
+            buttonContainer.classList.add('button-container');
+
+            const upButton = document.createElement('button');
+            upButton.classList.add('up-button');
+            upButton.innerHTML = '⬆';
+            upButton.addEventListener('click', function (e) {
+                e.stopPropagation(); // Prevent triggering file input
+                moveFileUp(index);
+            });
+
+            const downButton = document.createElement('button');
+            downButton.classList.add('down-button');
+            downButton.innerHTML = '⬇';
+            downButton.addEventListener('click', function (e) {
+                e.stopPropagation(); // Prevent triggering file input
+                moveFileDown(index);
+            });
+
+            buttonContainer.appendChild(upButton);
+            buttonContainer.appendChild(downButton);
+
             fileItem.appendChild(fileIcon);
             fileItem.appendChild(fileName);
+            fileItem.appendChild(buttonContainer);
             fileList.appendChild(fileItem);
         });
 
@@ -77,10 +104,28 @@ document.addEventListener('DOMContentLoaded', function () {
         return fileName;
     }
 
+    function moveFileUp(index) {
+        if (index > 0) {
+            const temp = files[index - 1];
+            files[index - 1] = files[index];
+            files[index] = temp;
+            displayFiles(files);
+        }
+    }
+
+    function moveFileDown(index) {
+        if (index < files.length - 1) {
+            const temp = files[index + 1];
+            files[index + 1] = files[index];
+            files[index] = temp;
+            displayFiles(files);
+        }
+    }
+
     async function handleFiles(files) {
         try {
             const pdfDocs = await Promise.all(files.map(file => file.arrayBuffer().then(buffer => PDFLib.PDFDocument.load(buffer))));
-            const mergedPdfBytes = await mergePdfPages(pdfDocs);
+            const mergedPdfBytes = await mergePdfDocs(pdfDocs);
 
             const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
@@ -114,35 +159,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    async function mergePdfPages(docs) {
+    async function mergePdfDocs(docs) {
         const mergedPdf = await PDFLib.PDFDocument.create();
 
         for (const doc of docs) {
-            try {
-                const copiedPages = await doc.copyPages(doc, [0, 1]);
-                if (copiedPages.length >= 2) {
-                    const [firstPage, secondPage] = copiedPages;
-                    console.log('Copied first and second pages of document:', doc);
-
-                    const width = firstPage.getWidth() + secondPage.getWidth();
-                    const height = Math.max(firstPage.getHeight(), secondPage.getHeight());
-
-                    const newPage = mergedPdf.addPage([width, height]);
-
-                    const [embeddedFirstPage, embeddedSecondPage] = await mergedPdf.embedPages([firstPage, secondPage]);
-
-                    newPage.drawPage(embeddedFirstPage, { x: 0, y: 0 });
-                    newPage.drawPage(embeddedSecondPage, { x: firstPage.getWidth(), y: 0 });
-                    console.log('Merged pages side by side.');
-                } else {
-                    console.warn('Document does not have enough pages:', doc);
-                }
-            } catch (error) {
-                console.error('Error copying pages from document:', doc, error);
-            }
+            const copiedPages = await mergedPdf.copyPages(doc, doc.getPageIndices());
+            copiedPages.forEach(page => mergedPdf.addPage(page));
         }
 
-        console.log('All pages merged successfully.');
         return await mergedPdf.save();
     }
 

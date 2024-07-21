@@ -109,7 +109,7 @@ button {
 
 button:hover {
     background-color: rgb(200, 50, 50);
-    transform: scale(1.01);
+    transform: scale(1.05);
 }
 
 .qr-display {
@@ -137,6 +137,7 @@ button:hover {
     cursor: pointer;
     transition: background-color 0.3s ease, border-color 0.3s ease;
     box-sizing: border-box;
+    position: relative; /* Add relative positioning for buttons */
 }
 
 .drop-section.dragover {
@@ -159,6 +160,8 @@ button:hover {
     align-items: center;
     border: 1px solid #555;
     transition: background-color 0.3s ease;
+    cursor: default; /* Updated from 'move' to 'default' */
+    justify-content: space-between; /* Add space between elements */
 }
 
 .file-item:hover {
@@ -173,10 +176,34 @@ button:hover {
 
 .file-item span {
     display: inline-block;
-    max-width: 100px; /* Adjust this value as needed */
+    max-width: 100px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.up-button, .down-button {
+    width: 27px;
+    height: 27px;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 2px 0;
+}
+
+.up-button:hover, .down-button:hover {
+    background-color: #242424;
+    color: #ffffff;
 }
 
 footer {

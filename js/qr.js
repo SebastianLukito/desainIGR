@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const saveBtn = document.getElementById('save-btn');
     const newBtn = document.getElementById('new-btn');
     const qrDisplay = document.getElementById('qr-display');
+    const logoDrop = document.getElementById('logo-drop');
+    const logoInput = document.getElementById('logo');
     let qrCodeData = null;
     let canvas = null;
 
@@ -36,9 +38,53 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    logoDrop.addEventListener('click', function() {
+        logoInput.click();
+    });
+
+    logoInput.addEventListener('change', function() {
+        handleLogoFiles(logoInput.files);
+    });
+
+    logoDrop.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        logoDrop.classList.add('dragover');
+    });
+
+    logoDrop.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        logoDrop.classList.remove('dragover');
+    });
+
+    logoDrop.addEventListener('drop', function(e) {
+        e.preventDefault();
+        logoDrop.classList.remove('dragover');
+        handleLogoFiles(e.dataTransfer.files);
+    });
+
+    function handleLogoFiles(files) {
+        if (files.length > 1) {
+            alert('Hanya satu logo yang bisa dipilih.');
+            return;
+        }
+        const file = files[0];
+        if (!['image/png', 'image/jpeg', 'image/jpg', 'image/x-icon'].includes(file.type)) {
+            alert('Format file tidak didukung. Pilih file dengan format PNG, JPG, JPEG, atau ICO.');
+            return;
+        }
+        logoInput.files = files;
+        const dropText = logoDrop.querySelector('p');
+        if (dropText) {
+            dropText.style.display = 'none';
+        }
+        const fileName = document.createElement('span');
+        fileName.textContent = file.name;
+        logoDrop.appendChild(fileName);
+    }
+
     function generateQRCode() {
         const url = document.getElementById('url').value;
-        const logoFile = document.getElementById('logo').files[0];
+        const logoFile = logoInput.files[0];
         const logoSize = parseInt(document.getElementById('logo-size').value);
         const padding = parseInt(document.getElementById('padding').value);
         const complexity = parseInt(document.getElementById('complexity').value);
@@ -147,6 +193,9 @@ document.addEventListener('DOMContentLoaded', function () {
             qrDisplay.removeChild(canvas);
             canvas = null;
         }
+
+        logoDrop.querySelector('p').style.display = 'block';
+        logoDrop.querySelectorAll('span').forEach(span => span.remove());
 
         qrDisplay.innerHTML = '<p>No QR code generated.</p>';
         qrCodeData = null;
