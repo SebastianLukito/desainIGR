@@ -82,6 +82,11 @@ body {
     background: #ffa509;
 }
 
+.right-panel {
+    max-height: 550px; /* Set maximum height */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
 .input-section, .button-section, .drop-section, .quality-section {
     margin-bottom: 20px;
     width: 100%;
@@ -130,6 +135,11 @@ button:hover {
     text-align: center;
     position: relative;
     box-sizing: border-box;
+}
+
+.file-display {
+    max-height: 400px; /* Set maximum height for file list */
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .qr-display p, .file-display p {

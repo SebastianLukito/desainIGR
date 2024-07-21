@@ -132,12 +132,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function setupDownload(images) {
         downloadBtn.style.display = 'block';
-        downloadBtn.onclick = function () {
-            images.forEach(img => {
+        downloadBtn.onclick = async function () {
+            const zip = new JSZip();
+            const imgFolder = zip.folder("images");
+
+            for (const img of images) {
+                const response = await fetch(img.src);
+                const blob = await response.blob();
+                imgFolder.file(img.alt, blob);
+            }
+
+            zip.generateAsync({ type: "blob" }).then(function (content) {
                 const a = document.createElement('a');
-                a.href = img.src;
-                a.download = img.alt;
+                const url = URL.createObjectURL(content);
+                a.href = url;
+                a.download = "images.zip";
                 a.click();
+                URL.revokeObjectURL(url);
             });
         };
     }
