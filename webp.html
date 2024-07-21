@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF to WEBP Converter</title>
+    <link rel="icon" href="assets/img/iconjpg.jpg" type="image/jpg">
+    <link rel="stylesheet" href="css/webp.css">
+</head>
+<body>
+    <div class="container">
+        <div class="marquee" id="marquee">
+            <p>MARKETING INDOGROSIR - SUB DIVISI DESAIN GRAFIS
+                <img src="assets/img/igr.png" alt="Logo Indogrosir" class="marquee-logo">
+            </p>
+        </div>
+        <main class="main">
+            <section class="left-panel">
+                <div class="drop-section" id="drop-section">
+                    <input type="file" id="pdf" name="pdf" accept=".pdf" multiple style="display: none;">
+                    <p>Drag & Drop PDF-nya di sini, gan <br> untuk mengonversi PDF ke WEBP</p>
+                    <div id="file-list"></div>
+                </div>
+                <div class="quality-section">
+                    <label for="quality">Kualitas Gambar (pixels):</label>
+                    <input type="number" id="quality" name="quality" min="10" max="3000" value="300">
+                </div>
+                <div class="button-section">
+                    <button id="convert-btn">Konversi PDF ke WEBP</button>
+                    <button id="reset-btn">Masukan PDF Baru</button>
+                </div>
+            </section>
+            <section class="right-panel">
+                <div class="button-section">
+                    <button id="download-btn" style="display:none;">Download Semua Gambar</button>
+                </div>
+                <div class="file-display" id="file-display">
+                    <div id="output-file-list"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>&copy; Marketing Indogrosir Sub Divisi Desain Grafis 2024</p>
+    </footer>
+    <div id="loading-popup" class="loading-popup" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Lagi diproses... Mohon tunggu ya mas...</p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script defer src="js/webp.js"></script>
+</body>
+</html>

@@ -135,7 +135,8 @@ body {
     left: 50%;
     transform: translate(-50%, -50%) scale(0.1);
     border-radius: 1rem;
-    background-color: #ddfbff;
+    color: #080808;
+    background-color: #ffffff;
     background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
     visibility: hidden;
     padding: 2rem;
@@ -144,10 +145,6 @@ body {
     z-index: 10;
     max-height: 80vh;
     overflow-y: auto;
-}
-
-.popupContainer:hover {
-    background-color: #ffffff;
 }
 
 .popupActive {
