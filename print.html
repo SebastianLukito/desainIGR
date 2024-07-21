@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print PDF Khusus Untuk Harga Hemat</title>
+    <link rel="icon" href="assets/img/iconjpg.jpg" type="image/jpg">
+    <link rel="stylesheet" href="css/print.css">
+</head>
+<body>
+    <div class="container">
+        <div class="marquee" id="marquee">
+            <p>MARKETING INDOGROSIR - SUB DIVISI DESAIN GRAFIS
+                <img src="assets/img/igr.png" alt="Logo Indogrosir" class="marquee-logo">
+            </p>
+        </div>
+        <main class="main">
+            <section class="left-panel">
+                <div class="drop-section" id="drop-section">
+                    <input type="file" id="pdf" name="pdf" accept=".pdf" multiple style="display: none;">
+                    <p>Drag & Drop PDF-nya di sini gan</p>
+                    <div id="file-list"></div>
+                </div>
+                <div class="button-section">
+                    <button id="merge-btn">Proses Gan</button>
+                    <button id="reset-btn">Masukan PDF Baru</button>
+                </div>
+            </section>
+            <section class="right-panel">
+                <div class="qr-display" id="qr-display">
+                </div>
+                <div class="button-section">
+                    <button id="download-btn" style="display:none;">Download PDF Hasilnya</button>
+                </div>
+            </section>
+        </main>
+        
+    </div>
+    <footer>
+        <p>&copy; Marketing Indogrosir Sub Divisi Desain Grafis 2024</p>
+    </footer>
+    <div id="loading-popup" class="loading-popup" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Lagi diproses... Mohon tunggu ya mas...</p>
+    </div>
+    <script defer src="js/print.js"></script>
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script>
+        document.getElementById('marquee').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

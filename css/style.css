@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: rgb(21, 21, 21);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.marquee {
+    width: 100%;
+    background-color: #000;
+    color: #e0e0e0;
+    text-align: center;
+    padding-top: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.marquee:hover {
+    background-color: #292929;
+    color: white;
+}
+
+.marquee:hover p {
+    animation-play-state: paused;
+}
+
+.marquee p {
+    display: inline-block;
+    animation: marquee 20s linear infinite alternate;
+}
+
+.marquee img.marquee-logo {
+    height: 30px;
+    vertical-align: middle;
+    margin-left: 10px;
+    padding-inline: 1.5px;
+    padding-block: 1px;
+    background-color: #ffffff;
+    border-radius: 2px;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(100%); }
+    50% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+.mainContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    flex: 1;
+    background: linear-gradient(135deg, #f06, #e3890b);
+}
+
+.buttonContainer {
+    margin: 10px;
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: #ffd609;
+    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-size: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition: background 0.9s ease;
+}
+
+.buttonContainer:hover {
+    background: #ff9800;
+}
+
+.buttonContainer .icon {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 0 auto 10px auto;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    transition: transform 0.3s ease;
+}
+
+.buttonContainer .icon:hover {
+    transform: scale(1.1);
+}
+
+.btn {
+    outline: none;
+    border: none;
+    background-color: rgb(245, 73, 73);
+    color: black;
+    font-size: 20px;
+    padding: 1rem 4rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.01s ease;
+}
+
+.btn:hover {
+    color: white;
+    background-color: rgb(200, 50, 50);
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.popupContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    border-radius: 1rem;
+    background-color: #fff;
+    visibility: hidden;
+    padding: 2rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s linear;
+    z-index: 10;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.popupActive {
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+    animation: popin 0.8s ease;
+}
+
+@keyframes popin {
+    0% { transform: translate(-50%, -50%) scale(0); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.popupContainer h2,
+p {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.sub-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.child-sub-buttons {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    color: black;
+    transition: 0.7s ease;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.child-sub-buttons.show {
+    display: flex;
+    opacity: 1;
+    max-height: 500px; /* arbitrary large value to allow the content to fully expand */
+}
+
+.child-sub-buttons p {
+    margin: 0 0 5px 0;
+}
+
+.child-sub-buttons a {
+    background-color: rgb(200, 73, 73);
+}
+
+.child-sub-buttons a:hover {
+    background-color: rgb(180, 63, 63);
+}
+
+.copy-btn {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.close-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: rgb(245, 73, 73);
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: rgb(234, 183, 183);
+}
+
+footer {
+    background-color: #000;
+    color: #e0e0e0;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: auto;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transition: box-shadow 0.3s ease;
+}
+
+footer:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+}
+
+@media (max-width: 768px) {
+    .mainContainer {
+        flex-direction: column;
+    }
+
+    .buttonContainer {
+        width: 80%;
+        margin: 10px 0;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .popupContainer {
+        width: 90%;
+        left: 5%;
+        transform: translateX(0) scale(0.1);
+    }
+
+    .popupActive {
+        transform: translateX(0) scale(1);
+    }
+}
