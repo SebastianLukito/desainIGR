@@ -50,12 +50,12 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("Complexity:", complexity);
 
         if (!url) {
-            alert('Please enter a URL.');
+            alert('Masukkan URL dulu bosku');
             return;
         }
 
         if (!validateURL(url)) {
-            alert('Invalid URL. Please enter a valid URL.');
+            alert('URL yang bosku masukkan tidak valid. Silakan cek kembali.');
             return;
         }
 
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
             link.href = qrCodeData.toDataURL("image/png");
             link.click();
         } else {
-            alert('No QR code to save. Please generate a QR code first.');
+            alert('Isi data-data QR dan buat QR-nya dulu bosku');
         }
     }
 
