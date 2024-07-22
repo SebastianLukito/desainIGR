@@ -18,3 +18,18 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
             document.getElementById('errorMessage').innerText = 'Error logging in. Please try again later.';
         });
 });
+
+// JavaScript to handle hover effect for motor animation and bubble teks
+const motorAnimation = document.querySelector('.motor-container');
+const bubbleTeks = document.querySelector('.bubble-teks');
+
+motorAnimation.addEventListener('mouseover', () => {
+    bubbleTeks.style.display = 'block';
+    bubbleTeks.style.position = 'absolute';
+    bubbleTeks.style.left = `${motorAnimation.getBoundingClientRect().left - bubbleTeks.offsetWidth - 250}px`;
+    bubbleTeks.style.top = `${motorAnimation.getBoundingClientRect().top + 50}px`;
+});
+
+motorAnimation.addEventListener('mouseout', () => {
+    bubbleTeks.style.display = 'none';
+});
