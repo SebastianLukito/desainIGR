@@ -125,7 +125,7 @@ body {
 .btn:hover {
     color: white;
     background-color: rgb(5, 5, 5);
-    transform: scale(1.05);
+    transform: scale(1.01);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -174,11 +174,11 @@ p {
     display: none;
     flex-direction: column;
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 0px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 10px;
-    background-color: #f0f0f0;
+    background-color: #d9d9d9;
     color: black;
     transition: 0.01s ease;
     opacity: 0;
@@ -194,14 +194,17 @@ p {
 
 .child-sub-buttons p {
     margin: 0 0 5px 0;
+    font-weight: bold;
 }
 
 .child-sub-buttons a {
-    background-color: rgb(200, 73, 73);
+    background-color: rgb(255, 179, 0);
 }
 
 .child-sub-buttons a:hover {
-    background-color: rgb(180, 63, 63);
+    background-color: rgb(255, 123, 0);
+    color: white;
+    font-weight: bold;
 }
 
 .copy-btn {
