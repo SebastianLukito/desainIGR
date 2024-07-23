@@ -11,7 +11,27 @@ document.addEventListener('DOMContentLoaded', function () {
     const fileList = document.getElementById('file-list');
     const loadingPopup = document.getElementById('loading-popup');
     const qualityInput = document.getElementById('quality');
+    const webpBtn = document.getElementById('webp-btn');
+    const jpegBtn = document.getElementById('jpeg-btn');
+    const pngBtn = document.getElementById('png-btn');
+    const resetBtn = document.getElementById('reset-btn');
     let files = [];
+    let selectedFormat = 'webp'; // Default format
+
+    // Format selection
+    webpBtn.addEventListener('click', () => selectFormat('webp'));
+    jpegBtn.addEventListener('click', () => selectFormat('jpeg'));
+    pngBtn.addEventListener('click', () => selectFormat('png'));
+
+    function selectFormat(format) {
+        selectedFormat = format;
+        webpBtn.classList.remove('active');
+        jpegBtn.classList.remove('active');
+        pngBtn.classList.remove('active');
+        if (format === 'webp') webpBtn.classList.add('active');
+        if (format === 'jpeg') jpegBtn.classList.add('active');
+        if (format === 'png') pngBtn.classList.add('active');
+    }
 
     dropSection.addEventListener('click', function () {
         pdfInput.click();
@@ -47,7 +67,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         // Show loading popup
         loadingPopup.style.display = 'flex';
-        handleFiles(files);
+        handleFiles(files, selectedFormat);
+    });
+
+    resetBtn.addEventListener('click', function () {
+        files = [];
+        fileList.innerHTML = '';
+        outputFileList.innerHTML = '';
+        pdfInput.value = ''; // Reset input file
+
+        // Show "Drag & Drop PDF-nya di sini gan" text
+        const dropText = dropSection.querySelector('p');
+        if (dropText) {
+            dropText.style.display = 'block';
+        }
+
+        // Hide download button and file display
+        fileDisplay.innerHTML = '';
+        downloadBtn.style.display = 'none';
     });
 
     function displayFiles(files) {
@@ -99,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return fileName;
     }
 
-    async function handleFiles(files) {
+    async function handleFiles(files, format) {
         try {
             const quality = parseInt(qualityInput.value, 10);
             const images = [];
@@ -111,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 for (let i = 1; i <= numPages; i++) {
                     const page = await pdf.getPage(i);
-                    const img = await convertPdfPageToWebp(page, i - 1, quality, file.name);
+                    const img = await convertPdfPageToImage(page, i - 1, quality, file.name, format);
                     images.push(img);
                 }
             }
@@ -153,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
     }
 
-    async function convertPdfPageToWebp(page, pageIndex, quality, fileName) {
+    async function convertPdfPageToImage(page, pageIndex, quality, fileName, format) {
         const viewport = page.getViewport({ scale: 2 });
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
@@ -162,10 +199,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
         await page.render({ canvasContext: context, viewport: viewport }).promise;
 
-        const dataUrl = canvas.toDataURL('image/webp', quality / 100);
+        let mimeType;
+        if (format === 'webp') {
+            mimeType = 'image/webp';
+        } else if (format === 'jpeg' || format === 'jpg') {
+            mimeType = 'image/jpeg';
+        } else if (format === 'png') {
+            mimeType = 'image/png';
+        }
+
+        const dataUrl = canvas.toDataURL(mimeType, quality / 100);
         const img = document.createElement('img');
         img.src = dataUrl;
-        img.alt = `${fileName.split('.')[0]}-${pageIndex + 1}.webp`;
+        img.alt = `${fileName.split('.')[0]}-${pageIndex + 1}.${format}`;
 
         return img;
     }
@@ -189,22 +235,4 @@ document.addEventListener('DOMContentLoaded', function () {
             outputFileList.appendChild(fileItem);
         });
     }
-
-    // Event listener for reset button
-    document.getElementById('reset-btn').addEventListener('click', function () {
-        files = [];
-        fileList.innerHTML = '';
-        outputFileList.innerHTML = '';
-        pdfInput.value = ''; // Reset input file
-
-        // Show "Drag & Drop PDF-nya di sini gan" text
-        const dropText = dropSection.querySelector('p');
-        if (dropText) {
-            dropText.style.display = 'block';
-        }
-
-        // Hide download button and file display
-        fileDisplay.innerHTML = '';
-        downloadBtn.style.display = 'none';
-    });
 });

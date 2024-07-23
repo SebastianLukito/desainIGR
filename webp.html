@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF to WEBP Converter</title>
+    <title>PDF to Image Converter</title>
     <link rel="icon" href="assets/img/iconjpg.jpg" type="image/jpg">
     <link rel="stylesheet" href="css/webp.css">
 </head>
@@ -18,15 +18,20 @@
             <section class="left-panel">
                 <div class="drop-section" id="drop-section">
                     <input type="file" id="pdf" name="pdf" accept=".pdf" multiple style="display: none;">
-                    <p>Drag & Drop PDF-nya di sini, gan <br> untuk mengonversi PDF ke WEBP</p>
+                    <p>Drag & Drop PDF-nya di sini, gan <br> untuk mengonversi PDF ke gambar</p>
                     <div id="file-list"></div>
                 </div>
                 <div class="quality-section">
                     <label for="quality">Kualitas Gambar (pixels):</label>
                     <input type="number" id="quality" name="quality" min="10" max="3000" value="300">
                 </div>
+                <div class="format-section">
+                    <button id="webp-btn">WEBP</button>
+                    <button id="jpeg-btn">JPEG</button>
+                    <button id="png-btn">PNG</button>
+                </div>
                 <div class="button-section">
-                    <button id="convert-btn">Konversi PDF ke WEBP</button>
+                    <button id="convert-btn">Konversi</button>
                     <button id="reset-btn">Masukan PDF Baru</button>
                 </div>
             </section>
