@@ -16,7 +16,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Ganti dari height ke min-height */
+    min-height: 100vh;
     overflow: hidden;
 }
 
@@ -64,15 +64,15 @@ body {
 
 .background-container {
     position: relative;
-    width: 100vw; /* Menggunakan unit viewport width */
-    height: 100vh; /* Menggunakan unit viewport height */
+    width: 100vw;
+    height: 100vh;
     background: linear-gradient(135deg, rgb(9, 43, 87), #9ce1ff);
     background-size: cover;
     background-position: center;
 }
 
 .login-container {
-    width: 90vw; /* Menggunakan unit viewport width */
+    width: 90vw;
     max-width: 400px;
     padding: 20px;
     background: linear-gradient(135deg, rgb(44, 108, 163), #9ce1ff);
@@ -170,11 +170,8 @@ body {
 .bubble-teks {
     display: none;
     position: absolute;
-    /* top: 20%; 
-    left: 20px; Align left */
-    transform: translate(-110%, 0); /* Adjust the left position as needed */
-    width: 30vw; /* Menggunakan unit viewport width */
-    max-width: 200px; /* Batas maksimum lebar */
+    width: 30vw;
+    max-width: 200px;
     z-index: 2;
 }
 
@@ -187,8 +184,8 @@ body {
 }
 
 .motor-animation {
-    width: 40vw; /* Menggunakan unit viewport width */
-    max-width: 500px; /* Batas maksimum lebar */
+    width: 40vw;
+    max-width: 500px;
     animation: motorMove 1.5s infinite;
     position: relative;
 }
@@ -205,11 +202,32 @@ body {
     }
     
     .motor-animation {
-        width: 60vw; /* Lebih kecil untuk layar sempit */
+        width: 60vw;
     }
 
     .bubble-teks {
-        width: 40vw; /* Lebih kecil untuk layar sempit */
+        width: 40vw;
         top: 25%;
     }
+}
+
+/* JavaScript untuk menyesuaikan posisi bubble-teks */
+.motor-container {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.motor-animation {
+    width: 40vw;
+    max-width: 500px;
+    animation: motorMove 1.5s infinite;
+    position: relative;
+}
+
+@keyframes motorMove {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, -10px); }
 }

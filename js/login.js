@@ -27,7 +27,7 @@ motorAnimation.addEventListener('mouseover', () => {
     bubbleTeks.style.display = 'block';
     const motorRect = motorAnimation.getBoundingClientRect();
     const bubbleWidth = bubbleTeks.offsetWidth;
-    bubbleTeks.style.left = `${motorRect.left - bubbleWidth + 50}px`;
+    bubbleTeks.style.left = `${motorRect.left - bubbleWidth - 180}px`;
     bubbleTeks.style.top = `${motorRect.top - 40}px`;
 });
 
