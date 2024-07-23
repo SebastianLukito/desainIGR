@@ -17,7 +17,8 @@ body {
 
 .marquee {
     width: 100%;
-    background-color: #000;
+    background-color: rgb(10, 66, 101);
+    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
     color: #e0e0e0;
     text-align: center;
     cursor: pointer;
@@ -66,7 +67,7 @@ body {
     padding: 20px;
     flex: 1;
     gap: 10px; /* Added gap for spacing between buttons */
-    background: linear-gradient(135deg, #f06, #3a9ef1);
+    background: url('backgroundlogin.jpg') no-repeat center center/cover;
 }
 
 .buttonContainer {
@@ -95,7 +96,8 @@ body {
 }
 
 footer {
-    background-color: #000;
+    background-color: rgb(10, 66, 101);
+    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
     color: #e0e0e0;
     text-align: center;
     padding: 10px 0;
