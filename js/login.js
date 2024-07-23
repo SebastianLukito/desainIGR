@@ -25,9 +25,10 @@ const bubbleTeks = document.querySelector('.bubble-teks');
 
 motorAnimation.addEventListener('mouseover', () => {
     bubbleTeks.style.display = 'block';
-    bubbleTeks.style.position = 'absolute';
-    bubbleTeks.style.left = `${motorAnimation.getBoundingClientRect().left - bubbleTeks.offsetWidth - 250}px`;
-    bubbleTeks.style.top = `${motorAnimation.getBoundingClientRect().top + 50}px`;
+    const motorRect = motorAnimation.getBoundingClientRect();
+    const bubbleWidth = bubbleTeks.offsetWidth;
+    bubbleTeks.style.left = `${motorRect.left - bubbleWidth + 50}px`;
+    bubbleTeks.style.top = `${motorRect.top - 40}px`;
 });
 
 motorAnimation.addEventListener('mouseout', () => {

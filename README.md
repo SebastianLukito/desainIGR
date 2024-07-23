@@ -1,2 +1,2 @@
-This project sucks, don't mind reading further
-So many bugs, not even good to use
+This project sucks on so many levels
+So many bugs, not even worth reading further

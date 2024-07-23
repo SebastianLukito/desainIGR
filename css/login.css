@@ -16,7 +16,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh; /* Ganti dari height ke min-height */
     overflow: hidden;
 }
 
@@ -64,15 +64,15 @@ body {
 
 .background-container {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 100vw; /* Menggunakan unit viewport width */
+    height: 100vh; /* Menggunakan unit viewport height */
     background: linear-gradient(135deg, rgb(9, 43, 87), #9ce1ff);
     background-size: cover;
     background-position: center;
 }
 
 .login-container {
-    width: 100%;
+    width: 90vw; /* Menggunakan unit viewport width */
     max-width: 400px;
     padding: 20px;
     background: linear-gradient(135deg, rgb(44, 108, 163), #9ce1ff);
@@ -80,7 +80,7 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     position: absolute;
     top: 50%;
-    left: 70%;
+    left: 72%;
     transform: translate(-50%, -50%);
     z-index: 3;
 }
@@ -170,11 +170,12 @@ body {
 .bubble-teks {
     display: none;
     position: absolute;
-    top: 25%;
-    left: 80px; /* Adjust the left position as needed */
-    transform: translateY(-50%);
-    width: 200px; /* Adjust the width as needed */
-    z-index: 2; /* Ensure it is above other elements */
+    /* top: 20%; 
+    left: 20px; Align left */
+    transform: translate(-110%, 0); /* Adjust the left position as needed */
+    width: 30vw; /* Menggunakan unit viewport width */
+    max-width: 200px; /* Batas maksimum lebar */
+    z-index: 2;
 }
 
 .motor-container {
@@ -186,13 +187,29 @@ body {
 }
 
 .motor-animation {
-    width: 550px; /* Adjust the width as needed */
+    width: 40vw; /* Menggunakan unit viewport width */
+    max-width: 500px; /* Batas maksimum lebar */
     animation: motorMove 1.5s infinite;
     position: relative;
 }
 
-
 @keyframes motorMove {
     0%, 100% { transform: translate(-50%, 0); }
     50% { transform: translate(-50%, -10px); }
+}
+
+/* Media query untuk penyesuaian pada layar yang lebih kecil */
+@media (max-width: 768px) {
+    .login-container {
+        width: 90vw;
+    }
+    
+    .motor-animation {
+        width: 60vw; /* Lebih kecil untuk layar sempit */
+    }
+
+    .bubble-teks {
+        width: 40vw; /* Lebih kecil untuk layar sempit */
+        top: 25%;
+    }
 }
