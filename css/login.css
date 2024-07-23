@@ -66,16 +66,16 @@ body {
     position: relative;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(135deg, rgb(9, 43, 87), #9ce1ff);
-    background-size: cover;
-    background-position: center;
+    background: url('backgroundlogin.jpg') no-repeat center center/cover;
 }
+
+
 
 .login-container {
     width: 90vw;
     max-width: 400px;
     padding: 20px;
-    background: linear-gradient(135deg, rgb(44, 108, 163), #9ce1ff);
+    background: linear-gradient(135deg, #9ce1ff, rgb(40, 42, 44));
     border-radius: 1rem;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     position: absolute;
@@ -87,6 +87,13 @@ body {
 
 .login-container:hover {
     background: linear-gradient(135deg, rgb(9, 43, 87), #9ce1ff);
+}
+
+.login-container h6 {
+    color: white;
+    font-size: 0.8rem;
+    margin-top: 10px;
+    text-align: center;
 }
 
 .login-box {
@@ -177,22 +184,23 @@ body {
 
 .motor-container {
     position: absolute;
-    bottom: 10%;
-    left: 50%;
+    bottom: 84%;
+    left: 10%;
     transform: translateX(-50%);
     z-index: 1;
 }
 
-.motor-animation {
-    width: 40vw;
-    max-width: 500px;
+.motor-animation, .motor-baruteks {
+    height: 35vw;
+    width: auto;
     animation: motorMove 1.5s infinite;
-    position: relative;
+    position: absolute;
+    left: 0;
 }
 
 @keyframes motorMove {
-    0%, 100% { transform: translate(-50%, 0); }
-    50% { transform: translate(-50%, -10px); }
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(0, -10px); }
 }
 
 /* Media query untuk penyesuaian pada layar yang lebih kecil */
@@ -201,7 +209,7 @@ body {
         width: 90vw;
     }
     
-    .motor-animation {
+    .motor-animation, .motor-baruteks {
         width: 60vw;
     }
 
@@ -209,25 +217,4 @@ body {
         width: 40vw;
         top: 25%;
     }
-}
-
-/* JavaScript untuk menyesuaikan posisi bubble-teks */
-.motor-container {
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-}
-
-.motor-animation {
-    width: 40vw;
-    max-width: 500px;
-    animation: motorMove 1.5s infinite;
-    position: relative;
-}
-
-@keyframes motorMove {
-    0%, 100% { transform: translate(-50%, 0); }
-    50% { transform: translate(-50%, -10px); }
 }

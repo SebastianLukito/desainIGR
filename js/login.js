@@ -19,18 +19,15 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         });
 });
 
-// JavaScript to handle hover effect for motor animation and bubble teks
-const motorAnimation = document.querySelector('.motor-container');
-const bubbleTeks = document.querySelector('.bubble-teks');
+const motorAnimation = document.querySelector('.motor-animation');
+const motorBaruteks = document.querySelector('.motor-baruteks');
 
 motorAnimation.addEventListener('mouseover', () => {
-    bubbleTeks.style.display = 'block';
-    const motorRect = motorAnimation.getBoundingClientRect();
-    const bubbleWidth = bubbleTeks.offsetWidth;
-    bubbleTeks.style.left = `${motorRect.left - bubbleWidth - 180}px`;
-    bubbleTeks.style.top = `${motorRect.top - 40}px`;
+    motorAnimation.style.display = 'none';
+    motorBaruteks.style.display = 'block';
 });
 
-motorAnimation.addEventListener('mouseout', () => {
-    bubbleTeks.style.display = 'none';
+motorBaruteks.addEventListener('mouseout', () => {
+    motorBaruteks.style.display = 'none';
+    motorAnimation.style.display = 'block';
 });
