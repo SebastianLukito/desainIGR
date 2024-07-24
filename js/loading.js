@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
-        window.location.href = 'main.html'; // Redirect to the main page after loading
+        window.location.href = 'loading.html'; // Redirect to the main page after loading
     }, 5000); // Adjust the timeout duration as needed
 });
 
