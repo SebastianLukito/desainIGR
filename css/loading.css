@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: url('backgroundlogin.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.background-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.running {
+    --color: #ffd2af;
+    --duration: .7s;
+    zoom: 3; /* Membesarkan gambar orang berlari */
+    position: absolute;
+}
+
+.running-behind {
+    --color: #ffd2af;
+    left: 40%;
+    animation: moveBehind 1.5s linear infinite;
+}
+
+.running-front {
+    left: 60%;
+    animation: moveFront 1.5s linear infinite;
+}
+
+@keyframes moveBehind {
+    0% {
+        left: 40%;
+    }
+    100% {
+        left: 45%;
+    }
+}
+
+@keyframes moveFront {
+    0% {
+        left: 60%;
+    }
+    100% {
+        left: 65%;
+    }
+}
+
+.outer {
+    animation: outer var(--duration) linear infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.body {
+    background: var(--color);
+    height: 15px;
+    width: 8px;
+    border-radius: 4px;
+    transform-origin: 4px 11px;
+    position: relative;
+    transform: rotate(32deg);
+    animation: body var(--duration) linear infinite;
+}
+
+.body:before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    bottom: 16px;
+    left: 0;
+    position: absolute;
+    background: var(--color);
+}
+
+.clothes {
+    position: absolute;
+    top: 0;
+    left: -2px;
+    width: 10px;
+    height: 13px;
+    background: #3498db; /* Warna baju */
+    z-index: 0; /* Memastikan baju berada di depan lengan belakang */
+    border-radius: 2px; /* Menghaluskan sudut baju */
+}
+
+.arm,
+.arm:before,
+.leg,
+.leg:before {
+    content: '';
+    width: var(--w, 11px);
+    height: 4px;
+    top: var(--t, 0);
+    left: var(--l, 2px);
+    border-radius: 2px;
+    transform-origin: 2px 2px;
+    position: absolute;
+    background: var(--c, var(--color));
+    transform: rotate(var(--r, 0deg));
+    animation: var(--name, arm-leg) var(--duration) linear infinite;
+    z-index: 1; /* Memastikan lengan berada di depan baju */
+}
+
+.arm.behind {
+    z-index: -1; /* Memastikan lengan belakang berada di belakang baju */
+}
+
+.sleeve {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #2b5c7d; /* Warna lengan baju */
+    z-index: -1; /* Memastikan sleeve berada di belakang lengan depan */
+    border-radius: 2px; /* Menghaluskan sudut lengan baju */
+}
+
+.pant {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000; /* Warna celana */
+    z-index: -2;
+    border-radius: 2px; /* Menghaluskan sudut celana */
+}
+
+.arm {
+    &:before {
+        --l: 7px;
+        --name: arm-b;
+    }
+    &.front {
+        --r: 24deg;
+        --r-to: 164deg;
+        &:before {
+            --r: -48deg;
+            --r-to: -36deg;
+        }
+    }
+    &.behind {
+        --r: 164deg;
+        --r-to: 24deg;
+        z-index: -1; /* Memastikan lengan belakang berada di belakang baju */
+        &:before {
+            --r: -36deg;
+            --r-to: -48deg;
+        }
+    }
+}
+
+.leg {
+    --w: 12px;
+    --t: 11px;
+    &:before {
+        --t: 0;
+        --l: 8px;
+    }
+    &.front {
+        --r: 10deg;
+        --r-to: 108deg;
+        &:before {
+            --r: 18deg;
+            --r-to: 76deg;
+        }
+    }
+    &.behind {
+        --r: 108deg;
+        --r-to: 10deg;
+        --c: #05120a; /* Warna celana */
+        border-radius: 4px; /* Menghaluskan sudut celana */
+        &:before {
+            --c: var(--color);
+            --r: 76deg;
+            --r-to: 18deg;
+        }
+        &:after {
+            content: '';
+            top: 0;
+            right: 0;
+            height: 4px;
+            width: 6px;
+            clip-path: polygon(2px 0, 6px 0, 6px 4px, 0 4px);
+            border-radius: 0 2px 2px 0;
+            position: absolute;
+            background: var(--color);
+        }
+    }
+}
+
+@keyframes outer {
+    50% {
+        transform: translateY(0);
+    }
+    25%,
+    75% {
+        transform: translateY(4px);
+    }
+}
+
+@keyframes body {
+    50% {
+        transform: rotate(16deg);
+    }
+    25%,
+    75% {
+        transform: rotate(24deg);
+    }
+}
+
+@keyframes arm-leg {
+    50% {
+        transform: rotate(var(--r-to));
+    }
+}
+
+@keyframes arm-b {
+    30%,
+    70% {
+        transform: rotate(var(--r-to));
+    }
+}
+
+.loading-text {
+    position: absolute;
+    bottom: 10%;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+}
