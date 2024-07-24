@@ -86,6 +86,34 @@ closePopupInfoBtn.addEventListener("click", function () {
   popupInfo.classList.remove("popupActive");
 });
 
+// Event listener untuk button "Template dan Logo"
+const ltBtn = document.getElementById("templateLogo");
+const closePopupLTBtn = document.getElementById("closePopupLT");
+const popupLT = document.getElementById("popupMenuLT");
+
+ltBtn.addEventListener("click", function () {
+  closeAllPopups();
+  popupLT.classList.add("popupActive");
+});
+
+closePopupLTBtn.addEventListener("click", function () {
+  popupLT.classList.remove("popupActive");
+});
+
+// Event listener untuk button "Manipulasi Gambar"
+const gambarBtn = document.getElementById("gambarBtn");
+const closePopupGambarBtn = document.getElementById("closePopupGambar");
+const popupGambar = document.getElementById("popupMenuGambar");
+
+gambarBtn.addEventListener("click", function () {
+  closeAllPopups();
+  popupGambar.classList.add("popupActive");
+});
+
+closePopupGambarBtn.addEventListener("click", function () {
+  popupGambar.classList.remove("popupActive");
+});
+
 // Toggle child sub buttons
 document.querySelectorAll('.toggleChild').forEach(button => {
   button.addEventListener('click', function (event) {

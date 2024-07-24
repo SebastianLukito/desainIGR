@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const pngBtn = document.getElementById('png-btn');
     const resetBtn = document.getElementById('reset-btn');
     let files = [];
-    let selectedFormat = 'webp'; // Default format
+    let selectedFormat = 'jpeg'; // Default format
 
     // Format selection
     webpBtn.addEventListener('click', () => selectFormat('webp'));
