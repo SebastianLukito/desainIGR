@@ -32,20 +32,20 @@ body {
 
 .running {
     --color: #ffd2af;
-    --duration: .7s;
-    zoom: 3; /* Membesarkan gambar orang berlari */
+    --duration: .6s;
+    zoom: 4; /* Membesarkan gambar orang berlari lebih besar lagi */
     position: absolute;
 }
 
 .running-behind {
     --color: #ffd2af;
     left: 40%;
-    animation: moveBehind 1.5s linear infinite;
+    /* animation: moveBehind 0.3s linear infinite; */
 }
 
 .running-front {
     left: 60%;
-    animation: moveFront 1.5s linear infinite;
+    /* animation: moveFront 1.5s linear infinite; */
 }
 
 @keyframes moveBehind {
@@ -76,10 +76,10 @@ body {
 
 .body {
     background: var(--color);
-    height: 15px;
-    width: 8px;
-    border-radius: 4px;
-    transform-origin: 4px 11px;
+    height: 20px; /* Memperbesar ukuran tubuh */
+    width: 10px;
+    border-radius: 5px;
+    transform-origin: 5px 15px;
     position: relative;
     transform: rotate(32deg);
     animation: body var(--duration) linear infinite;
@@ -87,24 +87,47 @@ body {
 
 .body:before {
     content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 4px;
-    bottom: 16px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%; /* Membuat lingkaran untuk kepala */
+    bottom: 20px;
     left: 0;
     position: absolute;
     background: var(--color);
+    z-index: 0; /* Menempatkan lingkaran di belakang gambar kepala */
+}
+
+.head {
+    position: absolute;
+    top: -26px; /* Sesuaikan posisi kepala */
+    left: -15px;
+    width: 30px; /* Ukuran kepala yang lebih besar untuk menutupi lingkaran */
+    height: 30px;
+    border-radius: 50%;
+    transform: rotate(-33deg);
+    z-index: 4; /* Memastikan gambar kepala berada di depan lingkaran */
 }
 
 .clothes {
     position: absolute;
     top: 0;
     left: -2px;
-    width: 10px;
-    height: 13px;
+    width: 12px;
+    height: 15px;
     background: #3498db; /* Warna baju */
     z-index: 0; /* Memastikan baju berada di depan lengan belakang */
     border-radius: 2px; /* Menghaluskan sudut baju */
+}
+
+.clothes2 {
+    position: absolute;
+    top: 0;
+    left: -2px;
+    width: 12px;
+    height: 20px;
+    background: #000000; /* Warna baju */
+    z-index: -1; /* Memastikan baju berada di depan lengan belakang */
+    border-radius: 5px; /* Menghaluskan sudut baju */
 }
 
 .arm,
@@ -112,12 +135,12 @@ body {
 .leg,
 .leg:before {
     content: '';
-    width: var(--w, 11px);
-    height: 4px;
+    width: var(--w, 12px);
+    height: 5px;
     top: var(--t, 0);
-    left: var(--l, 2px);
+    left: var(--l, 1px);
     border-radius: 2px;
-    transform-origin: 2px 2px;
+    transform-origin: 3px 2px;
     position: absolute;
     background: var(--c, var(--color));
     transform: rotate(var(--r, 0deg));
@@ -151,58 +174,71 @@ body {
     border-radius: 2px; /* Menghaluskan sudut celana */
 }
 
+.full-pant {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit; /* Warna sama dengan warna celana */
+    z-index: -2;
+    border-radius: 2px; /* Menghaluskan sudut celana */
+}
+
 .arm {
     &:before {
         --l: 7px;
         --name: arm-b;
     }
     &.front {
-        --r: 24deg;
-        --r-to: 164deg;
+        --r: 15deg; /* Adjust arm rotation */
+        --r-to: 165deg; /* Adjust arm rotation */
         &:before {
-            --r: -48deg;
-            --r-to: -36deg;
+            --r: -50deg; /* Adjust forearm rotation */
+            --r-to: -35deg; /* Adjust forearm rotation */
         }
     }
     &.behind {
-        --r: 164deg;
-        --r-to: 24deg;
-        z-index: -1; /* Memastikan lengan belakang berada di belakang baju */
+        --r: 165deg; /* Adjust arm rotation */
+        --r-to: 15deg; /* Adjust arm rotation */
+        z-index: -2; /* Memastikan lengan belakang berada di belakang baju */
         &:before {
-            --r: -36deg;
-            --r-to: -48deg;
+            --r: -35deg; /* Adjust forearm rotation */
+            --r-to: -50deg; /* Adjust forearm rotation */
         }
     }
 }
 
 .leg {
-    --w: 12px;
-    --t: 11px;
+    --w: 13px;
+    --t: 16px; /* Menyesuaikan tinggi kaki */
     &:before {
-        --t: 0;
+        --t: 0px;
         --l: 8px;
     }
     &.front {
-        --r: 10deg;
-        --r-to: 108deg;
+        --r: 20deg; /* Adjust leg rotation */
+        --r-to: 110deg; /* Adjust leg rotation */
+        
         &:before {
-            --r: 18deg;
-            --r-to: 76deg;
+            --r: 25deg; /* Adjust lower leg rotation */
+            --r-to: 80deg; /* Adjust lower leg rotation */
         }
     }
     &.behind {
-        --r: 108deg;
-        --r-to: 10deg;
+        --r: 110deg; /* Adjust leg rotation */
+        --r-to: 20deg; /* Adjust leg rotation */
         --c: #05120a; /* Warna celana */
         border-radius: 4px; /* Menghaluskan sudut celana */
+        z-index: -2; /* Memastikan lengan belakang berada di belakang baju */
         &:before {
             --c: var(--color);
-            --r: 76deg;
-            --r-to: 18deg;
+            --r: 80deg; /* Adjust lower leg rotation */
+            --r-to: 30deg; /* Adjust lower leg rotation */
         }
         &:after {
             content: '';
-            top: 0;
+            top: 0px;
             right: 0;
             height: 4px;
             width: 6px;
@@ -251,6 +287,111 @@ body {
     position: absolute;
     bottom: 10%;
     color: #fff;
-    font-size: 24px;
+    font-size: 50px;
     font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.loading-text span {
+    display: inline-block;
+    animation: wave 1.5s ease-in-out infinite;
+}
+
+.loading-text .space {
+    width: 20px; /* Sesuaikan lebar spasi sesuai kebutuhan Anda */
+    animation: none; /* Tidak perlu animasi untuk spasi */
+}
+
+@keyframes wave {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Warna khusus untuk person-1 */
+.person-1 .clothes {
+    background: #3498db; /* Warna baju orang pertama */
+}
+
+.person-1 .clothes2 {
+    background: #000000; /* Warna baju orang pertama */
+}
+
+.person-1 .sleeve {
+    background: #2b5c7d; /* Warna lengan baju orang pertama */
+}
+
+.person-1 .pant {
+    background: #000000; /* Warna celana orang pertama */
+}
+
+/* Warna khusus untuk person-2 */
+.person-2 .clothes {
+    background: #e74c3c; /* Warna baju orang kedua */
+}
+
+.person-2 .clothes2 {
+    background: #535457; /* Warna baju orang pertama */
+}
+
+.person-2 .sleeve {
+    background: #c0392b; /* Warna lengan baju orang kedua */
+}
+
+.person-2 .pant {
+    background: #535457; /* Warna celana orang kedua */
+}
+
+
+/* Warna khusus untuk person-1 */
+.person-1 .full-pant {
+    background: #000000; /* Warna celana orang pertama */
+}
+
+/* Warna khusus untuk person-2 */
+.person-2 .full-pant {
+    background: #535457; /* Warna celana orang kedua */
+}
+
+.road {
+    position: absolute;
+    bottom: 25%;
+    width: 35%;
+    height: 120px;
+    background: #333;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.road:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 6px;
+    top: 45%;
+    left: 0;
+    border-radius: 20px;
+    background: repeating-linear-gradient(
+        to right,
+        white 0px,
+        white 20px,
+        #333 20px,
+        #333 40px
+    );
+    animation: moveRoad 0.3s linear infinite;
+}
+
+@keyframes moveRoad {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-40px);
+    }
 }

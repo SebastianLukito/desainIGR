@@ -207,6 +207,15 @@ p {
     font-weight: bold;
 }
 
+.child-sub-buttons h7 {
+    margin: 0;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgb(255, 179, 0);
+    padding-block: 5px;
+    border-radius: 10px;
+}
+
 .copy-btn {
     display: flex;
     align-items: center;
