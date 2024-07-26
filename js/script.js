@@ -114,6 +114,20 @@ closePopupGambarBtn.addEventListener("click", function () {
   popupGambar.classList.remove("popupActive");
 });
 
+// Event listener untuk button "AI"
+const AIBtn = document.getElementById("AIBtn");
+const closePopupAIBtn = document.getElementById("closePopupAI");
+const popupAI = document.getElementById("popupMenuAI");
+
+AIBtn.addEventListener("click", function () {
+  closeAllPopups();
+  popupAI.classList.add("popupActive");
+});
+
+closePopupAIBtn.addEventListener("click", function () {
+  popupAI.classList.remove("popupActive");
+});
+
 // Toggle child sub buttons
 document.querySelectorAll('.toggleChild').forEach(button => {
   button.addEventListener('click', function (event) {

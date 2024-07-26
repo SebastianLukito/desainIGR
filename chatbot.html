@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Groq</title>
+    <link rel="icon" href="assets/img/iconjpg.jpg" type="image/jpg">
+    <link rel="stylesheet" href="css/chatbot.css">
+</head>
+<body>
+    <div class="container">
+        <div class="marquee" id="marquee">
+            <p>MARKETING INDOGROSIR - SUB DIVISI DESAIN GRAFIS
+                <img src="assets/img/igr.png" alt="Logo Indogrosir" class="marquee-logo">
+            </p>
+        </div>
+        <main class="main">
+            <section class="left-panel">
+                <h2>AI Chatbot Marketing Indogrosir</h2>
+                <div class="inputContainer">
+                    <div class="input-section">
+                        <label for="system-prompt">System prompt:</label>
+                        <textarea id="system-prompt" rows="5"></textarea>
+                    </div>
+                    <!-- <div class="format-section">
+                        <label for="model">Choose a model:</label>
+                        <select id="model">
+                            <option value="llama3-8b-8192">llama3-8b-8192</option>
+                            <option value="mixtral-8x7b-32768">mixtral-8x7b-32768</option>
+                            <option value="gemma-7b-it">gemma-7b-it</option>
+                        </select>
+                    </div>
+                    <div class="input-section">
+                        <label for="memory-length">Conversational memory length:</label>
+                        <input type="range" id="memory-length" min="1" max="10" value="5">
+                    </div> -->
+                    <div class="input-section">
+                        <label for="user-question">Ask a question:</label>
+                        <textarea id="user-question" rows="5"></textarea>
+                    </div>
+                    <div class="button-section">
+                        <button id="ask-btn">Ask</button>
+                    </div>
+                </div>
+            </section>
+            <section class="right-panel">
+                <h2>Chat History!</h2>
+                <div class="file-display" id="chat-history"></div>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>&copy; Marketing Indogrosir Sub Divisi Desain Grafis 2024</p>
+    </footer>
+    <!-- <div id="loading-popup" class="loading-popup" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Lagi diproses... Mohon tunggu ya mas...</p>
+    </div> -->
+    <script src="js/chatbot.js"></script>
+</body>
+</html>
