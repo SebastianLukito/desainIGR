@@ -76,7 +76,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     flex: 1;
-    min-width: 300px;
+    min-width: 550px;
     box-sizing: border-box;
 }
 
@@ -134,18 +134,23 @@ input[type="text"], select, input[type="range"] {
 textarea {
     width: 100%;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
     border: 1px solid #ccc;
     box-sizing: border-box;
     resize: vertical; /* Allow vertical resizing */
     overflow-y: auto; /* Enable vertical scroll */
+    height: 150px;
+    min-height: 50px;
     max-height: 150px;
+    background-color: rgb(54, 54, 54);
+    color: white;
+    font-size: 1.2em;
 }
 
 button {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     margin-top: 5px;
     background-color:#f5cc00;
     background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
@@ -175,16 +180,38 @@ button:hover {
     height: 600px;
     max-height: 500px;
     overflow-y: auto;
+    padding-top: 5px;
 }
 
 .file-display .message {
-    display: flex;
+    display: block;
     align-items: flex-start;
     margin-bottom: 10px;
     border-radius: 10px;
     padding: 10px;
-    max-width: 60%;
+    width: 70%;
+    max-width: 80%;
     word-wrap: break-word;
+    position: relative;
+    margin-top: 40px;
+}
+
+.file-display .message.user::before {
+    content: "You:";
+    position: absolute;
+    top: -25px;
+    left: 10px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.file-display .message.bot::before {
+    content: "Chatbot:";
+    position: absolute;
+    top: -25px;
+    left: 10px;
+    font-weight: bold;
+    color: #ffffff;
 }
 
 .file-display .message.user {
@@ -200,9 +227,8 @@ button:hover {
     margin-right: auto;
     text-align: left;
 }
-
 .file-display p {
-    margin: 0;
+    margin: 10px 0;
 }
 
 footer {
@@ -261,4 +287,85 @@ footer {
         width: 80%;
         margin: 10px 0;
     }
+}
+
+
+/* Style for the system prompt container */
+.system-prompt-container {
+    white-space: pre-line; 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 10px; 
+    background-color: rgb(54, 54, 54); 
+    color: white; 
+    max-height: 150px; 
+    overflow-y: auto;
+}
+
+.message {
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.message table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 1em; /* Ukuran font default */
+    font-family: 'Arial', sans-serif;
+    text-align: left;
+    background-color: #ffffff;
+    overflow-x: auto; /* Ensure table is responsive */
+}
+
+.message table th, .message table td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+}
+
+.message table th {
+    background-color: #f5cc00;
+    color: black;
+}
+
+
+/* Tambahkan media query untuk menyesuaikan ukuran font tabel jika terlalu lebar */
+@media (max-width: 600px) {
+    .message table {
+        font-size: 0.9em; /* Perkecil ukuran font */
+    }
+}
+
+@media (max-width: 500px) {
+    .message table {
+        font-size: 0.8em; /* Perkecil ukuran font lebih lanjut */
+    }
+}
+
+@media (max-width: 400px) {
+    .message table {
+        font-size: 0.7em; /* Perkecil ukuran font lebih lanjut */
+    }
+}
+
+@media (max-width: 300px) {
+    .message table {
+        font-size: 0.6em; /* Perkecil ukuran font lebih lanjut */
+    }
+}
+
+/* Gaya untuk menampilkan kode */
+pre {
+    background: #2d2d2d; /* Background warna hitam */
+    color: #f8f8f2; /* Warna teks terang */
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto; /* Allow horizontal scroll if needed */
+    white-space: pre-wrap; /* Allow wrapping */
+    font-family: 'Courier New', Courier, monospace;
+    margin: 10px 0;
+}
+
+code {
+    display: block;
 }
