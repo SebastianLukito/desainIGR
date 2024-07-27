@@ -207,8 +207,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         clearLogoDrop();
-
-        qrDisplay.innerHTML = '<p>No QR code generated.</p>';
+        
         qrCodeData = null;
     }
 

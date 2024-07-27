@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             addMessageToHistory(response, 'bot', true);
 
             // Check if the response indicates that the bot doesn't know the answer or user requested Google search
-            if (response.toLowerCase().includes("tidak tahu") || userQuestion.toLowerCase().includes("cari saja di google") || userQuestion.toLowerCase().includes("search google") || userQuestion.toLowerCase().includes("cari di google") || userQuestion.toLowerCase().includes("cari") || userQuestion.toLowerCase().includes("coba cari")) {
+            if (response.toLowerCase().includes("tidak tahu") || userQuestion.toLowerCase().includes("cari saja di google") || userQuestion.toLowerCase().includes("search google") || userQuestion.toLowerCase().includes("cari di google") || userQuestion.toLowerCase().includes("cari") || userQuestion.toLowerCase().includes("coba cari") || userQuestion.toLowerCase().includes("jelaskan")) {
                 const googleResponse = await searchGoogle(userQuestion);
                 addMessageToHistory(googleResponse, 'bot', false);
             }
