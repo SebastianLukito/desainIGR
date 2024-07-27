@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     async function getGroqChatCompletion(userQuestion, systemPrompt, model) {
-        const apiKey = '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';
+        const apiKey = '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';
         const apiUrl = 'https://api.groq.com/openai/v1/chat/completions';
 
         const payload = {
