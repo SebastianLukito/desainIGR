@@ -126,6 +126,8 @@ button:hover {
     border-radius: 10px;
     text-align: center;
     position: relative;
+    min-height: 500px;
+    max-height: 500px;
 }
 
 .qr-display p {
