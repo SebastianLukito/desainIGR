@@ -36,12 +36,18 @@ document.addEventListener('DOMContentLoaded', async function () {
         const memoryLength = '10'; // Set default memory length to maximum
 
         try {
-            addMessageToHistory(userQuestion, 'user'); // Pindahkan ke sini untuk memastikan pesan pengguna selalu ditampilkan
+            addMessageToHistory(userQuestion, 'user'); 
             const response = await getGroqChatCompletion(userQuestion, systemPrompt, model);
             addMessageToHistory(response, 'bot', true);
+
+            // Check if the response indicates that the bot doesn't know the answer or user requested Google search
+            if (response.toLowerCase().includes("tidak tahu") || userQuestion.toLowerCase().includes("cari saja di google") || userQuestion.toLowerCase().includes("search google") || userQuestion.toLowerCase().includes("cari di google") || userQuestion.toLowerCase().includes("cari") || userQuestion.toLowerCase().includes("coba cari")) {
+                const googleResponse = await searchGoogle(userQuestion);
+                addMessageToHistory(googleResponse, 'bot', false);
+            }
         } catch (error) {
-            console.error('Error calling Groq API:', error);
-            alert('Error calling Groq API. Please try again.');
+            console.error('Error calling Groq API or Google API:', error);
+            alert('Error calling Groq API or Google API. Please try again.');
         } finally {
             userQuestionInput.value = '';  // Clear the input field
         }
@@ -175,5 +181,29 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         const data = await response.json();
         return data.choices[0]?.message?.content || "No response from the API";
+    }
+
+    async function searchGoogle(query) {
+        const apiKey = 'AIzaSyDixbn07HtpKUoaDT4BRjAzXYkIAhAPFsI'; // API Key Google Anda
+        const searchEngineId = '668bac6c6a0004f46'; // ID mesin telusur Anda
+        const apiUrl = `https://customsearch.googleapis.com/customsearch/v1?q=${encodeURIComponent(query)}&key=${apiKey}&cx=${searchEngineId}`;
+
+        const response = await fetch(apiUrl);
+
+        if (!response.ok) {
+            throw new Error(`Google search failed: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        let result = 'Berikut adalah hasil pencarian dari Google:<br><br>';
+        let references = '';
+        data.items.forEach((item, index) => {
+            result += `<strong>${index + 1}. <a href="${item.link}" target="_blank">${item.title}</a></strong><br>${item.snippet}<br><br>`;
+        });
+
+        // Add the references to the result
+        result += `<br>${references}`;
+        
+        return result;
     }
 });

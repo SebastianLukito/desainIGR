@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat with Groq</title>
+    <title>Chat with Doni</title>
     <link rel="icon" href="assets/img/iconjpg.jpg" type="image/jpg">
     <link rel="stylesheet" href="css/chatbot.css">
 </head>
@@ -19,15 +19,15 @@
                 <h2>AI Chatbot Marketing Indogrosir</h2>
                 <div class="inputContainer">
                     <div class="input-section">
-                        <label for="system-prompt">System prompt:</label>
+                        <label for="system-prompt">Atur Role Chabot Ini Sesuai Keinginan Kamu:</label>
                         <textarea id="system-prompt" class="system-prompt-container" rows="5"></textarea>
                     </div>
                     <div class="input-section">
-                        <label for="user-question">Ask a question:</label>
+                        <label for="user-question">Tanyakan Pertanyaan:</label>
                         <textarea id="user-question" rows="5"></textarea>
                     </div>
                     <div class="button-section">
-                        <button id="ask-btn">Ask</button>
+                        <button id="ask-btn">Kirim Pesan</button>
                     </div>
                 </div>
             </section>
@@ -41,5 +41,10 @@
         <p>&copy; Marketing Indogrosir Sub Divisi Desain Grafis 2024</p>
     </footer>
     <script src="js/chatbot.js"></script>
+    <script>
+        document.getElementById('marquee').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    </script>
 </body>
 </html>

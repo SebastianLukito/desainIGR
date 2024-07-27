@@ -221,12 +221,29 @@ button:hover {
     text-align: left;
 }
 
+.file-display .message.user:hover {
+    background-color: #1f69c9;
+    color: white;
+    margin-left: auto;
+    text-align: left;
+    transform: scale(1.0125);
+}
+
 .file-display .message.bot {
-    background-color: #e0e0e0;
+    background-color: #edebeb;
     color: black;
     margin-right: auto;
     text-align: left;
 }
+
+.file-display .message.bot:hover {
+    background-color: #bdbdbd;
+    color: black;
+    margin-right: auto;
+    text-align: left;
+    transform: scale(1.0125);
+}
+
 .file-display p {
     margin: 10px 0;
 }
