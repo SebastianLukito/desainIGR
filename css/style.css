@@ -146,6 +146,8 @@ body {
     z-index: 10;
     max-height: 70vh;
     overflow-y: auto;
+    min-width: 600px;
+    max-width: 600px;
 }
 
 .popupActive {
@@ -325,7 +327,7 @@ h1 {
     margin: 0 auto;
     display: table;
     padding: 0 0 8em 0;
-    margin-bottom: -30%;
+    margin-bottom: -26%;
 }
 
 .tabel td, .tabel th {
