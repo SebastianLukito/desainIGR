@@ -73,6 +73,10 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
         logoInput.files = files;
+
+        // Hapus gambar sebelumnya jika ada
+        clearLogoDrop();
+
         const dropText = logoDrop.querySelector('p');
         if (dropText) {
             dropText.style.display = 'none';
@@ -80,6 +84,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const fileName = document.createElement('span');
         fileName.textContent = file.name;
         logoDrop.appendChild(fileName);
+    }
+
+    function clearLogoDrop() {
+        const existingFileName = logoDrop.querySelector('span');
+        if (existingFileName) {
+            logoDrop.removeChild(existingFileName);
+        }
+        logoDrop.querySelector('p').style.display = 'block';
     }
 
     function generateQRCode() {
@@ -194,8 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
             canvas = null;
         }
 
-        logoDrop.querySelector('p').style.display = 'block';
-        logoDrop.querySelectorAll('span').forEach(span => span.remove());
+        clearLogoDrop();
 
         qrDisplay.innerHTML = '<p>No QR code generated.</p>';
         qrCodeData = null;
