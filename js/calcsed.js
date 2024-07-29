@@ -6,17 +6,17 @@ const equalsButton = document.getElementById('equals');
 let currentInput = '';
 let operator = '';
 let result = '';
+let newOperation = false;
 
-buttons.forEach(button =>{
+buttons.forEach(button => {
     button.addEventListener('click', () =>
-    handleButtonClick(button.innerText))
+        handleButtonClick(button.innerText));
 })
 
 clearButton.addEventListener('click', clearDisplay);
 
 equalsButton.addEventListener('click', performCalculation);
 
-// Event listener for keyboard input
 document.addEventListener('keydown', (event) => {
     const key = event.key;
     if (key >= '0' && key <= '9') {
@@ -40,54 +40,54 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-function handleButtonClick(value){
-    if(value>= '0' && value <='9'){
-        currentInput += value;
+function handleButtonClick(value) {
+    if (newOperation && !isOperator(value)) {
+        currentInput = '';
+        newOperation = false;
     }
-    else if(value === '.' && !currentInput.includes('.')){
+
+    if (value >= '0' && value <= '9') {
         currentInput += value;
-    }
-    else if(value === 'C'){
+    } else if (value === '.' && !currentInput.includes('.')) {
+        currentInput += value;
+    } else if (value === 'C') {
         clearDisplay();
-    }
-    else if(value === '←'){
+    } else if (value === '←') {
         currentInput = currentInput.substring(0, currentInput.length - 1);
-    }
-    else if(value === '='){
-        performCalculation();
-        operator = '';
-    }
-    else {
-        if (currentInput !== '') {
-            if (operator !== '') {
+    } else if (isOperator(value)) {
+        if (currentInput !== '' || result !== '') {
+            if (operator && currentInput) {
                 performCalculation();
-            } else {
+            } else if (result === '') {
                 result = currentInput;
             }
             operator = value;
             currentInput = '';
         }
+    } else if (value === '=') {
+        performCalculation();
+        operator = '';
     }
-    display.value = `${result} ${operator} ${currentInput}`;
 
+    display.value = `${result} ${operator} ${currentInput}`;
 }
 
 function performCalculation() {
     if (currentInput !== '') {
-        if (operator === '+'){
+        if (operator === '+') {
             result = (parseFloat(result) + parseFloat(currentInput)).toString();
-        } else if (operator === '-'){
+        } else if (operator === '-') {
             result = (parseFloat(result) - parseFloat(currentInput)).toString();
-        } else if (operator === 'x'){
+        } else if (operator === 'x') {
             result = (parseFloat(result) * parseFloat(currentInput)).toString();
-        } else if (operator === '/'){
+        } else if (operator === '/') {
             result = (parseFloat(result) / parseFloat(currentInput)).toString();
         } else {
             result = currentInput;
         }
     }
     currentInput = '';
-    operator = '';
+    newOperation = true;
     display.value = result;
 }
 
@@ -96,4 +96,9 @@ function clearDisplay() {
     operator = '';
     result = '';
     display.value = '0';
+    newOperation = false;
+}
+
+function isOperator(value) {
+    return value === '+' || value === '-' || value === 'x' || value === '/';
 }
