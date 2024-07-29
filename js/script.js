@@ -128,6 +128,20 @@ closePopupAIBtn.addEventListener("click", function () {
   popupAI.classList.remove("popupActive");
 });
 
+// Event listener untuk button "calculator"
+const calcBtn = document.getElementById("calcBtn");
+const closePopupCalcBtn = document.getElementById("closePopupCalc");
+const popupCalc = document.getElementById("popupMenuCalc");
+
+calcBtn.addEventListener("click", function () {
+  closeAllPopups();
+  popupCalc.classList.add("popupActive");
+});
+
+closePopupCalcBtn.addEventListener("click", function () {
+  popupCalc.classList.remove("popupActive");
+});
+
 // Toggle child sub buttons
 document.querySelectorAll('.toggleChild').forEach(button => {
   button.addEventListener('click', function (event) {
