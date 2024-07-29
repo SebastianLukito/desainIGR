@@ -88,6 +88,11 @@ function performCalculation() {
     }
     currentInput = '';
     newOperation = true;
+
+    if (result.length > 9) {
+        result = parseFloat(result).toExponential(2);
+    }
+
     display.value = result;
 }
 
