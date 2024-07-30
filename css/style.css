@@ -192,7 +192,9 @@ p {
 .child-sub-buttons.show {
     display: flex;
     opacity: 1;
-    max-height: 500px;
+    overflow-y: auto;
+    height: auto;
+    max-height: 200px;
 }
 
 .child-sub-buttons p {
@@ -293,13 +295,13 @@ footer:hover {
     }
 }
 
-h1 {
+/* h1 {
     font-size:3em; 
     font-weight: 300;
     line-height:1em;
     text-align: center;
     color: #4DC3FA;
-}
+} */
 
 .blue { color: #185875; }
 .yellow { color: #FFF842; }
@@ -322,12 +324,11 @@ h1 {
 
 .tabel {
     text-align: left;
-    overflow: hidden;
+    /* overflow: hidden; */
     width: 100%;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     display: table;
-    padding: 0 0 8em 0;
-    margin-bottom: -26%;
+    padding: 0 0 0 0;
 }
 
 .tabel td, .tabel th {
