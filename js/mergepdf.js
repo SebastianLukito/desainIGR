@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const dropSection = document.getElementById('drop-section');
     const fileList = document.getElementById('file-list');
     const loadingPopup = document.getElementById('loading-popup');
+    const megabyteSlider = document.getElementById('megabyte-slider');
+    const megabyteInput = document.getElementById('megabyte-input');
+    const percentageSlider = document.getElementById('percentage-slider');
+    const percentageInput = document.getElementById('percentage-input');
     let files = [];
 
     dropSection.addEventListener('click', function (e) {
@@ -45,7 +49,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         // Show loading popup
         loadingPopup.style.display = 'flex';
-        handleFiles(files);
+
+        const percentage = parseInt(percentageInput.value, 10);
+        const megabyte = parseInt(megabyteInput.value, 10);
+        console.log('Merging PDFs with percentage:', percentage, 'and megabyte:', megabyte);
+
+        handleFiles(files, percentage, megabyte);
     });
 
     function displayFiles(files) {
@@ -122,15 +131,32 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    async function handleFiles(files) {
+    async function handleFiles(files, percentage, megabyte) {
         try {
-            const pdfDocs = await Promise.all(files.map(file => file.arrayBuffer().then(buffer => PDFLib.PDFDocument.load(buffer))));
-            const mergedPdfBytes = await mergePdfDocs(pdfDocs);
+            const images = [];
+            for (const file of files) {
+                const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+                const numPages = pdf.numPages;
+                for (let pageNum = 1; pageNum <= numPages; pageNum++) {
+                    const page = await pdf.getPage(pageNum);
+                    const viewport = page.getViewport({ scale: 1.0 });
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+                    await page.render({ canvasContext: context, viewport: viewport }).promise;
+                    images.push(canvas.toDataURL('image/jpeg', getQuality(percentage, megabyte)));
+                }
+            }
 
-            const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
+            console.log('Images converted, total images:', images.length);
+
+            const compressedPdfBytes = await createPdfFromImages(images);
+            console.log('PDF created from images, size:', compressedPdfBytes.length / (1024 * 1024), 'MB');
+
+            const blob = new Blob([compressedPdfBytes], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
 
-            // Display PDF in the right panel
             const iframe = document.createElement('iframe');
             iframe.src = url;
             iframe.width = '100%';
@@ -138,7 +164,6 @@ document.addEventListener('DOMContentLoaded', function () {
             qrDisplay.innerHTML = '';
             qrDisplay.appendChild(iframe);
 
-            // Show download button
             downloadBtn.style.display = 'block';
             downloadBtn.onclick = function () {
                 const a = document.createElement('a');
@@ -148,7 +173,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 window.URL.revokeObjectURL(url);
             };
 
-            // Hide loading popup
             loadingPopup.style.display = 'none';
 
             console.log('PDF merged and displayed successfully.');
@@ -159,15 +183,36 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    async function mergePdfDocs(docs) {
-        const mergedPdf = await PDFLib.PDFDocument.create();
+    function getQuality(percentage, megabyte) {
+        const qualityMap = {
+            1: 0.1,
+            2: 0.2,
+            3: 0.3,
+            4: 0.4,
+            5: 0.5,
+            6: 0.6,
+            7: 0.7,
+            8: 0.8,
+            9: 0.9,
+            10: 1.0
+        };
+        const scale = megabyte > 100 ? 10 : megabyte > 50 ? 8 : megabyte > 20 ? 6 : 4;
+        return qualityMap[scale];
+    }
 
-        for (const doc of docs) {
-            const copiedPages = await mergedPdf.copyPages(doc, doc.getPageIndices());
-            copiedPages.forEach(page => mergedPdf.addPage(page));
+    async function createPdfFromImages(images) {
+        const pdfDoc = await PDFLib.PDFDocument.create();
+        for (const imageDataUrl of images) {
+            const img = await pdfDoc.embedJpg(imageDataUrl);
+            const page = pdfDoc.addPage([img.width, img.height]);
+            page.drawImage(img, {
+                x: 0,
+                y: 0,
+                width: img.width,
+                height: img.height
+            });
         }
-
-        return await mergedPdf.save();
+        return await pdfDoc.save();
     }
 
     // Event listener for reset button
@@ -185,5 +230,41 @@ document.addEventListener('DOMContentLoaded', function () {
         // Hide download button and QR display
         qrDisplay.innerHTML = '';
         downloadBtn.style.display = 'none';
+    });
+
+    // Tab functionality
+    const tabItems = document.querySelectorAll('.tab-item');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabItems.forEach(item => {
+        item.addEventListener('click', function () {
+            tabItems.forEach(i => i.classList.remove('active'));
+            tabContents.forEach(c => c.classList.remove('active'));
+
+            item.classList.add('active');
+            document.getElementById(item.dataset.tab).classList.add('active');
+        });
+    });
+
+    // Synchronize slider and input for megabyte
+    megabyteSlider.addEventListener('input', function () {
+        megabyteInput.value = megabyteSlider.value;
+        console.log('Megabyte Slider Value:', megabyteSlider.value);
+    });
+
+    megabyteInput.addEventListener('input', function () {
+        megabyteSlider.value = megabyteInput.value;
+        console.log('Megabyte Input Value:', megabyteInput.value);
+    });
+
+    // Synchronize slider and input for percentage
+    percentageSlider.addEventListener('input', function () {
+        percentageInput.value = percentageSlider.value;
+        console.log('Percentage Slider Value:', percentageSlider.value);
+    });
+
+    percentageInput.addEventListener('input', function () {
+        percentageSlider.value = percentageInput.value;
+        console.log('Percentage Input Value:', percentageInput.value);
     });
 });

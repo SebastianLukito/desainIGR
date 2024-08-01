@@ -21,16 +21,40 @@
                     <p>Drag & Drop PDF-nya di sini, gan <br> untuk menggabungkan PDFmu</p>
                     <div id="file-list"></div>
                 </div>
+
+
+                <div class="tab-section">
+                    <p>Atur Ukuran PDF Output</p>
+                    <ul class="tab-list">
+                        <li class="tab-item active" data-tab="percentage-tab">Atur Berdasarkan Persentase</li>
+                        <li class="tab-item" data-tab="megabyte-tab">Atur Berdasarkan Kilo Byte</li>
+                    </ul>
+                    <div class="tab-content active" id="percentage-tab">
+                        <label for="percentage-slider">Persentase:</label>
+                        <input type="range" id="percentage-slider" min="1" max="100" value="100">
+                        <input type="number" id="percentage-input" min="1" max="100" value="100">
+                        <p>Dalam Persen (%)</p>
+                    </div>
+                    <div class="tab-content" id="megabyte-tab">
+                        <label for="megabyte-slider">Kilo Byte:</label>
+                        <input type="range" id="megabyte-slider" min="1" max="20000" value="5">
+                        <input type="number" id="megabyte-input" min="1" max="20000" value="5">
+                        <p>Dalam KiloBytes (KB)</p>
+                    </div>
+                    <h6>Mohon diperhatikan, jika menggunakan fitur ini. PDF anda menjadi tidak editable lagi karena sudah di-compress</h6>
+                </div>
+
                 <div class="button-section">
                     <button id="merge-btn">Gabungkan PDF-mu Kawan</button>
                     <button id="reset-btn">Masukan PDF Baru</button>
                 </div>
+                
             </section>
             <section class="right-panel">
-                <div class="qr-display" id="qr-display">
-                </div>
                 <div class="button-section">
                     <button id="download-btn" style="display:none;">Download PDF Hasilnya</button>
+                </div>
+                <div class="qr-display" id="qr-display">
                 </div>
             </section>
         </main>
@@ -46,6 +70,8 @@
     <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/pdf-compressor@latest/dist/pdf-compressor.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.min.js"></script>
     <script>
         document.getElementById('marquee').addEventListener('click', function() {
             window.location.href = 'index.html';
