@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const pdfInput = document.getElementById('pdf');
     const qrDisplay = document.getElementById('qr-display');
     const downloadBtn = document.getElementById('download-btn');
+    const shareBtn = document.getElementById('share-btn');
     const dropSection = document.getElementById('drop-section');
     const fileList = document.getElementById('file-list');
     const loadingPopup = document.getElementById('loading-popup');
@@ -176,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const numPages = pdf.numPages;
                 for (let pageNum = 1; pageNum <= numPages; pageNum++) {
                     const page = await pdf.getPage(pageNum);
-                    const viewport = page.getViewport({ scale: 3.0 }); // Set higher scale for better resolution
+                    const viewport = page.getViewport({ scale: 2.0 }); // Set higher scale for better resolution
                     const canvas = document.createElement('canvas');
                     const context = canvas.getContext('2d');
                     canvas.width = viewport.width;
@@ -206,12 +207,19 @@ document.addEventListener('DOMContentLoaded', function () {
             qrDisplay.appendChild(iframe);
 
             downloadBtn.style.display = 'block';
+            shareBtn.style.display = 'block';
+
             downloadBtn.onclick = function () {
                 const a = document.createElement('a');
                 a.href = url;
                 a.download = 'hasil.pdf';
                 a.click();
                 window.URL.revokeObjectURL(url);
+            };
+
+            shareBtn.onclick = function () {
+                const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(url)}`;
+                window.open(whatsappUrl, '_blank');
             };
 
             loadingPopup.style.display = 'none';
@@ -271,12 +279,19 @@ document.addEventListener('DOMContentLoaded', function () {
         qrDisplay.appendChild(iframe);
 
         downloadBtn.style.display = 'block';
+        shareBtn.style.display = 'block';
+
         downloadBtn.onclick = function () {
             const a = document.createElement('a');
             a.href = url;
             a.download = 'hasil.pdf';
             a.click();
             window.URL.revokeObjectURL(url);
+        };
+
+        shareBtn.onclick = function () {
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(url)}`;
+            window.open(whatsappUrl, '_blank');
         };
 
         loadingPopup.style.display = 'none';
@@ -299,6 +314,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Hide download button and QR display
         qrDisplay.innerHTML = '';
         downloadBtn.style.display = 'none';
+        shareBtn.style.display = 'none';
     });
 
     // Synchronize slider and input for percentage
