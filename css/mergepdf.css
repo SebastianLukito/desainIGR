@@ -55,9 +55,9 @@ body {
 }
 
 @keyframes marquee {
-    0% { transform: translateX(100%); }
+    0% { transform: translateX(90%); }
     50% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
+    100% { transform: translateX(-90%); }
 }
 
 .main {
@@ -81,7 +81,25 @@ body {
 }
 
 .left-panel:hover, .right-panel:hover {
-    background: #ededed;
+    background: #f8f8f8;
+}
+
+.left-panel h2, .right-panel h2 {
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #050505;
+    background-color: rgb(255, 208, 0);
+    padding-block: 10px;
+    border-radius: 10px;
+}
+
+.right-panel p{
+    color: #000000;
+    text-align: center;
+    background-color: rgb(255, 208, 0);
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .input-section, .button-section, .drop-section {
@@ -114,6 +132,30 @@ button:hover {
     background-color: rgb(200, 50, 50);
     /* transform: scale(1.02); */
 }
+
+.penjelasan {
+    background-color: rgb(255, 255, 255);
+    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    padding: 10px;
+    /* border: 3px solid #444; */
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    box-sizing: border-box;
+    margin-top: 15px;
+}
+
+.penjelasan h3 {
+    margin: 10px;
+    margin-bottom: -5px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.penjelasan p {
+    color: #4a4a4a;
+}
+
 
 .qr-display {
     background-color: #1a1a1a;
@@ -273,6 +315,47 @@ footer {
     }
 }
 
+.size-settings {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out, margin 0.5s ease-in-out;
+    background-color: #dfdfdf;
+    padding-inline: 20px;
+    padding-block: 0;
+    border-radius: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.size-settings.active {
+    max-height: 1000px; /* Nilai ini harus lebih besar dari tinggi konten yang sebenarnya */
+    padding-block: 5px;
+    margin-top: -20px;
+    margin-bottom: 15px;
+}
+
+#toggle-size-settings-btn {
+    background-color: #151515;
+    color: white;
+    margin-top: 10px;
+}
+
+#toggle-size-settings-btn:hover {
+    background-color: #4CAF50;
+    transform: scale(1.01);
+}
+
+#cancel-size-settings-btn {
+    background-color: #f44336;
+    color: white;
+    margin-top: 0px;
+}
+
+#cancel-size-settings-btn:hover {
+    background-color: #902200;
+    transform: scale(1.01);
+}
+
 .tab-section {
     width: 100%;
     margin-top: 20px;
@@ -280,7 +363,7 @@ footer {
 
 .tab-section p {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     color: black;
     font-weight: bold;
 }
@@ -306,8 +389,8 @@ footer {
 }
 
 .tab-item {
-    background-color: #444;
-    color: #e0e0e0;
+    background-color: #ffbb02;
+    color: #000000;
     font-weight: bold;
     padding: 10px 20px;
     margin: 0 5px;
@@ -316,6 +399,7 @@ footer {
     flex: 1;
     transition: background-color 0.5s ease;
     font-size: 0.8em;
+    z-index: 1;
 }
 
 .tab-item:hover {
@@ -324,9 +408,10 @@ footer {
 }
 
 .tab-item.active {
-    background-color: #ffbb02;
-    color: #000000;
+    background-color: #313131;
+    color: #fefefe;
     font-weight: bold;
+    z-index: 1;
 }
 
 .tab-content {
@@ -339,7 +424,8 @@ footer {
     text-align: center;
     margin-bottom: 20px;
     border-radius: 10px;
-    margin-top: -16px;
+    margin-top: 10px;
+    z-index: 3;
 }
 
 .tab-content.active p {

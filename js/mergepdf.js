@@ -6,11 +6,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const dropSection = document.getElementById('drop-section');
     const fileList = document.getElementById('file-list');
     const loadingPopup = document.getElementById('loading-popup');
-    const megabyteSlider = document.getElementById('megabyte-slider');
-    const megabyteInput = document.getElementById('megabyte-input');
     const percentageSlider = document.getElementById('percentage-slider');
     const percentageInput = document.getElementById('percentage-input');
+    const toggleSizeSettingsBtn = document.getElementById('toggle-size-settings-btn');
+    const cancelSizeSettingsBtn = document.getElementById('cancel-size-settings-btn');
+    const sizeSettings = document.getElementById('size-settings');
     let files = [];
+    let useSizeSettings = false;
 
     dropSection.addEventListener('click', function (e) {
         if (e.target.tagName === 'BUTTON') {
@@ -42,6 +44,20 @@ document.addEventListener('DOMContentLoaded', function () {
         displayFiles(files);
     });
 
+    toggleSizeSettingsBtn.addEventListener('click', function () {
+        useSizeSettings = !useSizeSettings;
+        if (useSizeSettings) {
+            sizeSettings.classList.add('active');
+        } else {
+            sizeSettings.classList.remove('active');
+        }
+    });
+
+    cancelSizeSettingsBtn.addEventListener('click', function () {
+        useSizeSettings = false;
+        sizeSettings.classList.remove('active');
+    });
+
     mergeBtn.addEventListener('click', function () {
         if (files.length < 1) {
             alert('Please upload at least one PDF file.');
@@ -50,11 +66,13 @@ document.addEventListener('DOMContentLoaded', function () {
         // Show loading popup
         loadingPopup.style.display = 'flex';
 
-        const percentage = parseInt(percentageInput.value, 10);
-        const megabyte = parseInt(megabyteInput.value, 10);
-        console.log('Merging PDFs with percentage:', percentage, 'and megabyte:', megabyte);
-
-        handleFiles(files, percentage, megabyte);
+        if (useSizeSettings) {
+            const percentage = parseInt(percentageInput.value, 10);
+            console.log('Merging PDFs with percentage:', percentage);
+            handleFilesWithSizeSettings(files, percentage);
+        } else {
+            handleFiles(files);
+        }
     });
 
     function displayFiles(files) {
@@ -131,7 +149,26 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    async function handleFiles(files, percentage, megabyte) {
+    async function handleFiles(files) {
+        try {
+            const pdfDoc = await PDFLib.PDFDocument.create();
+            for (const file of files) {
+                const existingPdfBytes = await file.arrayBuffer();
+                const existingPdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
+                const copiedPages = await pdfDoc.copyPages(existingPdfDoc, existingPdfDoc.getPageIndices());
+                copiedPages.forEach((page) => pdfDoc.addPage(page));
+            }
+
+            const pdfBytes = await pdfDoc.save();
+            displayMergedPdf(pdfBytes);
+        } catch (error) {
+            console.error('Error merging PDFs:', error);
+            alert('Error merging PDFs. Please try again.');
+            loadingPopup.style.display = 'none';
+        }
+    }
+
+    async function handleFilesWithSizeSettings(files, percentage) {
         try {
             const images = [];
             for (const file of files) {
@@ -139,13 +176,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 const numPages = pdf.numPages;
                 for (let pageNum = 1; pageNum <= numPages; pageNum++) {
                     const page = await pdf.getPage(pageNum);
-                    const viewport = page.getViewport({ scale: 1.0 });
+                    const viewport = page.getViewport({ scale: 3.0 }); // Set higher scale for better resolution
                     const canvas = document.createElement('canvas');
                     const context = canvas.getContext('2d');
                     canvas.width = viewport.width;
                     canvas.height = viewport.height;
+                    let quality = getQuality(percentage);
+                    if (percentage === 100) {
+                        quality = 1.0; // Highest quality for 100% percentage
+                    }
                     await page.render({ canvasContext: context, viewport: viewport }).promise;
-                    images.push(canvas.toDataURL('image/jpeg', getQuality(percentage, megabyte)));
+                    images.push(canvas.toDataURL('image/jpeg', quality));
                 }
             }
 
@@ -183,7 +224,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function getQuality(percentage, megabyte) {
+    function getQuality(percentage) {
+        if (percentage === 100) {
+            return 1.0; // Highest quality
+        }
         const qualityMap = {
             1: 0.1,
             2: 0.2,
@@ -196,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
             9: 0.9,
             10: 1.0
         };
-        const scale = megabyte > 100 ? 10 : megabyte > 50 ? 8 : megabyte > 20 ? 6 : 4;
+        const scale = percentage > 90 ? 10 : percentage > 80 ? 8 : percentage > 70 ? 6 : 4;
         return qualityMap[scale];
     }
 
@@ -215,6 +259,31 @@ document.addEventListener('DOMContentLoaded', function () {
         return await pdfDoc.save();
     }
 
+    function displayMergedPdf(pdfBytes) {
+        const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+
+        const iframe = document.createElement('iframe');
+        iframe.src = url;
+        iframe.width = '100%';
+        iframe.height = '500px';
+        qrDisplay.innerHTML = '';
+        qrDisplay.appendChild(iframe);
+
+        downloadBtn.style.display = 'block';
+        downloadBtn.onclick = function () {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'hasil.pdf';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        };
+
+        loadingPopup.style.display = 'none';
+
+        console.log('PDF merged and displayed successfully.');
+    }
+
     // Event listener for reset button
     document.getElementById('reset-btn').addEventListener('click', function () {
         files = [];
@@ -230,31 +299,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Hide download button and QR display
         qrDisplay.innerHTML = '';
         downloadBtn.style.display = 'none';
-    });
-
-    // Tab functionality
-    const tabItems = document.querySelectorAll('.tab-item');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    tabItems.forEach(item => {
-        item.addEventListener('click', function () {
-            tabItems.forEach(i => i.classList.remove('active'));
-            tabContents.forEach(c => c.classList.remove('active'));
-
-            item.classList.add('active');
-            document.getElementById(item.dataset.tab).classList.add('active');
-        });
-    });
-
-    // Synchronize slider and input for megabyte
-    megabyteSlider.addEventListener('input', function () {
-        megabyteInput.value = megabyteSlider.value;
-        console.log('Megabyte Slider Value:', megabyteSlider.value);
-    });
-
-    megabyteInput.addEventListener('input', function () {
-        megabyteSlider.value = megabyteInput.value;
-        console.log('Megabyte Input Value:', megabyteInput.value);
     });
 
     // Synchronize slider and input for percentage

@@ -16,6 +16,7 @@
         </div>
         <main class="main">
             <section class="left-panel">
+                <h2>GABUNGKAN PDF</h2>
                 <div class="drop-section" id="drop-section">
                     <input type="file" id="pdf" name="pdf" accept=".pdf" multiple style="display: none;">
                     <p>Drag & Drop PDF-nya di sini, gan <br> untuk menggabungkan PDFmu</p>
@@ -23,25 +24,23 @@
                 </div>
 
 
-                <div class="tab-section">
-                    <p>Atur Ukuran PDF Output</p>
-                    <ul class="tab-list">
-                        <li class="tab-item active" data-tab="percentage-tab">Atur Berdasarkan Persentase</li>
-                        <li class="tab-item" data-tab="megabyte-tab">Atur Berdasarkan Kilo Byte</li>
-                    </ul>
-                    <div class="tab-content active" id="percentage-tab">
-                        <label for="percentage-slider">Persentase:</label>
-                        <input type="range" id="percentage-slider" min="1" max="100" value="100">
-                        <input type="number" id="percentage-input" min="1" max="100" value="100">
-                        <p>Dalam Persen (%)</p>
+                <div class="button-section">
+                    <button id="toggle-size-settings-btn">Atur Ukuran Output PDF</button>
+                </div>
+            
+                <div id="size-settings" class="size-settings">
+                    <div class="tab-section">
+                        <div class="tab-content active" id="percentage-tab">
+                            <label for="percentage-slider">Persentase:</label>
+                            <input type="range" id="percentage-slider" min="1" max="100" value="100">
+                            <input type="number" id="percentage-input" min="1" max="100" value="100">
+                            <p>Dalam Persen (%)</p>
+                        </div>
+                        <h6>Mohon diperhatikan, jika menggunakan fitur ini. PDF anda menjadi <b><u>tidak editable</u></b> lagi karena sudah di-compress. Tutup slider ini atau tekan tombol Batal di bawah untuk membatalkan fitur.</h6>
                     </div>
-                    <div class="tab-content" id="megabyte-tab">
-                        <label for="megabyte-slider">Kilo Byte:</label>
-                        <input type="range" id="megabyte-slider" min="1" max="20000" value="5">
-                        <input type="number" id="megabyte-input" min="1" max="20000" value="5">
-                        <p>Dalam KiloBytes (KB)</p>
+                    <div class="button-section">
+                        <button id="cancel-size-settings-btn">Batal</button>
                     </div>
-                    <h6>Mohon diperhatikan, jika menggunakan fitur ini. PDF anda menjadi tidak editable lagi karena sudah di-compress</h6>
                 </div>
 
                 <div class="button-section">
@@ -49,13 +48,19 @@
                     <button id="reset-btn">Masukan PDF Baru</button>
                 </div>
                 
+                <div class="penjelasan">
+                    <h3>Penjelasan</h3>
+                    <p>Website ini secara khusus digunakan untuk menggabungkan dua atau lebih file PDF. Kamu bisa drag and drop saja file pdfmu atau tekan field itu untuk mengupload file pdf kamu. Kamu juga bisa mengatur susunan PDFmu. Ada fitur untuk mengatur ukuran PDFmu juga di sini. Namun harus diperhatikan, output PDFmu tidak bisa diedit lagi jika file yang kamu ingin merge adalah PDF dari Adobe Illustrator. Karena secara teknis, PDFmu akan di-compress dengan fitur ini. Tutup saja fiturnya jika PDFmu ingin bisa diedit kembali.</p>
+                </div>
             </section>
             <section class="right-panel">
+                <h2>DISPLAY HASIL</h2>
                 <div class="button-section">
                     <button id="download-btn" style="display:none;">Download PDF Hasilnya</button>
                 </div>
                 <div class="qr-display" id="qr-display">
                 </div>
+                <p>This engine is exclusively crafted for Indogrosir Design Team</p>
             </section>
         </main>
     </div>

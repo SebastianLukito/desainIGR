@@ -124,8 +124,8 @@ document.addEventListener('DOMContentLoaded', function () {
         canvas = document.createElement('canvas');
         const options = {
             text: url,
-            width: 300,
-            height: 300,
+            width: 400,
+            height: 400,
             colorDark: "#000000",
             colorLight: "#ffffff",
             errorCorrectionLevel: 'H',

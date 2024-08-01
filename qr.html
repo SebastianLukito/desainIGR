@@ -17,12 +17,13 @@
         </div>
         <main class="main">
             <section class="left-panel">
+                <h2>GENERATE QR</h2>
                 <div class="input-section">
                     <label for="url">Masukkan URL-nya Di Sini:</label>
                     <input type="text" id="url" name="url" placeholder="Masukkan URL-nya di sini">
                 </div>
                 <div class="logo-section">
-                    <label for="logo-drop">Unggah Logo:</label>
+                    <label for="logo-drop">Unggah Logo Di Sini (Opsional)</label>
                     <div id="logo-drop" class="drop-section">
                         <p>Drag & Drop Logo-nya di sini</p>
                     </div>
@@ -41,10 +42,17 @@
                     <button id="save-btn">Simpan QR</button>
                     <button id="new-btn">Buat QR Baru</button>
                 </div>
+
+                <div class="penjelasan">
+                    <h3>Penjelasan</h3>
+                    <p>Website ini secara khusus digunakan untuk membuat QR yang menuju link yang kamu input. Secara opsional, kamu bisa menambahkan logo pada QR. Pada pengaturan-pengaturan di atas, kamu bisa mengubah ukuran logo, ukuran background logo, dan kompleksitas QR-nya.</p>
+                </div>
             </section>
             <section class="right-panel">
+                <h2>Hasilnya</h2>
                 <div class="qr-display" id="qr-display">
                 </div>
+                <p>This engine is exclusively crafted for Indogrosir Design Team</p>
             </section>
         </main>
     </div>

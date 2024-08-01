@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fileIcon.alt = 'PDF Icon';
 
             const fileName = document.createElement('span');
-            fileName.textContent = truncateFileName(file.name, 15);
+            fileName.textContent = truncateFileName(file.name, 35);
 
             fileItem.appendChild(fileIcon);
             fileItem.appendChild(fileName);
