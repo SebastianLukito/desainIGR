@@ -55,9 +55,9 @@ body {
 }
 
 @keyframes marquee {
-    0% { transform: translateX(100%); }
+    0% { transform: translateX(90%); }
     50% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
+    100% { transform: translateX(-90%); }
 }
 
 .main {
@@ -72,7 +72,7 @@ body {
 }
 
 .left-panel, .right-panel {
-    background: #f5cc00;
+    background: #ffffff;
     padding: 20px;
     border-radius: 10px;
     flex: 1;
@@ -81,12 +81,30 @@ body {
 }
 
 .left-panel:hover, .right-panel:hover {
-    background: #ffe51f;
+    background: #fffdf1;
 }
 
 .right-panel {
     max-height: 550px; /* Set maximum height */
     overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.left-panel h2, .right-panel h2 {
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #050505;
+    background-color: rgb(255, 208, 0);
+    padding-block: 10px;
+    border-radius: 10px;
+}
+
+.right-panel p{
+    color: #000000;
+    text-align: center;
+    background-color: rgb(255, 208, 0);
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .input-section, .button-section, .drop-section, .quality-section, .format-section {
@@ -105,7 +123,9 @@ input[type="number"] {
     width: 100%;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #aeaeae;
+    background-color: #cecece;
+    font-weight: bold;
     box-sizing: border-box;
 }
 
@@ -126,8 +146,9 @@ button {
 }
 
 button:hover {
-    background-color: rgb(200, 50, 50);
-    transform: scale(1.05);
+    background-color: rgb(255, 200, 0);
+    transform: scale(1.01);
+    color: black;
 }
 
 .format-section {
@@ -160,6 +181,30 @@ button:hover {
     background-color: rgb(50, 150, 50);
 }
 
+.penjelasan {
+    background-color: rgb(255, 255, 255);
+    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    padding: 10px;
+    /* border: 3px solid #444; */
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    box-sizing: border-box;
+    margin-top: 15px;
+}
+
+.penjelasan h3 {
+    margin: 10px;
+    margin-bottom: -5px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.penjelasan p {
+    color: #4a4a4a;
+}
+
+
 .qr-display, .file-display {
     background-color: #1a1a1a;
     background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
@@ -169,10 +214,12 @@ button:hover {
     text-align: center;
     position: relative;
     box-sizing: border-box;
+    min-height: 300px;
+    max-height: 500px;
 }
 
 .file-display {
-    max-height: 400px; /* Set maximum height for file list */
+    max-height: 500px; /* Set maximum height for file list */
     overflow-y: auto; /* Enable vertical scrolling */
 }
 
@@ -183,15 +230,17 @@ button:hover {
 .drop-section {
     width: 100%;
     padding: 40px 20px;
-    border: 2px dashed #444;
+    border: 3px dashed #444;
     border-radius: 10px;
     text-align: center;
-    background-color: #262626;
+    background-color: #cecece;
     background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
-    color: #e0e0e0;
+    color: #000000;
+    font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease, border-color 0.3s ease;
     box-sizing: border-box;
+    position: relative; /* Add relative positioning for buttons */
 }
 
 .drop-section.dragover {
