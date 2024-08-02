@@ -281,6 +281,28 @@ button:hover {
     margin-left: 10px; /* Ensure spacing between icon and text */
 }
 
+.format-gambar {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    background-color: #e1e1e1;
+    padding-inline: 15px;
+    padding-block: 1px;
+    border-radius: 10px;
+}
+
+.format-gambar h3 {
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgb(97, 97, 97);
+    margin-inline: 60px;
+    padding-block: 5px;
+    border-radius: 10px;
+}
+
 footer {
     min-height: 50px;
     margin-top: 25px;
