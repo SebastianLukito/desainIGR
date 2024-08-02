@@ -84,10 +84,6 @@ body {
     background: #fffdf1;
 }
 
-.right-panel {
-    max-height: 550px; /* Set maximum height */
-    overflow-y: auto; /* Enable vertical scrolling */
-}
 
 .left-panel h2, .right-panel h2 {
     margin-top: 10px;
