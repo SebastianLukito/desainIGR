@@ -19,33 +19,44 @@
         </div>
         <main class="main">
             <section class="left-panel">
+                <h2>KONVERSI PDF KE GAMBAR</h2>
                 <div class="drop-section" id="drop-section">
                     <input type="file" id="image" name="image" accept=".jpeg, .jpg, .png, .gif, .tiff, .bmp, .webp" multiple style="display: none;">
                     <p>Drag & Drop gambar di sini, gan <br> untuk mengonversi gambar ke format lain</p>
                     <div id="file-list"></div>
                 </div>
-                <div class="format-section">
-                    <button id="ico-btn">ICO</button>
-                    <button id="jpeg-btn">JPEG</button>
-                    <button id="png-btn">PNG</button>
-                    <button id="pdf-btn">PDF</button>
-                    <button id="tiff-btn">TIFF</button>
-                    <button id="gif-btn">GIF</button>
-                    <button id="webp-btn">WEBP</button>
-                    <button id="bmp-btn">BMP</button>
+                <div class="format-gambar">
+                    <h3>PILIH FORMAT GAMBAR OUTPUT</h3>
+                    <div class="format-section">
+                        <button id="ico-btn">ICO</button>
+                        <button id="jpeg-btn">JPEG</button>
+                        <button id="png-btn">PNG</button>
+                        <button id="pdf-btn">PDF</button>
+                        <button id="tiff-btn">TIFF</button>
+                        <button id="gif-btn">GIF</button>
+                        <button id="webp-btn">WEBP</button>
+                        <button id="bmp-btn">BMP</button>
+                    </div>
                 </div>
+                
                 <div class="button-section">
                     <button id="convert-btn">Konversi</button>
                     <button id="reset-btn">Masukan Gambar Baru</button>
                 </div>
+                <div class="penjelasan">
+                    <h3>Penjelasan</h3>
+                    <p>Website ini secara khusus digunakan untuk mengkonversi format gambar. Contoh kamu ingin mengkonversi 1000 gambar JPEG ke format PNG. Melakukan konversi satu per satu sangat melelahkan, kamu bisa menggunakan website ini untuk mengkonversi gambar dalam jumlah besar.</p>
+                </div>
             </section>
             <section class="right-panel">
+                <h2>DISPLAY HASIL</h2>
                 <div class="button-section">
                     <button id="download-btn" style="display:none;">Download Semua Gambar</button>
                 </div>
                 <div class="file-display" id="file-display">
                     <div id="output-file-list"></div>
                 </div>
+                <p>This engine is exclusively crafted for Indogrosir Design Team</p>
             </section>
         </main>
     </div>
