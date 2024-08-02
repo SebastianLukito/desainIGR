@@ -55,9 +55,9 @@ body {
 }
 
 @keyframes marquee {
-    0% { transform: translateX(90%); }
+    0% { transform: translateX(75%); }
     50% { transform: translateX(0); }
-    100% { transform: translateX(-90%); }
+    100% { transform: translateX(-75%); }
 }
 
 .main {
