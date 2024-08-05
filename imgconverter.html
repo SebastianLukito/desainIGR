@@ -9,6 +9,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip-utils/0.1.0/jszip-utils.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/utif@3.1.0/UTIF.min.js"></script>
+    <script defer src="js/imgconverter.js"></script>
 </head>
 <body>
     <div class="container">
@@ -21,7 +23,7 @@
             <section class="left-panel">
                 <h2>KONVERSI FORMAT GAMBAR</h2>
                 <div class="drop-section" id="drop-section">
-                    <input type="file" id="image" name="image" accept=".jpeg, .jpg, .png, .gif, .tiff, .bmp, .webp" multiple style="display: none;">
+                    <input type="file" id="image" name="image" accept=".jpeg, .jpg, .png, .gif, .tiff, .bmp, .webp, .tif, .tiff" multiple style="display: none;">
                     <p>Drag & Drop gambar di sini, gan <br> untuk mengonversi gambar ke format lain</p>
                     <div id="file-list"></div>
                 </div>
@@ -67,7 +69,6 @@
         <div class="loading-spinner"></div>
         <p>Lagi diproses... Mohon tunggu ya mas...</p>
     </div>
-    <script defer src="js/imgconverter.js"></script>
     <script>
         document.getElementById('marquee').addEventListener('click', function() {
             window.location.href = 'index.html';
@@ -75,6 +76,3 @@
     </script>
 </body>
 </html>
-
-
-

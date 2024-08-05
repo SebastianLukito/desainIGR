@@ -114,19 +114,19 @@ closePopupGambarBtn.addEventListener("click", function () {
   popupGambar.classList.remove("popupActive");
 });
 
-// Event listener untuk button "AI"
-const AIBtn = document.getElementById("AIBtn");
-const closePopupAIBtn = document.getElementById("closePopupAI");
-const popupAI = document.getElementById("popupMenuAI");
+// // Event listener untuk button "AI"
+// const AIBtn = document.getElementById("AIBtn");
+// const closePopupAIBtn = document.getElementById("closePopupAI");
+// const popupAI = document.getElementById("popupMenuAI");
 
-AIBtn.addEventListener("click", function () {
-  closeAllPopups();
-  popupAI.classList.add("popupActive");
-});
+// AIBtn.addEventListener("click", function () {
+//   closeAllPopups();
+//   popupAI.classList.add("popupActive");
+// });
 
-closePopupAIBtn.addEventListener("click", function () {
-  popupAI.classList.remove("popupActive");
-});
+// closePopupAIBtn.addEventListener("click", function () {
+//   popupAI.classList.remove("popupActive");
+// });
 
 // Event listener untuk button "calculator"
 const calcBtn = document.getElementById("calcBtn");

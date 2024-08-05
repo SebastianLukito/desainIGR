@@ -94,41 +94,40 @@ document.addEventListener('DOMContentLoaded', function () {
             const fileItem = document.createElement('div');
             fileItem.classList.add('file-item');
             fileItem.setAttribute('data-index', index);
-    
+
             const fileIcon = document.createElement('img');
             const fileType = file.type.split('/')[1];
             fileIcon.src = fileType === 'pdf' ? 'assets/img/pdf.png' : `assets/img/format${fileType}.png`;
             fileIcon.alt = `${fileType} Icon`;
-    
+
             const fileName = document.createElement('span');
             fileName.textContent = truncateFileName(file.name, 15);
-    
+
             fileItem.appendChild(fileIcon);
             fileItem.appendChild(fileName);
             fileList.appendChild(fileItem);
-    
+
             const outputFileItem = document.createElement('div');
             outputFileItem.classList.add('file-item');
             outputFileItem.setAttribute('data-index', index);
-    
+
             const outputFileIcon = document.createElement('img');
             outputFileIcon.src = selectedFormat === 'pdf' ? 'assets/img/pdf.png' : `assets/img/format${selectedFormat}.png`;
             outputFileIcon.alt = `${selectedFormat} Icon`;
-    
+
             const outputFileName = document.createElement('span');
             outputFileName.textContent = truncateFileName(file.name, 15).replace(/\.[^/.]+$/, "") + `.${selectedFormat}`;
-    
+
             outputFileItem.appendChild(outputFileIcon);
             outputFileItem.appendChild(outputFileName);
             outputFileList.appendChild(outputFileItem);
         });
-    
+
         const dropText = dropSection.querySelector('p');
         if (dropText) {
             dropText.style.display = 'none';
         }
     }
-    
 
     function truncateFileName(fileName, maxLength) {
         if (fileName.length > maxLength) {
@@ -147,12 +146,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 const img = await convertImage(file, format);
                 images.push(img);
             }
-    
+
             displayImages(images);
             setupDownload(images);
-    
+
             loadingPopup.style.display = 'none';
-    
+
             console.log('Images converted and displayed successfully.');
         } catch (error) {
             console.error('Error converting images:', error);
@@ -166,16 +165,16 @@ document.addEventListener('DOMContentLoaded', function () {
         downloadBtn.onclick = async function () {
             // Tampilkan popup loading
             loadingPopup.style.display = 'flex';
-    
+
             const zip = new JSZip();
             const imgFolder = zip.folder("images");
-    
+
             for (const img of images) {
                 const response = await fetch(img.src);
                 const blob = await response.blob();
                 imgFolder.file(img.alt, blob);
             }
-    
+
             zip.generateAsync({ type: "blob" }).then(function (content) {
                 const a = document.createElement('a');
                 const url = URL.createObjectURL(content);
@@ -183,13 +182,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 a.download = "file_hasil_konversi.zip";
                 a.click();
                 URL.revokeObjectURL(url);
-    
+
                 // Sembunyikan popup loading setelah proses selesai
                 loadingPopup.style.display = 'none';
             }).catch(function (error) {
                 console.error('Error generating ZIP file:', error);
                 alert('Error generating ZIP file. Please try again.');
-    
+
                 // Sembunyikan popup loading jika terjadi kesalahan
                 loadingPopup.style.display = 'none';
             });
@@ -200,62 +199,84 @@ document.addEventListener('DOMContentLoaded', function () {
         if (format === 'pdf') {
             return await convertImageToPdf(file);
         }
-    
+
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.onload = function (event) {
-                const imgElement = new Image();
-                imgElement.onload = function () {
+                if (file.type === 'image/tiff' || file.type === 'image/tif') {
+                    const buffer = event.target.result;
+                    const ifds = UTIF.decode(buffer);
+                    UTIF.decodeImage(buffer, ifds[0]);
+                    const firstPage = ifds[0];
+                    const rgba = UTIF.toRGBA8(firstPage);
+                    const width = firstPage.width;
+                    const height = firstPage.height;
                     const canvas = document.createElement('canvas');
-                    canvas.width = imgElement.width;
-                    canvas.height = imgElement.height;
-                    const context = canvas.getContext('2d');
-                    context.drawImage(imgElement, 0, 0);
-                    let mimeType;
-                    switch (format) {
-                        case 'ico':
-                            mimeType = 'image/x-icon';
-                            break;
-                        case 'jpeg':
-                            mimeType = 'image/jpeg';
-                            break;
-                        case 'png':
-                            mimeType = 'image/png';
-                            break;
-                        case 'tiff':
-                            mimeType = 'image/tiff';
-                            break;
-                        case 'gif':
-                            mimeType = 'image/gif';
-                            break;
-                        case 'webp':
-                            mimeType = 'image/webp';
-                            break;
-                        case 'bmp':
-                            mimeType = 'image/bmp';
-                            break;
-                        default:
-                            mimeType = 'image/png';
-                    }
-                    canvas.toBlob((blob) => {
-                        if (!blob) {
-                            reject(new Error('Conversion to blob failed.'));
-                            return;
-                        }
-                        const url = URL.createObjectURL(blob);
-                        const img = document.createElement('img');
-                        img.src = url;
-                        img.alt = file.name.replace(/\.[^/.]+$/, "") + `.${format}`;
-                        resolve(img);
-                    }, mimeType);
-                };
-                imgElement.onerror = () => reject(new Error('Image loading failed.'));
-                imgElement.src = event.target.result;
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    const imageData = ctx.createImageData(width, height);
+                    imageData.data.set(rgba);
+                    ctx.putImageData(imageData, 0, 0);
+                    handleCanvasConversion(canvas, file, format, resolve, reject);
+                } else {
+                    const imgElement = new Image();
+                    imgElement.onload = function () {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = imgElement.width;
+                        canvas.height = imgElement.height;
+                        const context = canvas.getContext('2d');
+                        context.drawImage(imgElement, 0, 0);
+                        handleCanvasConversion(canvas, file, format, resolve, reject);
+                    };
+                    imgElement.onerror = () => reject(new Error('Image loading failed.'));
+                    imgElement.src = event.target.result;
+                }
             };
             reader.onerror = () => reject(new Error('File reading failed.'));
-            reader.readAsDataURL(file);
+            reader.readAsArrayBuffer(file); // Use readAsArrayBuffer for TIFF files
         });
-    }        
+    }
+
+    function handleCanvasConversion(canvas, file, format, resolve, reject) {
+        let mimeType;
+        switch (format) {
+            case 'ico':
+                mimeType = 'image/x-icon';
+                break;
+            case 'jpeg':
+                mimeType = 'image/jpeg';
+                break;
+            case 'png':
+                mimeType = 'image/png';
+                break;
+            case 'tiff':
+                mimeType = 'image/tiff';
+                break;
+            case 'gif':
+                mimeType = 'image/gif';
+                break;
+            case 'webp':
+                mimeType = 'image/webp';
+                break;
+            case 'bmp':
+                mimeType = 'image/bmp';
+                break;
+            default:
+                mimeType = 'image/png';
+        }
+        canvas.toBlob((blob) => {
+            if (!blob) {
+                reject(new Error('Conversion to blob failed.'));
+                return;
+            }
+            const url = URL.createObjectURL(blob);
+            const img = document.createElement('img');
+            img.src = url;
+            img.alt = file.name.replace(/\.[^/.]+$/, "") + `.${format}`;
+            resolve(img);
+        }, mimeType);
+    }
 
     async function convertImageToPdf(file) {
         const { jsPDF } = window.jspdf;
@@ -291,17 +312,17 @@ document.addEventListener('DOMContentLoaded', function () {
             const fileItem = document.createElement('div');
             fileItem.classList.add('file-item');
             fileItem.setAttribute('data-index', index);
-    
+
             const fileIcon = document.createElement('img');
             fileIcon.src = selectedFormat === 'pdf' ? 'assets/img/pdf.png' : img.src;
             fileIcon.alt = 'Image Icon';
-    
+
             const fileName = document.createElement('span');
             fileName.textContent = img.alt;
-    
+
             fileItem.appendChild(fileIcon);
             fileItem.appendChild(fileName);
             outputFileList.appendChild(fileItem);
         });
-    }    
+    }
 });
