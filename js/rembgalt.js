@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function removeBackground(file) {
         if (currentApiKeyIndex >= apiKeys.length) {
-            alert('All API keys have been exhausted. Please update the API keys.');
+            // alert('Hubungi Sebastian jika remove background gagal, biasanya karena server down');
             hideLoading();
             return;
         }
