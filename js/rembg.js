@@ -8,16 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const loadingPopup = document.getElementById("loading-popup");
 
   let selectedFile = null; // Variable to store the selected file
-  let apiKeys = [];
-  let currentApiKeyIndex = 0;
-
-  // Load API keys from JSON
-  fetch('../assets/list/rembgapi.json')
-      .then(response => response.json())
-      .then(data => {
-          apiKeys = data.api_keys;
-      })
-      .catch(error => console.error('Error loading API keys:', error));
 
   // Handle file selection
   fileInput.addEventListener('change', function () {
@@ -146,28 +136,17 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function removeBackground(file) {
-      if (currentApiKeyIndex >= apiKeys.length) {
-          alert('All API keys have been exhausted. Please update the API keys.');
-          hideLoading();
-          return;
-      }
-
       const formData = new FormData();
       formData.append("image_file", file);
 
       fetch("https://api.remove.bg/v1.0/removebg", {
           method: "POST",
           headers: {
-              "X-Api-Key": apiKeys[currentApiKeyIndex]
+              "X-Api-Key": "7QJzZY63de6zz4k4cw9cAjD3"
           },
           body: formData
       })
-      .then(response => {
-          if (!response.ok) {
-              throw new Error('API key failed');
-          }
-          return response.blob();
-      })
+      .then(response => response.blob())
       .then(blob => {
           const url = URL.createObjectURL(blob);
           const image = new Image();
@@ -181,9 +160,8 @@ document.addEventListener('DOMContentLoaded', function () {
           hideLoading(); // Hide loading popup when done
       })
       .catch(error => {
-          console.error('Error:', error);
-          currentApiKeyIndex++; // Move to the next API key
-          removeBackground(file); // Retry with the next API key
+          console.error(error);
+          hideLoading(); // Hide loading popup in case of error
       });
   }
 });
