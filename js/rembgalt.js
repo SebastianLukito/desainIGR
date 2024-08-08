@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const resetBtn = document.getElementById('reset-btn');
     const downloadPngBtn = document.getElementById("download-png-btn");
     const downloadTifBtn = document.getElementById("download-tif-btn");
+    const downloadTiffBtn = document.getElementById("download-tiff-btn")
     const loadingPopup = document.getElementById("loading-popup");
 
     let selectedFile = null; // Variable to store the selected file
@@ -93,6 +94,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    downloadTiffBtn.addEventListener('click', function () {
+        if (downloadTiffBtn.href) {
+            const link = document.createElement('a');
+            link.href = downloadTiffBtn.href;
+            link.download = 'background_removed.tiff';
+            link.click();
+        }
+    });
+
     function handleNewFile(files) {
         if (files.length > 0) {
             resetFileInput();
@@ -144,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
         selectedFile = null; // Reset the selected file
         downloadPngBtn.style.display = 'none'; // Hide the download buttons when reset
         downloadTifBtn.style.display = 'none';
+        downloadTiffBtn.style.display = 'none';
         const dropText = dropSection.querySelector('p');
         if (dropText) {
             dropText.style.display = 'block';
@@ -242,7 +253,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // Show and configure the download buttons
         downloadPngBtn.style.display = 'block';
         downloadTifBtn.style.display = 'block';
+        downloadTiffBtn.style.display = 'block';
         downloadPngBtn.href = croppedImageURL;
-        downloadTifBtn.href = originalImageURL.replace('image/png', 'image/tiff'); // Replace format for TIF
+        downloadTifBtn.href = originalImageURL.replace('image/png', 'image/tif'); // Replace format for TIF
+        downloadTiffBtn.href = originalImageURL.replace('image/png', 'image/tiff'); // Replace format for TIF
     }
 });
