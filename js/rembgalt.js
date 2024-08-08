@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             apiKeys = data.api_keys;
+            console.log('API keys loaded:', apiKeys);
         })
         .catch(error => console.error('Error loading API keys:', error));
 
@@ -159,10 +160,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function removeBackground(file) {
         if (currentApiKeyIndex >= apiKeys.length) {
-            // alert('Hubungi Sebastian jika remove background gagal, biasanya karena server down');
-            hideLoading();
-            return;
+            console.log('All API keys failed, retrying from the first key');
+            currentApiKeyIndex = 0; // Reset index to retry from the first key
         }
+
+        console.log('Using API key:', apiKeys[currentApiKeyIndex]);
 
         const formData = new FormData();
         formData.append("image_file", file);
@@ -176,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error('API key failed');
+                throw new Error('API key failed: ' + response.statusText);
             }
             return response.blob();
         })
