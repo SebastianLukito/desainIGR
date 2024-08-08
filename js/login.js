@@ -8,7 +8,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         .then(response => response.json())
         .then(data => {
             if (data[username] && data[username] === password) {
-                setCookie('loggedIn', 'true', 10);
+                setCookie('loggedIn', 'true', 60);
                 window.location.href = 'main.html';
             } else {
                 document.getElementById('errorMessage').innerText = 'Salah bosku, anda karyawan mana?';
