@@ -78,6 +78,11 @@
     <script src="https://cdn.jsdelivr.net/npm/utif@3.1.0/UTIF.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
     <script>
+        document.getElementById('marquees').addEventListener('click', function() {
+            window.location.href = 'main.html';
+        });
+    </script>
+    <script>
         function getCookie(name) {
             const value = `; ${document.cookie}`;
             const parts = value.split(`; ${name}=`);
