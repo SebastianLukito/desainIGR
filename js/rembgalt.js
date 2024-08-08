@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
         resultDiv.innerHTML = '';
         downloadPngBtn.style.display = 'none'; // Hide the download buttons initially
         downloadTifBtn.style.display = 'none';
+        downloadTiffBtn.style.display = 'none';
 
         files.forEach((file, index) => {
             const fileItem = document.createElement('div');
@@ -198,9 +199,10 @@ document.addEventListener('DOMContentLoaded', function () {
             const image = new Image();
             image.src = url;
             image.onload = () => {
-                const croppedImageURL = cropToFit(image, 'image/png');
-                displayResult(croppedImageURL, url);
-                hideLoading();
+                cropToFit(image, 'image/png').then(croppedImageURL => {
+                    displayResult(croppedImageURL, url);
+                    hideLoading();
+                });
             };
         })
         .catch(error => {
@@ -211,38 +213,43 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function cropToFit(image, format) {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = image.width;
-        canvas.height = image.height;
-        ctx.drawImage(image, 0, 0);
+        return new Promise((resolve) => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = image.width;
+            canvas.height = image.height;
+            ctx.drawImage(image, 0, 0);
 
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const { data } = imageData;
-        let minX = canvas.width, minY = canvas.height, maxX = 0, maxY = 0;
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const { data } = imageData;
+            let minX = canvas.width, minY = canvas.height, maxX = 0, maxY = 0;
 
-        for (let y = 0; y < canvas.height; y++) {
-            for (let x = 0; x < canvas.width; x++) {
-                const index = (y * canvas.width + x) * 4;
-                const alpha = data[index + 3];
-                if (alpha > 0) {
-                    if (x < minX) minX = x;
-                    if (x > maxX) maxX = x;
-                    if (y < minY) minY = y;
-                    if (y > maxY) maxY = y;
+            for (let y = 0; y < canvas.height; y++) {
+                for (let x = 0; x < canvas.width; x++) {
+                    const index = (y * canvas.width + x) * 4;
+                    const alpha = data[index + 3];
+                    if (alpha > 0) {
+                        if (x < minX) minX = x;
+                        if (x > maxX) maxX = x;
+                        if (y < minY) minY = y;
+                        if (y > maxY) maxY = y;
+                    }
                 }
             }
-        }
 
-        const croppedWidth = maxX - minX + 1;
-        const croppedHeight = maxY - minY + 1;
-        const croppedCanvas = document.createElement('canvas');
-        croppedCanvas.width = croppedWidth;
-        croppedCanvas.height = croppedHeight;
-        const croppedCtx = croppedCanvas.getContext('2d');
-        croppedCtx.drawImage(canvas, minX, minY, croppedWidth, croppedHeight, 0, 0, croppedWidth, croppedHeight);
+            const croppedWidth = maxX - minX + 1;
+            const croppedHeight = maxY - minY + 1;
+            const croppedCanvas = document.createElement('canvas');
+            croppedCanvas.width = croppedWidth;
+            croppedCanvas.height = croppedHeight;
+            const croppedCtx = croppedCanvas.getContext('2d');
+            croppedCtx.drawImage(canvas, minX, minY, croppedWidth, croppedHeight, 0, 0, croppedWidth, croppedHeight);
 
-        return croppedCanvas.toDataURL(format);
+            croppedCanvas.toBlob(blob => {
+                const croppedImageURL = URL.createObjectURL(blob);
+                resolve(croppedImageURL);
+            }, format);
+        });
     }
 
     function displayResult(croppedImageURL, originalImageURL) {
