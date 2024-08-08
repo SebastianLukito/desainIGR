@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const dropSection = document.getElementById("drop-section");
     const resultDiv = document.getElementById("result");
     const resetBtn = document.getElementById('reset-btn');
-    const downloadBtn = document.getElementById("download-btn");
+    const downloadPngBtn = document.getElementById("download-png-btn");
+    const downloadTifBtn = document.getElementById("download-tif-btn");
     const loadingPopup = document.getElementById("loading-popup");
 
     let selectedFile = null; // Variable to store the selected file
@@ -72,12 +73,21 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Handle download button
-    downloadBtn.addEventListener('click', function () {
-        if (downloadBtn.href) {
+    // Handle download buttons
+    downloadPngBtn.addEventListener('click', function () {
+        if (downloadPngBtn.href) {
             const link = document.createElement('a');
-            link.href = downloadBtn.href;
+            link.href = downloadPngBtn.href;
             link.download = 'background_removed.png';
+            link.click();
+        }
+    });
+
+    downloadTifBtn.addEventListener('click', function () {
+        if (downloadTifBtn.href) {
+            const link = document.createElement('a');
+            link.href = downloadTifBtn.href;
+            link.download = 'background_removed.tif';
             link.click();
         }
     });
@@ -93,7 +103,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function displayFiles(files) {
         fileList.innerHTML = '';
         resultDiv.innerHTML = '';
-        downloadBtn.style.display = 'none'; // Hide the download button initially
+        downloadPngBtn.style.display = 'none'; // Hide the download buttons initially
+        downloadTifBtn.style.display = 'none';
 
         files.forEach((file, index) => {
             const fileItem = document.createElement('div');
@@ -130,7 +141,8 @@ document.addEventListener('DOMContentLoaded', function () {
         fileList.innerHTML = '';
         resultDiv.innerHTML = '';
         selectedFile = null; // Reset the selected file
-        downloadBtn.style.display = 'none'; // Hide the download button when reset
+        downloadPngBtn.style.display = 'none'; // Hide the download buttons when reset
+        downloadTifBtn.style.display = 'none';
         const dropText = dropSection.querySelector('p');
         if (dropText) {
             dropText.style.display = 'block';
@@ -172,18 +184,63 @@ document.addEventListener('DOMContentLoaded', function () {
             const url = URL.createObjectURL(blob);
             const image = new Image();
             image.src = url;
-            resultDiv.appendChild(image);
-
-            // Show and configure the download button
-            downloadBtn.style.display = 'block';
-            downloadBtn.href = url;
-
-            hideLoading(); // Hide loading popup when done
+            image.onload = () => {
+                const croppedImageURL = cropToFit(image, 'image/png');
+                displayResult(croppedImageURL, url);
+                hideLoading();
+            };
         })
         .catch(error => {
             console.error('Error:', error);
             currentApiKeyIndex++; // Move to the next API key
             removeBackground(file); // Retry with the next API key
         });
+    }
+
+    function cropToFit(image, format) {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = image.width;
+        canvas.height = image.height;
+        ctx.drawImage(image, 0, 0);
+
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const { data } = imageData;
+        let minX = canvas.width, minY = canvas.height, maxX = 0, maxY = 0;
+
+        for (let y = 0; y < canvas.height; y++) {
+            for (let x = 0; x < canvas.width; x++) {
+                const index = (y * canvas.width + x) * 4;
+                const alpha = data[index + 3];
+                if (alpha > 0) {
+                    if (x < minX) minX = x;
+                    if (x > maxX) maxX = x;
+                    if (y < minY) minY = y;
+                    if (y > maxY) maxY = y;
+                }
+            }
+        }
+
+        const croppedWidth = maxX - minX + 1;
+        const croppedHeight = maxY - minY + 1;
+        const croppedCanvas = document.createElement('canvas');
+        croppedCanvas.width = croppedWidth;
+        croppedCanvas.height = croppedHeight;
+        const croppedCtx = croppedCanvas.getContext('2d');
+        croppedCtx.drawImage(canvas, minX, minY, croppedWidth, croppedHeight, 0, 0, croppedWidth, croppedHeight);
+
+        return croppedCanvas.toDataURL(format);
+    }
+
+    function displayResult(croppedImageURL, originalImageURL) {
+        const image = new Image();
+        image.src = croppedImageURL;
+        resultDiv.appendChild(image);
+
+        // Show and configure the download buttons
+        downloadPngBtn.style.display = 'block';
+        downloadTifBtn.style.display = 'block';
+        downloadPngBtn.href = croppedImageURL;
+        downloadTifBtn.href = originalImageURL.replace('image/png', 'image/tiff'); // Replace format for TIF
     }
 });
