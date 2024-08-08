@@ -77,5 +77,16 @@
     <script defer src="js/compressgambar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/utif@3.1.0/UTIF.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
+    <script>
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+    
+        if (!getCookie('loggedIn')) {
+            window.location.href = 'login.html';
+        }
+    </script>  
 </body>
 </html>
