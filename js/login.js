@@ -8,7 +8,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         .then(response => response.json())
         .then(data => {
             if (data[username] && data[username] === password) {
-                setCookie('loggedIn', 'true', 1);
+                setCookie('loggedIn', 'true', 10);
                 window.location.href = 'main.html';
             } else {
                 document.getElementById('errorMessage').innerText = 'Salah bosku, anda karyawan mana?';
@@ -20,12 +20,13 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         });
 });
 
-function setCookie(name, value, hours) {
+function setCookie(name, value, minutes) {
     const d = new Date();
-    d.setTime(d.getTime() + (hours * 60 * 60 * 1000));
+    d.setTime(d.getTime() + (minutes * 60 * 1000));
     const expires = "expires=" + d.toUTCString();
     document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }
+
 
 const motorAnimation = document.querySelector('.motor-animation');
 const motorBaruteks = document.querySelector('.motor-baruteks');
