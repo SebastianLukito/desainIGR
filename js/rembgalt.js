@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             apiKeys = data.api_keys;
-            console.log('API keys loaded:', apiKeys);
         })
         .catch(error => console.error('Error loading API keys:', error));
 
