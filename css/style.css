@@ -114,13 +114,14 @@ body {
     background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
     color: black;
     font-size: 20px;
-    padding: 0.5rem 4rem;
+    padding: 0.5rem 3rem;
     border-radius: 2rem;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     transition: all 0.01s ease;
+    min-width: 16rem;
 }
 
 .btn:hover {
