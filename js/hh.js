@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
         showLoading();
         sheetEditor.src = googleSheetsUrl;
 
-        // Menyembunyikan loading setelah iframe selesai memuat
         sheetEditor.onload = function() {
-            hideLoading();
+            // Tambahkan sedikit penundaan untuk memastikan bahwa konten iframe telah selesai dimuat
+            setTimeout(hideLoading, 25); // Menunggu 1 detik setelah load untuk memastikan semuanya sudah dimuat
         };
     }
 
@@ -40,5 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('reset-btn').addEventListener('click', function () {
         sheetEditor.src = ''; // Kosongkan iframe jika reset
+        hideLoading(); // Sembunyikan loading saat di-reset
     });
 });
