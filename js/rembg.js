@@ -1,26 +1,4 @@
-// Base64 decode function
-function base64Decode(str) {
-    return decodeURIComponent(atob(str).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-}
-
-// URL decoding and content loading
-document.addEventListener("DOMContentLoaded", function () {
-    const encodedPath = window.location.pathname.split('/').pop();
-    const decodedPath = base64Decode(encodedPath);
-
-    if (decodedPath === 'rembg.html') {
-        // Proceed with your existing initialization logic
-        initialize();
-    } else {
-        // Handle invalid or missing path
-        document.body.innerHTML = '<h1>404 Not Found</h1>';
-    }
-});
-
-function initialize() {
-    // Your existing script logic
+document.addEventListener('DOMContentLoaded', function () {
     const fileInput = document.getElementById("file");
     const fileList = document.getElementById("file-list");
     const dropSection = document.getElementById("drop-section");
@@ -28,7 +6,7 @@ function initialize() {
     const resetBtn = document.getElementById('reset-btn');
     const downloadPngBtn = document.getElementById("download-png-btn");
     const downloadTifBtn = document.getElementById("download-tif-btn");
-    const downloadTiffBtn = document.getElementById("download-tiff-btn");
+    const downloadTiffBtn = document.getElementById("download-tiff-btn")
     const loadingPopup = document.getElementById("loading-popup");
 
     let selectedFile = null; // Variable to store the selected file
@@ -40,6 +18,7 @@ function initialize() {
         .then(response => response.json())
         .then(data => {
             apiKeys = data.api_keys;
+            console.log('API keys loaded:', apiKeys);
         })
         .catch(error => console.error('Error loading API keys:', error));
 
@@ -286,4 +265,4 @@ function initialize() {
         downloadTifBtn.href = originalImageURL.replace('image/png', 'image/tif'); // Replace format for TIF
         downloadTiffBtn.href = originalImageURL.replace('image/png', 'image/tiff'); // Replace format for TIF
     }
-}
+});

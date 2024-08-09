@@ -142,6 +142,20 @@ closePopupCalcBtn.addEventListener("click", function () {
   popupCalc.classList.remove("popupActive");
 });
 
+// Event listener untuk button "alokasi"
+const alokasiBtn = document.getElementById("alokasiBtn");
+const closePopupAlokasiBtn = document.getElementById("closePopupAlokasi");
+const popupAlokasi = document.getElementById("popupMenuAlokasi");
+
+alokasiBtn.addEventListener("click", function () {
+  closeAllPopups();
+  popupAlokasi.classList.add("popupActive");
+});
+
+closePopupAlokasiBtn.addEventListener("click", function () {
+  popupAlokasi.classList.remove("popupActive");
+});
+
 // Toggle child sub buttons
 document.querySelectorAll('.toggleChild').forEach(button => {
   button.addEventListener('click', function (event) {
