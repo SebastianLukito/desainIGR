@@ -77,12 +77,12 @@ body {
     padding: 20px;
     border-radius: 10px;
     flex: 1;
-    min-width: 350px;
+    min-width: 300px;
     box-sizing: border-box;
 }
 
 .left-panel:hover, .right-panel:hover {
-    background: #f4f4f4;
+    background: #f8f8f8;
 }
 
 .left-panel h2, .right-panel h2 {
@@ -114,10 +114,10 @@ label {
 }
 
 button {
-    width: 10%;
-    height: 40px;
+    width: 100%;
     padding: 10px;
     margin-bottom: 10px;
+    margin-top: 0px;
     background-color: rgb(35, 35, 35);
     background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
     color: #e0e0e0;
@@ -130,9 +130,7 @@ button {
 }
 
 button:hover {
-    background-color: rgb(255, 208, 0);
-    transform: scale(1.01);
-    color: #000000;
+    background-color: rgb(200, 50, 50);
 }
 
 .qr-display {
