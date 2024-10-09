@@ -9,7 +9,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         .then(data => {
             if (data[username] && data[username] === password) {
                 setCookie('loggedIn', 'true', 60);
-                window.location.href = 'main.html';
+                window.location.href = 'loading.html';
             } else {
                 document.getElementById('errorMessage').innerText = 'Salah bosku, anda karyawan mana?';
             }
