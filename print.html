@@ -43,31 +43,46 @@
         </main>
         
     </div>
+    <!-- Footer -->
     <footer>
         <p>&copy; Marketing Indogrosir Sub Divisi Desain Grafis 2024</p>
     </footer>
+
+    <!-- Loading Popup -->
     <div id="loading-popup" class="loading-popup" style="display: none;">
         <div class="loading-spinner"></div>
         <p>Lagi diproses... Mohon tunggu ya mas...</p>
     </div>
-    <script defer src="js/print.js"></script>
-    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+
+    <!-- Scripts -->
+    <!-- PDF.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <!-- PDF.js Worker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js"></script>
+    <!-- Initialize PDF.js Worker -->
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+    </script>
+    <!-- PDF-Lib Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script defer src="js/print.js"></script>
     <script>
         document.getElementById('marquee').addEventListener('click', function() {
             window.location.href = 'main.html';
         });
     </script>
-        <script>
-            function getCookie(name) {
-                const value = `; ${document.cookie}`;
-                const parts = value.split(`; ${name}=`);
-                if (parts.length === 2) return parts.pop().split(';').shift();
-            }
-        
-            if (!getCookie('loggedIn')) {
-                window.location.href = 'index.html';
-            }
-        </script>  
+    <script>
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        if (!getCookie('loggedIn')) {
+            window.location.href = 'index.html';
+        }
+    </script> 
 </body>
 </html>

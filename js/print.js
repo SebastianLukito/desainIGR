@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const loadingPopup = document.getElementById('loading-popup');
     let files = [];
 
+
     dropSection.addEventListener('click', function () {
         pdfInput.click();
     });
@@ -79,8 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function handleFiles(files) {
         try {
-            const pdfDocs = await Promise.all(files.map(file => file.arrayBuffer().then(buffer => PDFLib.PDFDocument.load(buffer))));
-            const mergedPdfBytes = await mergePdfPages(pdfDocs);
+            const mergedPdfBytes = await mergePdfPages(files);
 
             const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
             const url = window.URL.createObjectURL(blob);
@@ -114,36 +114,81 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    async function mergePdfPages(docs) {
+    async function mergePdfPages(files) {
         const mergedPdf = await PDFLib.PDFDocument.create();
 
-        for (const doc of docs) {
+        for (const file of files) {
             try {
-                const copiedPages = await doc.copyPages(doc, [0, 1]);
-                if (copiedPages.length >= 2) {
-                    const [firstPage, secondPage] = copiedPages;
-                    console.log('Copied first and second pages of document:', doc);
+                const arrayBuffer = await file.arrayBuffer();
+                const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+                const pdfDocument = await loadingTask.promise;
 
-                    const width = firstPage.getWidth() + secondPage.getWidth();
-                    const height = Math.max(firstPage.getHeight(), secondPage.getHeight());
+                // Render the first two pages
+                const page1ImageData = await renderPageToImage(pdfDocument, 1);
+                const page2ImageData = await renderPageToImage(pdfDocument, 2);
+
+                if (page1ImageData && page2ImageData) {
+                    const page1Image = await mergedPdf.embedPng(page1ImageData);
+                    const page2Image = await mergedPdf.embedPng(page2ImageData);
+
+                    const width = page1Image.width + page2Image.width;
+                    const height = Math.max(page1Image.height, page2Image.height);
 
                     const newPage = mergedPdf.addPage([width, height]);
 
-                    const [embeddedFirstPage, embeddedSecondPage] = await mergedPdf.embedPages([firstPage, secondPage]);
+                    newPage.drawImage(page1Image, {
+                        x: 0,
+                        y: 0,
+                        width: page1Image.width,
+                        height: page1Image.height,
+                    });
 
-                    newPage.drawPage(embeddedFirstPage, { x: 0, y: 0 });
-                    newPage.drawPage(embeddedSecondPage, { x: firstPage.getWidth(), y: 0 });
-                    console.log('Merged pages side by side.');
+                    newPage.drawImage(page2Image, {
+                        x: page1Image.width,
+                        y: 0,
+                        width: page2Image.width,
+                        height: page2Image.height,
+                    });
+
+                    console.log('Merged pages as images side by side.');
                 } else {
-                    console.warn('Document does not have enough pages:', doc);
+                    console.warn('Document does not have enough pages:', file.name);
                 }
             } catch (error) {
-                console.error('Error copying pages from document:', doc, error);
+                console.error('Error processing document:', file.name, error);
             }
         }
 
         console.log('All pages merged successfully.');
         return await mergedPdf.save();
+    }
+
+    async function renderPageToImage(pdfDocument, pageNumber) {
+        try {
+            const page = await pdfDocument.getPage(pageNumber);
+            const viewport = page.getViewport({ scale: 2 }); // Adjust scale as needed
+
+            // Create a canvas element to render the PDF page
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+
+            const renderContext = {
+                canvasContext: context,
+                viewport: viewport,
+            };
+
+            await page.render(renderContext).promise;
+
+            // Convert canvas to image data URL
+            const imageDataUrl = canvas.toDataURL('image/png');
+
+            return imageDataUrl;
+        } catch (error) {
+            console.error('Error rendering page to image:', error);
+            return null;
+        }
     }
 
     // Event listener for reset button
