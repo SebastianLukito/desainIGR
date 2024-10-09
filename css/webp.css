@@ -103,7 +103,7 @@ body {
     border-radius: 10px;
 }
 
-.input-section, .button-section, .drop-section, .quality-section, .format-section {
+.input-section, .button-section, .drop-section, .quality-section, .size-section .format-section {
     margin-bottom: 20px;
     width: 100%;
 }
@@ -176,6 +176,29 @@ button:hover {
 .format-section button.active {
     background-color: rgb(50, 150, 50);
 }
+
+.size-section {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.size-section label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.size-section input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #aeaeae;
+    background-color: #cecece;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
 
 .penjelasan {
     background-color: rgb(255, 255, 255);

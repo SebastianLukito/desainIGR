@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const fileList = document.getElementById('file-list');
     const loadingPopup = document.getElementById('loading-popup');
     const qualityInput = document.getElementById('quality');
+    const maxSizeInput = document.getElementById('maxSize'); // Input for maximum size
     const webpBtn = document.getElementById('webp-btn');
     const jpegBtn = document.getElementById('jpeg-btn');
     const pngBtn = document.getElementById('png-btn');
@@ -42,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
         displayFiles(files);
     });
 
-    // Event listeners for drag and drop
     dropSection.addEventListener('dragover', function (e) {
         e.preventDefault();
         dropSection.classList.add('dragover');
@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Please upload at least one PDF file.');
             return;
         }
-        // Show loading popup
         loadingPopup.style.display = 'flex';
         handleFiles(files, selectedFormat);
     });
@@ -74,15 +73,13 @@ document.addEventListener('DOMContentLoaded', function () {
         files = [];
         fileList.innerHTML = '';
         outputFileList.innerHTML = '';
-        pdfInput.value = ''; // Reset input file
+        pdfInput.value = '';
 
-        // Show "Drag & Drop PDF-nya di sini gan" text
         const dropText = dropSection.querySelector('p');
         if (dropText) {
             dropText.style.display = 'block';
         }
 
-        // Hide download button and file display
         fileDisplay.innerHTML = '';
         downloadBtn.style.display = 'none';
     });
@@ -122,7 +119,6 @@ document.addEventListener('DOMContentLoaded', function () {
             outputFileList.appendChild(outputFileItem);
         });
 
-        // Remove "Drag & Drop PDF-nya di sini gan" text
         const dropText = dropSection.querySelector('p');
         if (dropText) {
             dropText.style.display = 'none';
@@ -137,8 +133,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     async function handleFiles(files, format) {
+        const quality = parseInt(qualityInput.value, 10);
+        const maxSize = parseInt(maxSizeInput.value, 10); // Get max size input
         try {
-            const quality = parseInt(qualityInput.value, 10);
             const images = [];
 
             for (const file of files) {
@@ -148,23 +145,71 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 for (let i = 1; i <= numPages; i++) {
                     const page = await pdf.getPage(i);
-                    const img = await convertPdfPageToImage(page, i - 1, quality, file.name, format);
-                    images.push(img);
+                    const img = await convertPdfPageToImage(page, i - 1, quality, maxSize, file.name, format);
+                    if (img) images.push(img);
                 }
             }
 
             displayImages(images);
             setupDownload(images);
-
-            // Hide loading popup
             loadingPopup.style.display = 'none';
-
-            console.log('PDF converted and displayed successfully.');
         } catch (error) {
             console.error('Error converting PDFs:', error);
             alert('Error converting PDFs. Please try again.');
             loadingPopup.style.display = 'none';
         }
+    }
+
+    async function convertPdfPageToImage(page, pageIndex, quality, maxSize, fileName, format) {
+        const viewport = page.getViewport({ scale: 2 });
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        await page.render({ canvasContext: context, viewport: viewport }).promise;
+
+        let mimeType;
+        if (format === 'webp') {
+            mimeType = 'image/webp';
+        } else if (format === 'jpeg' || format === 'jpg') {
+            mimeType = 'image/jpeg';
+        } else if (format === 'png') {
+            mimeType = 'image/png';
+        }
+
+        let dataUrl = canvas.toDataURL(mimeType, quality / 100);
+        let img = document.createElement('img');
+        img.src = dataUrl;
+        img.alt = `${fileName.split('.')[0]}-${pageIndex + 1}.${format}`;
+
+        if (await checkFileSize(img, maxSize)) {
+            return img;
+        } else {
+            return adjustFileSize(canvas, mimeType, quality, maxSize, fileName, format, pageIndex);
+        }
+    }
+
+    async function checkFileSize(img, maxSize) {
+        const response = await fetch(img.src);
+        const blob = await response.blob();
+        return (blob.size / 1024 <= maxSize); // size in KB
+    }
+
+    async function adjustFileSize(canvas, mimeType, quality, maxSize, fileName, format, pageIndex) {
+        let adjustedQuality = quality;
+        while (adjustedQuality > 10) { // stop if quality is below 10%
+            adjustedQuality -= 5; // reduce quality by 5% each time
+            let dataUrl = canvas.toDataURL(mimeType, adjustedQuality / 100);
+            let img = document.createElement('img');
+            img.src = dataUrl;
+            img.alt = `${fileName.split('.')[0]}-${pageIndex + 1}.${format}`;
+            if (await checkFileSize(img, maxSize)) {
+                return img;
+            }
+        }
+        alert('Cannot meet the size requirements with acceptable quality.');
+        return null; // or handle this case as needed
     }
 
     function setupDownload(images) {
@@ -188,32 +233,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 URL.revokeObjectURL(url);
             });
         };
-    }
-
-    async function convertPdfPageToImage(page, pageIndex, quality, fileName, format) {
-        const viewport = page.getViewport({ scale: 2 });
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-
-        await page.render({ canvasContext: context, viewport: viewport }).promise;
-
-        let mimeType;
-        if (format === 'webp') {
-            mimeType = 'image/webp';
-        } else if (format === 'jpeg' || format === 'jpg') {
-            mimeType = 'image/jpeg';
-        } else if (format === 'png') {
-            mimeType = 'image/png';
-        }
-
-        const dataUrl = canvas.toDataURL(mimeType, quality / 100);
-        const img = document.createElement('img');
-        img.src = dataUrl;
-        img.alt = `${fileName.split('.')[0]}-${pageIndex + 1}.${format}`;
-
-        return img;
     }
 
     function displayImages(images) {
