@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
         window.location.href = 'main.html'; // Redirect to the main page after loading
-    }, 6000); // Adjust the timeout duration as needed
+    }, 3000); // Adjust the timeout duration as needed
 });
 
 document.addEventListener('DOMContentLoaded', function() {
