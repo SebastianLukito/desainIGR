@@ -1,37 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>Login - Tim Desain Indogrosir</title>
     <link rel="icon" href="assets/img/iconjpg.jpg" type="image/jpg">
-    <title>Take Down</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: rgb(21, 21, 21);
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            background: url('css/backgroundlogin.jpg') no-repeat center center/cover;
-            text-align: center;
-        }
-
-        .text {
-            padding: 20px;
-            background-color: rgb(255, 255, 255);
-            color:black;
-            padding-inline: 50px;
-            border-radius: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/login.css" />
 </head>
 <body>
-    <div class="text">
-        <h1>Website ini sudah di-take down</h1>
-        <!-- <p>
-        </p> -->
+    <div class="background-container">
+        <div class="marquee" id="marquee">
+            <p>MARKETING INDOGROSIR - SUB DIVISI DESAIN GRAFIS
+                <img src="assets/img/igr.png" alt="Logo Indogrosir" class="marquee-logo">
+            </p>
+        </div>
+        <div class="motor-container">
+            <img src="assets/img/motorbaru.png" alt="Motor" class="motor-animation" loading="lazy">
+            <img src="assets/img/motorbaruteks.png" alt="Motor Baru Teks" class="motor-baruteks" style="display:none;">
+            
+        </div>
+        <div class="login-container">
+            <div class="login-box">
+                <h2>Selamat Datang</h2>
+                <form id="loginForm">
+                    <div class="inputBox">
+                        <input type="text" id="username" required>
+                        <label>Username</label>
+                    </div>
+                    <div class="inputBox">
+                        <input type="password" id="password" required>
+                        <label>Password</label>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                </form>
+                <div id="errorMessage" class="error-message"></div>
+            </div>
+            <h6>© 2024 Indogrosir. All rights reserved.</h6>
+        </div>
     </div>
+    
+    <script src="js/login.js"></script>
 </body>
 </html>
