@@ -1,25 +1,49 @@
-document.getElementById('loginForm').addEventListener('submit', function(event) {
+console.log("Firebase DB instance:", db);
+
+// Fungsi login dengan Firebase Firestore
+document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    fetch('assets/list/data.json')
-        .then(response => response.json())
-        .then(data => {
-            if (data[username] && data[username] === password) {
-                setCookie('loggedIn', 'true', 60);
-                window.location.href = 'loading.html';
-            } else {
-                document.getElementById('errorMessage').innerText = 'Salah bosku, anda karyawan mana?';
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching the JSON file:', error);
-            document.getElementById('errorMessage').innerText = 'Error logging in. Please try again later.';
-        });
+    try {
+        // Cek jika login sebagai admin
+        if (username === "admin" && password === "sebastian") {
+            setCookie('loggedIn', 'true', 1440);
+            window.location.href = 'main_admin.html';
+            return;
+        }
+
+        if (username === "naufal" && password === "123456") {
+            setCookie('loggedIn', 'true', 1440);
+            window.location.href = 'admin.html';
+            return;
+        }
+
+        if (username === "sebastian" && password === "123456") {
+            setCookie('loggedIn', 'true', 1440);
+            window.location.href = 'admin.html';
+            return;
+        }
+
+        // Dapatkan dokumen pengguna berdasarkan username dari Firestore
+        const userDoc = await db.collection("users").doc(username).get();
+
+        if (userDoc.exists && userDoc.data().password === password) {
+            // Jika username dan password cocok untuk pengguna biasa, buat cookie login
+            setCookie('loggedIn', 'true', 1440);
+            window.location.href = 'loading.html';
+        } else {
+            document.getElementById('errorMessage').innerText = 'Salah bosku, anda karyawan mana?';
+        }
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        document.getElementById('errorMessage').innerText = 'Error logging in. Please try again later.';
+    }
 });
 
+// Fungsi untuk menyetel cookie
 function setCookie(name, value, minutes) {
     const d = new Date();
     d.setTime(d.getTime() + (minutes * 60 * 1000));
@@ -27,7 +51,7 @@ function setCookie(name, value, minutes) {
     document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }
 
-
+// Animasi gambar motor
 const motorAnimation = document.querySelector('.motor-animation');
 const motorBaruteks = document.querySelector('.motor-baruteks');
 
@@ -40,4 +64,3 @@ motorBaruteks.addEventListener('mouseout', () => {
     motorBaruteks.style.display = 'none';
     motorAnimation.style.display = 'block';
 });
-
