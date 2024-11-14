@@ -98,7 +98,7 @@ body {
 
 .login-box {
     background: #ffffff;
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    /* background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png"); */
     padding: 20px;
     border-radius: 1rem;
     text-align: center;
@@ -112,7 +112,7 @@ body {
 
 .inputBox {
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .inputBox input {
@@ -130,18 +130,20 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    padding: 10px;
+    padding: 2px;
     font-size: 18px;
     color: #000;
     pointer-events: none;
     transition: 0.5s;
+    background-color: rgb(255, 255, 255);
 }
 
 .inputBox input:focus ~ label,
 .inputBox input:valid ~ label {
     top: -20px;
     left: 0;
-    color: #03a9f4;
+    color: #2554b3;
+    font-weight: bold;
     font-size: 14px;
 }
 
