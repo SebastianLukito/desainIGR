@@ -73,7 +73,7 @@ body {
     border-radius: 1rem;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 72%;
     transform: translate(-50%, -50%);
     z-index: 3;
@@ -197,4 +197,9 @@ body {
     .motor-animation, .motor-baruteks {
         width: 60vw;
     }
+}
+
+.spaced-btn {
+    margin-top: 10px; /* Menambahkan jarak di antara tombol */
+    width: 100%; /* Membuat tombol memiliki lebar penuh */
 }
