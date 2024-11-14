@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>Registrasi - Tim Desain Indogrosir</title>
+    <link rel="icon" href="assets/img/iconjpg.jpg" type="image/jpg">
+    <link rel="stylesheet" href="css/registrasi.css" />
+</head>
+<body>
+    <div class="background-container">
+        <div class="marquee" id="marquee">
+            <p>MARKETING INDOGROSIR - SUB DIVISI DESAIN GRAFIS
+                <img src="assets/img/igr.png" alt="Logo Indogrosir" class="marquee-logo">
+            </p>
+        </div>
+        <div class="motor-container">
+            <img src="assets/img/motorbaru.png" alt="Motor" class="motor-animation" loading="lazy">
+            <img src="assets/img/motorbaruteks.png" alt="Motor Baru Teks" class="motor-baruteks" style="display:none;">
+        </div>
+        <div class="registrasi-container">
+            <div class="registrasi-box">
+                <h2>Registrasi</h2>
+                <form id="registrasiForm">
+                    <div class="inputBox">
+                        <input type="text" id="username" required>
+                        <label>Username</label>
+                    </div>
+                    <div class="inputBox">
+                        <input type="password" id="password" required>
+                        <label>Password</label>
+                    </div>
+                    <button type="submit" class="btn">Register</button>
+                </form>
+                <div id="errorMessage" class="error-message"></div>
+            </div>
+            <h6>© 2024 Indogrosir. All rights reserved.</h6>
+        </div>
+    </div>
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+
+
+    <!-- Firebase Configuration and Initialization -->
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDptFYVVq3HF8o2vtXGQ2jdNaX-G8c1FfE",
+            authDomain: "indogrosir-174b9.firebaseapp.com",
+            projectId: "indogrosir-174b9",
+            storageBucket: "indogrosir-174b9.appspot.com",
+            messagingSenderId: "1077982905368",
+            appId: "1:1077982905368:web:a1b36e958d1c5289f6af6d",
+            measurementId: "G-7FLVT90LNX"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        const analytics = firebase.analytics();
+    </script>
+
+    <script src="js/registrasi.js"></script>
+</body>
+</html>
