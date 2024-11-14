@@ -4,6 +4,20 @@ document.getElementById('registrasiForm').addEventListener('submit', async funct
 
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
+    const password2 = document.getElementById('password2').value;
+
+    // Cek apakah password dan konfirmasi password sama
+    if (password !== password2) {
+        document.getElementById('errorMessage').innerText = 'Password berbeda. Mohon diulangi.';
+        return; // Menghentikan proses registrasi jika password tidak cocok
+    }
+
+    // Cek apakah password valid (minimal 6 karakter, terdiri dari huruf dan angka)
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    if (!passwordRegex.test(password)) {
+        document.getElementById('errorMessage').innerText = 'Password harus terdiri dari huruf dan angka, dan minimal 6 karakter.';
+        return; // Menghentikan proses registrasi jika password tidak valid
+    }
 
     try {
         // Cek apakah username sudah ada
@@ -13,14 +27,32 @@ document.getElementById('registrasiForm').addEventListener('submit', async funct
         } else {
             // Tambahkan pengguna baru ke Firestore
             await db.collection("users").doc(username).set({ password });
-            alert('Registrasi berhasil! Silakan login.');
-            window.location.href = 'login.html';
+            document.getElementById('errorMessage').innerText = 'Registrasi Berhasil. Silakan Login.';
+
+            // Mengganti form registrasi dengan dua tombol
+            const registrasiContainer = document.querySelector('.registrasi-box');
+            registrasiContainer.innerHTML = `
+                <h2>Pendaftaran Berhasil</h2>
+                <button onclick="registrasiLagi()" class="btn spaced-btn">Registrasi Lagi</button>
+                <button onclick="login()" class="btn spaced-btn">Login</button>
+            `;
         }
     } catch (error) {
         console.error("Error adding user:", error);
-        document.getElementById('errorMessage').innerText = 'Error during registration. Please try again later.';
+        document.getElementById('errorMessage').innerText = 'Wah registrasinya bermasalah. Mohon hubungi Sebastian.';
     }
 });
+
+// Fungsi untuk tombol "Registrasi Lagi"
+function registrasiLagi() {
+    window.location.reload(); // Muat ulang halaman untuk registrasi baru
+}
+
+// Fungsi untuk tombol "Login"
+function login() {
+    window.location.href = 'login.html'; // Pindah ke halaman login
+}
+
 
 // Animasi gambar motor
 const motorAnimation = document.querySelector('.motor-animation');
