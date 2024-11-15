@@ -205,3 +205,19 @@ body {
     margin-top: 10px; /* Menambahkan jarak di antara tombol */
     width: 100%; /* Membuat tombol memiliki lebar penuh */
 }
+
+.svg-toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.open-eye {
+    display: none; /* Default disembunyikan */
+}
+
+.closed-eye {
+    display: block; /* Default ditampilkan */
+}
