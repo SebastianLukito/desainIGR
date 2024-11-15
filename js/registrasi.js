@@ -32,7 +32,7 @@ document.getElementById('registrasiForm').addEventListener('submit', async funct
             // Mengganti form registrasi dengan dua tombol
             const registrasiContainer = document.querySelector('.registrasi-box');
             registrasiContainer.innerHTML = `
-                <h2>Pendaftaran Berhasil</h2>
+                <h2>Yey! Pendaftaran Berhasil!</h2>
                 <button onclick="registrasiLagi()" class="btn spaced-btn">Registrasi Lagi</button>
                 <button onclick="login()" class="btn spaced-btn">Login</button>
             `;

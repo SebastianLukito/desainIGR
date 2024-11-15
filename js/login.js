@@ -1,5 +1,7 @@
 console.log("Firebase DB instance:", db);
 
+const allowedUsernames = ["sebastian", "naufal", "admin"];
+
 // Fungsi login dengan Firebase Firestore
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -8,32 +10,21 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     const password = document.getElementById('password').value;
 
     try {
-        // Cek jika login sebagai admin
-        if (username === "admin" && password === "sebastian") {
-            setCookie('loggedIn', 'true', 1440);
-            window.location.href = 'main_admin.html';
-            return;
-        }
-
-        if (username === "naufal" && password === "123456") {
-            setCookie('loggedIn', 'true', 1440);
-            window.location.href = 'admin.html';
-            return;
-        }
-
-        if (username === "sebastian" && password === "123456") {
-            setCookie('loggedIn', 'true', 1440);
-            window.location.href = 'admin.html';
-            return;
-        }
-
         // Dapatkan dokumen pengguna berdasarkan username dari Firestore
         const userDoc = await db.collection("users").doc(username).get();
 
         if (userDoc.exists && userDoc.data().password === password) {
             // Jika username dan password cocok untuk pengguna biasa, buat cookie login
-            setCookie('loggedIn', 'true', 1440);
-            window.location.href = 'loading.html';
+            // Cek jika login sebagai admin
+            const username = document.getElementById('username').value;
+
+            if (allowedUsernames.includes(username)) {
+                setCookie('loggedIn', 'true', 1440); // Set cookie untuk login status
+                window.location.href = 'admin.html';
+            } else {
+                setCookie('loggedIn', 'false', 1440); // Set cookie jika gagal
+                window.location.href = 'loading.html';
+            }
         } else {
             document.getElementById('errorMessage').innerText = 'Salah bosku, anda karyawan mana?';
         }
