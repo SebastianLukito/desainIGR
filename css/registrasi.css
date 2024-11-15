@@ -100,12 +100,13 @@ body {
 }
 
 .registrasi-box h2 {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     color: rgb(5, 5, 5);
 }
 
 .inputBox {
     position: relative;
+    margin-top: 35px;
     margin-bottom: 25px;
 }
 
