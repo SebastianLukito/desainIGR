@@ -46,10 +46,11 @@
                         </svg>
                     </div>
                     <button type="submit" class="btn">Login</button>
+                    <p class="forgot-password"><a href="#" id="forgotPasswordLink">Kamu lupa password? Klik di sini!</a></p>
                 </form>
                 <div id="errorMessage" class="error-message"></div>
             </div>
-            <h6>© 2024 Indogrosir. All rasdights reserved.</h6>
+            <h6>© 2024 Indogrosir. All rights reserved.</h6>
         </div>
     </div>
     
@@ -82,5 +83,10 @@
 
     <!-- Include login.js -->
     <script src="js/login.js"></script>
+    <script>
+        document.getElementById('marquee').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    </script>
 </body>
 </html>
