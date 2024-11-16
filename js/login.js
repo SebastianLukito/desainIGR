@@ -89,9 +89,12 @@ document.getElementById('forgotPasswordLink').addEventListener('click', function
     // Mengganti konten login-box dengan pesan baru
     const loginBox = document.querySelector('.login-box');
     loginBox.innerHTML = `
+        <div class="info">
         <h2>Informasi</h2>
-        <p>Untuk melihat password, mohon hubungi Sebastian atau Naufal.</p>
+        <p>Mohon maaf, user tidak diizinkan untuk membuat akun atau mengganti password. Hal ini ditujukan untuk melindungi keamanan data internal Marketing Indogrosir.
+        <br><br> Untuk membuat akun, mengganti, atau melihat password, <b> mohon hubungi Sebastian atau Naufal </b> dengan otoritas admin. Mereka akan membantumu dengan senang hati.</p>
         <button id="backToLogin" class="btn">Login Kembali</button>
+        <div>
     `;
 
     // Menambahkan event listener untuk tombol "Login Kembali"
