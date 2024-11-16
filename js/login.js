@@ -81,3 +81,22 @@ motorBaruteks.addEventListener('mouseout', () => {
     motorBaruteks.style.display = 'none';
     motorAnimation.style.display = 'block';
 });
+
+// Event listener untuk "Lupa password?"
+document.getElementById('forgotPasswordLink').addEventListener('click', function(event) {
+    event.preventDefault();
+
+    // Mengganti konten login-box dengan pesan baru
+    const loginBox = document.querySelector('.login-box');
+    loginBox.innerHTML = `
+        <h2>Informasi</h2>
+        <p>Untuk melihat password, mohon hubungi Sebastian atau Naufal.</p>
+        <button id="backToLogin" class="btn">Login Kembali</button>
+    `;
+
+    // Menambahkan event listener untuk tombol "Login Kembali"
+    document.getElementById('backToLogin').addEventListener('click', function() {
+        // Memuat ulang halaman atau mengembalikan form login
+        window.location.reload();
+    });
+});
