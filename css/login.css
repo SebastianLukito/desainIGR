@@ -236,3 +236,25 @@ body {
 .closed-eye {
     display: block; /* Default ditampilkan */
 }
+
+/* Gaya untuk "Lupa password?" */
+.forgot-password {
+    margin-top: 20px;
+    margin-bottom: -10px;
+}
+
+.forgot-password a {
+    font-size: 0.9em;
+    color: #000;
+    text-decoration: none;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+    color: #2554b3;
+}
+
+/* Gaya khusus untuk tombol "Login Kembali" (opsional) */
+#backToLogin {
+    margin-top: 20px;
+}
