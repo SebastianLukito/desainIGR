@@ -1,3 +1,0 @@
-RewriteEngine On
-RewriteCond %{HTTP_HOST} ^(www\.)?marketingindogrosir.com$ [NC]
-RewriteRule ^(.*)$ https://www.marketingindogrosir.art/$1 [L,R=301]
