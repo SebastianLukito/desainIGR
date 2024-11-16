@@ -53,8 +53,23 @@ function login() {
     window.location.href = 'login.html'; // Pindah ke halaman login
 }
 
-function togglePasswordVisibility() {
+function togglePasswordVisibility1() {
     var passwordInput = document.getElementById('password');
+    var openEye = document.querySelector('.open-eye');
+    var closedEye = document.querySelector('.closed-eye');
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        openEye.style.display = 'block';
+        closedEye.style.display = 'none';
+    } else {
+        passwordInput.type = "password";
+        openEye.style.display = 'none';
+        closedEye.style.display = 'block';
+    }
+}
+
+function togglePasswordVisibility2() {
+    var passwordInput = document.getElementById('password2');
     var openEye = document.querySelector('.open-eye');
     var closedEye = document.querySelector('.closed-eye');
     if (passwordInput.type === "password") {
