@@ -60,8 +60,8 @@ function login() {
 // Fungsi untuk toggle visibility password
 function togglePasswordVisibility1() {
     var passwordInput = document.getElementById('currentPassword');
-    var openEye = document.querySelector('.open-eye');
-    var closedEye = document.querySelector('.closed-eye');
+    var openEye = document.querySelector('.open-eye1');
+    var closedEye = document.querySelector('.closed-eye1');
     if (passwordInput.type === "password") {
         passwordInput.type = "text";
         openEye.style.display = 'block';
@@ -75,8 +75,8 @@ function togglePasswordVisibility1() {
 
 function togglePasswordVisibility2() {
     var passwordInput = document.getElementById('newPassword');
-    var openEye = document.querySelector('.open-eye');
-    var closedEye = document.querySelector('.closed-eye');
+    var openEye = document.querySelector('.open-eye2');
+    var closedEye = document.querySelector('.closed-eye2');
     if (passwordInput.type === "password") {
         passwordInput.type = "text";
         openEye.style.display = 'block';
