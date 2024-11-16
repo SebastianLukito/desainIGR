@@ -6,7 +6,7 @@ const allowedUsernames = ["sebastian", "naufal", "admin"];
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
-    const username = document.getElementById('username').value;
+    const username = document.getElementById('username').value.trim(); // Menghapus spasi di awal/akhir
     const password = document.getElementById('password').value;
 
     try {
@@ -14,15 +14,16 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         const userDoc = await db.collection("users").doc(username).get();
 
         if (userDoc.exists && userDoc.data().password === password) {
-            // Jika username dan password cocok untuk pengguna biasa, buat cookie login
-            // Cek jika login sebagai admin
-            const username = document.getElementById('username').value;
+            // Jika username dan password cocok
+            // Simpan username dalam cookie
+            setCookie('username', username, 1440); // Menyimpan username selama 1 hari (1440 menit)
 
+            // Cek jika login sebagai admin
             if (allowedUsernames.includes(username)) {
-                setCookie('loggedIn', 'true', 1440); // Set cookie untuk login status
+                setCookie('loggedIn', 'true', 1440); // Set cookie untuk login status admin
                 window.location.href = 'admin.html';
             } else {
-                setCookie('loggedIn', 'false', 1440); // Set cookie jika gagal
+                setCookie('loggedIn', 'true', 1440); // Set cookie untuk login status pengguna biasa
                 window.location.href = 'loading.html';
             }
         } else {
@@ -49,13 +50,14 @@ function togglePasswordVisibility() {
     }
 }
 
-
-// Fungsi untuk menyetel cookie
+// Fungsi untuk menyetel cookie dengan opsi keamanan tambahan
 function setCookie(name, value, minutes) {
     const d = new Date();
     d.setTime(d.getTime() + (minutes * 60 * 1000));
     const expires = "expires=" + d.toUTCString();
-    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    const secure = location.protocol === 'https:' ? ';secure' : ''; // Hanya set 'secure' jika menggunakan HTTPS
+    const path = ";path=/";
+    document.cookie = `${name}=${value};${expires}${path}${secure};SameSite=Lax`;
 }
 
 // Animasi gambar motor
