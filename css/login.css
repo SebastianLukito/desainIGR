@@ -114,7 +114,7 @@ body {
 .login-box p {
     font-size: 0.9rem;
     margin-top: 20px;
-    margin-bottom: -15px;
+    margin-bottom: 1px;
     margin-inline: 20px;
 }
 
@@ -277,13 +277,14 @@ body {
 /* Gaya untuk "Lupa password?" */
 .forgot-password {
     margin-top: 20px;
-    margin-bottom: -10px;
+    margin-bottom: 100px;
 }
 
 .forgot-password a {
     font-size: 0.9em;
     color: #000;
     text-decoration: none;
+    margin-bottom: 10px;
 }
 
 .forgot-password a:hover {
