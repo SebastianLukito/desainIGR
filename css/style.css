@@ -22,7 +22,7 @@ body {
 .marquee {
     width: 100%;
     background-color: rgb(10, 66, 101);
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     color: #e0e0e0;
     text-align: center;
     padding-top: 15px;
@@ -79,7 +79,7 @@ body {
     border-radius: 1rem;
     overflow: hidden;
     background: #ffc02e;
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     background-size: cover;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 20px;
@@ -111,7 +111,7 @@ body {
     outline: none;
     border: none;
     background-color: rgb(255, 31, 1);
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     color: black;
     font-size: 20px;
     padding: 0.5rem 3rem;
@@ -139,7 +139,7 @@ body {
     border-radius: 1rem;
     color: #080808;
     background-color: #ffffff;
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     visibility: hidden;
     padding: 2rem;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -256,7 +256,7 @@ p {
 
 footer {
     background-color: rgb(10, 66, 101);
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     color: #e0e0e0;
     text-align: center;
     padding: 15px 0;

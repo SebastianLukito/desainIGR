@@ -1,6 +1,6 @@
 body {
     background-color: rgb(10, 66, 101);
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     color: #e0e0e0;
     font-family: Helvetica, sans-serif;
     margin: 0;
@@ -20,7 +20,7 @@ body {
 .marquee {
     width: 100%;
     background-color: rgb(10, 66, 101);
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     color: #ffffff;
     text-align: center;
     padding-top: 0px;
@@ -103,7 +103,7 @@ body {
     flex-direction: column;
     gap: 10px;
     background-color: #1a1a1a;
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     padding: 20px;
     border: 1px solid #444;
     border-radius: 10px;
@@ -153,7 +153,7 @@ button {
     margin-bottom: 5px;
     margin-top: 5px;
     background-color:#f5cc00;
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     color: #000000;
     border: none;
     border-radius: 5px;
@@ -170,7 +170,7 @@ button:hover {
 
 .file-display {
     background-color: #1a1a1a;
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     padding: 20px;
     border: 1px solid #444;
     border-radius: 10px;

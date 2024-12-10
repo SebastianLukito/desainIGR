@@ -29,7 +29,7 @@ body {
 .marquee {
     width: 100%;
     background-color: rgb(10, 66, 101);
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     color: #ffffff;
     text-align: center;
     padding-top: 0px;
@@ -76,7 +76,7 @@ body {
     padding: 20px;
     box-shadow: 0 9px 6px rgba(0, 0, 0, 2.9);
     background-color: rgb(17, 17, 17);
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     width: 300px;
     text-align: center;
     color: rgb(155, 66, 66);
@@ -84,7 +84,7 @@ body {
 
 .calculator:hover {
     background-color: rgb(0, 0, 0);
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     color: black;
 }
 
@@ -138,7 +138,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     background-color: rgb(10, 66, 101);
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     color: white;
     transition: background-color 0.3s ease;
     font-family: 'digital-7', monospace;
@@ -146,7 +146,7 @@ body {
 
 .btn:hover {
     background-color: rgb(255, 191, 0);
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     color: black;
     transform: translateY(1px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
@@ -166,13 +166,13 @@ body {
 
 #clear:hover {
     background-color: rgb(255, 191, 0);
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     color: black;
 }
 
 #equals:hover {
     background-color: rgb(255, 191, 0);
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     color: black;
 }
 
@@ -192,7 +192,7 @@ footer {
     color: #e0e0e0;
     text-align: center;
     background-color: rgb(10, 66, 101);
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -203,7 +203,7 @@ footer {
     font-size: 16px;
 
     background-color: rgb(255, 253, 239);
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     margin-top: 15px;
     padding-top: 2px;
     padding-bottom: 5px;
@@ -220,7 +220,7 @@ footer {
 
 .teksbiasa:hover {
     background-color: rgb(255, 191, 0);
-    background-image: url("https://www.transparenttextures.com/patterns/45-degree-fabric-light.png");
+    background-image: url("/assets/img/45-degree-fabric-light.png");
     color: black;
     transform: translateY(1px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
