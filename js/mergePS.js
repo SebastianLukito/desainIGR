@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const fileList = document.getElementById('file-list');
     const loadingPopup = document.getElementById('loading-popup');
     let files = [];
+    let mergedFilesGlobal = [];
 
     // Click event to trigger file input
     dropSection.addEventListener('click', function (e) {
@@ -53,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fileIcon.alt = 'PDF Icon';
 
             const fileName = document.createElement('span');
-            fileName.textContent = truncateFileName(file.name, 15);
+            fileName.textContent = truncateFileName(file.name, 45);
 
             fileItem.appendChild(fileIcon);
             fileItem.appendChild(fileName);
@@ -82,10 +83,11 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
         loadingPopup.style.display = 'flex';
-
+    
         try {
             const groupedFiles = groupFilesByName(files);
             const mergedFiles = await mergeGroupedFiles(groupedFiles);
+            mergedFilesGlobal = mergedFiles; // Simpan ke variabel global
             displayMergedFiles(mergedFiles);
             loadingPopup.style.display = 'none';
         } catch (error) {
@@ -128,16 +130,32 @@ document.addEventListener('DOMContentLoaded', function () {
         files.forEach(({ name, bytes }) => {
             const blob = new Blob([bytes], { type: 'application/pdf' });
             const url = URL.createObjectURL(blob);
+    
+            // Buat elemen container untuk setiap file agar styling menyerupai tampilan di sebelah kiri
+            const fileItem = document.createElement('div');
+            fileItem.classList.add('file-item');
+    
+            // Buat ikon PDF
+            const fileIcon = document.createElement('img');
+            fileIcon.src = 'assets/img/pdf.png'; // Ganti sesuai path ikon PDF
+            fileIcon.alt = 'PDF Icon';
+    
+            // Buat tautan download
             const link = document.createElement('a');
             link.href = url;
-            link.textContent = name;
             link.download = name;
+            link.textContent = truncateFileName(name, 40); // gunakan fungsi truncate yang sama dengan di kiri
             link.classList.add('merged-file-link');
-            qrDisplay.appendChild(link);
-            qrDisplay.appendChild(document.createElement('br'));
+    
+            // Masukkan ikon dan link ke dalam container file-item
+            fileItem.appendChild(fileIcon);
+            fileItem.appendChild(link);
+    
+            // Tambahkan elemen file-item ke dalam qrDisplay
+            qrDisplay.appendChild(fileItem);
         });
         downloadBtn.style.display = 'block';
-    }
+    }    
 
     // Reset files
     document.getElementById('reset-btn').addEventListener('click', function () {
@@ -155,4 +173,26 @@ document.addEventListener('DOMContentLoaded', function () {
         qrDisplay.innerHTML = '';
         downloadBtn.style.display = 'none';
     });
+
+    downloadBtn.addEventListener('click', async function () {
+        if (mergedFilesGlobal.length === 0) {
+            alert('Tidak ada hasil yang dapat diunduh.');
+            return;
+        }
+    
+        const zip = new JSZip();
+    
+        // Tambahkan tiap file PDF ke ZIP
+        for (const { name, bytes } of mergedFilesGlobal) {
+            // bytes adalah uint8array dari PDF bytes
+            zip.file(name, bytes);
+        }
+    
+        // Generate file zip
+        const content = await zip.generateAsync({ type: 'blob' });
+    
+        // Unduh file zip
+        saveAs(content, 'merged_files.zip');
+    });
+    
 });
