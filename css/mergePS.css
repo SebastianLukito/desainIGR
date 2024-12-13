@@ -272,6 +272,7 @@ button:hover {
     text-align: left;
 }
 
+/* Styling yang sudah ada untuk file-item di panel kiri */
 .file-item {
     background-color: #444;
     color: #e0e0e0;
@@ -282,13 +283,26 @@ button:hover {
     align-items: center;
     border: 1px solid #555;
     transition: background-color 0.3s ease;
-    cursor: default; /* Updated from 'move' to 'default' */
-    justify-content: flex-start; /* Align items to the start */
+    cursor: default;
+    justify-content: flex-start;
 }
 
 .file-item:hover {
     background-color: #555;
 }
+
+/* Untuk link di dalam file-item */
+.file-item a.merged-file-link {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 10px; /* memberi jarak antara ikon pdf dan teks */
+}
+
+.file-item a.merged-file-link:hover {
+    text-decoration: underline;
+}
+
 
 .file-item img {
     width: 32px;
