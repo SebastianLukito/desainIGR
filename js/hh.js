@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         sheetEditor.onload = function() {
             // Tambahkan sedikit penundaan untuk memastikan bahwa konten iframe telah selesai dimuat
-            setTimeout(hideLoading, 1); // Menunggu 1 detik setelah load untuk memastikan semuanya sudah dimuat
+            setTimeout(hideLoading, 0.15); // Menunggu 1 detik setelah load untuk memastikan semuanya sudah dimuat
         };
     }
 
