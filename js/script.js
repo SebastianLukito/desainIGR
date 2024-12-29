@@ -86,6 +86,21 @@ closePopupEmailBtn.addEventListener("click", function () {
   popupEmail.classList.remove("popupActive");
 });
 
+// Event listener untuk button "ftp"
+const generateFTPBtn = document.getElementById("ftp");
+const closePopupFTPBtn = document.getElementById("closePopupFTP");
+const popupFTP = document.getElementById("popupMenuFTP");
+
+generateFTPBtn.addEventListener("click", function () {
+closeAllPopups();
+popupFTP.classList.add("popupActive");
+});
+
+closePopupFTPBtn.addEventListener("click", function () {
+popupFTP.classList.remove("popupActive");
+});
+
+
 // Event listener untuk button "Informasi"
 const infoBtn = document.getElementById("info");
 const closePopupInfoBtn = document.getElementById("closePopupInfo");
