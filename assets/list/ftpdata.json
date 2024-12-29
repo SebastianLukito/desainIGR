@@ -1,0 +1,35 @@
+{
+    "users": [
+        {
+            "name": "bank gambar",
+            "ftp": [
+                "\\\\0200MKTDES-SDNA\\Bank Gambar"
+            ]
+        },
+        {
+            "name": "andrias",
+            "ftp": [
+                "\\\\0200MKTDIV-ASUN"
+            ]
+        },
+        {
+            "name": "sebastian",
+            "ftp": [
+                "\\\\0200MKTDES-BAS"
+            ]
+        },
+        {
+            "name": "hadis",
+            "ftp": [
+                "\\\\0200MKTDIV-HDS",
+                "\\\\172.10.123.95"
+            ]
+        },
+        {
+            "name": "naufal",
+            "ftp": [
+                "\\\\0200MKTDIV-NAC"
+            ]
+        }
+    ]
+}
