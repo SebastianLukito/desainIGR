@@ -1,0 +1,317 @@
+/* Gaya dasar mirip dengan emailcabang.css */
+body {
+    background-color: rgb(10, 66, 101);
+    background-image: url("/assets/img/45-degree-fabric-light.png");
+    color: #e0e0e0;
+    font-family: Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: url('backgroundlogin.jpg') no-repeat center center/cover;
+    min-height: 82vh;
+}
+
+.marquee {
+    width: 100%;
+    background-color: rgb(10, 66, 101);
+    background-image: url("/assets/img/45-degree-fabric-light.png");
+    color: #e0e0e0;
+    text-align: center;
+    padding-top: 0px;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    border-radius: 10px;
+}
+
+.marquee:hover {
+    background-color: #292929;
+    color: white;
+}
+
+.marquee:hover p {
+    animation-play-state: paused;
+}
+
+.marquee p {
+    display: inline-block;
+    animation: marquee 20s linear infinite alternate;
+}
+
+.marquee img.marquee-logo {
+    height: 20px;
+    vertical-align: middle;
+    margin-left: 10px;
+    padding-inline: 1.5px;
+    padding-block: 1px;
+    background-color: #ffffff;
+    border-radius: 2px;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(70%); }
+    50% { transform: translateX(0); }
+    100% { transform: translateX(-70%); }
+}
+
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+}
+
+.left-panel, .right-panel {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1;
+    min-width: 300px;
+    box-sizing: border-box;
+}
+
+.left-panel:hover, .right-panel:hover {
+    background: #f8f8f8;
+}
+
+.left-panel h2, .right-panel h2 {
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #050505;
+    background-color: rgb(255, 208, 0);
+    padding-block: 10px;
+    border-radius: 10px;
+}
+
+/* Panel Kanan */
+.right-panel p{
+    color: #000000;
+    text-align: center;
+    background-color: rgb(255, 208, 0);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.search-section {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.search-section input {
+    width: 90%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #000000;
+}
+
+.name-list {
+    background-color: #cecece;
+    background-image: url("/assets/img/45-degree-fabric-light.png");
+    padding: 20px;
+    border: 3px dashed #444;
+    border-radius: 10px;
+    text-align: left;
+    color: #000;
+    min-height: 300px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.name-item {
+    background-color: #444;
+    color: #e0e0e0;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    display: block;
+    border: 1px solid #555;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.name-item:hover {
+    background-color: #555;
+}
+
+.name-item.selected {
+    background-color: #0a0a0a;
+    color: #ffffff;
+}
+
+/* Panel Kanan */
+.ftp-display {
+    background-color: #1a1a1a;
+    background-image: url("/assets/img/45-degree-fabric-light.png");
+    padding: 20px;
+    border: 1px solid #444;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    box-sizing: border-box;
+    min-height: 80px;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+/* Container setiap alamat FTP */
+.ftp-container {
+    display: flex;              /* Biar tombol copy dan teks sejajar horizontal */
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;  /* Latar belakang putih */
+    color: #000000;             /* Teks warna hitam */
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Teks FTP di-align kiri */
+.ftp-text {
+    text-align: left;
+    margin-left: 10px;
+}
+
+/* Tombol copy dibiarkan sesuai style sebelumnya, 
+   tetapi akan berada di sisi kanan otomatis karena flex layout */
+.copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: rgb(157, 157, 157);
+    background-image: url("/assets/img/45-degree-fabric-light.png");
+    color: #1c1c1c;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-sizing: border-box;
+    font-size: 0.9em;
+}
+
+.copy-btn:hover {
+    transform: scale(1.01);
+    background-color: rgb(255, 213, 0);
+}
+
+
+.copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: rgb(157, 157, 157);
+    background-image: url("/assets/img/45-degree-fabric-light.png");
+    color: #1c1c1c;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-sizing: border-box;
+    font-size: 0.9em;
+}
+
+.copy-btn:hover {
+    transform: scale(1.01);
+    background-color: rgb(255, 213, 0);
+}
+
+footer {
+    color: #e0e0e0;
+    text-align: center;
+    margin-top: 25px;
+}
+
+/* Loading popup */
+.loading-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    z-index: 1000;
+}
+
+.loading-spinner {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #444;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main {
+        flex-direction: column;
+    }
+
+    .left-panel, .right-panel {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+/* Popup overlay */
+#popup-message {
+    position: fixed;        /* agar tetap di posisi yang sama ketika di-scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* latar belakang transparan */
+    display: flex;
+    justify-content: center; /* center secara horizontal */
+    align-items: center;     /* center secara vertikal */
+    z-index: 9999;           /* pastikan di atas elemen lain */
+    cursor: pointer;         /* agar user tahu dia bisa klik di mana saja */
+}
+
+/* Konten popup di tengah */
+#popup-content {
+    background: #ffffff;
+    color: #000000;
+    padding: 20px 30px;
+    border-radius: 8px;
+    max-width: 80%;
+    text-align: center;
+    position: relative;
+    cursor: auto;    /* agar mouse tidak berubah jadi pointer jika diarahkan ke konten */
+}
+
+/* Teks di dalam popup */
+#popup-text {
+    margin: 0;
+    font-size: 1em;
+    word-break: break-word; /* agar teks panjang bisa wrap */
+}
