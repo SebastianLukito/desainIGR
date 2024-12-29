@@ -1,0 +1,170 @@
+{
+    "division1": [
+        {
+            "name": "Peres",
+            "email": "peres@gmail.com"
+        },
+        {
+            "name": "Hadi",
+            "email": "hadi@gmail.com"
+        },
+        {
+            "name": "Nurul",
+            "email": "nurul@gmail.com"
+        },
+        {
+            "name": "Rachmat",
+            "email": "rachmat@gmail.com"
+        },
+        {
+            "name": "Indra",
+            "email": "indra@gmail.com"
+        },
+        {
+            "name": "Fitri",
+            "email": "fitri@gmail.com"
+        },
+        {
+            "name": "Surya",
+            "email": "surya@gmail.com"
+        },
+        {
+            "name": "Dita",
+            "email": "dita@gmail.com"
+        },
+        {
+            "name": "Rizal",
+            "email": "rizal@gmail.com"
+        },
+        {
+            "name": "Cahyadi",
+            "email": "cahyadi@gmail.com"
+        }
+    ],
+    "division2": [
+        {
+            "name": "Rivai",
+            "email": "rivai@gmail.com"
+        },
+        {
+            "name": "Sebastian",
+            "email": "sebastian@gmail.com"
+        },
+        {
+            "name": "Tika",
+            "email": "tika@gmail.com"
+        },
+        {
+            "name": "Darmono",
+            "email": "darmono@gmail.com"
+        },
+        {
+            "name": "Arief",
+            "email": "arief@gmail.com"
+        },
+        {
+            "name": "Riana",
+            "email": "riana@gmail.com"
+        },
+        {
+            "name": "Fikri",
+            "email": "fikri@gmail.com"
+        },
+        {
+            "name": "Dian",
+            "email": "dian@gmail.com"
+        },
+        {
+            "name": "Gunawan",
+            "email": "gunawan@gmail.com"
+        },
+        {
+            "name": "Dinda",
+            "email": "dinda@gmail.com"
+        }
+    ],
+    "division3": [
+        {
+            "name": "Louis",
+            "email": "louis@gmail.com"
+        },
+        {
+            "name": "Andi",
+            "email": "andi@gmail.com"
+        },
+        {
+            "name": "Sinta",
+            "email": "sinta@gmail.com"
+        },
+        {
+            "name": "Yosua",
+            "email": "yosua@gmail.com"
+        },
+        {
+            "name": "Putri",
+            "email": "putri@gmail.com"
+        },
+        {
+            "name": "Bambang",
+            "email": "bambang@gmail.com"
+        },
+        {
+            "name": "Dwi",
+            "email": "dwi@gmail.com"
+        },
+        {
+            "name": "Stella",
+            "email": "stella@gmail.com"
+        },
+        {
+            "name": "Fredy",
+            "email": "fredy@gmail.com"
+        },
+        {
+            "name": "Timot",
+            "email": "timot@gmail.com"
+        }
+    ],
+    "division4": [
+        {
+            "name": "Rina",
+            "email": "rina@gmail.com"
+        },
+        {
+            "name": "Budi",
+            "email": "budi@gmail.com"
+        },
+        {
+            "name": "Lisa",
+            "email": "lisa@gmail.com"
+        },
+        {
+            "name": "Rudi",
+            "email": "rudi@gmail.com"
+        },
+        {
+            "name": "Gunawan",
+            "email": "gunawan_div4@gmail.com"
+        },
+        {
+            "name": "Dewi",
+            "email": "dewi@gmail.com"
+        },
+        {
+            "name": "Eka",
+            "email": "eka@gmail.com"
+        },
+        {
+            "name": "Farid",
+            "email": "farid@gmail.com"
+        },
+        {
+            "name": "Wawan",
+            "email": "wawan@gmail.com"
+        },
+        {
+            "name": "Ika",
+            "email": "ika@gmail.com"
+        }
+    ]
+}
