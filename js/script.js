@@ -72,6 +72,20 @@ closePopupQRBtn.addEventListener("click", function () {
   popupQR.classList.remove("popupActive");
 });
 
+// Event listener untuk button "email"
+const generateEmailBtn = document.getElementById("email");
+const closePopupEmailBtn = document.getElementById("closePopupEmail");
+const popupEmail = document.getElementById("popupMenuEmail");
+
+generateEmailBtn.addEventListener("click", function () {
+  closeAllPopups();
+  popupEmail.classList.add("popupActive");
+});
+
+closePopupEmailBtn.addEventListener("click", function () {
+  popupEmail.classList.remove("popupActive");
+});
+
 // Event listener untuk button "Informasi"
 const infoBtn = document.getElementById("info");
 const closePopupInfoBtn = document.getElementById("closePopupInfo");
