@@ -13,16 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const emailDisplay = document.getElementById('email-display');
     const copyBtn = document.getElementById('copy-btn');
     const selectAllBtn = document.getElementById('selectAllBtn');
+    const clearBtn = document.getElementById('clear-btn'); // Pastikan ini sudah ada di HTML
 
     // Di sini kita siapkan container untuk sub tab
-    // Pastikan di emailcabang.html sudah ada elemen <div class="sub-tab-section">
     const subTabSection = document.querySelector('.sub-tab-section');
 
     // ---------------------------------------------
-    // DATA SUB TAB
+    // DATA SUB TAB (Contoh)
     // ---------------------------------------------
-    // Anda bisa menyesuaikan isi sub-tab sesuai kebutuhan
-    // Contohnya:
     const subTabData = {
     // division1 = SUP
     division1: [
@@ -124,14 +122,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedNames = [];
     // Divisi yang sedang aktif
     let currentDivision = 'division1';
-
-    // Status "Select All" per divisi (untuk toggle)
-    let isAllSelected = {
-        division1: false,
-        division2: false,
-        division3: false,
-        division4: false
-    };
+    // Sub tab yang sedang aktif (null = tidak ada)
+    let currentSubTab = null;
 
     // ---------------------------------------------
     // Fetch data dari JSON (data utama)
@@ -140,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             allData = data;
+            // Tampilkan data default (tanpa sub tab)
             displayNames(currentDivision, '');
         })
         .catch(error => console.error('Error loading JSON:', error));
@@ -147,31 +140,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---------------------------------------------
     // Fungsi menampilkan sub-tab (dinamis)
     // ---------------------------------------------
-    // Membuat <ul> sub-tab untuk setiap divisionKey
     function createSubTabsForDivision(divisionKey) {
     const ul = document.createElement('ul');
     ul.classList.add('sub-tab-list');
     ul.id = `sub-tab-${divisionKey}`;
-    // Default: disembunyikan dulu, akan ditampilkan saat tab-nya aktif
     ul.style.display = 'none';
 
-    // Ambil array sub-tab dari subTabData
     const subTabs = subTabData[divisionKey];
     if (subTabs) {
         subTabs.forEach(sub => {
         const li = document.createElement('li');
         li.classList.add('sub-tab-item');
-        li.textContent = sub.label; // e.g. 'SUP JAWA'
+        li.textContent = sub.label;
         li.setAttribute('data-subKey', sub.key);
 
         // Saat sub-tab di-klik
         li.addEventListener('click', () => {
-            // 1. Tandai sub-tab mana yg aktif
+            // 1. Tandai sub-tab mana yang aktif
             const siblings = ul.querySelectorAll('.sub-tab-item');
             siblings.forEach(item => item.classList.remove('active'));
             li.classList.add('active');
 
-            // 2. Tampilkan data "members" di panel kiri
+            // 2. Simpan sub tab aktif di variable global
+            currentSubTab = sub; 
+            // 3. Tampilkan data sub-tab ini di panel kiri
             displaySubTabMembers(sub.members);
         });
 
@@ -182,24 +174,22 @@ document.addEventListener('DOMContentLoaded', () => {
     return ul;
     }
 
-    // Menampilkan data members dari sub-tab di panel kiri
     function displaySubTabMembers(members) {
     // Bersihkan name-list
     nameListContainer.innerHTML = '';
 
-    // Render setiap item
     members.forEach(item => {
         const nameItem = document.createElement('div');
         nameItem.classList.add('name-item');
         nameItem.textContent = item.name;
         nameItem.setAttribute('data-email', item.email);
 
-        // Jika sudah terpilih, tandai
+        // Tandai jika sudah terpilih di selectedNames
         if (selectedNames.find(sel => sel.name === item.name && sel.email === item.email)) {
         nameItem.classList.add('selected');
         }
 
-        // Klik untuk toggle
+        // Klik item => toggle pilih/batal
         nameItem.addEventListener('click', () => {
         if (nameItem.classList.contains('selected')) {
             nameItem.classList.remove('selected');
@@ -215,167 +205,204 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     }
 
-    // ---------------------------------------------
-    // Generate sub-tab secara dinamis untuk semua division
-    // ---------------------------------------------
+    // Generate sub-tab untuk semua division
     Object.keys(subTabData).forEach(divisionKey => {
     const subTabUl = createSubTabsForDivision(divisionKey);
     subTabSection.appendChild(subTabUl);
     });
 
     // ---------------------------------------------
-    // Fungsi untuk menampilkan data (jika user belum pilih sub-tab)
-    // atau menampilkan data lengkap dari JSON (original)
+    // Fungsi untuk menampilkan data bawaan JSON
     // ---------------------------------------------
     function displayNames(divisionKey, filter) {
-        // Bersihkan name-list
-        nameListContainer.innerHTML = '';
+    currentSubTab = null; // reset sub-tab active
+    // Bersihkan name-list
+    nameListContainer.innerHTML = '';
 
-        // Jika data divisionKey tidak ada, berhenti
-        if (!allData[divisionKey]) return;
+    // Jika data divisionKey tidak ada, berhenti
+    if (!allData[divisionKey]) return;
 
-        // Filter berdasarkan teks pencarian
-        const filteredData = allData[divisionKey].filter(item =>
-            item.name.toLowerCase().includes(filter.toLowerCase())
-        );
+    // Filter berdasarkan teks pencarian
+    const filteredData = allData[divisionKey].filter(item =>
+        item.name.toLowerCase().includes(filter.toLowerCase())
+    );
 
-        // Render item
-        filteredData.forEach(item => {
-            const nameItem = document.createElement('div');
-            nameItem.classList.add('name-item');
-            nameItem.textContent = item.name;
-            nameItem.setAttribute('data-email', item.email);
+    // Render item
+    filteredData.forEach(item => {
+        const nameItem = document.createElement('div');
+        nameItem.classList.add('name-item');
+        nameItem.textContent = item.name;
+        nameItem.setAttribute('data-email', item.email);
 
-            // Tandai jika sudah terpilih di selectedNames
-            if (selectedNames.find(sel => sel.name === item.name && sel.email === item.email)) {
+        // Tandai jika sudah terpilih di selectedNames
+        if (selectedNames.find(sel => sel.name === item.name && sel.email === item.email)) {
+            nameItem.classList.add('selected');
+        }
+
+        // Klik item => toggle pilih/batal
+        nameItem.addEventListener('click', () => {
+            if (nameItem.classList.contains('selected')) {
+                nameItem.classList.remove('selected');
+                removeSelectedName(item);
+            } else {
                 nameItem.classList.add('selected');
+                addSelectedName(item);
             }
-
-            // Klik item => toggle pilih/batal
-            nameItem.addEventListener('click', () => {
-                if (nameItem.classList.contains('selected')) {
-                    nameItem.classList.remove('selected');
-                    removeSelectedName(item);
-                } else {
-                    nameItem.classList.add('selected');
-                    addSelectedName(item);
-                }
-                displayEmails();
-            });
-
-            nameListContainer.appendChild(nameItem);
+            displayEmails();
         });
+
+        nameListContainer.appendChild(nameItem);
+    });
     }
 
     // ---------------------------------------------
-    // Fungsi menambah dan menghapus item dari selectedNames
+    // Tambah/hapus item dari selectedNames
     // ---------------------------------------------
     function addSelectedName(item) {
-        // Hindari duplikasi
-        const exists = selectedNames.find(sel => sel.name === item.name && sel.email === item.email);
-        if (!exists) {
-            selectedNames.push(item);
-        }
+    const exists = selectedNames.find(sel => sel.name === item.name && sel.email === item.email);
+    if (!exists) {
+        selectedNames.push(item);
+    }
     }
 
     function removeSelectedName(item) {
-        selectedNames = selectedNames.filter(sel => {
-            return sel.name !== item.name || sel.email !== item.email;
-        });
+    selectedNames = selectedNames.filter(sel => {
+        return sel.name !== item.name || sel.email !== item.email;
+    });
     }
 
     // ---------------------------------------------
-    // Menampilkan email terpilih di panel kanan
+    // Tampilkan email terpilih di panel kanan
     // ---------------------------------------------
     function displayEmails() {
-        const emailList = selectedNames.map(obj => obj.email);
-        emailDisplay.textContent = emailList.join('; ');
+    const emailList = selectedNames.map(obj => obj.email);
+    emailDisplay.textContent = emailList.join('; ');
     }
 
     // ---------------------------------------------
     // Pencarian
     // ---------------------------------------------
     searchInput.addEventListener('input', () => {
-        const filterValue = searchInput.value.trim();
+    const filterValue = searchInput.value.trim();
+    // Jika sedang ada sub-tab aktif, tampilkan sub-tab data
+    if (currentSubTab) {
+        // Filter data sub-tab
+        const filtered = currentSubTab.members.filter(item =>
+        item.name.toLowerCase().includes(filterValue.toLowerCase())
+        );
+        displaySubTabMembers(filtered);
+    } else {
+        // Jika tidak ada sub-tab, gunakan data main
         displayNames(currentDivision, filterValue);
+    }
     });
 
     // ---------------------------------------------
     // Event listener: Tab utama (SUP, SAM, SM, MSJM)
     // ---------------------------------------------
     tabItems.forEach(tab => {
-        tab.addEventListener('click', () => {
-            // Nonaktifkan tab lama
-            document.querySelector('.tab-item.active').classList.remove('active');
-            // Aktifkan tab baru
-            tab.classList.add('active');
+    tab.addEventListener('click', () => {
+        // Nonaktifkan tab lama
+        document.querySelector('.tab-item.active').classList.remove('active');
+        // Aktifkan tab baru
+        tab.classList.add('active');
 
-            // Perbarui currentDivision
-            currentDivision = tab.getAttribute('data-division');
+        // Perbarui currentDivision
+        currentDivision = tab.getAttribute('data-division');
 
-            // Reset pencarian
-            searchInput.value = '';
+        // Reset pencarian
+        searchInput.value = '';
 
-            // Ganti teks tombol Select All
-            updateSelectAllButtonText(currentDivision);
+        // Tampilkan data default (dari JSON) di panel kiri
+        displayNames(currentDivision, '');
 
-            // Tampilkan data default (dari JSON) di panel kiri
-            displayNames(currentDivision, '');
-
-            // Sembunyikan semua sub-tab
-            const allSubTabLists = document.querySelectorAll('.sub-tab-list');
-            allSubTabLists.forEach(ul => {
+        // Sembunyikan semua sub-tab
+        const allSubTabLists = document.querySelectorAll('.sub-tab-list');
+        allSubTabLists.forEach(ul => {
             ul.style.display = 'none';
-            // Reset highlight sub-tab
             ul.querySelectorAll('.sub-tab-item').forEach(item => item.classList.remove('active'));
-            });
-
-            // Tampilkan sub-tab milik division yg aktif
-            const activeSubTabUl = document.getElementById(`sub-tab-${currentDivision}`);
-            if (activeSubTabUl) {
-                activeSubTabUl.style.display = 'flex'; // atau 'block'
-            }
         });
+
+        // Tampilkan sub-tab milik division yg aktif
+        const activeSubTabUl = document.getElementById(`sub-tab-${currentDivision}`);
+        if (activeSubTabUl) {
+            activeSubTabUl.style.display = 'flex';
+        }
+    });
     });
 
     // ---------------------------------------------
-    // Tombol "Select All" / "Unselect All"
+    // Tombol "Select All" / "Unselect All" (hanya tab atau sub-tab aktif)
     // ---------------------------------------------
     selectAllBtn.addEventListener('click', () => {
-        toggleSelectAll(currentDivision);
+    // Jika ada sub-tab aktif, select/unselect data sub-tab saja
+    if (currentSubTab) {
+        toggleSelectAllSubTab(currentDivision, currentSubTab);
+    } else {
+        // Jika tidak ada sub-tab, select/unselect data main tab
+        toggleSelectAllMain(currentDivision);
+    }
     });
 
-    function toggleSelectAll(divisionKey) {
-        if (!allData[divisionKey]) return;
+    // Fungsi select/unselect di sub-tab aktif
+    function toggleSelectAllSubTab(divisionKey, sub) {
+    // Cek apakah semua item sub-tab sudah diselected
+    const subEmails = sub.members.map(m => m.email);
+    const allSelected = sub.members.every(m =>
+        selectedNames.some(sel => sel.email === m.email)
+    );
 
-        if (!isAllSelected[divisionKey]) {
-            // Belum select all -> select semua item di divisi ini
-            allData[divisionKey].forEach(item => {
-                addSelectedName(item);
-            });
-            isAllSelected[divisionKey] = true;
-        } else {
-            // Sudah select all -> unselect semua item
-            allData[divisionKey].forEach(item => {
-                removeSelectedName(item);
-            });
-            isAllSelected[divisionKey] = false;
-        }
-
-        // Update tampilan di panel kiri
-        displayNames(divisionKey, searchInput.value);
-        // Update email di panel kanan
-        displayEmails();
-        // Perbarui teks tombol
-        updateSelectAllButtonText(divisionKey);
+    if (!allSelected) {
+        // Jika belum semua dipilih -> pilih semua
+        sub.members.forEach(item => addSelectedName(item));
+    } else {
+        // Jika sudah semua dipilih -> unselect semua
+        sub.members.forEach(item => removeSelectedName(item));
     }
 
-    function updateSelectAllButtonText(divisionKey) {
-        if (isAllSelected[divisionKey]) {
-            selectAllBtn.textContent = 'Unselect All';
-        } else {
-            selectAllBtn.textContent = 'Select All';
-        }
+    // Refresh panel kiri (sub-tab) dan panel kanan
+    displaySubTabMembers(sub.members);
+    displayEmails();
+    }
+
+    // Fungsi select/unselect di main tab
+    function toggleSelectAllMain(divisionKey) {
+    // data main tab
+    const dataTab = allData[divisionKey] || [];
+    // Cek apakah semua item main tab sudah diselected
+    const allSelected = dataTab.every(m =>
+        selectedNames.some(sel => sel.email === m.email)
+    );
+
+    if (!allSelected) {
+        // Belum semua -> select all
+        dataTab.forEach(item => addSelectedName(item));
+    } else {
+        // Sudah semua -> unselect all
+        dataTab.forEach(item => removeSelectedName(item));
+    }
+
+    // Refresh panel kiri (main tab) dan panel kanan
+    displayNames(divisionKey, searchInput.value);
+    displayEmails();
+    }
+
+    // ---------------------------------------------
+    // Tombol Clear All
+    // ---------------------------------------------
+    clearBtn.addEventListener('click', clearAllSelections);
+
+    function clearAllSelections() {
+    selectedNames = [];
+    // Reset tampilan email
+    displayEmails();
+
+    // Jika sedang lihat sub-tab, refresh sub-tab
+    if (currentSubTab) {
+        displaySubTabMembers(currentSubTab.members);
+    } else {
+        displayNames(currentDivision, searchInput.value);
+    }
     }
 
     // ---------------------------------------------
@@ -383,43 +410,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---------------------------------------------
     copyBtn.addEventListener('click', copyToClipboard);
     function copyToClipboard() {
-        const textToCopy = emailDisplay.textContent;
-        if (!textToCopy) return;
+    const textToCopy = emailDisplay.textContent;
+    if (!textToCopy) return;
 
-        navigator.clipboard.writeText(textToCopy)
-            .then(() => {
-                alert('Email berhasil disalin!');
-            })
-            .catch(err => {
-                console.error('Failed to copy text: ', err);
-            });
+    navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+            alert('Email berhasil disalin!');
+        })
+        .catch(err => {
+            console.error('Failed to copy text: ', err);
+        });
     }
-
-    // Seleksi tombol Clear All
-    const clearBtn = document.getElementById('clear-btn');
-    clearBtn.addEventListener('click', clearAllSelections);
-
-    // Fungsi untuk Clear All
-    function clearAllSelections() {
-        // Kosongkan array selectedNames
-        selectedNames = [];
-
-        // Pastikan "Select All" toggle reset (opsional)
-        isAllSelected = {
-            division1: false,
-            division2: false,
-            division3: false,
-            division4: false
-        };
-
-        // Bersihkan tampilan email di panel kanan
-        displayEmails();
-
-        // Bersihkan highlight 'selected' di panel kiri
-        // (panggil ulang displayNames dengan filter kosong, 
-        //  agar nameList di-refresh)
-        displayNames(currentDivision, searchInput.value);
-    }
-
 
 });
