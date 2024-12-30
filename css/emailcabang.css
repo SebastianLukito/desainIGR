@@ -316,3 +316,76 @@ footer {
     transform: scale(1.01);
 }
 
+/* Untuk ul yang menampung semua sub tab item */
+.sub-tab-list {
+    list-style: none;
+    margin-bottom: 15px;
+    padding: 0;
+    margin-top: -5px;
+
+    /* Pastikan sub tab disusun secara fleksibel (Flexbox) */
+    display: flex;
+
+    /* Rata tengah secara horizontal */
+    justify-content: center;  
+
+    /* Jika mau sub-tab bisa turun ke baris berikutnya saat layar sempit */
+    flex-wrap: wrap; 
+    background-color: #868686;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+/* Untuk setiap li sub-tab item */
+.sub-tab-item {
+    margin: 5px 5px;
+    padding: 8px 12px;
+    background-color: #ffbb02;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #000;
+    transition: background-color 0.3s ease;
+}
+
+.sub-tab-item.active {
+    background-color: #333;
+    color: #fff;
+}
+
+.sub-tab-item:hover {
+    background-color: #555;
+    color: #fff;
+}
+
+.clear-btn {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    background-color: rgb(70, 70, 70);
+    background-image: url("/assets/img/45-degree-fabric-light.png");
+    color: #e0e0e0;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.clear-btn:hover {
+    transform: scale(1.01);
+}
+
+.clear-btn p {
+    margin: 0;
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 15px;
+}
