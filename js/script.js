@@ -209,3 +209,54 @@ function copyToClipboard(elementId) {
       console.error('Failed to copy text: ', err);
   });
 }
+
+let typedText = ''; // Variabel untuk menyimpan teks yang diketik pengguna
+
+document.addEventListener('keydown', function (event) {
+    // Tambahkan karakter yang diketik ke typedText
+    typedText += event.key.toLowerCase();
+
+    // Batasi panjang teks hanya sebesar kata terpanjang ("planetes" - 8 karakter)
+    if (typedText.length > 8) {
+        typedText = typedText.slice(-8);
+    }
+
+    // Periksa apakah teks yang diketik cocok dengan "monster"
+    if (typedText === 'monster') {
+        window.location.href = 'monster.html'; // Redirect ke monster.html
+    }
+
+    // Periksa apakah teks yang diketik cocok dengan "planetes"
+    else if (typedText === 'planetes') {
+        window.location.href = 'solar_system.html'; // Redirect ke solar_system.html
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  function showRandomEasterEggInfo() {
+      const easterEggInfo = document.getElementById("easterEggInfo");
+
+      // Pastikan elemen ditemukan sebelum mencoba mengaksesnya
+      if (!easterEggInfo) {
+          console.error("Element with ID 'easterEggInfo' not found.");
+          return; // Keluar dari fungsi jika elemen tidak ditemukan
+      }
+
+      const messages = [
+          "Easter egg, ketik 'planetes' di sembarang tempat",
+          "Easter egg, ketik 'monster' di sembarang tempat",
+          ""
+      ];
+
+      // Pilih pesan secara acak
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      easterEggInfo.textContent = randomMessage;
+
+      // Jadwalkan pesan untuk berubah setiap 10 detik
+      setTimeout(showRandomEasterEggInfo, 10000);
+  }
+
+  // Jalankan fungsi saat halaman dimuat
+  showRandomEasterEggInfo();
+});
+
