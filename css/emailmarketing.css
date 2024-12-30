@@ -316,3 +316,33 @@ footer {
     transform: scale(1.01);
 }
 
+.clear-btn {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    background-color: rgb(70, 70, 70);
+    background-image: url("/assets/img/45-degree-fabric-light.png");
+    color: #e0e0e0;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.clear-btn:hover {
+    transform: scale(1.01);
+}
+
+.clear-btn p {
+    margin: 0;
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 15px;
+}
