@@ -7,28 +7,95 @@
             ]
         },
         {
+            "name": "data kamera",
+            "ftp": [
+                "\\\\172.20.122.14\\Bagas Siswanto\\Data Kamera"
+            ]
+        },
+        {
             "name": "andrias",
             "ftp": [
-                "\\\\0200MKTDIV-ASUN"
+                "\\\\0200MKTDIV-ASUN",
+                "\\\\172.20.123.25"
             ]
         },
         {
             "name": "sebastian",
             "ftp": [
-                "\\\\0200MKTDES-BAS"
+                "\\\\0200MKTDES-BAS",
+                "\\\\172.20.122.20"
             ]
         },
         {
             "name": "hadis",
             "ftp": [
                 "\\\\0200MKTDIV-HDS",
-                "\\\\172.10.123.95"
+                "\\\\172.20.122.95"
             ]
         },
         {
             "name": "naufal",
             "ftp": [
-                "\\\\0200MKTDIV-NAC"
+                "\\\\0200MKTDIV-NAC",
+                "\\\\172.20.123.99"
+            ]
+        },
+        {
+            "name": "desi",
+            "ftp": [
+                "\\\\0200MKTDIV-DSN",
+                "\\\\172.20.122.44"
+            ]
+        },
+        {
+            "name": "sudiana",
+            "ftp": [
+                "\\\\0200MKTDIV-SDNA",
+                "\\\\172.20.123.5"
+            ]
+        },
+        {
+            "name": "fajar",
+            "ftp": [
+                "\\\\172.20.123.44"
+            ]
+        },
+        {
+            "name": "dedi",
+            "ftp": [
+                "\\\\172.20.123.45"
+            ]
+        },
+        {
+            "name": "jody",
+            "ftp": [
+                "\\\\172.20.122.21"
+            ]
+        },
+        {
+            "name": "andrian",
+            "ftp": [
+                "\\\\172.20.123.24"
+            ]
+        },
+        {
+            "name": "aziz",
+            "ftp": [
+                "\\\\0200MKTDIV-AZIZ",
+                "\\\\172.20.123.35"
+            ]
+        },
+        {
+            "name": "salhan",
+            "ftp": [
+                "\\\\0200MKTDES-SAL",
+                "\\\\172.20.122.5"
+            ]
+        },
+        {
+            "name": "bagas",
+            "ftp": [
+                "\\\\172.20.122.14"
             ]
         }
     ]
