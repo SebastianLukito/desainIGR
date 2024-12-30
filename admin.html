@@ -13,10 +13,13 @@
 </head>
 <body>
     <div class="marquee" id="marquee">
-        <p id="marqueeText">SELAMAT DATANG - MARKETING INDOGROSIR - SUB DIVISI DESAIN GRAFIS
+        <p id="marqueeText">
+            SELAMAT DATANG - MARKETING INDOGROSIR - SUB DIVISI DESAIN GRAFIS
             <img src="assets/img/igr.png" alt="Logo Indogrosir" class="marquee-logo">
+            <span id="easterEggInfo"></span> <!-- Pastikan elemen ini ada -->
         </p>
-    </div>
+    </div> 
+    
     <div class="mainContainer">
         <!-- admin Dashboard button -->
         <div class="buttonContainer">
@@ -419,7 +422,7 @@
         } else {
             // Perbarui teks marquee dengan menyertakan username
             const marqueeText = document.getElementById('marqueeText');
-            marqueeText.innerHTML = `SELAMAT DATANG <strong>${username.toUpperCase()}</strong> DI WEBSITE MARKETING INDOGROSIR - SUB DIVISI DESAIN GRAFIS <img src="assets/img/igr.png" alt="Logo Indogrosir" class="marquee-logo">`;
+            marqueeText.innerHTML = `SELAMAT DATANG <strong>${username.toUpperCase()}</strong> DI WEBSITE MARKETING INDOGROSIR - SUB DIVISI DESAIN GRAFIS <img src="assets/img/igr.png" alt="Logo Indogrosir" class="marquee-logo"> <span id="easterEggInfo"></span>`;
         }
     </script> 
 </body>
