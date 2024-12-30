@@ -380,3 +380,19 @@ footer:hover {
 .tabel td:nth-child(4),
 .tabel th:nth-child(4) { display: none; }
 }
+
+#easterEggInfo {
+    font-weight: bold;
+    color: #ff0;
+    margin-left: 10px;
+    animation: fadeInOut 10s linear infinite;
+}
+
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0;
+    }
+    10%, 90% {
+        opacity: 1;
+    }
+}
