@@ -1,44 +1,132 @@
 {
     "division1": [
         {
-            "name": "Peres",
-            "email": "peres@gmail.com"
+            "name": "Support IGR Yogyakarta",
+            "email": "support@yog.indogrosir.co.id"
         },
         {
-            "name": "Hadi",
-            "email": "hadi@gmail.com"
+            "name": "Support IGR Samarinda",
+            "email": "support@smd.indogrosir.co.id"
         },
         {
-            "name": "Nurul",
-            "email": "nurul@gmail.com"
+            "name": "Support IGR Palembang",
+            "email": "support@plg.indogrosir.co.id"
         },
         {
-            "name": "Rachmat",
-            "email": "rachmat@gmail.com"
+            "name": "Support IGR Pekanbaru",
+            "email": "support@pku.indogrosir.co.id"
         },
         {
-            "name": "Indra",
-            "email": "indra@gmail.com"
+            "name": "Support IGR Bogor",
+            "email": "support@bgr.indogrosir.co.id"
         },
         {
-            "name": "Fitri",
-            "email": "fitri@gmail.com"
+            "name": "Support IGR Bandung",
+            "email": "support@bdg.indogrosir.co.id"
         },
         {
-            "name": "Surya",
-            "email": "surya@gmail.com"
+            "name": "Support IGR Tangerang",
+            "email": "support@tgr.indogrosir.co.id"
         },
         {
-            "name": "Dita",
-            "email": "dita@gmail.com"
+            "name": "Support IGR Semarang",
+            "email": "support@smg.indogrosir.co.id"
         },
         {
-            "name": "Rizal",
-            "email": "rizal@gmail.com"
+            "name": "Support IGR Manado",
+            "email": "support@mdo.indogrosir.co.id"
         },
         {
-            "name": "Cahyadi",
-            "email": "cahyadi@gmail.com"
+            "name": "Support IGR Medan",
+            "email": "support@mdn.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Banjarmasin",
+            "email": "support@bms.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Bekasi",
+            "email": "support@bks.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Cipinang",
+            "email": "support@cpg.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Kemayoran",
+            "email": "support@kmy.indogrosir.co.id"
+        },
+        {
+            "name": "SPV Support IGR Pontianak",
+            "email": "spv-support@ptk.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Pontianak",
+            "email": "support@ptk.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Surabaya",
+            "email": "support@sby.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Solo",
+            "email": "support@slo.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Medan 2",
+            "email": "support1_mdn@indomaret.co.id"
+        },
+        {
+            "name": "Support IGR Bandar Lampung",
+            "email": "support@bdl.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Malang",
+            "email": "support@mlg.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Kendari",
+            "email": "support@kri.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Ciputat",
+            "email": "support@cpt.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Cikokol",
+            "email": "support@ckl.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Cikokol 2",
+            "email": "support2@ckl.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Jambi",
+            "email": "support@jbi.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Ambon",
+            "email": "support@amb.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Batam",
+            "email": "support@btm.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Karawang",
+            "email": "support@krw.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Sukabumi",
+            "email": "support@sbi.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Makassar",
+            "email": "support@mks.indogrosir.co.id"
+        },
+        {
+            "name": "Support IGR Purwokerto",
+            "email": "support@pwt.indogrosir.co.id"
         }
     ],
     "division2": [
