@@ -267,7 +267,7 @@ function showRandomEasterEggInfo() {
     easterEggInfo.textContent = randomMessage;
 
     // Jadwalkan pesan untuk berubah setiap 10 detik
-    setTimeout(showRandomEasterEggInfo, 10000);
+    setTimeout(showRandomEasterEggInfo, 40000);
 }
 
 // Jalankan fungsi saat halaman dimuat
