@@ -384,8 +384,8 @@ footer:hover {
 #easterEggInfo {
     font-weight: bold;
     color: #ff0;
-    margin-left: 10px;
-    animation: fadeInOut 10s linear infinite;
+    margin-left: 20px;
+    animation: marquee 20s linear infinite alternate;
 }
 
 @keyframes fadeInOut {
