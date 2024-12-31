@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         label: 'F1A',
         members: [
             { name: 'F1A Yemima', email: 'snack.igr.idm@indomaret.co.id' },
-            { name: 'F1A Mishella', email: 'mishella@indomaret.co.id' },
+            { name: 'F1A Mishella', email: 'misshella@indomaret.co.id' },
             { name: 'F1A Hengky Yap', email: 'hengky@indomaret.co.id' },
             // tambahkan lagi...
         ]
