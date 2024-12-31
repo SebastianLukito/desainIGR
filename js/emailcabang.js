@@ -30,15 +30,49 @@ document.addEventListener('DOMContentLoaded', () => {
         members: [
             { name: 'SUP YOG', email: 'support@yog.indogrosir.co.id' },
             { name: 'SUP SBY', email: 'support@sby.indogrosir.co.id' },
+            { name: 'SUP KMY', email: 'support@kmy.indogrosir.co.id' },
+            { name: 'SUP CPG', email: 'support@cpg.indogrosir.co.id' },
+            { name: 'SUP BGR', email: 'support@bgr.indogrosir.co.id' },
+            { name: 'SUP TGR', email: 'support@tgr.indogrosir.co.id' },
+            { name: 'SUP CPT', email: 'support@cpt.indogrosir.co.id' },
+            { name: 'SUP KRW', email: 'support@krw.indogrosir.co.id' },
+            { name: 'SUP BKS', email: 'support@bks.indogrosir.co.id' },
+            { name: 'SUP CKL', email: 'support@ckl.indogrosir.co.id' },
+            { name: 'SUP BDG', email: 'support@bdg.indogrosir.co.id' },
+            { name: 'SUP MLG', email: 'support@mlg.indogrosir.co.id' },
+            { name: 'SUP SBI', email: 'support@sbi.indogrosir.co.id' },
+            { name: 'SUP SLO', email: 'support@slo.indogrosir.co.id' },
+            { name: 'SUP SMG', email: 'support@smg.indogrosir.co.id' },
+            { name: 'SUP PWT', email: 'support@pwt.indogrosir.co.id' },
             // tambahkan lagi...
         ]
         },
         {
+            key: 'jawa',
+            label: 'SUP JAWA kecuali DKI',
+            members: [
+                { name: 'SUP YOG', email: 'support@yog.indogrosir.co.id' },
+                { name: 'SUP SBY', email: 'support@sby.indogrosir.co.id' },
+                { name: 'SUP BDG', email: 'support@bdg.indogrosir.co.id' },
+                { name: 'SUP MLG', email: 'support@mlg.indogrosir.co.id' },
+                { name: 'SUP SBI', email: 'support@sbi.indogrosir.co.id' },
+                { name: 'SUP SLO', email: 'support@slo.indogrosir.co.id' },
+                { name: 'SUP SMG', email: 'support@smg.indogrosir.co.id' },
+                { name: 'SUP PWT', email: 'support@pwt.indogrosir.co.id' },
+                // tambahkan lagi...
+            ]
+            },
+        {
         key: 'dki',
         label: 'SUP DKI',
         members: [
+            { name: 'SUP KMY', email: 'support@kmy.indogrosir.co.id' },
+            { name: 'SUP CPG', email: 'support@cpg.indogrosir.co.id' },
+            { name: 'SUP BGR', email: 'support@bgr.indogrosir.co.id' },
             { name: 'SUP TGR', email: 'support@tgr.indogrosir.co.id' },
-            { name: 'SUP BKS', email: 'support@bks.indogrosir.co.id' },
+            { name: 'SUP CPT', email: 'support@cpt.indogrosir.co.id' },
+            { name: 'SUP KRW', email: 'support@krw.indogrosir.co.id' },
+            { name: 'SUP BKS', email: 'support@bks.indogrosir.co.id' }
             // tambahkan lagi...
         ]
         },
@@ -60,56 +94,306 @@ document.addEventListener('DOMContentLoaded', () => {
             { name: 'SUP MKS', email: 'support@mks.indogrosir.co.id' },
         ]
         },
+        {
+            key: 'sumatera',
+            label: 'SUP SUM',
+            members: [
+                { name: 'SUP BTM', email: 'support@btm.indogrosir.co.id' },
+                { name: 'SUP BDL', email: 'support@bdl.indogrosir.co.id' },
+                { name: 'SUP JBI', email: 'support@jbi.indogrosir.co.id' },
+                { name: 'SUP MDN', email: 'support@mdn.indogrosir.co.id' },
+                { name: 'SUP PKU', email: 'support@pku.indogrosir.co.id' },
+                { name: 'SUP PLG', email: 'support@plg.indogrosir.co.id' },
+            ]
+        },
+        {
+            key: 'maluku',
+            label: 'SUP MAL',
+            members: [
+                { name: 'SUP AMB', email: 'support@amb.indogrosir.co.id' },
+            ]
+        },
     ],
 
     // division2 = SAM
     division2: [
         {
-        key: 'jawa',
-        label: 'SAM JAWA',
-        members: [
-            { name: 'SAM YOG', email: 'sam@yog.indogrosir.co.id' },
-            { name: 'SAM SMG', email: 'sam@smg.indogrosir.co.id' },
-            // dst...
-        ]
-        },
-        {
-        key: 'kalimantan',
-        label: 'SAM KALIMANTAN',
-        members: [
-            { name: 'SAM BMS', email: 'sam@bms.indogrosir.co.id' },
-            { name: 'SAM SMD', email: 'sam@smd.indogrosir.co.id' },
-            { name: 'SAM PTK', email: 'sam@ptk.indogrosir.co.id' },
-        ]
-        },
+            key: 'jawa',
+            label: 'SAM JAWA',
+            members: [
+                { name: 'SAM YOG', email: 'sam@yog.indogrosir.co.id' },
+                { name: 'SAM SBY', email: 'sam@sby.indogrosir.co.id' },
+                { name: 'SAM KMY', email: 'sam@kmy.indogrosir.co.id' },
+                { name: 'SAM CPG', email: 'sam@cpg.indogrosir.co.id' },
+                { name: 'SAM BGR', email: 'sam@bgr.indogrosir.co.id' },
+                { name: 'SAM TGR', email: 'sam@tgr.indogrosir.co.id' },
+                { name: 'SAM CPT', email: 'sam@cpt.indogrosir.co.id' },
+                { name: 'SAM KRW', email: 'sam@krw.indogrosir.co.id' },
+                { name: 'SAM BKS', email: 'sam@bks.indogrosir.co.id' },
+                { name: 'SAM CKL', email: 'sam@ckl.indogrosir.co.id' },
+                { name: 'SAM BDG', email: 'sam@bdg.indogrosir.co.id' },
+                { name: 'SAM MLG', email: 'sam@mlg.indogrosir.co.id' },
+                { name: 'SAM SBI', email: 'sam@sbi.indogrosir.co.id' },
+                { name: 'SAM SLO', email: 'sam@slo.indogrosir.co.id' },
+                { name: 'SAM SMG', email: 'sam@smg.indogrosir.co.id' },
+                { name: 'SAM PWT', email: 'sam@pwt.indogrosir.co.id' },
+                // tambahkan lagi...
+            ]
+            },
+            {
+                key: 'jawa',
+                label: 'SAM JAWA kecuali DKI',
+                members: [
+                    { name: 'SAM YOG', email: 'sam@yog.indogrosir.co.id' },
+                    { name: 'SAM SBY', email: 'sam@sby.indogrosir.co.id' },
+                    { name: 'SAM BDG', email: 'sam@bdg.indogrosir.co.id' },
+                    { name: 'SAM MLG', email: 'sam@mlg.indogrosir.co.id' },
+                    { name: 'SAM SBI', email: 'sam@sbi.indogrosir.co.id' },
+                    { name: 'SAM SLO', email: 'sam@slo.indogrosir.co.id' },
+                    { name: 'SAM SMG', email: 'sam@smg.indogrosir.co.id' },
+                    { name: 'SAM PWT', email: 'sam@pwt.indogrosir.co.id' },
+                    // tambahkan lagi...
+                ]
+                },
+            {
+            key: 'dki',
+            label: 'SAM DKI',
+            members: [
+                { name: 'SAM KMY', email: 'sam@kmy.indogrosir.co.id' },
+                { name: 'SAM CPG', email: 'sam@cpg.indogrosir.co.id' },
+                { name: 'SAM BGR', email: 'sam@bgr.indogrosir.co.id' },
+                { name: 'SAM TGR', email: 'sam@tgr.indogrosir.co.id' },
+                { name: 'SAM CPT', email: 'sam@cpt.indogrosir.co.id' },
+                { name: 'SAM KRW', email: 'sam@krw.indogrosir.co.id' },
+                { name: 'SAM BKS', email: 'sam@bks.indogrosir.co.id' }
+                // tambahkan lagi...
+            ]
+            },
+            {
+            key: 'kalimantan',
+            label: 'SAM KAL',
+            members: [
+                { name: 'SAM BMS', email: 'sam@bms.indogrosir.co.id' },
+                { name: 'SAM SMD', email: 'sam@smd.indogrosir.co.id' },
+                { name: 'SAM PTK', email: 'sam@ptk.indogrosir.co.id' },
+            ]
+            },
+            {
+            key: 'sulawesi',
+            label: 'SAM SUL',
+            members: [
+                { name: 'SAM KRI', email: 'sam@kri.indogrosir.co.id' },
+                { name: 'SAM MDO', email: 'sam@mdo.indogrosir.co.id' },
+                { name: 'SAM MKS', email: 'sam@mks.indogrosir.co.id' },
+            ]
+            },
+            {
+                key: 'sumatera',
+                label: 'SAM SUM',
+                members: [
+                    { name: 'SAM BTM', email: 'sam@btm.indogrosir.co.id' },
+                    { name: 'SAM BDL', email: 'sam@bdl.indogrosir.co.id' },
+                    { name: 'SAM JBI', email: 'sam@jbi.indogrosir.co.id' },
+                    { name: 'SAM MDN', email: 'sam@mdn.indogrosir.co.id' },
+                    { name: 'SAM PKU', email: 'sam@pku.indogrosir.co.id' },
+                    { name: 'SAM PLG', email: 'sam@plg.indogrosir.co.id' },
+                ]
+            },
+            {
+                key: 'maluku',
+                label: 'SAM MAL',
+                members: [
+                    { name: 'SAM AMB', email: 'sam@amb.indogrosir.co.id' },
+                ]
+            },
         // tambahkan sub-tab lain (Sumatra, Sulawesi, dsb.) sesuai kebutuhan
     ],
 
     // division3 = SM
     division3: [
         {
-        key: 'jawa',
-        label: 'SM JAWA',
-        members: [
-            { name: 'SM YOG', email: 'sm@yog.indogrosir.co.id' },
-            { name: 'SM BDG', email: 'sm@bdg.indogrosir.co.id' },
-            // dst...
-        ]
-        },
+            key: 'jawa',
+            label: 'SM JAWA',
+            members: [
+                { name: 'SM YOG', email: 'sm@yog.indogrosir.co.id' },
+                { name: 'SM SBY', email: 'sm@sby.indogrosir.co.id' },
+                { name: 'SM KMY', email: 'sm@kmy.indogrosir.co.id' },
+                { name: 'SM CPG', email: 'sm@cpg.indogrosir.co.id' },
+                { name: 'SM BGR', email: 'sm@bgr.indogrosir.co.id' },
+                { name: 'SM TGR', email: 'sm@tgr.indogrosir.co.id' },
+                { name: 'SM CPT', email: 'sm@cpt.indogrosir.co.id' },
+                { name: 'SM KRW', email: 'sm@krw.indogrosir.co.id' },
+                { name: 'SM BKS', email: 'sm@bks.indogrosir.co.id' },
+                { name: 'SM CKL', email: 'sm@ckl.indogrosir.co.id' },
+                { name: 'SM BDG', email: 'sm@bdg.indogrosir.co.id' },
+                { name: 'SM MLG', email: 'sm@mlg.indogrosir.co.id' },
+                { name: 'SM SBI', email: 'sm@sbi.indogrosir.co.id' },
+                { name: 'SM SLO', email: 'sm@slo.indogrosir.co.id' },
+                { name: 'SM SMG', email: 'sm@smg.indogrosir.co.id' },
+                { name: 'SM PWT', email: 'sm@pwt.indogrosir.co.id' },
+                // tambahkan lagi...
+            ]
+            },
+            {
+                key: 'jawa',
+                label: 'SM JAWA kecuali DKI',
+                members: [
+                    { name: 'SM YOG', email: 'sm@yog.indogrosir.co.id' },
+                    { name: 'SM SBY', email: 'sm@sby.indogrosir.co.id' },
+                    { name: 'SM BDG', email: 'sm@bdg.indogrosir.co.id' },
+                    { name: 'SM MLG', email: 'sm@mlg.indogrosir.co.id' },
+                    { name: 'SM SBI', email: 'sm@sbi.indogrosir.co.id' },
+                    { name: 'SM SLO', email: 'sm@slo.indogrosir.co.id' },
+                    { name: 'SM SMG', email: 'sm@smg.indogrosir.co.id' },
+                    { name: 'SM PWT', email: 'sm@pwt.indogrosir.co.id' },
+                    // tambahkan lagi...
+                ]
+                },
+            {
+            key: 'dki',
+            label: 'SM DKI',
+            members: [
+                { name: 'SM KMY', email: 'sm@kmy.indogrosir.co.id' },
+                { name: 'SM CPG', email: 'sm@cpg.indogrosir.co.id' },
+                { name: 'SM BGR', email: 'sm@bgr.indogrosir.co.id' },
+                { name: 'SM TGR', email: 'sm@tgr.indogrosir.co.id' },
+                { name: 'SM CPT', email: 'sm@cpt.indogrosir.co.id' },
+                { name: 'SM KRW', email: 'sm@krw.indogrosir.co.id' },
+                { name: 'SM BKS', email: 'sm@bks.indogrosir.co.id' }
+                // tambahkan lagi...
+            ]
+            },
+            {
+            key: 'kalimantan',
+            label: 'SM KAL',
+            members: [
+                { name: 'SM BMS', email: 'sm@bms.indogrosir.co.id' },
+                { name: 'SM SMD', email: 'sm@smd.indogrosir.co.id' },
+                { name: 'SM PTK', email: 'sm@ptk.indogrosir.co.id' },
+            ]
+            },
+            {
+            key: 'sulawesi',
+            label: 'SM SUL',
+            members: [
+                { name: 'SM KRI', email: 'sm@kri.indogrosir.co.id' },
+                { name: 'SM MDO', email: 'sm@mdo.indogrosir.co.id' },
+                { name: 'SM MKS', email: 'sm@mks.indogrosir.co.id' },
+            ]
+            },
+            {
+                key: 'sumatera',
+                label: 'SM SUM',
+                members: [
+                    { name: 'SM BTM', email: 'sm@btm.indogrosir.co.id' },
+                    { name: 'SM BDL', email: 'sm@bdl.indogrosir.co.id' },
+                    { name: 'SM JBI', email: 'sm@jbi.indogrosir.co.id' },
+                    { name: 'SM MDN', email: 'sm@mdn.indogrosir.co.id' },
+                    { name: 'SM PKU', email: 'sm@pku.indogrosir.co.id' },
+                    { name: 'SM PLG', email: 'sm@plg.indogrosir.co.id' },
+                ]
+            },
+            {
+                key: 'maluku',
+                label: 'SM MAL',
+                members: [
+                    { name: 'SM AMB', email: 'sm@amb.indogrosir.co.id' },
+                ]
+            },
         // tambahkan sub-tab lain
     ],
 
     // division4 = MSJM
     division4: [
         {
-        key: 'jawa',
-        label: 'MSJM JAWA',
-        members: [
-            { name: 'MSJM YOG', email: 'msjm@yog.indogrosir.co.id' },
-            { name: 'MSJM SMG', email: 'msjm@smg.indogrosir.co.id' },
-            // dst...
-        ]
-        },
+            key: 'jawa',
+            label: 'MSJM JAWA',
+            members: [
+                { name: 'MSJM YOG', email: 'msjm@yog.indogrosir.co.id' },
+                { name: 'MSJM SBY', email: 'msjm@sby.indogrosir.co.id' },
+                { name: 'MSJM KMY', email: 'msjm@kmy.indogrosir.co.id' },
+                { name: 'MSJM CPG', email: 'msjm@cpg.indogrosir.co.id' },
+                { name: 'MSJM BGR', email: 'msjm@bgr.indogrosir.co.id' },
+                { name: 'MSJM TGR', email: 'msjm@tgr.indogrosir.co.id' },
+                { name: 'MSJM CPT', email: 'msjm@cpt.indogrosir.co.id' },
+                { name: 'MSJM KRW', email: 'msjm@krw.indogrosir.co.id' },
+                { name: 'MSJM BKS', email: 'msjm@bks.indogrosir.co.id' },
+                { name: 'MSJM CKL', email: 'msjm@ckl.indogrosir.co.id' },
+                { name: 'MSJM BDG', email: 'msjm@bdg.indogrosir.co.id' },
+                { name: 'MSJM MLG', email: 'msjm@mlg.indogrosir.co.id' },
+                { name: 'MSJM SBI', email: 'msjm@sbi.indogrosir.co.id' },
+                { name: 'MSJM SLO', email: 'msjm@slo.indogrosir.co.id' },
+                { name: 'MSJM SMG', email: 'msjm@smg.indogrosir.co.id' },
+                { name: 'MSJM PWT', email: 'msjm@pwt.indogrosir.co.id' },
+                // tambahkan lagi...
+            ]
+            },
+            {
+                key: 'jawa',
+                label: 'MSJM JAWA kecuali DKI',
+                members: [
+                    { name: 'MSJM YOG', email: 'msjm@yog.indogrosir.co.id' },
+                    { name: 'MSJM SBY', email: 'msjm@sby.indogrosir.co.id' },
+                    { name: 'MSJM BDG', email: 'msjm@bdg.indogrosir.co.id' },
+                    { name: 'MSJM MLG', email: 'msjm@mlg.indogrosir.co.id' },
+                    { name: 'MSJM SBI', email: 'msjm@sbi.indogrosir.co.id' },
+                    { name: 'MSJM SLO', email: 'msjm@slo.indogrosir.co.id' },
+                    { name: 'MSJM SMG', email: 'msjm@smg.indogrosir.co.id' },
+                    { name: 'MSJM PWT', email: 'msjm@pwt.indogrosir.co.id' },
+                    // tambahkan lagi...
+                ]
+                },
+            {
+            key: 'dki',
+            label: 'MSJM DKI',
+            members: [
+                { name: 'MSJM KMY', email: 'msjm@kmy.indogrosir.co.id' },
+                { name: 'MSJM CPG', email: 'msjm@cpg.indogrosir.co.id' },
+                { name: 'MSJM BGR', email: 'msjm@bgr.indogrosir.co.id' },
+                { name: 'MSJM TGR', email: 'msjm@tgr.indogrosir.co.id' },
+                { name: 'MSJM CPT', email: 'msjm@cpt.indogrosir.co.id' },
+                { name: 'MSJM KRW', email: 'msjm@krw.indogrosir.co.id' },
+                { name: 'MSJM BKS', email: 'msjm@bks.indogrosir.co.id' }
+                // tambahkan lagi...
+            ]
+            },
+            {
+            key: 'kalimantan',
+            label: 'MSJM KAL',
+            members: [
+                { name: 'MSJM BMS', email: 'msjm@bms.indogrosir.co.id' },
+                { name: 'MSJM MSJMD', email: 'msjm@MSJMd.indogrosir.co.id' },
+                { name: 'MSJM PTK', email: 'msjm@ptk.indogrosir.co.id' },
+            ]
+            },
+            {
+            key: 'sulawesi',
+            label: 'MSJM SUL',
+            members: [
+                { name: 'MSJM KRI', email: 'msjm@kri.indogrosir.co.id' },
+                { name: 'MSJM MDO', email: 'msjm@mdo.indogrosir.co.id' },
+                { name: 'MSJM MKS', email: 'msjm@mks.indogrosir.co.id' },
+            ]
+            },
+            {
+                key: 'sumatera',
+                label: 'MSJM SUM',
+                members: [
+                    { name: 'MSJM BTM', email: 'msjm@btm.indogrosir.co.id' },
+                    { name: 'MSJM BDL', email: 'msjm@bdl.indogrosir.co.id' },
+                    { name: 'MSJM JBI', email: 'msjm@jbi.indogrosir.co.id' },
+                    { name: 'MSJM MDN', email: 'msjm@mdn.indogrosir.co.id' },
+                    { name: 'MSJM PKU', email: 'msjm@pku.indogrosir.co.id' },
+                    { name: 'MSJM PLG', email: 'msjm@plg.indogrosir.co.id' },
+                ]
+            },
+            {
+                key: 'maluku',
+                label: 'MSJM MAL',
+                members: [
+                    { name: 'MSJM AMB', email: 'msjm@amb.indogrosir.co.id' },
+                ]
+            },
         // tambahkan sub-tab lain
     ]
     };
