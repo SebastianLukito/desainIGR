@@ -396,3 +396,23 @@ footer:hover {
         opacity: 1;
     }
 }
+
+#logoutBtn {
+    position: absolute; 
+    top: 14px; 
+    right: 10px; 
+    padding: 5px 20px; 
+    cursor: pointer;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    background-color: #ffc02e;
+    background-image: url("/assets/img/45-degree-fabric-light.png");
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#logoutBtn:hover {
+    background-color: #6b0000;
+    color: white;
+}
