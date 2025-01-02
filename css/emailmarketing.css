@@ -346,3 +346,37 @@ footer {
     color: #ffffff;
     font-size: 15px;
 }
+
+/* Popup overlay */
+#popup-message {
+    position: fixed;        /* agar tetap di posisi yang sama ketika di-scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* latar belakang transparan */
+    display: flex;
+    justify-content: center; /* center secara horizontal */
+    align-items: center;     /* center secara vertikal */
+    z-index: 9999;           /* pastikan di atas elemen lain */
+    cursor: pointer;         /* agar user tahu dia bisa klik di mana saja */
+}
+
+/* Konten popup di tengah */
+#popup-content {
+    background: #ffffff;
+    color: #000000;
+    padding: 20px 30px;
+    border-radius: 8px;
+    max-width: 80%;
+    text-align: center;
+    position: relative;
+    cursor: auto;    /* agar mouse tidak berubah jadi pointer jika diarahkan ke konten */
+}
+
+/* Teks di dalam popup */
+#popup-text {
+    margin: 0;
+    font-size: 1em;
+    word-break: break-word; /* agar teks panjang bisa wrap */
+}
