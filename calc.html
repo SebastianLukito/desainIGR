@@ -18,6 +18,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="css/logout.css">
     <link rel="stylesheet" href="css/calc.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.2/math.min.js"
     integrity="sha512-d35gaU1E+gZdyLbQUGODiOEXqH+Q4pj9BmkFS3xwTrmw7DustRm+tfpfVQaywn9l+qCsd5dsJ4A+11s/OisvFw==" 
@@ -33,6 +34,7 @@
             <p>MARKETING INDOGROSIR - SUB DIVISI DESAIN GRAFIS
                 <img src="assets/img/igr.png" alt="Logo Indogrosir" class="marquees-logo">
             </p>
+            <a class="logoutBtn" id="logoutBtn">Log Out</a>
         </div>
         <div class="row">
             <div class="col-lg-2"></div>
@@ -426,22 +428,8 @@
     <footer class="footers">
         <p>&copy; Marketing Indogrosir Sub Divisi Desain Grafis 2024</p>
     </footer>
-    <script>
-        document.getElementById('marquees').addEventListener('click', function() {
-            window.location.href = 'main.html';
-        });
-    </script>
-    <script>
-        function getCookie(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop().split(';').shift();
-        }
-    
-        if (!getCookie('loggedIn')) {
-            window.location.href = 'index.html';
-        }
-    </script>  
+    <script src="js/logout.js"></script>
+    <script src="js/cookie.js"></script> 
 
 </body>
 
