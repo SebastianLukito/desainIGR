@@ -480,11 +480,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     navigator.clipboard.writeText(textToCopy)
         .then(() => {
-            alert('Email berhasil disalin!');
+            showPopup(`Email berhasil disalin, silakan paste di email draft anda.`);
         })
         .catch(err => {
             console.error('Failed to copy text: ', err);
         });
     }
+
+    function showPopup(message) {
+        const popupOverlay = document.getElementById('popup-message');
+        const popupText = document.getElementById('popup-text');
+        
+        // Tampilkan pesan di <p id="popup-text">
+        popupText.textContent = message;
+        
+        // Tampilkan popup
+        popupOverlay.style.display = 'flex';
+        
+        // Klik di luar konten = tutup popup
+        popupOverlay.addEventListener('click', () => {
+            popupOverlay.style.display = 'none';
+        });
+        
+        // Mencegah popup menutup jika user klik tepat di area konten
+        const popupContent = document.getElementById('popup-content');
+        popupContent.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+    }
+    
 
 });
