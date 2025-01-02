@@ -260,3 +260,18 @@ document.addEventListener("DOMContentLoaded", function () {
   showRandomEasterEggInfo();
 });
 
+// Tutup popup jika user klik di luar box popup
+document.addEventListener('click', function(event) {
+  // Mencari elemen popup container terdekat dari target klik
+  // (closest akan bernilai null jika tidak menemukan .popupContainer di atasnya)
+  const isClickInsidePopup = event.target.closest('.popupContainer');
+  const isClickOnButton = event.target.closest('.btn');
+  
+  // Jika tidak ada elemen popup container di atas target klik
+  // dan bukan klik di tombol (agar tidak langsung menutup popup saat tombol diklik),
+  // maka tutup semua popup dan child-sub-buttons
+  if (!isClickInsidePopup && !isClickOnButton) {
+      closeAllPopups();
+      closeAllChildSubButtons();
+  }
+});
