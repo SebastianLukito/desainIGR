@@ -491,8 +491,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Generate sub-tab untuk semua division
     Object.keys(subTabData).forEach(divisionKey => {
-    const subTabUl = createSubTabsForDivision(divisionKey);
-    subTabSection.appendChild(subTabUl);
+        const subTabUl = createSubTabsForDivision(divisionKey);
+        subTabSection.appendChild(subTabUl);
+        // Tampilkan sub-tab untuk division1 (currentDivision)
+        const defaultSubTabUl = document.getElementById(`sub-tab-${currentDivision}`);
+        if (defaultSubTabUl) {
+            // Supaya terlihat, set display sub-tab jadi 'flex'
+            defaultSubTabUl.style.display = 'flex';
+            
+            // Tidak ada sub-tab yang di-set "active" dan
+            // TIDAK memanggil displaySubTabMembers() di sini
+            // agar benar-benar tidak ada sub-tab yang langsung terbuka.
+        }
+
     });
 
     // ---------------------------------------------
@@ -677,16 +688,16 @@ document.addEventListener('DOMContentLoaded', () => {
     clearBtn.addEventListener('click', clearAllSelections);
 
     function clearAllSelections() {
-    selectedNames = [];
-    // Reset tampilan email
-    displayEmails();
+        selectedNames = [];
+        // Reset tampilan email
+        displayEmails();
 
-    // Jika sedang lihat sub-tab, refresh sub-tab
-    if (currentSubTab) {
-        displaySubTabMembers(currentSubTab.members);
-    } else {
-        displayNames(currentDivision, searchInput.value);
-    }
+        // Jika sedang lihat sub-tab, refresh sub-tab
+        if (currentSubTab) {
+            displaySubTabMembers(currentSubTab.members);
+        } else {
+            displayNames(currentDivision, searchInput.value);
+        }
     }
 
     // ---------------------------------------------
@@ -694,16 +705,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---------------------------------------------
     copyBtn.addEventListener('click', copyToClipboard);
     function copyToClipboard() {
-    const textToCopy = emailDisplay.textContent;
-    if (!textToCopy) return;
+        const textToCopy = emailDisplay.textContent;
+        if (!textToCopy) return;
 
-    navigator.clipboard.writeText(textToCopy)
-        .then(() => {
-            showPopup(`Email berhasil disalin, silakan paste di email draft anda.`);
-        })
-        .catch(err => {
-            console.error('Failed to copy text: ', err);
-        });
+        navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+                showPopup(`Email berhasil disalin, silakan paste di email draft anda.`);
+            })
+            .catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
     }
 
     function showPopup(message) {

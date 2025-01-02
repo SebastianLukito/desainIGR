@@ -272,8 +272,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Generate sub-tab untuk semua division
     Object.keys(subTabData).forEach(divisionKey => {
-    const subTabUl = createSubTabsForDivision(divisionKey);
-    subTabSection.appendChild(subTabUl);
+        const subTabUl = createSubTabsForDivision(divisionKey);
+        subTabSection.appendChild(subTabUl);
+        // Tampilkan sub-tab untuk division1 (currentDivision)
+        const defaultSubTabUl = document.getElementById(`sub-tab-${currentDivision}`);
+        if (defaultSubTabUl) {
+            // Supaya terlihat, set display sub-tab jadi 'flex'
+            defaultSubTabUl.style.display = 'flex';
+            
+            // Tidak ada sub-tab yang di-set "active" dan
+            // TIDAK memanggil displaySubTabMembers() di sini
+            // agar benar-benar tidak ada sub-tab yang langsung terbuka.
+        }
     });
 
     // ---------------------------------------------
