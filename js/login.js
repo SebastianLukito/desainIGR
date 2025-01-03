@@ -3,9 +3,141 @@ console.log("Firebase DB instance:", db);
 const allowedUsernames = ["sebastian", "naufal"];
 const adminUsername = ["admin"];
 
+// Konstanta untuk batas percobaan dan durasi blokir
+const MAX_ATTEMPTS = 3;
+const BLOCK_DURATION = 15; // dalam detik
+
+// Fungsi untuk mendapatkan data percobaan dari localStorage
+function getFailedAttempts() {
+    const attempts = localStorage.getItem('failedAttempts');
+    return attempts ? parseInt(attempts) : 0;
+}
+
+// Fungsi untuk menyetel data percobaan di localStorage
+function setFailedAttempts(count) {
+    localStorage.setItem('failedAttempts', count);
+}
+
+// Fungsi untuk mendapatkan waktu blokir dari localStorage
+function getBlockUntil() {
+    const blockUntil = localStorage.getItem('blockUntil');
+    return blockUntil ? parseInt(blockUntil) : null;
+}
+
+// Fungsi untuk menyetel waktu blokir di localStorage
+function setBlockUntil(timestamp) {
+    localStorage.setItem('blockUntil', timestamp);
+}
+
+// Fungsi untuk reset percobaan dan blokir
+function resetFailedAttempts() {
+    localStorage.removeItem('failedAttempts');
+    localStorage.removeItem('blockUntil');
+}
+
+// Fungsi untuk memeriksa apakah saat ini sedang dalam keadaan blokir
+function isBlocked() {
+    const blockUntil = getBlockUntil();
+    if (blockUntil) {
+        const now = Date.now();
+        if (now < blockUntil) {
+            return Math.ceil((blockUntil - now) / 1000); // Kembalikan sisa waktu dalam detik
+        } else {
+            resetFailedAttempts();
+            return false;
+        }
+    }
+    return false;
+}
+
+// Fungsi untuk memulai blokir
+function startBlock() {
+    const blockUntil = Date.now() + BLOCK_DURATION * 1000;
+    setBlockUntil(blockUntil);
+    disableLoginButtons();
+    showCountdown(BLOCK_DURATION);
+}
+
+// Fungsi untuk menonaktifkan tombol login
+function disableLoginButtons() {
+    document.querySelector('.btn[type="submit"]').disabled = true;
+    document.getElementById('googleLoginBtn').disabled = true;
+}
+
+// Fungsi untuk mengaktifkan kembali tombol login
+function enableLoginButtons() {
+    document.querySelector('.btn[type="submit"]').disabled = false;
+    document.getElementById('googleLoginBtn').disabled = false;
+}
+
+// Fungsi untuk menampilkan countdown
+function showCountdown(seconds) {
+    const countdownElem = document.getElementById('countdownMessage');
+    countdownElem.style.display = 'block';
+    countdownElem.innerText = `Login diblokir selama ${seconds} detik. Silakan coba lagi nanti.`;
+
+    const interval = setInterval(() => {
+        seconds--;
+        if (seconds > 0) {
+            countdownElem.innerText = `Login diblokir selama ${seconds} detik. Silakan coba lagi nanti.`;
+        } else {
+            clearInterval(interval);
+            countdownElem.style.display = 'none';
+            enableLoginButtons();
+            resetFailedAttempts();
+        }
+    }, 1000);
+}
+
+// Fungsi untuk menangani kegagalan login
+function handleFailedLogin() {
+    const username = document.getElementById('username').value.trim();
+    let attempts = getFailedAttempts();
+    attempts += 1;
+    setFailedAttempts(attempts);
+
+    // Log aktivitas gagal
+    logFailedLogin(username);
+
+    if (attempts >= MAX_ATTEMPTS) {
+        startBlock();
+    } else {
+        document.getElementById('errorMessage').innerText = `Login gagal. Percobaan: ${attempts} dari ${MAX_ATTEMPTS}.`;
+    }
+}
+
+// Fungsi untuk menangani kegagalan login melalui security question
+function handleFailedSecurityAnswer() {
+    let attempts = getFailedAttempts();
+    attempts += 1;
+    setFailedAttempts(attempts);
+
+    if (attempts >= MAX_ATTEMPTS) {
+        startBlock();
+    } else {
+        document.getElementById('securityError').innerText = `Jawaban salah. Percobaan: ${attempts} dari ${MAX_ATTEMPTS}.`;
+    }
+}
+
+// Periksa apakah saat ini sedang dalam keadaan blokir saat halaman dimuat
+window.addEventListener('load', () => {
+    const remaining = isBlocked();
+    if (remaining) {
+        disableLoginButtons();
+        showCountdown(remaining);
+    }
+});
+
 // Fungsi login dengan Firebase Firestore
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();
+
+    // Periksa apakah saat ini sedang dalam keadaan blokir
+    if (isBlocked()) {
+        const remaining = isBlocked();
+        document.getElementById('errorMessage').innerText = `Login diblokir. Silakan coba lagi dalam ${remaining} detik.`;
+        return;
+    }
 
     const username = document.getElementById('username').value.trim(); // Menghapus spasi di awal/akhir
     const password = document.getElementById('password').value;
@@ -18,6 +150,9 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             // Jika username dan password cocok
             // Simpan username dalam cookie
             setCookie('username', username, 1440); // Menyimpan username selama 1 hari (1440 menit)
+
+            // Reset percobaan gagal setelah login sukses
+            resetFailedAttempts();
 
             // Cek jika login sebagai admin utama
             if (adminUsername.includes(username.toLowerCase())) {
@@ -35,6 +170,8 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
                 window.location.href = 'loading.html';
             }
         } else {
+            // Jika login gagal
+            handleFailedLogin();
             document.getElementById('errorMessage').innerText = 'Salah bosku, anda karyawan mana?';
         }
     } catch (error) {
@@ -43,6 +180,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     }
 });
 
+// Fungsi togglePasswordVisibility tetap sama
 function togglePasswordVisibility() {
     var passwordInput = document.getElementById('password');
     var openEye = document.querySelector('.open-eye');
@@ -58,7 +196,7 @@ function togglePasswordVisibility() {
     }
 }
 
-// Fungsi untuk menyetel cookie dengan opsi keamanan tambahan
+// Fungsi untuk menyetel cookie dengan opsi keamanan tambahan tetap sama
 function setCookie(name, value, minutes) {
     const d = new Date();
     d.setTime(d.getTime() + (minutes * 60 * 1000));
@@ -68,7 +206,7 @@ function setCookie(name, value, minutes) {
     document.cookie = `${name}=${value};${expires}${path}${secure};SameSite=Lax`;
 }
 
-// Animasi gambar motor
+// Animasi gambar motor tetap sama
 const motorAnimation = document.querySelector('.motor-animation');
 const motorBaruteks = document.querySelector('.motor-baruteks');
 
@@ -82,7 +220,7 @@ motorBaruteks.addEventListener('mouseout', () => {
     motorAnimation.style.display = 'block';
 });
 
-// Event listener untuk "Lupa password?"
+// Event listener untuk "Lupa password?" tetap sama
 document.getElementById('forgotPasswordLink').addEventListener('click', function(event) {
     event.preventDefault();
 
@@ -107,7 +245,7 @@ document.getElementById('forgotPasswordLink').addEventListener('click', function
 // Tangkap elemen tombol
 const googleLoginBtn = document.getElementById('googleLoginBtn');
 
-// Fungsi untuk login dengan Google
+// Fungsi untuk login dengan Google tetap sama, namun tambahkan pemanggilan handleFailedLogin pada kegagalan
 async function signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -142,6 +280,9 @@ async function signInWithGoogle() {
         // Set login status
         setCookie('loggedIn', 'user', 1440);
     
+        // Reset percobaan gagal setelah login sukses
+        resetFailedAttempts();
+    
         // Redirect ke halaman sesuai role
         // (Sesuaikan logika, misal cek admin / user)
         window.location.href = 'loading.html';
@@ -150,6 +291,8 @@ async function signInWithGoogle() {
         console.error("Google Sign-In error:", error);
         document.getElementById('errorMessage').innerText = 
         'Login dengan Google gagal: ' + (error.message || '');
+        // Tangani kegagalan login dengan Google
+        handleFailedLogin();
     }
 }
 
@@ -159,7 +302,7 @@ googleLoginBtn.addEventListener('click', () => {
     showSecurityModal();
 });
 
-// Fungsi untuk menampilkan modal pertanyaan keamanan
+// Fungsi untuk menampilkan modal pertanyaan keamanan tetap sama, tambahkan pemanggilan handleFailedSecurityAnswer pada kegagalan
 async function showSecurityModal() {
     const modal = document.getElementById('securityModal');
     const closeButton = document.querySelector('.close-button');
@@ -215,10 +358,44 @@ async function showSecurityModal() {
         if (userAnswer === correctAnswer) {
             // Jawaban benar, tutup modal dan lanjutkan login dengan Google
             modal.style.display = 'none';
+            // Reset percobaan gagal setelah jawaban benar
+            resetFailedAttempts();
             signInWithGoogle();
         } else {
-            // Jawaban salah, tampilkan error
+            // Jawaban salah, tampilkan error dan tangani percobaan gagal
             securityErrorElem.innerText = 'Jawaban salah. Silakan coba lagi.';
+            handleFailedSecurityAnswer();
         }
     }
+}
+
+
+
+// Tambahkan log aktivitas gagal ke Firestore
+async function logFailedLogin(username) {
+    try {
+        const failedLogRef = db.collection("failedLogins");
+        await failedLogRef.add({
+            username: username || "unknown",
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            ip: await getPublicIP(), // Mendapatkan IP publik (opsional)
+        });
+        console.log("Failed login logged for:", username);
+    } catch (error) {
+        console.error("Error logging failed login:", error);
+    }
+}
+
+// Fungsi untuk mendapatkan IP publik (opsional)
+async function getPublicIP() {
+    try {
+        const response = await fetch("https://api.ipify.org?format=json");
+        if (response.ok) {
+            const data = await response.json();
+            return data.ip;
+        }
+    } catch (error) {
+        console.error("Failed to fetch IP:", error);
+    }
+    return "unknown";
 }
