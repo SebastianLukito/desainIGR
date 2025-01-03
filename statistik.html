@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistik Pengunjung</title>
+    <link rel="icon" href="assets/img/iconjpg.jpg" type="image/jpg">
+    <link rel="stylesheet" href="css/statistik.css">
+    <link rel="stylesheet" href="css/marquee.css">
+    <link rel="stylesheet" href="css/logout.css">
+</head>
+<body>
+    <div class="container">
+        <div class="marquee" id="marquee">
+            <p id="marqueeText">
+                Statistik Pengunjung - MARKETING INDOGROSIR - SUB DIVISI DESAIN GRAFIS
+                <img src="assets/img/igr.png" alt="Logo Indogrosir" class="marquee-logo">
+            </p>
+            <a class="logoutBtn" id="logoutBtn">Log Out</a>
+        </div>
+
+        <main class="main">
+            <!-- Panel kiri: Tabel Pengunjung -->
+            <section class="left-panel">
+                <h2>Tabel Pengunjung</h2>
+                <table id="visitorTable">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Username</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data pengunjung akan dimuat secara dinamis -->
+                    </tbody>
+                </table>
+                <div id="pagination" class="pagination"></div>
+
+            </section>
+
+            <!-- Panel kanan: Grafik Pengunjung -->
+            <section class="right-panel">
+                <h2>Grafik Pengunjung</h2>
+                <div class="dropdown">
+                    <label for="timeRange">Pilih Rentang Waktu:</label>
+                    <select id="timeRange">
+                        <option value="daily">Harian</option>
+                        <option value="weekly">Mingguan</option>
+                        <option value="monthly">Bulanan</option>
+                    </select>
+                </div>
+                <canvas id="visitorChart"></canvas>
+                <button id="exportExcelBtn" class="export-btn">Export to Excel</button>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>&copy; Marketing Indogrosir Sub Divisi Desain Grafis 2024</p>
+    </footer>
+    <!-- Firebase App (required) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="js/logout.js"></script> 
+    <script src="js/fbconfig.js"></script>
+    <script>    
+        const firebaseApp = firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+    <script src="js/cookie.js"></script>
+    <script src="js/statistik.js"></script>
+</body>
+</html>
