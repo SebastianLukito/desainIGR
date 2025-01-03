@@ -57,7 +57,21 @@
             <h6>© 2024 Indogrosir. All rights reserved.</h6>
         </div>
     </div>
-    
+
+    <!-- Tambahkan di dalam <body> setelah elemen lainnya -->
+    <div id="securityModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Pertanyaan Keamanan</h2>
+            <p id="securityQuestion">Loading...</p>
+            <input type="text" id="securityAnswer" placeholder="Jawaban Anda" required />
+            <h5>Jawab menggunakan huruf kecil atau angka</h5>
+            <button id="submitSecurityAnswer" class="btn">Submit</button>
+            <div id="securityError" class="error-message"></div>
+            
+        </div>
+    </div>
+        
     
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
