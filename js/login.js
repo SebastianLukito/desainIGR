@@ -109,49 +109,116 @@ const googleLoginBtn = document.getElementById('googleLoginBtn');
 
 // Fungsi untuk login dengan Google
 async function signInWithGoogle() {
-const provider = new firebase.auth.GoogleAuthProvider();
+    const provider = new firebase.auth.GoogleAuthProvider();
 
-try {
-    // Pop-up Google Sign-In
-    const result = await auth.signInWithPopup(provider);
+    try {
+        // Pop-up Google Sign-In
+        const result = await auth.signInWithPopup(provider);
+        
+        // Dapatkan user info
+        const user   = result.user;            // firebase.User object
+        const email  = user.email;            // misal: "example@gmail.com"
+        const uid    = user.uid;              // UID yang unik
+        const name   = user.displayName;      // misal: "John Doe"
     
-    // Dapatkan user info
-    const user   = result.user;            // firebase.User object
-    const email  = user.email;            // misal: "example@gmail.com"
-    const uid    = user.uid;              // UID yang unik
-    const name   = user.displayName;      // misal: "John Doe"
-
-    // (Opsional) Simpan user ke Firestore, atau validasi user
-    // Contoh: cek user di "allowedUsernames" jika Anda pakai e-mail
-    // atau simpan user doc di 'users' collection.
-
-    // Misalnya: cek data user di Firestore
-    const userDocRef = db.collection('users').doc(email);
-    const userDocSnap = await userDocRef.get();
-    if (!userDocSnap.exists) {
-    // Jika belum terdaftar, opsional: buat data minimal
-    await userDocRef.set({
-        username: email,
-        displayName: name,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
+        // (Opsional) Simpan user ke Firestore, atau validasi user
+        // Contoh: cek user di "allowedUsernames" jika Anda pakai e-mail
+        // atau simpan user doc di 'users' collection.
+    
+        // Misalnya: cek data user di Firestore
+        const userDocRef = db.collection('users').doc(email);
+        const userDocSnap = await userDocRef.get();
+        if (!userDocSnap.exists) {
+            // Jika belum terdaftar, opsional: buat data minimal
+            await userDocRef.set({
+                username: email,
+                displayName: name,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        }
+    
+        // Set cookie (opsional) untuk username
+        setCookie('username', email, 1440);
+        // Set login status
+        setCookie('loggedIn', 'user', 1440);
+    
+        // Redirect ke halaman sesuai role
+        // (Sesuaikan logika, misal cek admin / user)
+        window.location.href = 'loading.html';
+    
+    } catch (error) {
+        console.error("Google Sign-In error:", error);
+        document.getElementById('errorMessage').innerText = 
+        'Login dengan Google gagal: ' + (error.message || '');
     }
-
-    // Set cookie (opsional) untuk username
-    setCookie('username', email, 1440);
-    // Set login status
-    setCookie('loggedIn', 'user', 1440);
-
-    // Redirect ke halaman sesuai role
-    // (Sesuaikan logika, misal cek admin / user)
-    window.location.href = 'loading.html';
-
-} catch (error) {
-    console.error("Google Sign-In error:", error);
-    document.getElementById('errorMessage').innerText = 
-    'Login dengan Google gagal: ' + (error.message || '');
-}
 }
 
 // Pasang event listener
-googleLoginBtn.addEventListener('click', signInWithGoogle);
+googleLoginBtn.addEventListener('click', () => {
+    // Tampilkan modal pertanyaan keamanan sebelum login dengan Google
+    showSecurityModal();
+});
+
+// Fungsi untuk menampilkan modal pertanyaan keamanan
+async function showSecurityModal() {
+    const modal = document.getElementById('securityModal');
+    const closeButton = document.querySelector('.close-button');
+    const securityQuestionElem = document.getElementById('securityQuestion');
+    const securityErrorElem = document.getElementById('securityError');
+    const submitSecurityAnswerBtn = document.getElementById('submitSecurityAnswer');
+    const securityAnswerInput = document.getElementById('securityAnswer');
+    
+    // Reset error message dan input
+    securityErrorElem.innerText = '';
+    securityAnswerInput.value = '';
+    
+    // Ambil pertanyaan acak dari tanya.json
+    try {
+        const response = await fetch('assets/list/tanya.json');
+        if (!response.ok) {
+            throw new Error('Gagal memuat pertanyaan keamanan.');
+        }
+        const questions = await response.json();
+        const randomIndex = Math.floor(Math.random() * questions.length);
+        const selectedQuestion = questions[randomIndex];
+        
+        // Tampilkan pertanyaan
+        securityQuestionElem.innerText = selectedQuestion.pertanyaan;
+        
+        // Simpan jawaban yang benar di atribut data
+        securityQuestionElem.setAttribute('data-jawaban', selectedQuestion.jawaban.toLowerCase());
+        
+        // Tampilkan modal
+        modal.style.display = 'block';
+    } catch (error) {
+        console.error(error);
+        document.getElementById('errorMessage').innerText = 'Error memuat pertanyaan keamanan. Silakan coba lagi.';
+    }
+
+    // Ketika pengguna mengklik tombol close
+    closeButton.onclick = function() {
+        modal.style.display = 'none';
+    }
+
+    // Ketika pengguna mengklik di luar modal
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    // Event listener untuk submit jawaban
+    submitSecurityAnswerBtn.onclick = function() {
+        const userAnswer = securityAnswerInput.value.trim().toLowerCase();
+        const correctAnswer = securityQuestionElem.getAttribute('data-jawaban');
+
+        if (userAnswer === correctAnswer) {
+            // Jawaban benar, tutup modal dan lanjutkan login dengan Google
+            modal.style.display = 'none';
+            signInWithGoogle();
+        } else {
+            // Jawaban salah, tampilkan error
+            securityErrorElem.innerText = 'Jawaban salah. Silakan coba lagi.';
+        }
+    }
+}
