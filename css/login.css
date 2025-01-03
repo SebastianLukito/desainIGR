@@ -412,3 +412,9 @@ body {
     background-color: rgb(5, 5, 5);
     color: white;
 }
+
+/* Tambahkan di akhir login.css */
+.countdown-message {
+    font-weight: bold;
+    color: red;
+}
