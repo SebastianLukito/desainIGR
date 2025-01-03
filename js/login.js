@@ -103,3 +103,55 @@ document.getElementById('forgotPasswordLink').addEventListener('click', function
         window.location.reload();
     });
 });
+
+// Tangkap elemen tombol
+const googleLoginBtn = document.getElementById('googleLoginBtn');
+
+// Fungsi untuk login dengan Google
+async function signInWithGoogle() {
+const provider = new firebase.auth.GoogleAuthProvider();
+
+try {
+    // Pop-up Google Sign-In
+    const result = await auth.signInWithPopup(provider);
+    
+    // Dapatkan user info
+    const user   = result.user;            // firebase.User object
+    const email  = user.email;            // misal: "example@gmail.com"
+    const uid    = user.uid;              // UID yang unik
+    const name   = user.displayName;      // misal: "John Doe"
+
+    // (Opsional) Simpan user ke Firestore, atau validasi user
+    // Contoh: cek user di "allowedUsernames" jika Anda pakai e-mail
+    // atau simpan user doc di 'users' collection.
+
+    // Misalnya: cek data user di Firestore
+    const userDocRef = db.collection('users').doc(email);
+    const userDocSnap = await userDocRef.get();
+    if (!userDocSnap.exists) {
+    // Jika belum terdaftar, opsional: buat data minimal
+    await userDocRef.set({
+        username: email,
+        displayName: name,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    }
+
+    // Set cookie (opsional) untuk username
+    setCookie('username', email, 1440);
+    // Set login status
+    setCookie('loggedIn', 'user', 1440);
+
+    // Redirect ke halaman sesuai role
+    // (Sesuaikan logika, misal cek admin / user)
+    window.location.href = 'loading.html';
+
+} catch (error) {
+    console.error("Google Sign-In error:", error);
+    document.getElementById('errorMessage').innerText = 
+    'Login dengan Google gagal: ' + (error.message || '');
+}
+}
+
+// Pasang event listener
+googleLoginBtn.addEventListener('click', signInWithGoogle);
