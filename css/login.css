@@ -208,6 +208,31 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.btn-google {
+    outline: none;
+    margin-top: 10px;
+    border: none;
+    background-color: rgb(255, 69, 1);
+    background-image: url("/assets/img/45-degree-fabric-light.png");
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0.5rem 2rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.01s ease;
+}
+
+.btn-google:hover {
+    color: white;
+    background-color: rgb(5, 5, 5);
+    transform: scale(1.01);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
 .error-message {
     color: red;
     margin-top: 10px;
