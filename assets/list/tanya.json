@@ -1,6 +1,6 @@
 [
     {
-        "pertanyaan": "Siapa nama belakang jody?",
+        "pertanyaan": "Siapa nama belakang Jody?",
         "jawaban": "zuliant"
     },
     {
@@ -14,5 +14,17 @@
     {
         "pertanyaan": "Dulu (sebelum tahun 2021) kantor marketing Indogrosir ada di mana?",
         "jawaban": "kemayoran"
+    },
+    {
+        "pertanyaan": "Siapa nama belakang Naufal?",
+        "jawaban": "afiarban"
+    },
+    {
+        "pertanyaan": "Siapa nama belakang Bagas?",
+        "jawaban": "siswanto"
+    },
+    {
+        "pertanyaan": "Nama Harga Hemat diganti menjadi apa?",
+        "jawaban": "tambah untung"
     }
 ]
