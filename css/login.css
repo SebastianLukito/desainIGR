@@ -209,28 +209,27 @@ body {
 }
 
 .btn-google {
-    outline: none;
-    margin-top: 10px;
-    border: none;
-    background-color: rgb(255, 69, 1);
-    background-image: url("/assets/img/45-degree-fabric-light.png");
-    color: rgb(255, 255, 255);
-    font-weight: bold;
-    font-size: 20px;
-    padding: 0.5rem 2rem;
-    border-radius: 2rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
     cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.01s ease;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    margin-top: 10px;
 }
 
 .btn-google:hover {
-    color: white;
-    background-color: rgb(5, 5, 5);
-    transform: scale(1.01);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #e3e3e3;
+}
+
+.google-logo {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
 }
 
 .error-message {
