@@ -9,6 +9,22 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
+// Firebase Firestore - Tambahkan data pengunjung
+function addVisitorToFirestore(username) {
+    db.collection("visitors")
+        .add({
+            username: username,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp() // Tambahkan timestamp otomatis
+        })
+        .then(() => {
+            console.log("Pengunjung berhasil ditambahkan ke statistik!");
+        })
+        .catch((error) => {
+            console.error("Error menambahkan pengunjung ke statistik:", error);
+        });
+}
+
+// Validasi cookie login
 const loggedIn = getCookie('loggedIn');
 const username = getCookie('username');
 
@@ -24,11 +40,16 @@ if (!loggedIn || !username) {
 } else {
     // Perbarui teks marquee dengan menyertakan username
     const marqueeText = document.getElementById('marqueeText');
-    marqueeText.innerHTML = `SELAMAT DATANG <strong>${username.toUpperCase()}</strong> DI WEBSITE MARKETING INDOGROSIR - SUB DIVISI DESAIN GRAFIS <img src="assets/img/igr.png" alt="Logo Indogrosir" class="marquee-logo">`;
+    if (marqueeText) {
+        marqueeText.innerHTML = `SELAMAT DATANG <strong>${username.toUpperCase()}</strong> DI WEBSITE MARKETING INDOGROSIR - SUB DIVISI DESAIN GRAFIS <img src="assets/img/igr.png" alt="Logo Indogrosir" class="marquee-logo">`;
+    }
+
+    // Tambahkan data pengunjung ke Firestore (jika login berhasil)
+    addVisitorToFirestore(username);
 }
 
 // Event listener untuk klik pada marquee
-document.getElementById('marquee').addEventListener('click', function() {
+document.getElementById('marquee').addEventListener('click', function () {
     const username = getCookie('username');
 
     if (username && adminUsers.includes(username.toLowerCase())) {
