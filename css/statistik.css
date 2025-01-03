@@ -1,0 +1,207 @@
+/* Gaya dasar */
+body {
+    background-color: rgb(10, 66, 101);
+    background-image: url("/assets/img/45-degree-fabric-light.png");
+    color: #e0e0e0;
+    font-family: Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: url('backgroundlogin.jpg') no-repeat center center/cover;
+    min-height: 82vh;
+}
+
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+    width: 100%;
+    max-width: 1300px;
+    box-sizing: border-box;
+}
+
+.left-panel, .right-panel {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1;
+    min-width: 300px;
+    min-height: 600px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    justify-items: center;
+}
+
+.left-panel:hover, .right-panel:hover {
+    background: #f8f8f8;
+}
+
+.left-panel h2, .right-panel h2 {
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #050505;
+    background-color: rgb(255, 208, 0);
+    padding-block: 10px;
+    padding-inline: 20%;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+footer {
+    color: #e0e0e0;
+    text-align: center;
+    margin-top: 25px;
+}
+
+/* Gaya tabel pengunjung */
+#visitorTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    color: #000;
+}
+
+#visitorTable th, #visitorTable td {
+    border: 1px solid #000;
+    text-align: center;
+    padding: 10px;
+}
+
+#visitorTable th {
+    background-color: rgb(255, 208, 0);
+    color: #000;
+    font-weight: bold;
+}
+
+#visitorTable tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+#visitorTable tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+#visitorTable tr:hover {
+    background-color: rgb(255, 245, 195);
+    color: #000;
+}
+
+/* Gaya grafik */
+#visitorChart {
+    height: 800px; /* Atur tinggi grafik di sini */
+    max-height: 800px; /* Batas maksimum tinggi */
+    width: 100%; /* Pastikan grafik memenuhi lebar */
+    margin: 0 auto; /* Pusatkan grafik */
+    display: block;
+    padding: 20px;
+    background: #f9f9f9;
+    color: #000;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Dropdown gaya */
+.dropdown {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.dropdown label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: #000;
+}
+
+.dropdown select {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dropdown select:hover {
+    background-color: rgb(255, 213, 0);
+}
+
+/* Responsivitas */
+@media (max-width: 768px) {
+    .main {
+        flex-direction: column;
+    }
+
+    .left-panel, .right-panel {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    #visitorTable th, #visitorTable td {
+        font-size: 12px;
+    }
+
+    .dropdown select {
+        font-size: 12px;
+    }
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #000;
+    cursor: pointer;
+}
+
+.pagination button.active {
+    font-weight: bold;
+    background-color: rgb(255, 213, 0);
+    color: #000;
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.export-btn {
+    width: 15vw;
+    padding: 10px;
+    margin-top: 90px;
+    background-color: rgb(34, 139, 34);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.export-btn:hover {
+    background-color: rgb(0, 100, 0);
+    transform: scale(1.02);
+}
+
+
+
+
