@@ -244,6 +244,11 @@ document.addEventListener('keydown', function (event) {
     else if (typedText === 'planetes') {
         window.location.href = 'solar_system.html'; // Redirect ke solar_system.html
     }
+
+    // Periksa apakah teks yang diketik cocok dengan "2048"
+    else if (typedText === '2048') {
+    window.location.href = 'games/2048/index.html'; // Redirect ke index.html
+}
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -259,6 +264,7 @@ function showRandomEasterEggInfo() {
     const messages = [
         "Easter egg, ketik 'planetes' di sembarang tempat",
         "Easter egg, ketik 'monster' di sembarang tempat",
+        "Easter egg, ketik '2048' di sembarang tempat",
         ""
     ];
 
