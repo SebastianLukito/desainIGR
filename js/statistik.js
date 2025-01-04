@@ -129,7 +129,7 @@ function updateChart(timeRange) {
                 label: `Pengunjung (${timeRange})`,
                 data: groupedData.data,
                 borderColor: "rgb(33, 34, 34)",
-                tension: 0.6,
+                tension: 0.1,
                 fill: false,
             }],
         },
@@ -155,23 +155,32 @@ function groupDataByTimeRange(timeRange) {
             const dayString = day.toLocaleDateString();
             labels.push(dayString);
 
-            const count = visitorData.filter((visitor) =>
-                new Date(visitor.timestamp).toLocaleDateString() === dayString
-            ).length;
+            const count = visitorData.filter((visitor) => {
+                const visitDate = new Date(visitor.timestamp);
+                return visitDate.toLocaleDateString() === dayString;
+            }).length;
             data.push(count);
         }
     } else if (timeRange === "weekly") {
+        // Iterasi 4 minggu terakhir
         for (let i = 3; i >= 0; i--) {
-            const weekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i * 7);
+            const weekStart = new Date(now);
+            weekStart.setDate(weekStart.getDate() - i * 7); // Awal minggu
+            weekStart.setHours(0, 0, 0, 0);
+    
             const weekEnd = new Date(weekStart);
-            weekEnd.setDate(weekStart.getDate() + 6);
+            weekEnd.setDate(weekStart.getDate() + 6); // Akhir minggu
+            weekEnd.setHours(23, 59, 59, 999);
+    
             const label = `${weekStart.toLocaleDateString()} - ${weekEnd.toLocaleDateString()}`;
             labels.push(label);
-
+    
+            // Hitung jumlah pengunjung dalam rentang minggu
             const count = visitorData.filter((visitor) => {
                 const visitDate = new Date(visitor.timestamp);
                 return visitDate >= weekStart && visitDate <= weekEnd;
             }).length;
+    
             data.push(count);
         }
     } else if (timeRange === "monthly") {
@@ -180,26 +189,29 @@ function groupDataByTimeRange(timeRange) {
             const monthString = `${month.toLocaleString("default", { month: "long" })} ${month.getFullYear()}`;
             labels.push(monthString);
 
-            const count = visitorData.filter((visitor) =>
-                new Date(visitor.timestamp).getMonth() === month.getMonth() &&
-                new Date(visitor.timestamp).getFullYear() === month.getFullYear()
-            ).length;
+            const count = visitorData.filter((visitor) => {
+                const visitDate = new Date(visitor.timestamp);
+                return visitDate.getMonth() === month.getMonth() &&
+                    visitDate.getFullYear() === month.getFullYear();
+            }).length;
             data.push(count);
         }
-    } else if (timeRange === "yearly") { // Tambahan untuk grafik tahunan
+    } else if (timeRange === "yearly") {
         for (let i = 4; i >= 0; i--) {
             const year = now.getFullYear() - i;
             labels.push(year.toString());
 
-            const count = visitorData.filter((visitor) =>
-                new Date(visitor.timestamp).getFullYear() === year
-            ).length;
+            const count = visitorData.filter((visitor) => {
+                const visitDate = new Date(visitor.timestamp);
+                return visitDate.getFullYear() === year;
+            }).length;
             data.push(count);
         }
     }
 
     return { labels, data };
 }
+
 
 
 // Event listener untuk dropdown rentang waktu
