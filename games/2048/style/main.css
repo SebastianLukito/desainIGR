@@ -1,4 +1,11 @@
 @import url(fonts/clear-sans.css);
+
+html {
+  transform: scale(0.7); /* Scale everything to 80% */
+  transform-origin: center;
+  overflow: hidden;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -8,8 +15,7 @@ body {
   font-size: 18px; }
 
 body {
-  transform: scale(0.8); /* Scale everything to 80% */
-  transform-origin: center;
+  
   margin-top: 50px;
   margin-bottom: 90px;
   padding-top: 40px;
