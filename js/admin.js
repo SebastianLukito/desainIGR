@@ -237,18 +237,18 @@ document.addEventListener('keydown', function (event) {
 
     // Periksa apakah teks yang diketik cocok dengan "monster"
     if (typedText === 'monster') {
-        window.location.href = 'monster.html'; // Redirect ke monster.html
+        window.location.href = 'monster.html', '_blank'; // Redirect ke monster.html
     }
 
     // Periksa apakah teks yang diketik cocok dengan "planetes"
     else if (typedText === 'planetes') {
-        window.location.href = 'solar_system.html'; // Redirect ke solar_system.html
+        window.location.href = 'solar_system.html', '_blank'; // Redirect ke solar_system.html
     }
 
     // Periksa apakah teks yang diketik cocok dengan "2048"
     else if (typedText === '2048') {
-    window.location.href = 'games/2048/index.html'; // Redirect ke index.html
-}
+      window.location.href = 'games/2048/index.html', '_blank'; // Redirect ke index.html
+    }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
