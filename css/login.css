@@ -337,6 +337,31 @@ body {
         width: 40vw;
         top: 25%;
     }
+    
+    /* Modal Styles */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; 
+        z-index: 1000; 
+        left: 0;
+        top: 0px;
+        width: 100%; 
+        height: 100%; 
+        padding-top: 150px;
+        /* overflow: auto;  */
+        background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 12% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 620px; /* Could be more or less, depending on screen size */
+        max-width: 700px;
+        border-radius: 20px;
+        text-align: center;
+    }
 }
 
 .svg-toggle-password {
@@ -384,10 +409,11 @@ body {
     position: fixed; 
     z-index: 1000; 
     left: 0;
-    top: 0px;
+    top: -120px;
     width: 100%; 
     height: 100%; 
     padding-top: 150px;
+    padding-bottom: 1500px;
     /* overflow: auto;  */
     background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
 }
