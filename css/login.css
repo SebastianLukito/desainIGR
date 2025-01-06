@@ -283,9 +283,10 @@ body {
 .motor-container {
     position: absolute;
     bottom: 84%;
-    left: 10%;
+    left: 3%;
     transform: translateX(-50%);
     z-index: 1;
+    scale: 1.1;
 }
 
 .motor-animation, .motor-baruteks {
