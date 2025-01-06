@@ -75,6 +75,7 @@ h1.title {
   position: relative;
   display: inline-block;
   background: #2d2a26;
+  background-image: url(".../.../assets/img/45-degree-fabric-light.png");
   min-width: 50px;
   padding-inline:25px;
   padding-top: 20px;
@@ -174,7 +175,8 @@ hr {
   -ms-user-select: none;
   -ms-touch-action: none;
   touch-action: none;
-  background: #bbada0;
+  background: #786758;
+  background-image: url(".../.../assets/img/45-degree-fabric-light.png");
   border-radius: 6px;
   width: 500px;
   height: 500px;
@@ -189,6 +191,7 @@ hr {
     bottom: 0;
     left: 0;
     background: rgba(238, 228, 218, 0.5);
+    background-image: url(".../.../assets/img/45-degree-fabric-light.png");
     z-index: 100;
     text-align: center;
     -webkit-animation: fade-in 800ms ease 1200ms;
@@ -571,11 +574,12 @@ hr {
     margin-top: -60px;
     display: inline-block;
     min-width: 450px;
-    background: #8f7a66;
+    background-color: rgb(255, 200, 1);
+    background-image: url(".../.../assets/img/45-degree-fabric-light.png");
     border-radius: 10px;
     padding: 10px 20px;
     text-decoration: none;
-    color: #f9f6f2;
+    color: #000000;
     font-size: 18px;
     font-weight: bold;
     text-align: center;
@@ -588,13 +592,13 @@ hr {
   }
 
   #leaderboard {
-    width: 600px;
+    width: 550px;
     height: 700px;
-    background: rgba(255, 255, 255, 0.9); /* Warna latar belakang semi-transparan */
+    background: rgba(255, 255, 255); /* Warna latar belakang semi-transparan */
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bayangan untuk kedalaman */
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 20px;
     position: absolute;
     top: -7%; /* Atur sesuai kebutuhan */
     right: 20px;
@@ -603,7 +607,7 @@ hr {
 
 #leaderboard h2 {
     font-size: 45px; /* Ukuran font judul */
-    color: #333; /* Warna font */
+    color: #000000; /* Warna font */
     margin-bottom: 12px; /* Jarak antara judul dan tabel */
     text-align: center; /* Pusatkan teks */
     background-color: rgb(255, 200, 1);
@@ -616,30 +620,31 @@ hr {
 #leaderboard table {
     width: 100%; /* Lebar penuh dalam container */
     border-collapse: collapse; /* Hapus jarak antar cell */
-    font-size: 30px;
+    font-size: 25px;
 }
 
 #leaderboard th, #leaderboard td {
-    border-bottom: 1px solid #ddd; /* Garis bawah setiap baris */
+    border-bottom: 1px solid #ffffff; /* Garis bawah setiap baris */
     padding-inline: 25px; /* Padding untuk cell */
     padding-block: 15px;
     border-radius: 5px;
-    color: white;
+    color: rgb(0, 0, 0);
     text-align: center; /* Rata kiri teks */
 }
 
 #leaderboard th {
-    background-color: #9e1010; /* Warna latar belakang header */
+    background-color: #f5f5f5; /* Warna latar belakang header */
 }
 
 #leaderboard td {
     color: #000000; /* Warna teks untuk data */
-    background-color: #fff9f4;
+    background-color: #fff3e4;
+    border-radius: 10px;
 }
 
 #leaderboard td:hover {
   color: #000000; /* Warna teks untuk data */
-  background-color: #bbbbbb;
+  background-color: #d7d7d7;
 }
 
 @media (max-width: 500px) {

@@ -1,7 +1,6 @@
-// leaderboard.js
 document.addEventListener('DOMContentLoaded', function() {
     const db = firebase.firestore();
-    const scoresList = document.getElementById('scoresList'); // Mengganti ini
+    const scoresList = document.getElementById('scoresList'); // Menggunakan id yang telah diatur
 
     function updateLeaderboard() {
     db.collection("gameScores")
@@ -10,13 +9,16 @@ document.addEventListener('DOMContentLoaded', function() {
         .get()
         .then(function(querySnapshot) {
         scoresList.innerHTML = ''; // Clear previous entries in tbody only
+        let rank = 1; // Inisiasi ranking di awal
         querySnapshot.forEach(function(doc) {
             const data = doc.data();
-            const row = scoresList.insertRow(); // Menggunakan insertRow untuk membuat baris baru
-            const cell1 = row.insertCell(0);
-            const cell2 = row.insertCell(1);
-            cell1.textContent = data.username;
-            cell2.textContent = data.score;
+            const row = scoresList.insertRow();
+            const cellRank = row.insertCell(0);
+            const cellUsername = row.insertCell(1);
+            const cellScore = row.insertCell(2);
+            cellRank.textContent = rank++; // Set rank dan increment
+            cellUsername.textContent = data.username;
+            cellScore.textContent = data.score;
         });
         })
         .catch(function(error) {
