@@ -1,59 +1,30 @@
-import { db } from '../../../js/fbconfig.js';
-import {firebaseApp} from '../../../js/fbconfig.js';
+// leaderboard.js
+document.addEventListener('DOMContentLoaded', function() {
+    const db = firebase.firestore();
+    const scoresList = document.getElementById('scoresList'); // Mengganti ini
 
-(function () {
-// Ambil username dari cookie
-const user = getCookie("username");
-let currentScore = 0;
-
-// Fungsi untuk memperbarui leaderboard
-function updateLeaderboard() {
-    const leaderboard = document.getElementById("leaderboard");
-    leaderboard.innerHTML = ""; // Kosongkan leaderboard sebelumnya
-
+    function updateLeaderboard() {
     db.collection("gameScores")
-    .orderBy("score", "desc")
-    .limit(10)
-    .get()
-    .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        const li = document.createElement("li");
-        li.textContent = `${data.username}: ${data.score}`;
-        leaderboard.appendChild(li);
+        .orderBy("score", "desc")
+        .limit(10)
+        .get()
+        .then(function(querySnapshot) {
+        scoresList.innerHTML = ''; // Clear previous entries in tbody only
+        querySnapshot.forEach(function(doc) {
+            const data = doc.data();
+            const row = scoresList.insertRow(); // Menggunakan insertRow untuk membuat baris baru
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            cell1.textContent = data.username;
+            cell2.textContent = data.score;
         });
-    })
-    .catch((error) => {
-        console.error("Error fetching leaderboard:", error);
-    });
-}
-
-// Fungsi untuk menyimpan skor ke Firestore
-function saveScore(user, score) {
-    db.collection("gameScores")
-    .add({
-        username: user,
-        score: score,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    })
-    .then(() => {
-        console.log("Score successfully saved!");
-        updateLeaderboard(); // Update leaderboard setelah menyimpan skor
-    })
-    .catch((error) => {
-        console.error("Error saving score:", error);
-    });
-}
-
-// Pantau perubahan skor di halaman
-document.querySelector(".score-container").addEventListener("DOMSubtreeModified", () => {
-    const newScore = parseInt(document.querySelector(".score-container").textContent, 10);
-    if (newScore > currentScore) {
-    currentScore = newScore;
-    saveScore(user, currentScore);
+        })
+        .catch(function(error) {
+        console.error("Error fetching scores: ", error);
+        });
     }
-});
 
-// Inisialisasi leaderboard saat halaman dimuat
-updateLeaderboard();
-})();
+    // Call the update function periodically if you want to auto-refresh the scores
+    updateLeaderboard();
+    setInterval(updateLeaderboard, 30000); // Refresh every 30 seconds
+});

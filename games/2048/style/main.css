@@ -10,9 +10,8 @@ body {
   margin: 0;
   padding: 0;
   background: url('../../../css/backgroundlogin.jpg') no-repeat center center/cover;
-  color: #4d4d4d;
-  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
-  font-size: 18px; }
+  
+  }
 
 body {
   
@@ -26,6 +25,9 @@ body {
   padding: 50px;
   background-color: #ffffff;
   border-radius: 10px;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px;
+  color: #4d4d4d;
 }
 
 .heading:after {
@@ -139,7 +141,8 @@ hr {
 
 .container {
   width: 500px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  flex-grow: 1 }
 
 @-webkit-keyframes fade-in {
   0% {
@@ -583,7 +586,71 @@ hr {
   .restart-button:hover {
     background: #a57b64;
   }
-  
+
+  #leaderboard {
+    width: 600px;
+    height: 700px;
+    background: rgba(255, 255, 255, 0.9); /* Warna latar belakang semi-transparan */
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bayangan untuk kedalaman */
+    padding: 15px;
+    border-radius: 10px;
+    position: absolute;
+    top: -7%; /* Atur sesuai kebutuhan */
+    right: 20px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Font keluarga */
+}
+
+#leaderboard h2 {
+    font-size: 45px; /* Ukuran font judul */
+    color: #333; /* Warna font */
+    margin-bottom: 12px; /* Jarak antara judul dan tabel */
+    text-align: center; /* Pusatkan teks */
+    background-color: rgb(255, 200, 1);
+    background-image: url(".../.../assets/img/45-degree-fabric-light.png");
+    border-radius: 10px;
+    padding-block: 10px;
+    margin-top: 0px;
+}
+
+#leaderboard table {
+    width: 100%; /* Lebar penuh dalam container */
+    border-collapse: collapse; /* Hapus jarak antar cell */
+    font-size: 30px;
+}
+
+#leaderboard th, #leaderboard td {
+    border-bottom: 1px solid #ddd; /* Garis bawah setiap baris */
+    padding-inline: 25px; /* Padding untuk cell */
+    padding-block: 15px;
+    border-radius: 5px;
+    color: white;
+    text-align: center; /* Rata kiri teks */
+}
+
+#leaderboard th {
+    background-color: #9e1010; /* Warna latar belakang header */
+}
+
+#leaderboard td {
+    color: #000000; /* Warna teks untuk data */
+    background-color: #fff9f4;
+}
+
+#leaderboard td:hover {
+  color: #000000; /* Warna teks untuk data */
+  background-color: #bbbbbb;
+}
+
+@media (max-width: 500px) {
+    #leaderboard {
+        width: 95%; /* Lebar responsive untuk perangkat kecil */
+        right: 2.5%; /* Pusatkan */
+        left: 2.5%;
+        top: 10%;
+    }
+}
+
 /* 
 @media screen and (max-width: 520px) {
   html, body {
