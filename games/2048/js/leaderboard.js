@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateLeaderboard() {
     db.collection("gameScores")
         .orderBy("score", "desc")
-        .limit(10)
+        .limit(9)
         .get()
         .then(function(querySnapshot) {
         scoresList.innerHTML = ''; // Clear previous entries in tbody only
