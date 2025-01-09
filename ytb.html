@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Music Streaming</title>
+<link rel="icon" href="assets/img/iconjpg.jpg" type="image/jpg" />
+<!-- Memanggil file CSS -->
+<link rel="stylesheet" href="css/ytb.css" />
+<link rel="stylesheet" href="css/marquee.css" />
+<link rel="stylesheet" href="css/logout.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="marquee" id="marquee">
+            <p id="marqueeText">
+                SELAMAT DATANG - MARKETING INDOGROSIR - SUB DIVISI DESAIN GRAFIS
+                <img src="assets/img/igr.png" alt="Logo Indogrosir" class="marquee-logo">
+            </p>
+            <a class="logoutBtn" id="logoutBtn">Log Out</a>
+        </div>
+
+        <main class="main">
+            <!-- Panel Kiri -->
+            <section class="left-panel">
+                <h2>Search Videos</h2>
+                <div class="search-section">
+                    <input type="text" id="searchInput" placeholder="Search for videos...">
+                    <button id="searchBtn">Search</button>
+                </div>
+                <div class="search-results" id="searchResults">
+                    <!-- Search results will appear here -->
+                </div>
+            </section>
+
+            <!-- Panel Kanan -->
+            <section class="right-panel">
+                <h2>Video Player</h2>
+                <div class="video-player">
+                    <iframe id="videoPlayer" width="100%" height="315" src="" frameborder="0" allowfullscreen loading="lazy"></iframe>
+                </div>
+            </section>
+        </main>
+    </div>
+
+<footer>
+    <p>&copy; Marketing Indogrosir Sub Divisi Desain Grafis 2024</p>
+</footer>
+
+<!-- Memanggil file JS -->
+<script src="https://www.youtube.com/iframe_api"></script>
+<script src="js/ytb.js"></script>
+<script src="js/cookie.js"></script>
+<script src="js/logout.js"></script>
+</body>
+</html>
