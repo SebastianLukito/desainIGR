@@ -185,6 +185,20 @@ closePopupAlokasiBtn.addEventListener("click", function () {
   popupAlokasi.classList.remove("popupActive");
 });
 
+// Event listener untuk button "youtube"
+const youtubeBtn = document.getElementById("youtubeBtn");
+const closePopupYtbBtn = document.getElementById("closePopupYtb");
+const popupYtb = document.getElementById("popupMenuYtb");
+
+youtubeBtn.addEventListener("click", function () {
+  closeAllPopups();
+  popupYtb.classList.add("popupActive");
+});
+
+closePopupAlokasiBtn.addEventListener("click", function () {
+  popupYtb.classList.remove("popupActive");
+});
+
 // Toggle child sub buttons
 document.querySelectorAll('.toggleChild').forEach(button => {
   button.addEventListener('click', function (event) {
