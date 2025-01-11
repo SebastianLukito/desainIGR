@@ -16,6 +16,7 @@ body {
     background-color: rgb(21, 21, 21);
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     min-height: 100vh;
 }
 
@@ -67,7 +68,8 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding-top: -20px;
+    padding-bottom: 20px;
     flex: 1;
     background: url('backgroundlogin.jpg') no-repeat center center/cover;
     min-height: 80vh;
@@ -79,6 +81,19 @@ body {
     border-radius: 1rem;
     overflow: hidden;
     background: #ffc02e;
+    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-size: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition: background 0.9s ease;
+}
+
+.buttonContainer1 {
+    margin: 10px;
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: transparent;
     background-image: url("/assets/img/45-degree-fabric-light.png");
     background-size: cover;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -144,7 +159,7 @@ body {
     padding: 2rem;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     transition: all 0.4s linear;
-    z-index: 10;
+    z-index: 1001;
     max-height: 70vh;
     overflow-y: auto;
     min-width: 600px;
@@ -415,4 +430,32 @@ footer:hover {
 #logoutBtn:hover {
     background-color: #6b0000;
     color: white;
+}
+
+
+.searchContainer {
+    position: sticky; /* Membuat elemen tetap di tempat saat scrolling */
+    top: 0; /* Posisi di atas */
+    width: 100%;
+    z-index: 1000; /* Prioritas elemen agar tidak tertutup */
+    padding: 0px;
+    text-align: center;
+    background-color:transparent;
+    margin-bottom: 10px;
+}
+
+#searchBar {
+    width: 60%;
+    padding-inline: 20px;
+    padding-block: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+#searchBar:focus {
+    border-color: #fefefe;
+    box-shadow: 0 0 10px rgba(104, 88, 1, 0.5);
 }
