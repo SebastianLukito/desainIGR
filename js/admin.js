@@ -382,3 +382,23 @@ searchBar.addEventListener('input', function () {
     }
 });
 
+// Deteksi klik di luar search bar dan buttonContainer
+document.addEventListener('click', function (event) {
+    const isClickInsideSearchBar = event.target.closest('#searchBar');
+    const isClickInsideButtonContainer = event.target.closest('.buttonContainer');
+
+    // Jika tidak klik di dalam search bar atau buttonContainer
+    if (!isClickInsideSearchBar && !isClickInsideButtonContainer) {
+        // Hapus teks di search bar
+        searchBar.value = '';
+
+        // Tampilkan semua buttonContainer kembali
+        const buttonContainers = document.querySelectorAll('.buttonContainer');
+        buttonContainers.forEach(container => {
+            container.style.display = 'block';
+        });
+
+        // Sembunyikan easterEggContainer
+        easterEggContainer.style.display = 'none';
+    }
+});
