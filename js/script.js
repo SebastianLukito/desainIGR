@@ -227,6 +227,12 @@ function copyToClipboard(elementId) {
 let typedText = ''; // Variabel untuk menyimpan teks yang diketik pengguna
 
 document.addEventListener('keydown', function (event) {
+    // Cek apakah fokus berada di dalam search bar
+    const activeElement = document.activeElement;
+    if (activeElement && activeElement.id === 'searchBar') {
+        return; // Jika sedang mengetik di search bar, abaikan logika berikutnya
+    }
+
     // Tambahkan karakter yang diketik ke typedText
     typedText += event.key.toLowerCase();
 
@@ -237,18 +243,18 @@ document.addEventListener('keydown', function (event) {
 
     // Periksa apakah teks yang diketik cocok dengan "monster"
     if (typedText === 'monster') {
-        window.location.href = 'monster.html', '_blank'; // Redirect ke monster.html
+        window.location.href = 'monster.html'; // Redirect ke monster.html
     }
 
     // Periksa apakah teks yang diketik cocok dengan "planetes"
     else if (typedText === 'planetes') {
-        window.location.href = 'solar_system.html', '_blank'; // Redirect ke solar_system.html
+        window.location.href = 'solar_system.html'; // Redirect ke solar_system.html
     }
 
     // Periksa apakah teks yang diketik cocok dengan "2048"
     else if (typedText === '2048') {
-      window.location.href = 'games/2048/index.html', '_blank'; // Redirect ke index.html
-  }
+        window.location.href = 'games/2048/index.html'; // Redirect ke index.html
+    }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -307,4 +313,57 @@ logoutBtn.addEventListener('click', function() {
 
   // Arahkan ke halaman login.html
   window.location.href = 'login.html';
+});
+
+// Fungsi pencarian dengan mendukung easter egg
+const searchBar = document.getElementById('searchBar');
+const easterEggContainer = document.createElement('div');
+easterEggContainer.classList.add('buttonContainer1');
+easterEggContainer.style.display = 'none'; // Default tidak ditampilkan
+easterEggContainer.innerHTML = `
+        <a href="games/2048/index.html" class="btn" target="_blank">2048</a>
+        <a href="monster.html" class="btn" target="_blank">Monster</a>
+        <a href="solar_system.html" class="btn" target="_blank">Planetes</a>
+`;
+// Tambahkan ke DOM di akhir .mainContainer
+document.querySelector('.mainContainer').appendChild(easterEggContainer);
+
+searchBar.addEventListener('input', function () {
+    const query = this.value.toLowerCase();
+    const buttonContainers = document.querySelectorAll('.buttonContainer:not(.easterEggContainer)');
+    let hasResult = false;
+
+    // Sembunyikan semua button container kecuali easter egg
+    buttonContainers.forEach(container => {
+        container.style.display = 'none';
+    });
+
+    // Cari button dan sub-button yang sesuai dengan query
+    const buttons = document.querySelectorAll('.btn, .sub-buttons .btn');
+    buttons.forEach(button => {
+        const text = button.textContent.toLowerCase();
+        if (text.includes(query)) {
+            hasResult = true;
+            const container = button.closest('.buttonContainer');
+            if (container) {
+                container.style.display = 'block';
+            }
+        }
+    });
+
+    // Tampilkan sub-button khusus jika query adalah easter egg
+    if (['2048', 'monster', 'planetes'].includes(query)) {
+        easterEggContainer.style.display = 'block';
+        hasResult = true;
+    } else {
+        easterEggContainer.style.display = 'none';
+    }
+
+    // Jika tidak ada hasil, tampilkan semua kembali
+    if (!hasResult && query === '') {
+        buttonContainers.forEach(container => {
+            container.style.display = 'block';
+        });
+        easterEggContainer.style.display = 'none'; // Pastikan disembunyikan jika kosong
+    }
 });
