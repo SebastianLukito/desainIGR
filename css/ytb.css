@@ -41,6 +41,7 @@ body {
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
+    transition: display 0.3s ease;
 }
 
 .right-panel {
@@ -51,6 +52,7 @@ body {
     flex: 2;
     min-width: 750px;
     box-sizing: border-box;
+    transition: margin 0.3s ease, width 0.3s ease;
 }
 
 .left-panel:hover, .right-panel:hover {
@@ -130,7 +132,7 @@ body {
 
 /* Hasil pencarian */
 .search-results {
-    height: 695px;
+    height: 795px;
     overflow-y: auto;
     padding: 10px;
     border: 1px solid #ccc;
@@ -174,19 +176,54 @@ body {
 
 /* Animasi loading */
 .loading-overlay {
-    display: none;
-    position: absolute;
+    display: none; 
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(171, 171, 171, 0.5);
+    background-color: rgba(0, 0, 0, 0.6); 
     z-index: 1000;
+    display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 1.5em;
 }
+
+.spinner {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    background: conic-gradient(#007BFF, #FF4500, #32CD32, #FFD700, #007BFF); 
+    border-radius: 50%;
+    animation: spin-gradient 1.5s linear infinite;
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.5); 
+}
+
+.spinner::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background-color: rgba(80, 80, 80, 0.8); 
+    background-image: url("/assets/img/45-degree-fabric-light.png");
+    border-radius: 80%;
+    z-index: 1;
+}
+
+@keyframes spin-gradient {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(-180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 
 
 /* Video player */
@@ -249,7 +286,7 @@ footer {
 /* Komentar */
 .comments-section {
     margin-top: 20px;
-    padding: 15px;
+    padding: 10px;
     background: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan */
@@ -268,6 +305,14 @@ footer {
     padding-bottom: 10px;
 }
 
+.comments-section p {
+    margin-block: 5px;
+    margin-inline: 5px;
+    color: #222;
+    font-size: 15px;
+    padding-bottom: 10px;
+}
+
 #commentsContainer {
     overflow-y: auto;
     padding-block: 15px;
@@ -275,7 +320,7 @@ footer {
     background: #fffdf2;
     border-radius: 5px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Bayangan dalam */
-    height: 300px;
+    height: 400px;
     background-image: url("/assets/img/45-degree-fabric-light.png");
 }
 
@@ -283,12 +328,13 @@ footer {
 .comment-item {
     margin-bottom: 15px;
     padding-block: 5px;
-    padding-top: 0px;
+    padding-top: 15px;
     padding-inline: 15px;
     background-color: rgb(255, 255, 255, 0.5);
     border-radius: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
-    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Efek hover */
+    transition: transform 0.4s ease, box-shadow 0.2s ease; /* Efek hover */
+    font-size: 10px;
 }
 
 .comment-item:hover {
@@ -298,9 +344,9 @@ footer {
 }
 
 .comment-author {
-    font-size: 14px;
-    color: #ffffff;
-    background-color: #021e3c; /* Warna biru elegan */
+    font-size: 10px;
+    color: #fefefe;
+    background-color: #ffce0b; /* Warna biru elegan */
     background-image: url("/assets/img/45-degree-fabric-light.png");
     border-radius: 20px;
     padding: 8px 15px;
@@ -311,7 +357,7 @@ footer {
 
 .comment-text {
     margin-top: 10px;
-    font-size: 14px;
+    font-size: 9px;
     color: #444;
     line-height: 1.5;
     word-wrap: break-word; /* Pastikan teks panjang terbungkus */
@@ -336,4 +382,31 @@ footer {
     .video-player iframe {
         height: 200px;
     }
+}
+
+.toggle-left-panel {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    background-color: rgba(162, 162, 162, 0.5);
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 0 20px 20px 0;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 50px;
+    height: 50px;
+    padding-right: 10px;
+    transition: transform 1.0s ease, box-shadow 0.2s ease; 
+}
+
+.toggle-left-panel:hover {
+    background-color: #ffffe0;
+    scale: 1.05;
+    transition: transform 1.0s ease, box-shadow 0.2s ease; 
 }
