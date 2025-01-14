@@ -31,6 +31,28 @@
                     <input type="text" id="searchInput" placeholder="Search for videos or paste YouTube link...">
                     <button id="searchBtn">Search</button>
                 </div>
+                <!-- Container pembungkus sort & filter -->
+                <div class="sort-filter-container">
+
+                    <div class="sort-section">
+                    <label for="sortSelect">Urutkan:</label>
+                    <select id="sortSelect">
+                        <option value="relevance">Terelevan</option>
+                        <option value="viewCount">Terpopuler</option>
+                        <option value="date">Terbaru</option>
+                    </select>
+                    </div>
+                
+                    <div class="filter-section">
+                    <label for="filterSelect">Filter:</label>
+                    <select id="filterSelect">
+                        <option value="any">Semua</option>
+                        <option value="short">Short</option>
+                        <option value="long">Video</option>
+                    </select>
+                    </div>
+                
+                </div>
                 <div class="search-results" id="searchResults">
                     <!-- Search results will appear here -->
                 </div>
