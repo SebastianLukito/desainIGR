@@ -218,29 +218,49 @@ document.addEventListener('DOMContentLoaded', () => {
         isLoadingComments = false;
     };
 
-    const startSearch = () => {
+    const fetchVideoMetadata = async (videoId) => {
+        const apiKey = getCurrentApiKey();
+        const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${apiKey}`;
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const data = await response.json();
+            if (data.items.length > 0) {
+                return data.items[0].snippet;
+            }
+        } catch (error) {
+            console.error('Error fetching video metadata:', error);
+        }
+        return null;
+    };
+    
+    const startSearch = async () => {
         const input = searchInput.value.trim();
         if (!input) {
             loadPopularVideos();
             return;
         }
-
+    
         const videoId = extractVideoId(input);
         if (videoId) {
-            loadVideo(videoId);
-            searchResults.innerHTML = '';
-            renderSearchResult({
-                id: { videoId },
-                snippet: { title: 'Video', thumbnails: { medium: { url: '' } } },
-            });
+            const metadata = await fetchVideoMetadata(videoId);
+            if (metadata) {
+                loadVideo(videoId);
+                searchResults.innerHTML = '';
+                renderSearchResult({
+                    id: { videoId },
+                    snippet: metadata,
+                });
+            }
             return;
         }
-
+    
         currentQuery = input;
         searchResults.innerHTML = '';
         nextPageToken = null;
         searchVideos(currentQuery);
     };
+    
 
     const extractVideoId = (url) => {
         const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/.*v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
