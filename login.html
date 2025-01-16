@@ -18,11 +18,15 @@
                 <img src="assets/img/igr.png" alt="Logo Indogrosir" class="marquee-logo">
             </p>
         </div>
-        <div class="motor-container">
+        <!-- <div class="motor-container">
             <img src="assets/img/motoranim.gif" alt="Motor" class="motor-animation" loading="lazy">
             <img src="assets/img/motoranim.gif" alt="Motor Baru Teks" class="motor-baruteks" style="display:none;">
-            
+        </div> -->
+        <div class="model-container">
+            <model-viewer class="rotating-model" src="assets/img/model.glb" auto-rotate camera-controls disable-zoom></model-viewer>
+            <!-- <model-viewer class="rotating-model" src="assets/img/model.glb" auto-rotate camera-controls></model-viewer> -->
         </div>
+        
         <div class="login-container">
             <div class="login-box">
                 <h2>Hey IGR Design Team!</h2>
@@ -74,7 +78,8 @@
         </div>
     </div>
         
-    
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
