@@ -207,18 +207,18 @@ function setCookie(name, value, minutes) {
 }
 
 // Animasi gambar motor tetap sama
-const motorAnimation = document.querySelector('.motor-animation');
-const motorBaruteks = document.querySelector('.motor-baruteks');
+// const motorAnimation = document.querySelector('.motor-animation');
+// const motorBaruteks = document.querySelector('.motor-baruteks');
 
-motorAnimation.addEventListener('mouseover', () => {
-    motorAnimation.style.display = 'none';
-    motorBaruteks.style.display = 'block';
-});
+// motorAnimation.addEventListener('mouseover', () => {
+//     motorAnimation.style.display = 'none';
+//     motorBaruteks.style.display = 'block';
+// });
 
-motorBaruteks.addEventListener('mouseout', () => {
-    motorBaruteks.style.display = 'none';
-    motorAnimation.style.display = 'block';
-});
+// motorBaruteks.addEventListener('mouseout', () => {
+//     motorBaruteks.style.display = 'none';
+//     motorAnimation.style.display = 'block';
+// });
 
 // Event listener untuk "Lupa password?" tetap sama
 document.getElementById('forgotPasswordLink').addEventListener('click', function(event) {
@@ -399,3 +399,39 @@ async function getPublicIP() {
     }
     return "unknown";
 }
+
+// Seleksi elemen loading overlay
+const loadingOverlay = document.getElementById('loadingOverlay');
+const modelViewer = document.querySelector('model-viewer');
+
+// Fungsi untuk menampilkan overlay loading
+function showLoadingOverlay() {
+    if (loadingOverlay) {
+        loadingOverlay.style.display = 'flex';
+    }
+}
+
+// Fungsi untuk menyembunyikan overlay loading
+function hideLoadingOverlay() {
+    if (loadingOverlay) {
+        loadingOverlay.style.display = 'none';
+    }
+}
+
+// Event untuk menampilkan loading saat halaman dimuat
+window.addEventListener('load', () => {
+    showLoadingOverlay();
+    console.log("All assets are loading...");
+
+    // Periksa status pemuatan model-viewer
+    if (modelViewer) {
+        modelViewer.addEventListener('model-visibility', (event) => {
+            if (event.detail.visible) {
+                console.log("3D model is visible.");
+                hideLoadingOverlay();
+            }
+        });
+    } else {
+        hideLoadingOverlay();
+    }
+});
