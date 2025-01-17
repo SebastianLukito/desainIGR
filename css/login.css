@@ -30,6 +30,8 @@ body {
     overflow: hidden;
     cursor: pointer;
     white-space: nowrap;
+    z-index: 200;
+    position: relative;
 }
 
 .marquee:hover {
@@ -614,16 +616,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 800%;
     height: 100vh; /* Sesuaikan tinggi layar */
-    margin-top: -40px;
-    margin-left: -250px;
+    margin-top: -520px;
+    margin-left: -5050px;
+    z-index: -5;
 
 }
 
 .rotating-model {
-    width: 1400px; /* Ukuran awal */
-    height: 1400px;
+    width: 4400px; /* Ukuran awal */
+    height: 4400px;
     /* animation: rotate360 0.05s linear infinite, scaleUp 0.5s ease-in-out forwards; */
 }
 
@@ -656,7 +659,7 @@ body {
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.6);
-    z-index: 1000;
+    z-index: 100;
     display: flex;
     align-items: center;
     justify-content: center;
