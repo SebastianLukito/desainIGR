@@ -613,13 +613,14 @@ body {
 }
 
 .model-container {
+    position: static;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 800%;
+    width: 300%;
     height: 100vh; /* Sesuaikan tinggi layar */
-    margin-top: -520px;
-    margin-left: -5050px;
+    margin-top: -500px;
+    margin-left: -1550px;
     z-index: -5;
 
 }
