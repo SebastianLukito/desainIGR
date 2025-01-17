@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { name: 'SUP KRI', email: 'support@kri.indogrosir.co.id' },
             { name: 'SUP MDO', email: 'support@mdo.indogrosir.co.id' },
             { name: 'SUP MKS', email: 'support@mks.indogrosir.co.id' },
+            { name: 'SUP GTO', email: 'support@gto.indogrosir.co.id' }
         ]
         },
         {
@@ -185,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: 'SAM KRI', email: 'sam@kri.indogrosir.co.id' },
                 { name: 'SAM MDO', email: 'sam@mdo.indogrosir.co.id' },
                 { name: 'SAM MKS', email: 'sam@mks.indogrosir.co.id' },
+                { name: 'SAM GTO', email: 'sam@gto.indogrosir.co.id' }
             ]
             },
             {
@@ -279,6 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: 'SM KRI', email: 'sm@kri.indogrosir.co.id' },
                 { name: 'SM MDO', email: 'sm@mdo.indogrosir.co.id' },
                 { name: 'SM MKS', email: 'sm@mks.indogrosir.co.id' },
+                { name: 'SM GTO', email: 'sm@gto.indogrosir.co.id' }
             ]
             },
             {
@@ -373,6 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 { name: 'MSJM KRI', email: 'msjm@kri.indogrosir.co.id' },
                 { name: 'MSJM MDO', email: 'msjm@mdo.indogrosir.co.id' },
                 { name: 'MSJM MKS', email: 'msjm@mks.indogrosir.co.id' },
+                { name: 'MSJM GTO', email: 'msjm@gto.indogrosir.co.id' }
             ]
             },
             {
