@@ -652,8 +652,9 @@ body {
 }
 
 /* Animasi loading */
+/* Animasi loading overlay */
 .loading-overlay {
-    display: none; /* Tampilkan dengan JavaScript */
+    display: none; /* Ditampilkan melalui JavaScript */
     position: fixed;
     top: 0;
     left: 0;
@@ -664,10 +665,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: row; /* Pastikan spinner dan teks sejajar */
+    flex-direction: row; /* Spinner dan teks sejajar */
     gap: 20px; /* Jarak antara spinner dan teks */
 }
 
+/* Spinner animasi */
 .spinner {
     position: relative;
     width: 90px;
@@ -687,10 +689,11 @@ body {
     bottom: 10px;
     background-color: rgba(80, 80, 80, 0.8);
     background-image: url("/assets/img/45-degree-fabric-light.png");
-    border-radius: 80%;
+    border-radius: 50%;
     z-index: 1;
 }
 
+/* Animasi rotasi spinner */
 @keyframes spin-gradient {
     0% {
         transform: rotate(0deg);
@@ -703,14 +706,16 @@ body {
     }
 }
 
+/* Teks loading */
 .loading-text {
-    font-size: 54px;
+    font-size: 24px;
     color: #fff;
     font-family: 'Poppins', sans-serif;
     animation: pulse 1.5s ease-in-out infinite;
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
+/* Animasi teks loading */
 @keyframes pulse {
     0% {
         opacity: 0.8;
@@ -722,4 +727,5 @@ body {
         opacity: 0.8;
     }
 }
+
 
