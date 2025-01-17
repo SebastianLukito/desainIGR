@@ -127,6 +127,10 @@
         {
             "name": "SUP PWT",
             "email": "support@pwt.indogrosir.co.id"
+        },
+        {
+            "name": "SUP GTO",
+            "email": "support@gto.indogrosir.co.id"
         }
     ],
     "division2": [
@@ -241,6 +245,10 @@
         {
             "name": "SAM PWT",
             "email": "sam@pwt.indogrosir.co.id"
+        },
+        {
+            "name": "SAM GTO",
+            "email": "sam@gto.indogrosir.co.id"
         }
     ],
     "division3": [
@@ -359,6 +367,10 @@
         {
             "name": "SM PWT",
             "email": "sm@pwt.indogrosir.co.id"
+        },
+        {
+            "name": "SM GTO",
+            "email": "sm@gto.indogrosir.co.id"
         }
     ],
     "division4": [
@@ -477,6 +489,10 @@
         {
             "name": "MSJM PWT",
             "email": "msjm@pwt.indogrosir.co.id"
+        },
+        {
+            "name": "MSJM GTO",
+            "email": "msjm@gto.indogrosir.co.id"
         }
     ]
 }
