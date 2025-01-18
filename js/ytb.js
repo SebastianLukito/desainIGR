@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const API_KEYS = [
-        'AIzaSyBYWQ9dm5RQXNCMaBQZ-gpgLUe6WX3GshQ', 
+        'AIzaSyBYWQ9dm5RQXNCMaBQZ-gpgLUe6WX3GshQ',
         'AIzaSyBUa1x2BO3OE6upcxVVur0EtmCTJ3_EMsU',
         'AIzaSyBXdWCUZPb3HVxBbAoPo6XWHS3Zdtrg4R0',
         'AIzaSyBwQ-PzU9VhprlFqTUYuHb48fUjqt2EVPQ',
@@ -10,12 +10,28 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
     let currentKeyIndex = 0;
 
-    // Channel yang ditampilkan saat loadPopularVideos() dipanggil
+    // Channel yang ditampilkan
     const scienceChannels = [
-        'UC2mP7il3YV7TxM_5bxBUVkg', // Sepulang Sekolah
-        'UCZfqKXBw8jzFnfxpFt2aNlg', // Kok Bisa
-        'UCsXVk37bltHxD1rDPwtNM8Q', // Kurzgesagt
-        'UCHnyfMqiRRG1u-2MsSQLbXA'  // Veritasium
+        'UCpdwWrQYnGSyWJSRy-eGhCg',  // Tekotok
+        'UCfQHaUbD0oEBH_FRYHE5qIg',  // Sepulang Sekolah
+        'UCY_QJ_qZWOIOJKAiBKatFaQ',  // Kok Bisa
+        'UCwRH985XgMYXQ6NxXDo8npw',  // Kurzgesagt
+        'UCin0m13qWv3-051xlWlHamA',  // Veritasium
+        'UCaPa78XJgS-BrTxsVYHPA6',   // Gadgetin
+        'UCAuUUnT6oDeKwE6v1NGQxug',  // TedEd
+        'UCC_OYI6VZtuEZuq49Ht-cQQ',  // Ferry Irwandi
+        'UCA19mAJURyYHbJzhfpqhpCA',  // Action Lab
+        'UCEIwxahdLz7bap-VDs9h35A',  // Steve Mould
+        'UCzI8ArgVBHXN3lSz-dI0yRw',  // Narasi Newsroom
+        'UCkzbfqQmXyAPY_XEsJvkcWg',  // Gerrard Wijaya
+        'UCFP8lCYY-qRchUhFQzieMjQ',  // NatGeo Indonesia
+        'UC-DgB27DyWZDrA9J37-HP_Q',  // Tretan Universe
+        'UC513PdAP2-jWkJunTh5kXRw',  // Mark Rober
+        'UCBREMSD-melGOMVONey64Lg',  // Asumsi
+        'UCVSB96sHYiHMlAkMfjl0Wzw',  // Alam Semenit
+        'UC1_uAIS3r8Vu6JjXWvastJg',  // 3Blue1Brown
+        'UCshVTOdmZLdLj8LTV1j_0uw',  // TED
+        'UCvNkERNo3eAT59vzqE4-3Vg',  // Banda Neira Topic
     ];
 
     // Elemen-elemen di halaman
@@ -25,25 +41,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoPlayer = document.getElementById('videoPlayer');
     const loadingOverlay = document.getElementById('loadingOverlay');
     const commentsContainer = document.getElementById('commentsContainer');
-
-    // Tambahan: elemen select untuk sort
     const sortSelect = document.getElementById('sortSelect');
-
-    // BAGIAN FILTER: tambahkan elemen select filter di HTML, lalu tangkap di JS
-    const filterSelect = document.getElementById('filterSelect'); // Pastikan ada di HTML
-
+    const filterSelect = document.getElementById('filterSelect');
+    
+    // Variabel penunjang
     let nextPageToken = null;
     let nextCommentsPageToken = null;
     let currentQuery = '';
     let isLoading = false;
     let isLoadingComments = false;
 
-    // Variabel untuk menyimpan pilihan urutan (sort)
-    // Default-nya "relevance"
-    let sortOrder = 'relevance';
+    // Set default sort ke "date" (video terbaru)
+    let sortOrder = 'date';
 
-    // BAGIAN FILTER: variabel untuk menyimpan pilihan filter durasi (any, short, long, dsb.)
-    let videoDurationFilter = 'any'; // default-nya tampilkan semua
+    // Set default filter ke "medium" (4-20 menit) untuk memprioritaskan video biasa
+    let videoDurationFilter = 'medium';
 
     // Fungsi mendapatkan API key yang sedang dipakai
     const getCurrentApiKey = () => {
@@ -55,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentKeyIndex = (currentKeyIndex + 1) % API_KEYS.length;
     };
 
-    // Tampilkan/hilangkan loading overlay
+    // Loading overlay
     const showLoading = () => {
         loadingOverlay.style.display = 'flex';
     };
@@ -64,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     hideLoading();
 
-    // Logika toggle panel kiri
+    // Toggle panel kiri (tidak berubah)
     const leftPanel = document.querySelector('.left-panel');
     const rightPanel = document.querySelector('.right-panel');
     const toggleLeftPanelButton = document.createElement('button');
@@ -77,70 +89,133 @@ document.addEventListener('DOMContentLoaded', () => {
             leftPanel.style.display = 'block';
             rightPanel.style.margin = '0';
             toggleLeftPanelButton.textContent = '<';
-
             videoPlayer.style.transition = 'height 0.3s ease';
             videoPlayer.style.height = '415px';
         } else {
             leftPanel.style.display = 'none';
             rightPanel.style.margin = '0 auto';
             toggleLeftPanelButton.textContent = '>';
-
             videoPlayer.style.transition = 'height 0.3s ease';
             videoPlayer.style.height = '600px';
             videoPlayer.style.marginTop = '10px';
         }
     });
 
+    // Fungsi ini menghasilkan tanggal 1 tahun ke belakang dalam format ISO8601
+    function getOneYearAgoDate() {
+        const now = new Date();
+        const oneYearAgo = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
+        return oneYearAgo.toISOString(); 
+    }
+
+    // Fungsi untuk mengacak urutan array (menggunakan Fisher-Yates Shuffle)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
     // ---------------------
-    // FUNGSI LOAD VIDEO POPULER (untuk channel-channel science di atas)
+    // FUNGSI LOAD VIDEO "POPULER" / REKOMENDASI PADA CHANNEL
     // ---------------------
     const loadPopularVideos = async () => {
-        showLoading();
-        searchResults.innerHTML = '';
+        showLoading(); // Tampilkan loading spinner
+        searchResults.innerHTML = ''; // Kosongkan hasil pencarian sebelumnya
+    
+        // Acak urutan channel sebelum memulai
+        shuffleArray(scienceChannels);
+    
+        const publishedAfter = getOneYearAgoDate(); // Tanggal 1 tahun ke belakang
+        const videoMap = {}; // Tempat menyimpan video dari setiap channel (key: channelId)
+    
+        // Ambil 10 video dari setiap channel
         for (let i = 0; i < scienceChannels.length; i++) {
             const channelId = scienceChannels[i];
             const apiKey = getCurrentApiKey();
-            // order tidak di-set, default akan "relevance" untuk search by channel
-            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&channelId=${channelId}&key=${apiKey}&maxResults=10`;
-
+    
+            const url = `https://www.googleapis.com/youtube/v3/search
+                ?part=snippet
+                &type=video
+                &channelId=${channelId}
+                &key=${apiKey}
+                &maxResults=10
+                &order=viewCount
+                &publishedAfter=${publishedAfter}
+                &videoDuration=${videoDurationFilter}
+                &regionCode=US
+                &relevanceLanguage=en`
+                .replace(/\s+/g, ''); // Hapus spasi tambahan
+    
             try {
                 const response = await fetch(url);
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
-
-                data.items.forEach(item => renderSearchResult(item));
+    
+                if (data.items.length > 0) {
+                    videoMap[channelId] = data.items; // Simpan 10 video dari setiap channel
+                }
             } catch (error) {
-                console.error(`Error fetching popular videos from channel ${channelId}:`, error);
-                rotateApiKey();
+                console.error(`Error fetching videos from channel ${channelId}:`, error);
+                rotateApiKey(); // Gunakan API key berikutnya jika gagal
             }
         }
-        hideLoading();
+    
+        // Round-robin: Ambil satu video dari setiap channel secara bergantian
+        const videoPool = [];
+        let finished = false;
+        let index = 0;
+    
+        while (!finished) {
+            finished = true; // Asumsi selesai kecuali ada video yang tersisa
+            for (const channelId of scienceChannels) {
+                const videos = videoMap[channelId];
+                if (videos && videos[index]) {
+                    videoPool.push(videos[index]); // Ambil video ke-n dari channel ini
+                    finished = false; // Masih ada video yang bisa diambil
+                }
+            }
+            index++; // Lanjut ke video berikutnya di setiap channel
+        }
+    
+        // Render video yang telah diatur ulang
+        videoPool.forEach((video) => {
+            renderSearchResult(video);
+        });
+    
+        hideLoading(); // Sembunyikan loading spinner
     };
+    
+    
 
     // ---------------------
-    // FUNGSI SEARCH VIDEO
+    // FUNGSI SEARCH VIDEO (saat user mengetik di search bar)
     // ---------------------
     const searchVideos = async (query, pageToken = '') => {
         if (isLoading) return;
         isLoading = true;
-
         showLoading();
         let success = false;
 
-        // BAGIAN FILTER: siapkan parameter durasi
+        // Param durasi
         let videoDurationParam = '';
         if (videoDurationFilter !== 'any') {
-            // misalnya "short" untuk reels, "long", dsb.
             videoDurationParam = `&videoDuration=${videoDurationFilter}`;
         }
 
         for (let i = 0; i < API_KEYS.length; i++) {
             const apiKey = getCurrentApiKey();
 
-            // Tambah parameter &order=sortOrder
-            // Nilai sortOrder bisa 'relevance', 'viewCount', atau 'date'
-            // Juga tambahkan videoDurationParam
-            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${encodeURIComponent(query)}&order=${sortOrder}&key=${apiKey}&maxResults=10&pageToken=${pageToken}${videoDurationParam}`;
+            const url = `https://www.googleapis.com/youtube/v3/search
+                ?part=snippet
+                &type=video
+                &q=${encodeURIComponent(query)}
+                &order=${sortOrder}
+                &key=${apiKey}
+                &maxResults=10
+                &pageToken=${pageToken}
+                ${videoDurationParam}`
+                .replace(/\s+/g, '');
 
             try {
                 const response = await fetch(url);
@@ -149,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 nextPageToken = data.nextPageToken || null;
 
-                // Jika tidak ada item, tampilkan info
+                // Jika tidak ada item
                 if (data.items.length === 0 && !pageToken) {
                     searchResults.innerHTML = '<p>No videos found.</p>';
                 }
@@ -171,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isLoading = false;
     };
 
-    // Render satu item (thumbnail + judul) ke panel kiri
+    // Menampilkan hasil pencarian di panel kiri
     const renderSearchResult = (item) => {
         const videoId = item.id.videoId;
         const title = item.snippet.title;
@@ -184,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>${title}</p>
         `;
 
-        // Event ketika user klik salah satu video
+        // Klik salah satu hasil => load video
         resultItem.addEventListener('click', () => {
             // Hilangkan 'selected' di item lain
             document.querySelectorAll('.result-item').forEach(el => el.classList.remove('selected'));
@@ -198,6 +273,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Memuat video ke iframe dan memanggil fetchComments
     const loadVideo = (videoId) => {
         showLoading();
+
+        const videoPlaceholder = document.getElementById('videoPlaceholder');
+        const videoPlayer = document.getElementById('videoPlayer');
+    
+        // Sembunyikan placeholder, tampilkan iframe
+        videoPlaceholder.style.display = 'none';
+        videoPlayer.style.display = 'block';
+    
         videoPlayer.src = `https://www.youtube.com/embed/${videoId}`;
         videoPlayer.onload = () => {
             hideLoading();
@@ -216,7 +299,13 @@ document.addEventListener('DOMContentLoaded', () => {
         let success = false;
         for (let i = 0; i < API_KEYS.length; i++) {
             const apiKey = getCurrentApiKey();
-            const url = `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=${videoId}&key=${apiKey}&maxResults=10&pageToken=${pageToken}`;
+            const url = `https://www.googleapis.com/youtube/v3/commentThreads
+                ?part=snippet
+                &videoId=${videoId}
+                &key=${apiKey}
+                &maxResults=10
+                &pageToken=${pageToken}`
+                .replace(/\s+/g, '');
 
             try {
                 const response = await fetch(url);
@@ -264,7 +353,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ambil metadata video (dipakai saat user paste link)
     const fetchVideoMetadata = async (videoId) => {
         const apiKey = getCurrentApiKey();
-        const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${apiKey}`;
+        const url = `https://www.googleapis.com/youtube/v3/videos
+            ?part=snippet
+            &id=${videoId}
+            &key=${apiKey}`
+            .replace(/\s+/g, '');
         try {
             const response = await fetch(url);
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -282,14 +375,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const startSearch = async () => {
         const input = searchInput.value.trim();
         if (!input) {
-            // Kalau input kosong, tampilkan popular videos
+            // Kalau input kosong, langsung load rekomendasi (video terbaru channel)
             loadPopularVideos();
             return;
         }
 
         const videoId = extractVideoId(input);
         if (videoId) {
-            // Kalau user langsung paste link
+            // Kalau user paste link
             const metadata = await fetchVideoMetadata(videoId);
             if (metadata) {
                 loadVideo(videoId);
@@ -344,28 +437,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // EVENT: ketika user mengubah pilihan sort
+    // Ketika user mengubah pilihan sort
     sortSelect.addEventListener('change', () => {
-        sortOrder = sortSelect.value;  // relevance, viewCount, atau date
-        // Jika ada query yang sedang dicari, ulangi pencarian dengan sort baru
+        sortOrder = sortSelect.value;  // relevance, viewCount, date
         if (currentQuery) {
+            // Jika sedang ada query, ulangi pencarian
             searchResults.innerHTML = '';
             nextPageToken = null;
             searchVideos(currentQuery);
+        } else {
+            // Jika tidak ada query, reload rekomendasi
+            loadPopularVideos();
         }
     });
 
-    // BAGIAN FILTER: event listener untuk dropdown filter
+    // Ketika user mengubah pilihan filter
     filterSelect.addEventListener('change', () => {
-        // Baca value, misal: "any" atau "short"
-        videoDurationFilter = filterSelect.value;
+        videoDurationFilter = filterSelect.value;  // any, short, long, dsb.
         if (currentQuery) {
+            // Jika sedang ada query, ulangi pencarian
             searchResults.innerHTML = '';
             nextPageToken = null;
             searchVideos(currentQuery);
+        } else {
+            // Jika tidak ada query, reload rekomendasi
+            loadPopularVideos();
         }
     });
 
-    // Saat pertama load, tampilkan video populer
+    // Klik logo => refresh
+    const logoYtb = document.querySelector('.logoYtb');
+    logoYtb.addEventListener('click', () => {
+        window.location.reload();
+    });
+
+    // Saat pertama load, tampilkan video "populer" (rekomendasi channel)
     loadPopularVideos();
+
+    // Tambahkan komentar default
+    const defaultCommentItem = document.createElement('div');
+    defaultCommentItem.classList.add('comment-item');
+    defaultCommentItem.innerHTML = `
+        <p class="comment-author">Sebastian The Developer Guy</p>
+        <p class="comment-text">Nanti komentarnya juga muncul di sini ya guys</p>
+    `;
+    commentsContainer.appendChild(defaultCommentItem);
 });
