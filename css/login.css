@@ -619,16 +619,20 @@ body {
     align-items: center;
     width: 300%;
     height: 100vh; /* Sesuaikan tinggi layar */
-    margin-top: -500px;
-    margin-left: -1550px;
+    /* margin-top: -500px;
+    margin-left: -1550px; */
+    margin-top: 400px;
+    margin-left: -1800px;
     z-index: -5;
 
 }
 
 .rotating-model {
-    width: 4400px; /* Ukuran awal */
-    height: 4400px;
-    /* animation: rotate360 0.05s linear infinite, scaleUp 0.5s ease-in-out forwards; */
+    /* width: 4400px; 
+    height: 4400px; */
+    width: 500vw;
+    height: 190vh;
+    animation: rotate360 0.05s linear infinite, scaleUp 0.5s ease-in-out forwards;
 }
 
 /* Animasi rotasi */
