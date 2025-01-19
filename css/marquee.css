@@ -34,6 +34,8 @@
     padding-block: 1px;
     background-color: #ffffff;
     border-radius: 2px;
+    pointer-events: none;
+    user-select: none;
 }
 
 @keyframes marquee {

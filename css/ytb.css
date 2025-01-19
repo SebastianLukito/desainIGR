@@ -31,7 +31,8 @@ body {
 
 /* Panel kiri dan kanan */
 .left-panel {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.2); /* Efek transparan */
+    backdrop-filter: blur(5px);
     padding: 20px;
     padding-top: 15px;
     border-radius: 10px;
@@ -45,7 +46,8 @@ body {
 }
 
 .right-panel {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.2); /* Efek transparan */
+    backdrop-filter: blur(5px);
     padding: 20px;
     padding-top: 15px;
     border-radius: 10px;
@@ -79,11 +81,17 @@ body {
     cursor: pointer;
 }
 
+.logoYtb h2 {
+    user-select: none;
+}
+
 .logoYtb img {
     width: 60px; 
     height: 60px; 
     margin-right: 8px; 
     margin-bottom: 10px;
+    pointer-events: none;
+    user-select: none;
 }
 
 /* Search bar */
@@ -93,6 +101,10 @@ body {
     margin-bottom: 15px;
     align-items: center;
     justify-content: center;
+}
+
+.search-section input::placeholder {
+    user-select: none;
 }
 
 .search-section input {
@@ -113,6 +125,7 @@ body {
     font-size: 1em;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    user-select: none;
 }
 
 .search-section button:hover {
@@ -138,7 +151,8 @@ body {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background: rgb(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.72); /* Efek transparan */
+    backdrop-filter: blur(15px);
 }
 
 .result-item {
@@ -156,6 +170,8 @@ body {
     height: 70px;
     object-fit: cover;
     border-radius: 5px;
+    pointer-events: none;
+    user-select: none;
 }
 
 .result-item:hover {
@@ -168,6 +184,7 @@ body {
     font-size: 1em;
     color: #333;
     margin-inline: 5px;
+    user-select: none;
 }
 
 /* Kolom dipilih */
@@ -235,6 +252,7 @@ body {
     border: none;
     background: #000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    user-select: none;
 }
 
 /* Video player */
@@ -259,6 +277,7 @@ footer {
     margin-top: 20px;
     font-size: 0.9em;
     color: #ccc;
+    user-select: none;
 }
 
 .download-buttons {
@@ -288,7 +307,8 @@ footer {
 .comments-section {
     margin-top: 20px;
     padding: 10px;
-    background: #f9f9f9;
+    background: rgba(255, 255, 255, 0.72); /* Efek transparan */
+    backdrop-filter: blur(15px);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tambahkan bayangan */
     max-width: 100%;
@@ -297,13 +317,15 @@ footer {
 }
 
 .comments-section h3 {
-    margin-block: 5px;
+    margin-top: 5px;
+    margin-bottom: 1px;
     margin-inline: 15px;
     color: #222;
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase; /* Huruf kapital */
     padding-bottom: 10px;
+    user-select: none;
 }
 
 .comments-section p {
@@ -312,6 +334,7 @@ footer {
     color: #222;
     font-size: 15px;
     padding-bottom: 10px;
+    user-select: none;
 }
 
 #commentsContainer {
@@ -354,6 +377,7 @@ footer {
     display: inline-block;
     font-weight: bold;
     margin-bottom: 10px;
+    user-select: none;
 }
 
 .comment-text {
@@ -363,6 +387,7 @@ footer {
     line-height: 1.5;
     word-wrap: break-word; /* Pastikan teks panjang terbungkus */
     padding-left: 5px;
+    user-select: none;
 }
 
 
@@ -390,7 +415,8 @@ footer {
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    background-color: rgba(162, 162, 162, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(15px);
     color: rgb(0, 0, 0);
     font-size: 20px;
     font-weight: bold;
@@ -399,15 +425,16 @@ footer {
     padding: 10px 15px;
     cursor: pointer;
     z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.2);
     width: 50px;
     height: 50px;
     padding-right: 10px;
     transition: transform 1.0s ease, box-shadow 0.2s ease; 
+    user-select: none;
 }
 
 .toggle-left-panel:hover {
-    background-color: #ffffe0;
+    background-color: #ffffff;
     scale: 1.05;
     transition: transform 1.0s ease, box-shadow 0.2s ease; 
 }
@@ -441,6 +468,7 @@ footer {
     color: #333;
     font-size: 16px;
     margin: 0; /* Pastikan tidak ada margin berlebih */
+    user-select: none;
 }
 
 /* Dropdown Sort & Filter (bisa disatukan jika gayanya sama) */
@@ -454,6 +482,7 @@ footer {
     color: #333;
     cursor: pointer;
     transition: all 0.3s ease;
+    user-select: none;
 }
 
 /* Efek hover & focus */

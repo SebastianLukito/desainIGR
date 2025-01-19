@@ -54,3 +54,51 @@ button {
 footer {
     user-select: none;
 }
+
+.logoYtb {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+.video-player iframe {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+#videoPlayer {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+.result-item {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+.search-section input {
+    cursor: url("../assets/cursor/text.png"), auto;
+}
+
+.search-section button {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+
+.toggle-left-panel {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+.sort-section label,
+.filter-section label {
+    cursor: url("../assets/cursor/cursor.png"), auto;
+}
+
+#sortSelect,
+#filterSelect {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+#sortSelect:focus,
+#filterSelect:focus {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+.sort-filter-container {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
