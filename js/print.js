@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const iframe = document.createElement('iframe');
             iframe.src = url;
             iframe.width = '100%';
-            iframe.height = '500px';
+            iframe.height = '400px';
             qrDisplay.innerHTML = '';
             qrDisplay.appendChild(iframe);
 
