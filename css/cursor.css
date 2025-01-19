@@ -50,3 +50,7 @@ button {
     cursor: url("../assets/cursor/tap.png"), auto;
     user-select: none;
 }
+
+footer {
+    user-select: none;
+}
