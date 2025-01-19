@@ -18,6 +18,7 @@ body {
     align-items: center;
     min-height: 100vh;
     overflow: hidden;
+    cursor: url("../assets/img/cursor.png"), auto;
 }
 
 .marquee {
@@ -116,6 +117,7 @@ body {
     font-size: 0.8rem;
     margin-top: 10px;
     text-align: center;
+    user-select: none;
 }
 
 .login-box {
@@ -130,6 +132,7 @@ body {
 .login-box h2 {
     margin-bottom: 30px;
     color: rgb(5, 5, 5);
+    user-select: none;
 }
 
 .login-box p {
@@ -137,11 +140,13 @@ body {
     margin-top: 20px;
     margin-bottom: 1px;
     margin-inline: 20px;
+    user-select: none;
 }
 
 .info h2 {
     margin-bottom: 20px;
     color: rgb(5, 5, 5);
+    user-select: none;
 }
 
 .info p {
@@ -166,12 +171,14 @@ body {
     display: inline-block;
     transition: all 0.01s ease;
     margin-bottom: 10px;
+    user-select: none;
 }
 
 .inputBox {
     position: relative;
     margin-bottom: 20px;
     width: 100%;
+    cursor: url("../assets/img/cursor.png") 0 0, auto;
 }
 
 .inputBox input {
@@ -207,6 +214,7 @@ body {
     /* background: #f9f9f9; */
     padding: 0 5px;
     margin-top: -5px;
+    user-select: none;
 }
 
 .inputBox input:focus ~ label,
@@ -236,6 +244,7 @@ body {
     display: inline-block;
     transition: all 0.01s ease;
     margin-top: -10px;
+    user-select: none;
 }
 
 .btn:hover {
@@ -253,10 +262,10 @@ body {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 10px;
-    cursor: pointer;
     font-family: Arial, sans-serif;
     font-size: 16px;
     margin-top: 10px;
+    user-select: none;
 }
 
 .btn-google:hover {
@@ -272,6 +281,7 @@ body {
 .error-message {
     color: red;
     margin-top: 10px;
+    user-select: none;
 }
 
 .bubble-teks {

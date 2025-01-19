@@ -1,0 +1,31 @@
+body {
+    cursor: url("../assets/cursor/cursor.png"), auto;
+}
+
+.btn {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+.btn-google {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+#forgotPasswordLink {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+.marquee {
+    cursor: url("../assets/cursor/cursor.png"), auto;
+}
+
+.eye open-eye {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+.svg-toggle-password {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+.inputBox input {
+    cursor: url("../assets/cursor/text.png"), auto;
+}
