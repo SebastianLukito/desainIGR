@@ -28,7 +28,6 @@ body {
     text-align: center;
     padding-top: 15px;
     overflow: hidden;
-    cursor: pointer;
     white-space: nowrap;
 }
 
@@ -44,6 +43,7 @@ body {
 .marquee p {
     display: inline-block;
     animation: marquee 20s linear infinite alternate;
+    user-select: none;
 }
 
 .marquee img.marquee-logo {
@@ -115,11 +115,15 @@ body {
     border-radius: 10px;
     padding: 10px;
     transition: transform 0.3s ease;
+    user-select: none;
 }
 
 .buttonContainer .icon:hover {
-    transform: translate(0, -5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.buttonContainer img {
+    pointer-events: none;
 }
 
 .btn {
@@ -137,6 +141,7 @@ body {
     display: inline-block;
     transition: all 0.01s ease;
     min-width: 16rem;
+    user-select: none;
 }
 
 .btn:hover {
@@ -181,6 +186,7 @@ body {
 p {
     text-align: center;
     margin-bottom: 1rem;
+    user-select: none;
 }
 
 .sub-buttons {
@@ -443,6 +449,10 @@ footer:hover {
     background-color:transparent;
     margin-bottom: 10px;
 }
+
+#searchBar::placeholder {
+    user-select: none; /* Mencegah seleksi teks */
+}  
 
 #searchBar {
     width: 60%;

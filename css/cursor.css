@@ -29,3 +29,15 @@ body {
 .inputBox input {
     cursor: url("../assets/cursor/text.png"), auto;
 }
+
+#searchBar {
+    cursor: url("../assets/cursor/text.png"), auto;
+}
+
+#logoutBtn {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+.copy-btn {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
