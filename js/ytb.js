@@ -76,30 +76,42 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     hideLoading();
 
-    // Toggle panel kiri (tidak berubah)
+    // Toggle panel kiri (dengan padding untuk tombol)
     const leftPanel = document.querySelector('.left-panel');
     const rightPanel = document.querySelector('.right-panel');
     const toggleLeftPanelButton = document.createElement('button');
-    toggleLeftPanelButton.textContent = '<';
+
+    // Tambahkan latar belakang sebagai gambar
+    toggleLeftPanelButton.style.backgroundImage = 'url("../assets/cursor/minimize.png")';
+    toggleLeftPanelButton.style.backgroundSize = '50%'; // Gambar latar menempati 50% dari tombol
+    toggleLeftPanelButton.style.backgroundRepeat = 'no-repeat'; // Tidak mengulang gambar
+    toggleLeftPanelButton.style.backgroundPosition = 'center'; // Gambar berada di tengah
+
+    // Tambahkan ukuran tombol dan padding
+    toggleLeftPanelButton.style.width = '50px'; // Lebar tombol
+    toggleLeftPanelButton.style.height = '50px'; // Tinggi tombol
+    toggleLeftPanelButton.style.padding = '10px'; // Tambahkan padding untuk ruang di sekitar gambar
+
+    // Tambahkan kelas dan masukkan tombol ke dalam body
     toggleLeftPanelButton.classList.add('toggle-left-panel');
     document.body.appendChild(toggleLeftPanelButton);
 
+    // Tambahkan event listener untuk klik tombol
     toggleLeftPanelButton.addEventListener('click', () => {
         if (leftPanel.style.display === 'none') {
             leftPanel.style.display = 'block';
             rightPanel.style.margin = '0';
-            toggleLeftPanelButton.textContent = '<';
             videoPlayer.style.transition = 'height 0.3s ease';
             videoPlayer.style.height = '415px';
         } else {
             leftPanel.style.display = 'none';
             rightPanel.style.margin = '0 auto';
-            toggleLeftPanelButton.textContent = '>';
             videoPlayer.style.transition = 'height 0.3s ease';
             videoPlayer.style.height = '600px';
             videoPlayer.style.marginTop = '10px';
         }
     });
+
 
     // Fungsi ini menghasilkan tanggal 1 tahun ke belakang dalam format ISO8601
     function getOneYearAgoDate() {
@@ -139,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 &type=video
                 &channelId=${channelId}
                 &key=${apiKey}
-                &maxResults=10
+                &maxResults=1
                 &order=viewCount
                 &publishedAfter=${publishedAfter}
                 &videoDuration=${videoDurationFilter}
