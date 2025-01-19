@@ -41,3 +41,12 @@ body {
 .copy-btn {
     cursor: url("../assets/cursor/tap.png"), auto;
 }
+
+.drop-section {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+button {
+    cursor: url("../assets/cursor/tap.png"), auto;
+    user-select: none;
+}

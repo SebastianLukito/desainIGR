@@ -49,6 +49,7 @@ body {
     background-color: rgb(255, 208, 0);
     padding-block: 10px;
     border-radius: 10px;
+    user-select: none;
 }
 
 .right-panel p{
@@ -57,6 +58,7 @@ body {
     background-color: rgb(255, 208, 0);
     padding: 10px;
     border-radius: 10px;
+    user-select: none;
 }
 
 .input-section, .button-section, .drop-section {
@@ -105,6 +107,7 @@ button:hover {
 
 .qr-display p {
     margin: 0;
+    user-select: none;
 }
 
 .drop-section {
@@ -125,6 +128,7 @@ button:hover {
     position: relative; /* Add relative positioning for buttons */
     max-height: 250px; /* Set maximum height for file list */
     overflow-y: auto;
+    user-select: none;
 }
 
 .drop-section.dragover {
@@ -150,10 +154,12 @@ button:hover {
     margin-bottom: -5px;
     font-weight: bold;
     color: #000000;
+    user-select: none;
 }
 
 .penjelasan p {
     color: #4a4a4a;
+    user-select: none;
 }
 
 #file-list {
@@ -182,6 +188,7 @@ button:hover {
     width: 32px;
     height: 32px;
     margin-right: 10px;
+    pointer-events: none;
 }
 
 .file-item span {
