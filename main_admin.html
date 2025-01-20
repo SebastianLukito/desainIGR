@@ -11,6 +11,7 @@
     <link rel="icon" href="assets/img/iconjpg.jpg" type="image/jpg">
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/cursor.css" />
+    <link rel="stylesheet" href="css/disablerc.css" />
 </head>
 <body>
     <div class="marquee" id="marquee">
@@ -38,6 +39,13 @@
 
         <!-- Tambahkan button utama dan sub button lainnya di sini -->
 
+    </div>
+
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup">
+            <h3>Klik Kanan Tidak Diizinkan</h3>
+            <p>Maaf, website ini tidak mengizinkan untuk klik kanan.</p>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -80,5 +88,6 @@
             marqueeText.innerHTML = `SELAMAT DATANG <strong>${username.toUpperCase()}</strong> DI WEBSITE MARKETING INDOGROSIR - SUB DIVISI DESAIN GRAFIS <img src="assets/img/igr.png" alt="Logo Indogrosir" class="marquee-logo">`;
         }
     </script> 
+    <script src="js/disablerc.js"></script>
 </body>
 </html>
