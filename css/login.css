@@ -92,10 +92,11 @@ body {
     width: 90vw;
     max-width: 400px;
     padding: 20px;
-    /* background: linear-gradient(135deg, #9ce1ff, rgb(40, 42, 44)); */
+    background: rgba(223, 223, 223, 0.92); /* Efek transparan */
+    backdrop-filter: blur(15px);
     background: transparent;
     border-radius: 1rem;
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 30px 40px rgba(0, 0, 0, 0.2);
     position: absolute;
     top: 57%;
     left: 75%;
