@@ -48,18 +48,3 @@ if (!loggedIn || !username) {
     addVisitorToFirestore(username);
 }
 
-// Event listener untuk klik pada marquee
-document.getElementById('marquee').addEventListener('click', function () {
-    const username = getCookie('username');
-
-    if (username && adminUsers.includes(username.toLowerCase())) {
-        // Jika user adalah admin, redirect ke admin.html
-        window.location.href = 'admin.html';
-    } else if (username && adminSpecial.includes(username.toLowerCase())) {
-        // Jika user adalah admin spesial, redirect ke main_admin.html
-        window.location.href = 'main_admin.html';
-    } else {
-        // Jika bukan admin, redirect ke main.html
-        window.location.href = 'main.html';
-    }
-});
