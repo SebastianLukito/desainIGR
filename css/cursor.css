@@ -103,3 +103,7 @@ footer {
 .sort-filter-container {
     cursor: url("../assets/cursor/tap.png"), auto;
 }
+
+.close-btn {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
