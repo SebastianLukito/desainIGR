@@ -11,6 +11,7 @@
     <link rel="icon" href="assets/img/iconjpg.jpg" type="image/jpg">
     <link rel="stylesheet" href="css/login.css" />
     <link rel="stylesheet" href="css/cursor.css" />
+    <link rel="stylesheet" href="css/disablerc.css" />
 </head>
 <body>
     <div class="background-container">
@@ -83,6 +84,13 @@
         <div class="spinner"></div>
         <p class="loading-text">Loading Bro. Sedang Download Aset.<br>Ini hanya pertama kali saja.</p>
     </div>
+
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup">
+            <h3>Klik Kanan Tidak Diizinkan</h3>
+            <p>Maaf, website ini tidak mengizinkan untuk klik kanan.</p>
+        </div>
+    </div>
         
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 
@@ -104,5 +112,6 @@
 
     <!-- Include login.js -->
     <script src="js/login.js"></script>
+    <script src="js/disablerc.js"></script>
 </body>
 </html>
