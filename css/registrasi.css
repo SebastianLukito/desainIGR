@@ -215,7 +215,6 @@ body {
     animation: motorMove 1.5s infinite;
     position: absolute;
     left: 0;
-    pointer-events: none;
     user-select: none;
 }
 
