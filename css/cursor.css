@@ -107,3 +107,11 @@ footer {
 .close-btn {
     cursor: url("../assets/cursor/tap.png"), auto;
 }
+
+#submitSecurityAnswer {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+#securityAnswer {
+    cursor: url("../assets/cursor/text.png"), auto;
+}

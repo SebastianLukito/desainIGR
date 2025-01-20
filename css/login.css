@@ -433,10 +433,10 @@ body {
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background: rgba(223, 223, 223, 0.52); /* Efek transparan */
+    backdrop-filter: blur(15px);
     margin: 12% auto; /* 15% from the top and centered */
     padding: 20px;
-    border: 1px solid #888;
     width: 620px; /* Could be more or less, depending on screen size */
     max-width: 700px;
     border-radius: 20px;
@@ -452,6 +452,7 @@ body {
     padding-inline: 20px;
     padding-block: 10px;
     border-radius: 10px;
+    user-select: none;
 }
 
 .modal-content h5 {
@@ -461,6 +462,7 @@ body {
     margin-top: -10px;
     padding-inline: 5px;
     border-radius: 10px;
+    user-select: none;
 }
 
 #securityQuestion {
@@ -468,21 +470,24 @@ body {
     margin-top: 20px;
     font-size: 20px;
     font-weight: bold;
+    user-select: none;
 }
 
 .close-button {
-    color: #aaa;
+    color: #000000;
     float: right;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
     margin-left: 20px;
+    margin-top: -10px;
 }
 
 .close-button:hover,
 .close-button:focus {
     color: black;
     text-decoration: none;
+    user-select: none;
 }
 
 #securityAnswer {
@@ -493,6 +498,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
+    user-select: none;
 }
 
 #submitSecurityAnswer {
@@ -515,6 +521,7 @@ body {
 .countdown-message {
     font-weight: bold;
     color: red;
+    user-select: none;
 }
 
 /* Media query untuk layar dengan lebar lebih kecil dari 1024px (tablet dan ponsel) */
