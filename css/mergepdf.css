@@ -29,7 +29,8 @@ body {
 }
 
 .left-panel, .right-panel {
-    background: #ffffff;
+    background: rgba(223, 223, 223, 0.14); /* Efek transparan */
+    backdrop-filter: blur(15px);
     padding: 20px;
     border-radius: 10px;
     flex: 1;
@@ -38,7 +39,8 @@ body {
 }
 
 .left-panel:hover, .right-panel:hover {
-    background: #f8f8f8;
+    background: rgba(223, 223, 223, 0.14); /* Efek transparan */
+    backdrop-filter: blur(16px);
 }
 
 .left-panel h2, .right-panel h2 {
@@ -49,6 +51,7 @@ body {
     background-color: rgb(255, 208, 0);
     padding-block: 10px;
     border-radius: 10px;
+    user-select: none;
 }
 
 .right-panel p{
@@ -57,6 +60,7 @@ body {
     background-color: rgb(255, 208, 0);
     padding: 10px;
     border-radius: 10px;
+    user-select: none;
 }
 
 .input-section, .button-section, .drop-section {
@@ -126,10 +130,12 @@ button:hover {
     margin-bottom: -5px;
     font-weight: bold;
     color: #000000;
+    user-select: none;
 }
 
 .penjelasan p {
     color: #4a4a4a;
+    user-select: none;
 }
 
 
@@ -148,15 +154,19 @@ button:hover {
 
 .qr-display p {
     margin: 0;
+    user-select: none;
 }
 
 .drop-section {
     width: 100%;
-    padding: 40px 20px;
-    border: 3px dashed #444;
+    min-height: 250px;
+    padding: 20px 20px;
     border-radius: 10px;
+    border: 5px solid #444;
     text-align: center;
-    background-color: #cecece;
+    align-content: center;
+    background: rgba(255, 255, 255, 0.72); /* Efek transparan */
+    backdrop-filter: blur(15px);
     background-image: url("/assets/img/45-degree-fabric-light.png");
     color: #000000;
     font-weight: bold;
@@ -164,11 +174,16 @@ button:hover {
     transition: background-color 0.3s ease, border-color 0.3s ease;
     box-sizing: border-box;
     position: relative; /* Add relative positioning for buttons */
+    max-height: 450px; /* Set maximum height for file list */
+    overflow-y: auto;
+    user-select: none;
 }
 
 .drop-section.dragover {
-    background-color: #333;
-    border-color: #888;
+    background-color: #fff6e7;
+    border: 5px dashed #444;
+    transform:scale(1.01);
+    color: #fff6e7;
 }
 
 #file-list {
@@ -199,6 +214,8 @@ button:hover {
     width: 40px;
     height: 40px;
     margin-left: 20px;
+    user-select: none;
+    pointer-events: none;
 }
 
 .file-item span {
@@ -238,6 +255,7 @@ footer {
     margin-top: 25px;
     color: #e0e0e0;
     text-align: center;
+    user-select: none;
 }
 
 .loading-popup {
@@ -342,6 +360,7 @@ footer {
     margin-bottom: 5px;
     color: black;
     font-weight: bold;
+    user-select: none;
 }
 
 .tab-section h6 {
@@ -354,6 +373,7 @@ footer {
     padding: 15px;
     background-color: #ffbb02;
     border-radius: 10px;
+    user-select: none;
 }
 
 .tab-list {
@@ -402,6 +422,7 @@ footer {
     border-radius: 10px;
     margin-top: 10px;
     z-index: 3;
+    user-select: none;
 }
 
 .tab-content.active p {
@@ -410,6 +431,7 @@ footer {
     padding: 10px;
     border-radius: 10px;
     font-weight: bold;
+    user-select: none;
 }
 
 .tab-content.active label {
