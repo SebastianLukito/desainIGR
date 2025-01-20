@@ -17,21 +17,15 @@
     transform: translate(-50%, -50%);
     background: rgba(255, 255, 255, 0.52); /* Efek transparan */
     backdrop-filter: blur(15px);
-    padding-block: 15px;
     padding-inline: 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     text-align: center;
 }
 
-.popup h3 {
-    color: black;
-    font-weight: bold;
-    margin-block: 5px;
-}
-
 .popup p {
     color: black;
     font-weight: bold;
+    margin-block: 15px;
 }
 
