@@ -122,7 +122,7 @@ button:hover {
     min-height: 250px;
     padding: 20px 20px;
     border-radius: 10px;
-    border: 2px solid #444;
+    border: 5px solid #444;
     text-align: center;
     align-content: center;
     background: rgba(255, 255, 255, 0.72); /* Efek transparan */
@@ -140,8 +140,10 @@ button:hover {
 }
 
 .drop-section.dragover {
-    background-color: #333;
-    border-color: #888;
+    background-color: #fff6e7;
+    border: 5px dashed #444;
+    transform:scale(1.01);
+    color: #fff6e7;
 }
 
 .penjelasan {

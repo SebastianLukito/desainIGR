@@ -26,8 +26,13 @@
 
 .popup h2 {
     margin: 0 0 10px 0;
+    color: black;
+    font-weight: bold;
 }
 
 .popup p {
     margin-top: 10px;
+    color: black;
+    font-weight: bold;
 }
+
