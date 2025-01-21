@@ -63,16 +63,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function clearLogoDrop() {
-        const existingFileName = logoDrop.querySelector('div'); // Periksa apakah elemen container ada
+        const existingFileName = logoDrop.querySelector('div');
         if (existingFileName) {
-            logoDrop.removeChild(existingFileName); // Hapus container jika ada
+            logoDrop.removeChild(existingFileName);
         }
-        const dropText = logoDrop.querySelector('p'); // Pastikan teks p ditampilkan kembali
+        const dropText = logoDrop.querySelector('p');
         if (dropText) {
             dropText.style.display = 'block';
         }
     }
-    
 
     function handleLogoFiles(files) {
         if (files.length > 1) {
@@ -85,42 +84,37 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
         logoInput.files = files;
-    
-        // Hapus gambar sebelumnya jika ada
+
         clearLogoDrop();
-    
+
         const dropText = logoDrop.querySelector('p');
         if (dropText) {
             dropText.style.display = 'none';
         }
-    
-        // Tampilkan nama file
+
         const fileName = document.createElement('span');
         fileName.textContent = file.name;
-    
-        // Tampilkan preview gambar
+
         const filePreview = document.createElement('img');
-        filePreview.style.maxWidth = '50px'; // Sesuaikan ukuran gambar
+        filePreview.style.maxWidth = '50px';
         filePreview.style.maxHeight = '50px';
         filePreview.style.marginLeft = '10px';
         filePreview.style.borderRadius = '5px';
-    
+
         const reader = new FileReader();
         reader.onload = function (e) {
             filePreview.src = e.target.result;
         };
         reader.readAsDataURL(file);
-    
-        // Tambahkan nama file dan preview gambar ke logoDrop
+
         const fileContainer = document.createElement('div');
         fileContainer.style.display = 'flex';
         fileContainer.style.alignItems = 'center';
         fileContainer.appendChild(fileName);
         fileContainer.appendChild(filePreview);
-    
+
         logoDrop.appendChild(fileContainer);
     }
-    
 
     function generateQRCode() {
         const url = document.getElementById('url').value;
@@ -128,12 +122,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const logoSize = parseInt(document.getElementById('logo-size').value);
         const padding = parseInt(document.getElementById('padding').value);
         const complexity = parseInt(document.getElementById('complexity').value);
-
-        console.log("URL:", url);
-        console.log("Logo File:", logoFile);
-        console.log("Logo Size:", logoSize);
-        console.log("Padding:", padding);
-        console.log("Complexity:", complexity);
 
         if (!url) {
             alert('Masukkan URL dulu bosku');
@@ -147,6 +135,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (canvas && qrDisplay.contains(canvas)) {
             qrDisplay.removeChild(canvas);
+        }
+
+        const existingNote = qrDisplay.querySelector('.qr-note');
+        if (existingNote) {
+            qrDisplay.removeChild(existingNote);
         }
 
         canvas = document.createElement('canvas');
@@ -173,6 +166,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
         qrDisplay.appendChild(canvas);
         qrCodeData = canvas;
+
+        const note = document.createElement('p');
+        note.textContent = "Silakan tes scan QR anda. Jika QR tidak bisa discan, mohon perkecil ukuran logo atau padding.";
+        note.classList.add('qr-note');
+        note.style.marginTop = "10px";
+        note.style.marginInline = "20px";
+        note.style.textAlign = "center";
+        note.style.color = "#000";
+        note.style.backgroundColor = "#ffffff";
+        note.style.padding = "10px";
+        note.style.borderRadius = "5px";
+        note.style.fontSize = "14px";
+        qrDisplay.appendChild(note);
     }
 
     function addLogoToCanvas(logoFile, canvas, logoSize, padding) {
@@ -234,8 +240,12 @@ document.addEventListener('DOMContentLoaded', function () {
             canvas = null;
         }
 
+        const existingNote = qrDisplay.querySelector('.qr-note');
+        if (existingNote) {
+            qrDisplay.removeChild(existingNote);
+        }
+
         clearLogoDrop();
-        
         qrCodeData = null;
     }
 
