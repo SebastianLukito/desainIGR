@@ -119,3 +119,7 @@ footer {
 .close-button {
     cursor: url("../assets/cursor/tap.png"), auto;
 }
+
+#backToLogin {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
