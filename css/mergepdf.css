@@ -199,7 +199,6 @@ button:hover {
     margin-bottom: 5px;
     display: flex;
     align-items: center;
-    border: 1px solid #555;
     transition: background-color 0.3s ease;
     cursor: default; /* Updated from 'move' to 'default' */
     justify-content: space-between; /* Add space between elements */
@@ -220,7 +219,7 @@ button:hover {
 
 .file-item span {
     display: inline-block;
-    max-width: 100px;
+    max-width: 500px;
     white-space: nowrap;
     overflow: hidden;
     /* text-overflow: ellipsis; */
