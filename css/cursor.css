@@ -115,3 +115,7 @@ footer {
 #securityAnswer {
     cursor: url("../assets/cursor/text.png"), auto;
 }
+
+.close-button {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
