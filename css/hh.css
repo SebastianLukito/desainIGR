@@ -251,3 +251,46 @@ footer {
     transform: translate(24px, 0);
     }
 }
+
+.left-panel.hidden {
+    display: none;
+}
+
+.right-panel.expanded {
+    flex: 2; /* Memperbesar panel kanan */
+    max-width: 100%; /* Memungkinkan menggunakan seluruh ruang */
+}
+
+.toggle-left-panel {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(15px);
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 0 20px 20px 0;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, 0.2);
+    width: 50px;
+    height: 50px;
+    padding-right: 10px;
+    transition: transform 1.0s ease, box-shadow 0.2s ease;
+    user-select: none;
+    background-color: rgba(255, 255, 255, 0.5); /* Default background */
+    background-size: 50%; /* Ukuran gambar */
+    background-repeat: no-repeat; /* Tidak mengulang gambar */
+    background-position: center; /* Gambar di tengah */
+    border: 1px solid #ccc; /* Tambahkan border untuk tampilan */
+}
+
+.toggle-left-panel:hover {
+    background-color: #ffffff;
+    scale: 1.05;
+    transition: transform 1.0s ease, box-shadow 0.2s ease;
+}
