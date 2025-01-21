@@ -171,3 +171,27 @@ footer {
 .name-item {
     cursor: url("../assets/cursor/tap.png"), auto;
 }
+
+.logo-section label {
+    cursor: url("../assets/cursor/cursor.png"), auto;
+}
+
+.logo-section input {
+    cursor: url("../assets/cursor/text.png"), auto;
+}
+
+.complexity-section input {
+    cursor: url("../assets/cursor/text.png"), auto;
+}
+
+.complexity-section label {
+    cursor: url("../assets/cursor/cursor.png"), auto;
+}
+
+.input-section label {
+    cursor: url("../assets/cursor/cursor.png"), auto;
+}
+
+.input-section input {
+    cursor: url("../assets/cursor/text.png"), auto;
+}
