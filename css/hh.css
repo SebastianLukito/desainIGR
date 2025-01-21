@@ -38,11 +38,11 @@ body {
 }
 
 .left-panel{
-    max-width: 450px;
+    max-width: 350px;
 }
 
 .right-panel {
-    min-width: 420px;
+    min-width: 520px;
 }
 
 .left-panel:hover, .right-panel:hover {
@@ -117,7 +117,7 @@ button:hover {
     text-align: center;
     position: relative;
     box-sizing: border-box;
-    margin-top: 325px;
+    margin-top: 355px;
 }
 
 .penjelasan h3 {
@@ -134,6 +134,7 @@ button:hover {
 }
 
 .sheet-editor {
+    scale: 0.95;
     background-color: #1a1a1a;
     background-image: url("/assets/img/45-degree-fabric-light.png");
     padding: 20px;
@@ -144,7 +145,8 @@ button:hover {
     box-sizing: border-box;
     min-height: 710px;
     max-height: 750px;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
+    margin-top: -25px;
 }
 
 footer {
