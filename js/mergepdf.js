@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fileIcon.alt = 'PDF Icon';
 
             const fileName = document.createElement('span');
-            fileName.textContent = truncateFileName(file.name, 15);
+            fileName.textContent = truncateFileName(file.name, 25);
 
             const buttonContainer = document.createElement('div');
             buttonContainer.classList.add('button-container');
