@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="css/compresspdf.css">
     <link rel="stylesheet" href="css/marquee.css">
     <link rel="stylesheet" href="css/logout.css">
+    <link rel="stylesheet" href="css/cursor.css">
+    <link rel="stylesheet" href="css/disablerc.css" />
 </head>
 <body>
     <div class="container">
@@ -74,6 +76,11 @@
         <div class="loading-spinner"></div>
         <p>Lagi diproses... Mohon tunggu ya mas...</p>
     </div>
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup">
+            <p>Maaf, website ini tidak mengizinkan untuk klik kanan.</p>
+        </div>
+    </div>
     <script defer src="js/compresspdf.js"></script>
     <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
@@ -81,5 +88,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
     <script src="js/cookie.js"></script> 
     <script src="js/logout.js"></script>
+    <script src="js/disablerc.js"></script>
 </body>
 </html>
