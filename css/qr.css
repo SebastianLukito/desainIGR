@@ -106,16 +106,37 @@ button:hover {
     color: #000000;
 }
 
+.button1-section button {
+    margin-top: 20px;
+    background-color: #ffd500;
+    color: #000000;
+}
+
+.button1-section button:hover {
+    margin-top: 20px;
+    background-color: #fc1515;
+    color: #ffffff;
+}
+
 .qr-display {
     background-color: #1a1a1a;
     background-image: url("/assets/img/45-degree-fabric-light.png");
-    padding-top: 100px;
     border: 1px solid #444;
     border-radius: 10px;
-    text-align: center;
+    min-height: 460px;
+    max-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    min-height: 500px;
-    max-height: 500px;
+    padding: 0; /* Hapus padding agar QR code sepenuhnya terpusat */
+    box-sizing: border-box; /* Memastikan margin dan border dihitung */
+    padding-block: 20px;
+}
+
+.qr-display canvas {
+    display: block;
+    margin: auto;
 }
 
 .qr-display p {
