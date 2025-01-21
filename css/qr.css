@@ -152,7 +152,7 @@ footer {
 
 .drop-section {
     width: 100%;
-    min-height: 250px;
+    height: 150px;
     padding: 20px 20px;
     border-radius: 10px;
     border: 5px solid #444;
@@ -167,7 +167,6 @@ footer {
     transition: background-color 0.3s ease, border-color 0.3s ease;
     box-sizing: border-box;
     position: relative; /* Add relative positioning for buttons */
-    max-height: 450px; /* Set maximum height for file list */
     overflow-y: auto;
     user-select: none;
     margin-bottom: 10px;
