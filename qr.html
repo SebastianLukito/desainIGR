@@ -9,6 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
     <link rel="stylesheet" href="css/marquee.css">
     <link rel="stylesheet" href="css/logout.css">
+    <link rel="stylesheet" href="css/cursor.css">
+    <link rel="stylesheet" href="css/disablerc.css" />
 </head>
 <body>
     <div class="container">
@@ -52,7 +54,7 @@
                 </div>
             </section>
             <section class="right-panel">
-                <h2>Hasilnya</h2>
+                <h2>HASIL</h2>
                 <div class="qr-display" id="qr-display">
                 </div>
                 <p>This engine is exclusively crafted for Indogrosir Design Team</p>
@@ -62,8 +64,14 @@
     <footer>
         <p>&copy; Marketing Indogrosir Sub Divisi Desain Grafis 2024</p>
     </footer>
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup">
+            <p>Maaf, website ini tidak mengizinkan untuk klik kanan.</p>
+        </div>
+    </div>
     <script defer src="js/qr.js"></script>
     <script src="js/cookie.js"></script> 
     <script src="js/logout.js"></script>
+    <script src="js/disablerc.js"></script>
 </body>
 </html>
