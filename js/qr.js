@@ -62,6 +62,18 @@ document.addEventListener('DOMContentLoaded', function () {
         handleLogoFiles(e.dataTransfer.files);
     });
 
+    function clearLogoDrop() {
+        const existingFileName = logoDrop.querySelector('div'); // Periksa apakah elemen container ada
+        if (existingFileName) {
+            logoDrop.removeChild(existingFileName); // Hapus container jika ada
+        }
+        const dropText = logoDrop.querySelector('p'); // Pastikan teks p ditampilkan kembali
+        if (dropText) {
+            dropText.style.display = 'block';
+        }
+    }
+    
+
     function handleLogoFiles(files) {
         if (files.length > 1) {
             alert('Hanya satu logo yang bisa dipilih.');
@@ -73,26 +85,42 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
         logoInput.files = files;
-
+    
         // Hapus gambar sebelumnya jika ada
         clearLogoDrop();
-
+    
         const dropText = logoDrop.querySelector('p');
         if (dropText) {
             dropText.style.display = 'none';
         }
+    
+        // Tampilkan nama file
         const fileName = document.createElement('span');
         fileName.textContent = file.name;
-        logoDrop.appendChild(fileName);
+    
+        // Tampilkan preview gambar
+        const filePreview = document.createElement('img');
+        filePreview.style.maxWidth = '50px'; // Sesuaikan ukuran gambar
+        filePreview.style.maxHeight = '50px';
+        filePreview.style.marginLeft = '10px';
+        filePreview.style.borderRadius = '5px';
+    
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            filePreview.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    
+        // Tambahkan nama file dan preview gambar ke logoDrop
+        const fileContainer = document.createElement('div');
+        fileContainer.style.display = 'flex';
+        fileContainer.style.alignItems = 'center';
+        fileContainer.appendChild(fileName);
+        fileContainer.appendChild(filePreview);
+    
+        logoDrop.appendChild(fileContainer);
     }
-
-    function clearLogoDrop() {
-        const existingFileName = logoDrop.querySelector('span');
-        if (existingFileName) {
-            logoDrop.removeChild(existingFileName);
-        }
-        logoDrop.querySelector('p').style.display = 'block';
-    }
+    
 
     function generateQRCode() {
         const url = document.getElementById('url').value;
