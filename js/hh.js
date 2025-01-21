@@ -67,13 +67,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
     toggleLeftPanelButton.addEventListener('click', togglePanelVisibility);
 
-    // Fungsi untuk mencegah scroll di luar iframe
+    let scrollbarOverlay;
+
     sheetEditor.addEventListener('mouseenter', () => {
-        document.body.style.overflow = 'hidden'; // Nonaktifkan scroll pada body
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+        document.body.style.overflow = 'hidden'; // Nonaktifkan scroll
+        document.body.style.paddingRight = `${scrollbarWidth}px`; // Tambahkan padding untuk mengkompensasi scrollbar
+
+        // Buat overlay hitam untuk menggantikan scrollbar
+        if (!scrollbarOverlay) {
+            scrollbarOverlay = document.createElement('div');
+            scrollbarOverlay.style.position = 'fixed';
+            scrollbarOverlay.style.top = '0';
+            scrollbarOverlay.style.right = '0';
+            scrollbarOverlay.style.width = `${scrollbarWidth}px`;
+            scrollbarOverlay.style.height = '100vh';
+            scrollbarOverlay.style.backgroundColor = 'black'; // Warna hitam total
+            scrollbarOverlay.style.zIndex = '1000';
+            document.body.appendChild(scrollbarOverlay);
+        }
     });
 
-    // Fungsi untuk mengembalikan scroll di luar iframe
     sheetEditor.addEventListener('mouseleave', () => {
-        document.body.style.overflow = 'auto'; // Aktifkan kembali scroll pada body
+        document.body.style.overflow = ''; // Aktifkan kembali scroll
+        document.body.style.paddingRight = ''; // Hapus padding
+
+        // Hapus overlay hitam jika ada
+        if (scrollbarOverlay) {
+            document.body.removeChild(scrollbarOverlay);
+            scrollbarOverlay = null;
+        }
     });
 });
