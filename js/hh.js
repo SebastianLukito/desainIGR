@@ -66,4 +66,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     toggleLeftPanelButton.addEventListener('click', togglePanelVisibility);
+
+    // Fungsi untuk mencegah scroll di luar iframe
+    sheetEditor.addEventListener('mouseenter', () => {
+        document.body.style.overflow = 'hidden'; // Nonaktifkan scroll pada body
+    });
+
+    // Fungsi untuk mengembalikan scroll di luar iframe
+    sheetEditor.addEventListener('mouseleave', () => {
+        document.body.style.overflow = 'auto'; // Aktifkan kembali scroll pada body
+    });
 });
