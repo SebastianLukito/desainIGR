@@ -115,15 +115,11 @@ body {
     border-radius: 10px;
     padding: 10px;
     transition: transform 0.3s ease;
-    user-select: none;
 }
 
 .buttonContainer .icon:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.buttonContainer img {
-    pointer-events: none;
+    transform: translateY(-11px);
 }
 
 .btn {
