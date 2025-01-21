@@ -167,3 +167,7 @@ footer {
 .tab-section input{
     cursor: url("../assets/cursor/text.png"), auto;
 }
+
+.name-item {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
