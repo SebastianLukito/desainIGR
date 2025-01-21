@@ -151,3 +151,19 @@ footer {
 .format-gambar .format-section button {
     cursor: url("../assets/cursor/tap.png"), auto;
 }
+
+.tab-section p {
+    cursor: url("../assets/cursor/cursor.png"), auto;
+}
+
+.tab-section h6 {
+    cursor: url("../assets/cursor/cursor.png"), auto;
+}
+
+.tab-section #percentage-slider{
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+.tab-section input{
+    cursor: url("../assets/cursor/text.png"), auto;
+}
