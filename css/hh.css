@@ -35,6 +35,7 @@ body {
     border-radius: 10px;
     flex: 1;
     box-sizing: border-box;
+    
 }
 
 .left-panel{
@@ -117,7 +118,7 @@ button:hover {
     text-align: center;
     position: relative;
     box-sizing: border-box;
-    margin-top: 355px;
+    margin-top: 15px;
 }
 
 .penjelasan h3 {
@@ -143,7 +144,7 @@ button:hover {
     text-align: center;
     position: relative;
     box-sizing: border-box;
-    min-height: 710px;
+    min-height: 310px;
     max-height: 750px;
     margin-bottom: 0px;
     margin-top: -25px;
