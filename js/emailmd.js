@@ -350,8 +350,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Tampilkan email terpilih di panel kanan
     // ---------------------------------------------
     function displayEmails() {
-    const emailList = selectedNames.map(obj => obj.email);
-    emailDisplay.textContent = emailList.join('; ');
+        const emailList = selectedNames.map(obj => obj.email);
+        emailDisplay.textContent = emailList.join('; ') + ';';
     }
 
     // ---------------------------------------------
