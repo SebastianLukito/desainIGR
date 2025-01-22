@@ -30,7 +30,8 @@ body {
 }
 
 .left-panel, .right-panel {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.2); /* Efek transparan */
+    backdrop-filter: blur(6px);
     padding: 20px;
     border-radius: 10px;
     flex: 1;
@@ -39,7 +40,8 @@ body {
 }
 
 .left-panel:hover, .right-panel:hover {
-    background: #f8f8f8;
+    background: rgba(255, 255, 255, 0.2); /* Efek transparan */
+    backdrop-filter: blur(6px);
 }
 
 .left-panel h2, .right-panel h2 {
@@ -50,6 +52,7 @@ body {
     background-color: rgb(255, 208, 0);
     padding-block: 10px;
     border-radius: 10px;
+    user-select: none;
 }
 
 /* Bagian search bar, name list, dsb. */
@@ -88,6 +91,7 @@ body {
     border: 1px solid #555;
     transition: background-color 0.3s ease;
     cursor: pointer;
+    user-select: none;
 }
 
 .name-item:hover {
@@ -128,6 +132,7 @@ body {
     transition: background-color 0.5s ease;
     font-size: 0.75em;
     z-index: 1;
+    user-select: none;
 }
 
 .tab-item:hover {
@@ -150,6 +155,8 @@ body {
     background-color: rgb(255, 208, 0);
     padding: 10px;
     border-radius: 10px;
+    user-select: none;
+    margin-top: 290px;
 }
 
 .email-display {
@@ -166,6 +173,7 @@ body {
     overflow-y: auto;
     margin-bottom: 20px;
     color: #fff;
+    user-select: none;
 }
 
 .copy-btn {
@@ -304,6 +312,7 @@ footer {
     font-size: 0.75em;
     color: #000;
     transition: background-color 0.3s ease;
+    user-select: none;
 }
 
 .sub-tab-item.active {
@@ -320,9 +329,9 @@ footer {
     width: 100%;
     padding: 5px;
     margin-bottom: 10px;
-    background-color: rgb(70, 70, 70);
+    background-color: rgb(135, 212, 248);
     background-image: url("/assets/img/45-degree-fabric-light.png");
-    color: #e0e0e0;
+    color: #000000;
     border: none;
     border-radius: 5px;
     font-weight: bold;
@@ -334,17 +343,29 @@ footer {
     align-items: center;
     gap: 10px;
     text-align: center;
+    font-size: 15px;
 }
 
 .clear-btn:hover {
     transform: scale(1.01);
+    background-color: rgb(250, 234, 9);
+    background-image: url("/assets/img/45-degree-fabric-light.png");
+    color: #000000;
 }
 
 .clear-btn p {
     margin: 0;
     background-color: transparent;
-    color: #ffffff;
-    font-size: 15px;
+    color: #000000;
+    user-select: none;
+    
+}
+
+.clear-btn p:hover {
+    margin: 0;
+    background-color: transparent;
+    color: #000000;
+    
 }
 
 /* Popup overlay */
@@ -372,6 +393,7 @@ footer {
     text-align: center;
     position: relative;
     cursor: auto;    /* agar mouse tidak berubah jadi pointer jika diarahkan ke konten */
+    user-select: none;
 }
 
 /* Teks di dalam popup */

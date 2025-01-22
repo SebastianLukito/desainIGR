@@ -207,3 +207,11 @@ footer {
 .tab-content.active label {
     cursor: url("../assets/cursor/cursor.png"), auto;
 }
+
+.sub-tab-item {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+.sub-tab-item.active {
+    cursor: url("../assets/cursor/cursor.png"), auto;
+}
