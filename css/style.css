@@ -115,6 +115,7 @@ body {
     border-radius: 10px;
     padding: 10px;
     transition: transform 0.3s ease;
+    user-select: none;
 }
 
 .buttonContainer .icon:hover {
