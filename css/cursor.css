@@ -195,3 +195,15 @@ footer {
 .input-section input {
     cursor: url("../assets/cursor/text.png"), auto;
 }
+
+.tab-item {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+.tab-item.active {
+    cursor: url("../assets/cursor/cursor.png"), auto;
+}
+
+.tab-content.active label {
+    cursor: url("../assets/cursor/cursor.png"), auto;
+}
