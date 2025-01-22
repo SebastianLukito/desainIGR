@@ -93,7 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function displayEmails() {
         const emailList = selectedNames.map(obj => obj.email);
-        emailDisplay.textContent = emailList.join('; ') + ';';
+        if (emailList.length > 0) {
+            emailDisplay.textContent = emailList.join('; ') + ';';
+        } else {
+            emailDisplay.textContent = ''; // Kosongkan jika tidak ada email
+        }
     }
 
     // Event listener: pencarian
