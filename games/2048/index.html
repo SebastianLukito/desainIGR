@@ -6,6 +6,8 @@
 
   <link href="style/main.css" rel="stylesheet" type="text/css">
   <link rel="icon" href="../../assets/img/iconjpg.jpg" type="image/jpg">
+  <link rel="stylesheet" href="../../css/cursor.css">
+  <link rel="stylesheet" href="../../css/disablerc-game.css" />
 </head>
 <body>
   <div class="container" style="float: left;">
@@ -83,6 +85,13 @@
       </tbody>
     </table>
   </div>
+
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup">
+        <p>Maaf, website ini tidak mengizinkan untuk klik kanan.</p>
+    </div>
+  </div>
+
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
@@ -105,5 +114,6 @@
   <script src="js/game_manager.js"></script>
   <script src="js/application.js"></script>
   <script src="js/leaderboard.js"></script>
+  <script src="../../js/disablerc.js"></script>
 </body>
 </html>
