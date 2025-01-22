@@ -219,3 +219,7 @@ footer {
 .clear-btn {
     cursor: url("../assets/cursor/tap.png"), auto;
 }
+
+.button-section button {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
