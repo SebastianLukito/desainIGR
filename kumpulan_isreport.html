@@ -7,6 +7,8 @@
     <title>Kumpulan ISReport</title>
     <link rel="icon" href="assets/img/iconjpg.jpg" type="image/jpg">
     <link rel="stylesheet" href="css/ISReport.css" />
+    <link rel="stylesheet" href="css/cursor.css">
+    <link rel="stylesheet" href="css/disablerc.css" />
 </head>
 <body>
     <div class="marquee" id="marquee">
@@ -86,6 +88,11 @@
     <footer>
         <p>&copy; Marketing Indogrosir Sub Divisi Desain Grafis 2024</p>
     </footer>
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup">
+            <p>Maaf, website ini tidak mengizinkan untuk klik kanan.</p>
+        </div>
+    </div>
     <script src="js/ISReport.js"></script>
     <script>
         // Daftar username admin
@@ -133,5 +140,6 @@
             }
         });
     </script>
+    <script src="js/disablerc.js"></script>
 </body>
 </html>
