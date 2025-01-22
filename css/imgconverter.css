@@ -29,7 +29,8 @@ body {
 }
 
 .left-panel, .right-panel {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.2); /* Efek transparan */
+    backdrop-filter: blur(6px);
     padding: 20px;
     border-radius: 10px;
     flex: 1;
@@ -38,7 +39,8 @@ body {
 }
 
 .left-panel:hover, .right-panel:hover {
-    background: #fffef8;
+    background: rgba(255, 255, 255, 0.2); /* Efek transparan */
+    backdrop-filter: blur(6px);
 }
 
 .left-panel h2, .right-panel h2 {
@@ -49,6 +51,7 @@ body {
     background-color: rgb(255, 208, 0);
     padding-block: 10px;
     border-radius: 10px;
+    user-select: none;
 }
 
 .right-panel p{
@@ -57,6 +60,7 @@ body {
     background-color: rgb(255, 208, 0);
     padding: 10px;
     border-radius: 10px;
+    user-select: none;
 }
 
 .input-section, .button-section, .drop-section, .format-section {
@@ -69,6 +73,7 @@ label {
     margin-bottom: 5px;
     font-weight: bold;
     color: #333;
+    user-select: none;
 }
 
 input[type="number"] {
@@ -93,6 +98,7 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
     box-sizing: border-box;
+    user-select: none;
 }
 
 button.active {
@@ -131,15 +137,19 @@ button:hover {
 
 .qr-display p, .file-display p {
     margin: 0;
+    user-select: none;
 }
 
 .drop-section {
     width: 100%;
-    padding: 40px 20px;
-    border: 3px dashed #444;
+    min-height: 200px;
+    padding: 20px 20px;
     border-radius: 10px;
+    border: 5px solid #444;
     text-align: center;
-    background-color: #cecece;
+    align-content: center;
+    background: rgba(255, 255, 255, 0.72); /* Efek transparan */
+    backdrop-filter: blur(15px);
     background-image: url("/assets/img/45-degree-fabric-light.png");
     color: #000000;
     font-weight: bold;
@@ -147,13 +157,16 @@ button:hover {
     transition: background-color 0.3s ease, border-color 0.3s ease;
     box-sizing: border-box;
     position: relative; /* Add relative positioning for buttons */
-    max-height: 550px; /* Set maximum height for file list */
+    max-height: 450px; /* Set maximum height for file list */
     overflow-y: auto;
+    user-select: none;
 }
 
 .drop-section.dragover {
-    background-color: #333;
-    border-color: #888;
+    background-color: #fff6e7;
+    border: 5px dashed #444;
+    transform:scale(1.01);
+    color: #fff6e7;
 }
 
 .format-gambar {
@@ -176,6 +189,7 @@ button:hover {
     margin-inline: 60px;
     padding-block: 5px;
     border-radius: 10px;
+    user-select: none;
 }
 
 #file-list, #output-file-list {
@@ -195,6 +209,7 @@ button:hover {
     transition: background-color 0.3s ease;
     cursor: default; /* Updated from 'move' to 'default' */
     justify-content: flex-start; /* Align items to the start */
+    user-select: none;
 }
 
 .file-item:hover {
@@ -205,6 +220,8 @@ button:hover {
     width: 32px;
     height: 32px;
     margin-right: 10px;
+    user-select: none;
+    pointer-events: none;
 }
 
 .file-item span {
@@ -232,10 +249,12 @@ button:hover {
     margin-bottom: -5px;
     font-weight: bold;
     color: #000000;
+    user-select: none;
 }
 
 .penjelasan p {
     color: #4a4a4a;
+    user-select: none;
 }
 
 
@@ -244,6 +263,7 @@ footer {
     margin-top: 25px;
     color: #e0e0e0;
     text-align: center;
+    user-select: none;
 }
 
 .loading-popup {
