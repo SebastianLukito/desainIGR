@@ -40,6 +40,7 @@ body {
 .marquee p {
     display: inline-block;
     animation: marquee 20s linear infinite alternate;
+    user-select: none;
 }
 
 .marquee img.marquee-logo {
@@ -50,6 +51,8 @@ body {
     padding-block: 1px;
     background-color: #ffffff;
     border-radius: 2px;
+    user-select: none;
+    pointer-events: none;
 }
 
 @keyframes marquee {
@@ -88,6 +91,7 @@ body {
     text-decoration: none;
     display: inline-block;
     transition: background-color 0.3s ease, color 0.3s ease;
+    user-select: none;
 }
 
 .btn:hover {
