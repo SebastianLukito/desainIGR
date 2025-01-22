@@ -215,3 +215,7 @@ footer {
 .sub-tab-item.active {
     cursor: url("../assets/cursor/cursor.png"), auto;
 }
+
+.clear-btn {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
