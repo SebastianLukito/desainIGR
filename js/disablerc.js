@@ -51,11 +51,44 @@ function createWhiteOverlay() {
     overlay.style.height = '100%';
     overlay.style.backgroundColor = 'white';
     overlay.style.zIndex = '9999';
+    overlay.style.display = 'flex';
+    overlay.style.flexDirection = 'column';
+    overlay.style.justifyContent = 'center';
+    overlay.style.alignItems = 'center';
+    overlay.style.fontFamily = 'Arial, sans-serif';
+
+    // Tambahkan teks utama
+    const text = document.createElement('div');
+    text.innerText = 'Dilarang foto-foto di sini guys';
+    text.style.fontSize = '24px';
+    text.style.fontWeight = 'bold';
+    text.style.color = 'black';
+    text.style.marginBottom = '20px';
+    overlay.appendChild(text);
+
+    // Tambahkan countdown
+    const countdown = document.createElement('div');
+    countdown.style.fontSize = '20px';
+    countdown.style.color = 'black';
+    overlay.appendChild(countdown);
+
+    let remainingTime = 10; // 10 detik countdown
+    countdown.innerText = `Tutup dalam ${remainingTime} detik...`;
+
+    const interval = setInterval(() => {
+        remainingTime--;
+        countdown.innerText = `Tutup dalam ${remainingTime} detik...`;
+
+        if (remainingTime <= 0) {
+            clearInterval(interval);
+        }
+    }, 1000);
+
     document.body.appendChild(overlay);
 
     setTimeout(() => {
         document.body.removeChild(overlay);
-    }, 2000);
+    }, 10000); // Durasi 10 detik
 }
 
 // Disable Screenshoot bro
