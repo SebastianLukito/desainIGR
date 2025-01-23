@@ -55,7 +55,7 @@ function createWhiteOverlay() {
 
     setTimeout(() => {
         document.body.removeChild(overlay);
-    }, 1000);
+    }, 2000);
 }
 
 // Disable Screenshoot bro
@@ -63,7 +63,7 @@ document.addEventListener('keyup', (e) => {
     if (e.key == 'PrintScreen') {
         navigator.clipboard.writeText('');
         createWhiteOverlay();
-        showPopup('Maaf, SS tidak diizinkan.');
+        showPopup('Maaf, screenshoot tidak diizinkan.');
     }
     
 });
@@ -81,7 +81,7 @@ document.addEventListener('keydown', (e) => {
         navigator.clipboard.writeText('');
         e.stopImmediatePropagation();
         createWhiteOverlay();
-        showPopup('Maaf, SS tidak diizinkan.');
+        showPopup('Maaf, screenshoot tidak diizinkan.');
     }
 });
 
