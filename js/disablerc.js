@@ -1,30 +1,90 @@
-// Ambil elemen overlay
 const popupOverlay = document.getElementById('popupOverlay');
+const popupText = document.querySelector('.popup p');
 
-// Fungsi untuk mencegah klik kanan dan menampilkan pop-up
+// Fungsi untuk menampilkan pop-up dengan pesan kustom
+function showPopup(message) {
+    popupText.textContent = message;
+    popupOverlay.style.display = 'block';
+}
+
+// Mencegah klik kanan dan menampilkan pop-up
 document.addEventListener('contextmenu', function (event) {
-    event.preventDefault(); // Cegah menu klik kanan
-    popupOverlay.style.display = 'block'; // Tampilkan pop-up
+    event.preventDefault();
+    showPopup('Maaf, website ini tidak mengizinkan untuk klik kanan.');
 });
 
 // Tutup pop-up ketika user klik di luar area pop-up
 popupOverlay.addEventListener('click', function (event) {
-    if (event.target === popupOverlay) { // Pastikan klik di luar pop-up
+    if (event.target === popupOverlay) {
         popupOverlay.style.display = 'none';
     }
 });
 
+
+// Disable berbagai shortcut keyboard untuk Developer Tools
 document.addEventListener('keydown', function (e) {
     // Disable F12
     if (e.key === 'F12') {
         e.preventDefault();
+        showPopup('Maaf, Developer Tools tidak diizinkan.');
     }
-    // Disable Ctrl+Shift+I
-    if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+
+    // Disable Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+Shift+J
+    if (e.ctrlKey && e.shiftKey && ['I', 'C', 'J', 'K'].includes(e.key)) {
         e.preventDefault();
+        showPopup('Maaf, Developer Tools tidak diizinkan.');
     }
+
     // Disable Ctrl+U
     if (e.ctrlKey && e.key === 'u') {
         e.preventDefault();
+        showPopup('Maaf, View Source tidak diizinkan.');
     }
 });
+
+function createWhiteOverlay() {
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backgroundColor = 'white';
+    overlay.style.zIndex = '9999';
+    document.body.appendChild(overlay);
+
+    setTimeout(() => {
+        document.body.removeChild(overlay);
+    }, 1000);
+}
+
+// Disable Screenshoot bro
+document.addEventListener('keyup', (e) => {
+    if (e.key == 'PrintScreen') {
+        navigator.clipboard.writeText('');
+        createWhiteOverlay();
+        showPopup('Maaf, SS tidak diizinkan.');
+    }
+    
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.key == 'p') {
+        showPopup('Maaf, print halaman tidak diizinkan.');
+        e.preventDefault();
+        
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.shiftKey && e.metaKey) {
+        navigator.clipboard.writeText('');
+        e.stopImmediatePropagation();
+        createWhiteOverlay();
+        showPopup('Maaf, SS tidak diizinkan.');
+    }
+});
+
+document.onkeydown = function(e){ 
+    console.log(e.key);
+}
