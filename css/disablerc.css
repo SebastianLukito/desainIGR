@@ -27,5 +27,6 @@
     color: black;
     font-weight: bold;
     margin-block: 15px;
+    user-select: none;
 }
 

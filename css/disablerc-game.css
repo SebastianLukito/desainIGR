@@ -26,11 +26,13 @@
 }
 
 .popup p {
-    color: rgb(0, 0, 0);
+    color: black;
     font-weight: bold;
     margin-block: 15px;
-    
+    user-select: none;
 }
+
+
 
 .game-container .game-message .lower .keep-playing-button {
     user-select: none;
