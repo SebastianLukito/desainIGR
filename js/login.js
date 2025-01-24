@@ -128,6 +128,22 @@ window.addEventListener('load', () => {
     }
 });
 
+function recordLogin(username) {
+    if (!username) return; // Pastikan username valid
+    db.collection("visitors")
+        .add({
+            username: username,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(), // Waktu login
+        })
+        .then(() => {
+            console.log(`Statistik login untuk "${username}" berhasil dicatat!`);
+        })
+        .catch((error) => {
+            console.error("Error mencatat statistik login:", error);
+        });
+}
+
+
 // Fungsi login dengan Firebase Firestore
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -150,6 +166,8 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             // Jika username dan password cocok
             // Simpan username dalam cookie
             setCookie('username', username, 1440); // Menyimpan username selama 1 hari (1440 menit)
+
+            recordLogin(username);
 
             // Reset percobaan gagal setelah login sukses
             resetFailedAttempts();
@@ -285,6 +303,7 @@ async function signInWithGoogle() {
     
         // Redirect ke halaman sesuai role
         // (Sesuaikan logika, misal cek admin / user)
+        recordLogin(email); // Catat statistik login
         window.location.href = 'loading.html';
     
     } catch (error) {
