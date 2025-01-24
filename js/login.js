@@ -167,24 +167,25 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             // Simpan username dalam cookie
             setCookie('username', username, 1440); // Menyimpan username selama 1 hari (1440 menit)
 
-            recordLogin(username);
-
             // Reset percobaan gagal setelah login sukses
             resetFailedAttempts();
 
             // Cek jika login sebagai admin utama
             if (adminUsername.includes(username.toLowerCase())) {
                 setCookie('loggedIn', 'admin', 1440); // Set cookie untuk login status admin utama
+                recordLogin(username);
                 window.location.href = 'main_admin.html';
             }
             // Cek jika login sebagai admin biasa
             else if (allowedUsernames.includes(username.toLowerCase())) {
                 setCookie('loggedIn', 'admin', 1440); // Set cookie untuk login status admin
+                recordLogin(username);
                 window.location.href = 'admin.html';
             }
             // Jika bukan admin, redirect ke halaman pengguna biasa
             else {
                 setCookie('loggedIn', 'user', 1440); // Set cookie untuk login status pengguna biasa
+                recordLogin(username);
                 window.location.href = 'loading.html';
             }
         } else {
