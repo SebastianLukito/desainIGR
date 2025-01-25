@@ -715,10 +715,10 @@ function updateMaxDayMonth() {
 
     // Ganti ke .onclick = ... agar tidak menumpuk listener
     dayBox.onclick = () => {
-        scrambleCount("maxDayCount", maxDayCount, 1000);
+        scrambleCount("maxDayCount", maxDayCount, 2000);
     };
     monthBox.onclick = () => {
-        scrambleCount("maxMonthCount", maxMonthCount, 1000);
+        scrambleCount("maxMonthCount", maxMonthCount, 2000);
     };
 }
 
@@ -726,7 +726,7 @@ function updateMaxDayMonth() {
  * Animasi “scramble” angka selama `duration` ms,
  * lalu menampilkan `finalValue` di element .info-count.
  */
-function scrambleCount(elementId, finalValue, duration = 1000) {
+function scrambleCount(elementId, finalValue, duration) {
     const element = document.getElementById(elementId);
     const startTime = performance.now();
 
@@ -736,7 +736,7 @@ function scrambleCount(elementId, finalValue, duration = 1000) {
 
         if (elapsed < duration) {
             // Tampilkan angka acak antara 0 sampai finalValue
-            let randomVal = Math.floor(Math.random() * (finalValue + 1));
+            let randomVal = Math.floor(Math.random() * (finalValue + 1) * 1000000);
             element.textContent = randomVal;
         } else {
             clearInterval(interval);
