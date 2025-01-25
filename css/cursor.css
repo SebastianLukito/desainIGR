@@ -260,3 +260,7 @@ footer {
 .dropdown select {
     cursor: url("../assets/cursor/tap.png"), auto;
 }
+
+.info-count {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}

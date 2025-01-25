@@ -64,12 +64,15 @@ body {
     padding-inline: 20%;
     border-radius: 10px;
     font-weight: bold;
+    user-select: none;
 }
 
 footer {
     color: #e0e0e0;
     text-align: center;
     margin-top: 25px;
+    margin-bottom: 30px;
+    user-select: none;
 }
 
 /* Gaya tabel pengunjung */
@@ -84,12 +87,14 @@ footer {
     border: 1px solid #000;
     text-align: center;
     padding: 10px;
+    user-select: none;
 }
 
 #visitorTable th {
     background-color: rgb(255, 208, 0);
     color: #000;
     font-weight: bold;
+    user-select: none;
 }
 
 #visitorTable tr:nth-child(odd) {
@@ -155,6 +160,7 @@ footer {
     font-weight: bold;
     margin-right: 10px;
     color: #000;
+    user-select: none;
 }
 
 .dropdown select {
@@ -166,6 +172,7 @@ footer {
     color: #000;
     cursor: pointer;
     transition: all 0.43s ease;
+    user-select: none;
 }
 
 .dropdown select:hover {
@@ -206,6 +213,7 @@ footer {
     background-color: #f9f9f9;
     color: #000;
     cursor: pointer;
+    user-select: none;
 }
 
 .pagination button:hover {
@@ -236,6 +244,7 @@ footer {
     font-weight: bold;
     cursor: pointer;
     margin-top: 15px;
+    user-select: none;
 }
 .export-btn:hover {
     transform: scale(1.05);
@@ -273,6 +282,7 @@ footer {
     min-width: 110px;      /* Biar tidak terlalu kecil card-nya */
     text-align: center;
     flex: 1 1 auto;        /* Biarkan lebarnya menyesuaikan */
+    user-select: none;
 }
 
 .summary-card-lp h3 {
@@ -331,6 +341,7 @@ footer {
     border-radius: 10px;
     margin-bottom: -5px;
     margin-top: 5px;
+    user-select: none;
 }
 
 .date-filter-section input[type="date"] {
@@ -378,6 +389,7 @@ footer {
     align-items: center;    /* Vertically center */
     gap: 1rem;              /* Jarak antar elemen */
     margin-bottom: 20px;    /* Jarak ke konten di bawahnya (opsional) */
+    user-select: none;
 }
 
 .dateTimeBox {
@@ -406,4 +418,76 @@ footer {
 #currentDateTime {
     font-family: "DSDigital", sans-serif;
     letter-spacing: 1px;   
+}
+
+.pengunjung-terbanyak {
+    background-color: rgb(10, 66, 101);
+    background-image: url("/assets/img/45-degree-fabric-light.png");
+    padding-top: 5px;
+    padding-bottom: 2px;
+    padding-inline: 20px;
+    border-radius: 10px;
+    height: auto;
+    margin-bottom: 20px;
+    user-select: none;
+}
+
+.pengunjung-terbanyak h3 {
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #050505;
+    background-color: rgb(255, 255, 255);
+    padding-block: 10px;
+    padding-inline: 5px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.top-info-container {
+    display: flex; 
+    justify-content: space-around; /* Atau space-between, dsb. */
+    margin-top: 10px;
+    margin-bottom: 15px; 
+}
+
+.info-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #050505;
+    background-color: rgb(230, 255, 236);
+    box-shadow: 0 5px 7px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    padding: 10px;
+    width: 227px; /* Masing-masing kolom lebar 45% agar sejajar */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-inline: 4px;
+}
+
+
+
+.info-label {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.info-count {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #000000;
+    background-color: rgb(233, 233, 233);
+    border: 3px solid #000;
+    border-radius: 10px;
+    text-align: center;
+    width: 200px;
+    padding: 10px;
+    font-family: "DSDigital", sans-serif;
+    letter-spacing: 1px;   
+    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.info-count:hover {
+    transform: translateY(-2px)
 }
