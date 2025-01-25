@@ -38,6 +38,8 @@ function fetchVisitorData() {
 
             // Panggil ringkasan
             updateSummary();
+
+            updateMaxDayMonth();
         });
 }
 
@@ -618,3 +620,127 @@ updateDateTime();
 
 // Update setiap 1 detik (1000 ms)
 setInterval(updateDateTime, 1000);
+
+function updateMaxDayMonth() {
+    // --- 1) Hitung HARI dengan pengunjung terbanyak ---
+    const dayMap = {};  // { "YYYY-MM-DD": count }
+
+    visitorData.forEach(visitor => {
+        const dateObj = new Date(visitor.timestamp);
+        const yyyy = dateObj.getFullYear();
+        let mm = dateObj.getMonth() + 1;
+        let dd = dateObj.getDate();
+
+        if (mm < 10) mm = "0" + mm;
+        if (dd < 10) dd = "0" + dd;
+
+        const dateKey = `${yyyy}-${mm}-${dd}`;
+        dayMap[dateKey] = (dayMap[dateKey] || 0) + 1;
+    });
+
+    // Cari key dengan count terbesar
+    let maxDayKey = null;
+    let maxDayCount = 0;
+    for (const key in dayMap) {
+        if (dayMap[key] > maxDayCount) {
+            maxDayCount = dayMap[key];
+            maxDayKey = key;
+        }
+    }
+
+    // Konversi jadi format "Sabtu, 4 Januari 2025"
+    let dayLabel = "";
+    if (maxDayKey) {
+        const [y, m, d] = maxDayKey.split("-");
+        const dateObj = new Date(+y, +m - 1, +d);
+
+        const dayNames = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+        const monthNames = [
+            "Januari","Februari","Maret","April","Mei","Juni",
+            "Juli","Agustus","September","Oktober","November","Desember"
+        ];
+
+        const dayName = dayNames[dateObj.getDay()];
+        const monthName = monthNames[+m - 1];
+        dayLabel = `${dayName}, ${+d} ${monthName} ${+y}`; 
+    }
+
+    // Tampilkan di DOM
+    document.getElementById("maxDayLabel").textContent = dayLabel || "-";
+    document.getElementById("maxDayCount").textContent = maxDayCount || "0";
+
+    // --- 2) Hitung BULAN dengan pengunjung terbanyak ---
+    const monthMap = {}; // { "YYYY-MM": count }
+
+    visitorData.forEach(visitor => {
+        const dateObj = new Date(visitor.timestamp);
+        const yyyy = dateObj.getFullYear();
+        let mm = dateObj.getMonth() + 1;
+        if (mm < 10) mm = "0" + mm;
+
+        const monthKey = `${yyyy}-${mm}`;
+        monthMap[monthKey] = (monthMap[monthKey] || 0) + 1;
+    });
+
+    let maxMonthKey = null;
+    let maxMonthCount = 0;
+    for (const key in monthMap) {
+        if (monthMap[key] > maxMonthCount) {
+            maxMonthCount = monthMap[key];
+            maxMonthKey = key;
+        }
+    }
+
+    // Konversi ke format "Januari 2025"
+    let monthLabel = "";
+    if (maxMonthKey) {
+        const [y2, m2] = maxMonthKey.split("-");
+        const dateObj = new Date(+y2, +m2 - 1, 1);
+
+        const monthNames = [
+            "Januari","Februari","Maret","April","Mei","Juni",
+            "Juli","Agustus","September","Oktober","November","Desember"
+        ];
+        monthLabel = `${monthNames[+m2 - 1]} ${+y2}`;
+    }
+
+    // Tampilkan di DOM
+    document.getElementById("maxMonthLabel").textContent = monthLabel || "-";
+    document.getElementById("maxMonthCount").textContent = maxMonthCount || "0";
+
+    // --- 3) Pasang event listener untuk animasi scramble ---
+    // (Jika data berubah, kita update event listener agar memakai finalValue terbaru)
+    const dayBox = document.getElementById("maxDayBox");
+    const monthBox = document.getElementById("maxMonthBox");
+
+    // Ganti ke .onclick = ... agar tidak menumpuk listener
+    dayBox.onclick = () => {
+        scrambleCount("maxDayCount", maxDayCount, 1000);
+    };
+    monthBox.onclick = () => {
+        scrambleCount("maxMonthCount", maxMonthCount, 1000);
+    };
+}
+
+/**
+ * Animasi “scramble” angka selama `duration` ms,
+ * lalu menampilkan `finalValue` di element .info-count.
+ */
+function scrambleCount(elementId, finalValue, duration = 1000) {
+    const element = document.getElementById(elementId);
+    const startTime = performance.now();
+
+    const interval = setInterval(() => {
+        const now = performance.now();
+        const elapsed = now - startTime;
+
+        if (elapsed < duration) {
+            // Tampilkan angka acak antara 0 sampai finalValue
+            let randomVal = Math.floor(Math.random() * (finalValue + 1));
+            element.textContent = randomVal;
+        } else {
+            clearInterval(interval);
+            element.textContent = finalValue;
+        }
+    }, 50);
+}
