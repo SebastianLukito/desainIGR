@@ -3,7 +3,7 @@ let visitorData = [];   // data asli dari Firestore
 let filteredData = [];  // data setelah difilter
 let chartInstance = null;
 let currentPage = 1; // Halaman saat ini
-const rowsPerPage = 12; // Jumlah baris per halaman
+const rowsPerPage = 14; // Jumlah baris per halaman
 let top5ChartInstance = null;
 
 // Variabel global untuk menyimpan date range
