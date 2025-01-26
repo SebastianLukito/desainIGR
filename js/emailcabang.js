@@ -747,13 +747,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Failed to copy text: ', err);
             });
 
-        // Klik di luar untuk menyembunyikan panel kanan dan tampilkan GIF motor
-        document.addEventListener('click', (e) => {
-            if (!rightPanel.contains(e.target) && !nameListContainer.contains(e.target)) {
-                rightPanel.classList.remove('active');
-                motorContainer.classList.remove('hidden');
-            }
-        });
     }
 
     function showPopup(message) {
@@ -768,6 +761,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Klik di luar konten = tutup popup
         popupOverlay.addEventListener('click', () => {
+            // rightPanel.classList.remove('active');
+            // motorContainer.classList.remove('hidden');
             popupOverlay.style.display = 'none';
         });
         
