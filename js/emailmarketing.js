@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyBtn = document.getElementById('copy-btn');
     const selectAllBtn = document.getElementById('selectAllBtn');
 
+    const rightPanel = document.querySelector('.right-panel'); 
+    const motorContainer = document.querySelector('.motor-container');
+
     // Variabel global data
     let allData = {};
     // Menampung nama-nama (lintas divisi) yang dipilih
@@ -63,6 +66,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Klik item => toggle pilih/batal
             nameItem.addEventListener('click', () => {
+                setTimeout(() => {
+                    rightPanel.classList.add('active');
+                    motorContainer.classList.add('hidden');
+                }, 10); // Delay untuk memastikan transisi terlihat
                 if (nameItem.classList.contains('selected')) {
                     nameItem.classList.remove('selected');
                     removeSelectedName(item);
@@ -128,6 +135,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Tombol "Select All" / "Unselect All"
     selectAllBtn.addEventListener('click', () => {
+        rightPanel.classList.remove('active'); // Reset animasi sebelum diaktifkan kembali
+        motorContainer.classList.add('hidden'); // Sembunyikan GIF motor
+
+        // Tampilkan panel kanan dengan animasi
+        setTimeout(() => {
+            rightPanel.classList.add('active');
+            motorContainer.classList.add('hidden');
+        }, 10); // Delay untuk memastikan transisi terlihat
+    
+
         toggleSelectAll(currentDivision);
     });
 
@@ -184,12 +201,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Seleksi tombol Clear All
     const clearBtn = document.getElementById('clear-btn');
-    clearBtn.addEventListener('click', clearAllSelections);
+    // clearBtn.addEventListener('click', clearAllSelections);
 
-    // Fungsi untuk Clear All
-    function clearAllSelections() {
-        // Kosongkan array selectedNames
+    clearBtn.addEventListener('click', () => {
         selectedNames = [];
+        rightPanel.classList.remove('active');
+        motorContainer.classList.remove('hidden');
 
         // Pastikan "Select All" toggle reset (opsional)
         isAllSelected = {
@@ -206,7 +223,29 @@ document.addEventListener('DOMContentLoaded', () => {
         // (panggil ulang displayNames dengan filter kosong, 
         //  agar nameList di-refresh)
         displayNames(currentDivision, searchInput.value);
-    }
+    });
+
+    // // Fungsi untuk Clear All
+    // function clearAllSelections() {
+    //     // Kosongkan array selectedNames
+    //     selectedNames = [];
+
+    //     // Pastikan "Select All" toggle reset (opsional)
+    //     isAllSelected = {
+    //         division1: false,
+    //         division2: false,
+    //         division3: false,
+    //         division4: false
+    //     };
+
+    //     // Bersihkan tampilan email di panel kanan
+    //     displayEmails();
+
+    //     // Bersihkan highlight 'selected' di panel kiri
+    //     // (panggil ulang displayNames dengan filter kosong, 
+    //     //  agar nameList di-refresh)
+    //     displayNames(currentDivision, searchInput.value);
+    // }
 
     function showPopup(message) {
         const popupOverlay = document.getElementById('popup-message');
