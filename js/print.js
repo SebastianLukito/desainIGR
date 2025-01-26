@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const dropSection = document.getElementById('drop-section');
     const fileList = document.getElementById('file-list');
     const loadingPopup = document.getElementById('loading-popup');
+
+    const rightPanel = document.querySelector('.right-panel'); 
+    const motorContainer = document.querySelector('.motor-container');
+
     let files = [];
 
 
@@ -37,6 +41,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     mergeBtn.addEventListener('click', function () {
+        rightPanel.classList.remove('active'); // Reset animasi sebelum diaktifkan kembali
+        motorContainer.classList.add('hidden'); // Sembunyikan GIF motor
+
+        // Tampilkan panel kanan dengan animasi
+        setTimeout(() => {
+            rightPanel.classList.add('active');
+            motorContainer.classList.add('hidden');
+        }, 10); // Delay untuk memastikan transisi terlihat
+        
         if (files.length < 1) {
             alert('Please upload at least one PDF file.');
             return;
@@ -206,5 +219,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // Hide download button and QR display
         qrDisplay.innerHTML = '';
         downloadBtn.style.display = 'none';
+
+        rightPanel.classList.remove('active');
+        motorContainer.classList.remove('hidden');
     });
 });
