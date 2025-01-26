@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const marquee = document.getElementById('marquee');
-    const marqueeText = document.getElementById('marqueeText');
 
     // Tab items (SUP IGR, SAM IGR, SM IGR, MSJM IGR)
     const tabItems = document.querySelectorAll('.tab-item');
@@ -14,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyBtn = document.getElementById('copy-btn');
     const selectAllBtn = document.getElementById('selectAllBtn');
     const clearBtn = document.getElementById('clear-btn'); // Pastikan ini sudah ada di HTML
+
+    const rightPanel = document.querySelector('.right-panel'); 
+    const motorContainer = document.querySelector('.motor-container');
 
     // Di sini kita siapkan container untuk sub tab
     const subTabSection = document.querySelector('.sub-tab-section');
@@ -479,6 +480,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Klik item => toggle pilih/batal
         nameItem.addEventListener('click', () => {
+        setTimeout(() => {
+            rightPanel.classList.add('active');
+            motorContainer.classList.add('hidden');
+        }, 10); // Delay untuk memastikan transisi terlihat
         if (nameItem.classList.contains('selected')) {
             nameItem.classList.remove('selected');
             removeSelectedName(item);
@@ -540,6 +545,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Klik item => toggle pilih/batal
         nameItem.addEventListener('click', () => {
+            setTimeout(() => {
+                rightPanel.classList.add('active');
+                motorContainer.classList.add('hidden');
+            }, 10); // Delay untuk memastikan transisi terlihat
             if (nameItem.classList.contains('selected')) {
                 nameItem.classList.remove('selected');
                 removeSelectedName(item);
@@ -638,12 +647,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Tombol "Select All" / "Unselect All" (hanya tab atau sub-tab aktif)
     // ---------------------------------------------
     selectAllBtn.addEventListener('click', () => {
+
+        rightPanel.classList.remove('active'); // Reset animasi sebelum diaktifkan kembali
+        motorContainer.classList.add('hidden'); // Sembunyikan GIF motor
+
+        // Tampilkan panel kanan dengan animasi
+        setTimeout(() => {
+            rightPanel.classList.add('active');
+            motorContainer.classList.add('hidden');
+        }, 10); // Delay untuk memastikan transisi terlihat
+    
     // Jika ada sub-tab aktif, select/unselect data sub-tab saja
     if (currentSubTab) {
         toggleSelectAllSubTab(currentDivision, currentSubTab);
     } else {
         // Jika tidak ada sub-tab, select/unselect data main tab
         toggleSelectAllMain(currentDivision);
+    
     }
     });
 
@@ -658,12 +678,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!allSelected) {
         // Jika belum semua dipilih -> pilih semua
         sub.members.forEach(item => addSelectedName(item));
+        
     } else {
         // Jika sudah semua dipilih -> unselect semua
         sub.members.forEach(item => removeSelectedName(item));
     }
 
     // Refresh panel kiri (sub-tab) dan panel kanan
+    
     displaySubTabMembers(sub.members);
     displayEmails();
     }
@@ -693,12 +715,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---------------------------------------------
     // Tombol Clear All
     // ---------------------------------------------
-    clearBtn.addEventListener('click', clearAllSelections);
-
-    function clearAllSelections() {
+    clearBtn.addEventListener('click', () => {
         selectedNames = [];
         // Reset tampilan email
         displayEmails();
+        rightPanel.classList.remove('active');
+        motorContainer.classList.remove('hidden');
 
         // Jika sedang lihat sub-tab, refresh sub-tab
         if (currentSubTab) {
@@ -706,7 +728,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             displayNames(currentDivision, searchInput.value);
         }
-    }
+    });
+
 
     // ---------------------------------------------
     // Fungsi Copy ke Clipboard
@@ -723,6 +746,14 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(err => {
                 console.error('Failed to copy text: ', err);
             });
+
+        // Klik di luar untuk menyembunyikan panel kanan dan tampilkan GIF motor
+        document.addEventListener('click', (e) => {
+            if (!rightPanel.contains(e.target) && !nameListContainer.contains(e.target)) {
+                rightPanel.classList.remove('active');
+                motorContainer.classList.remove('hidden');
+            }
+        });
     }
 
     function showPopup(message) {
