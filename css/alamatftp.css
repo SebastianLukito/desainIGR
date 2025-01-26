@@ -95,10 +95,7 @@ body {
     min-height: 400px;
     max-height: 200px;
     overflow-y: auto;
-    display: flex;
-    flex-wrap: wrap; /* Agar elemen turun ke baris baru jika ruang tidak cukup */
-    gap: 10px; /* Jarak antar elemen */
-    justify-content: space-between; /* Rata kiri dan kanan */
+
 }
 
 .name-item {
@@ -112,8 +109,7 @@ body {
     transition: background-color 0.3s ease;
     cursor: pointer;
     user-select: none;
-    flex: 0 0 48%; /* Lebar setiap item menjadi 48% */
-    box-sizing: border-box; /* Pastikan padding termasuk dalam lebar total */
+
 }
 
 .name-item:hover {
