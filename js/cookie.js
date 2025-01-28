@@ -9,33 +9,33 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
-// Firebase Firestore - Tambahkan data pengunjung
-function addVisitorToFirestore(username) {
-    db.collection("visitors")
-        .add({
-            username: username,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp() // Tambahkan timestamp otomatis
-        })
-        .then(() => {
-            console.log("Pengunjung berhasil ditambahkan ke statistik!");
-        })
-        .catch((error) => {
-            console.error("Error menambahkan pengunjung ke statistik:", error);
-        });
-}
-
 // Validasi cookie login
 const loggedIn = getCookie('loggedIn');
 const username = getCookie('username');
 
-// Cek apakah pengguna sudah login dan username tersedia
-if (!loggedIn || !username) {
-    // Dapatkan nama halaman saat ini
-    const currentPage = window.location.pathname.split('/').pop();
+// Fungsi untuk mengarahkan pengguna berdasarkan otoritas
+function redirectUserBasedOnRole() {
+    if (adminSpecial.includes(username.toLowerCase())) {
+        window.location.href = 'main_admin.html'; // Redirect untuk admin spesial
+    } else if (adminUsers.includes(username.toLowerCase())) {
+        window.location.href = 'admin.html'; // Redirect untuk admin biasa
+    } else {
+        window.location.href = 'main.html'; // Redirect untuk pengguna biasa
+    }
+}
 
-    // Jika pengguna tidak berada di index.html atau login.html, redirect ke halaman login
-    if (currentPage !== 'index.html' && currentPage !== 'login.html') {
-        window.location.href = 'login.html'; // Atau 'index.html' sesuai kebutuhan Anda
+// Periksa halaman saat ini
+const currentPages = window.location.pathname.split('/').pop();
+
+// Jika pengguna sudah login dan mengakses login.html atau index.html
+if (loggedIn && (currentPages === 'login.html' || currentPages === 'index.html')) {
+    redirectUserBasedOnRole();
+}
+
+// Jika pengguna belum login dan mengakses halaman lain selain login.html atau index.html
+if (!loggedIn || !username) {
+    if (currentPages !== 'index.html' && currentPages !== 'login.html') {
+        window.location.href = 'login.html'; // Atau index.html sesuai kebutuhan Anda
     }
 } else {
     // Perbarui teks marquee dengan menyertakan username
@@ -47,4 +47,3 @@ if (!loggedIn || !username) {
     // Tambahkan data pengunjung ke Firestore (jika login berhasil)
     addVisitorToFirestore(username);
 }
-
