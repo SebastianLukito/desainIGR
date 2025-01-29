@@ -99,15 +99,12 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
     <script src="js/fbconfig.js"></script>
-
-
-    <!-- Firebase Configuration and Initialization -->
     <script>
+        // Inisialisasi Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
-        const db = firebase.firestore();
-        const analytics = firebase.analytics();
     </script>
+
 
     <!-- Include login.js -->
     <script src="js/login.js"></script>

@@ -38,13 +38,13 @@
                 <h2>Manipulasi PDF</h2>
                 <p>Ini untuk edit-edit PDF sesuai kebutuhan tim desain grafis Indogrosir</p>
                 <div class="sub-buttons">
-                    <a id="printHH" href="print.html" class="btn" target="_blank">Print Tambah Untung</a>
-                    <a id="mergepdf" href="mergepdf.html" class="btn" target="_blank">Gabungkan PDF</a>
-                    <a id="splitpdf" href="splitpdf.html" class="btn" target="_blank">Pisahkan PDF</a>
-                    <a id="mergePS" href="mergePS.html" class="btn" target="_blank">Merge PDF Khusus Produk Segar</a>
-                    <a id="webpconverter" href="webp.html" class="btn" target="_blank">Konversi PDF ke Gambar</a>
-                    <a id="compresspdf" href="compresspdf.html" class="btn" target="_blank">Kompresi PDF</a>
-                    <a id="convertpdftoexcel" href="convertpdftoexcel.html" class="btn" target="_blank">Konversi PDF ke Excel</a>
+                    <a id="printHH" href="print.html" class="btn" target="_blank" onclick="recordFeatureUsage('Print TU')">Print Tambah Untung</a>
+                    <a id="mergepdf" href="mergepdf.html" class="btn" target="_blank" onclick="recordFeatureUsage('Merge PDF')">Gabungkan PDF</a>
+                    <a id="splitpdf" href="splitpdf.html" class="btn" target="_blank" onclick="recordFeatureUsage('Split PDF')">Pisahkan PDF</a>
+                    <a id="mergePS" href="mergePS.html" class="btn" target="_blank" onclick="recordFeatureUsage('Merge PDF Produk Segar')">Merge PDF Khusus Produk Segar</a>
+                    <a id="webpconverter" href="webp.html" class="btn" target="_blank" onclick="recordFeatureUsage('Konversi PDF - Gambar')">Konversi PDF ke Gambar</a>
+                    <a id="compresspdf" href="compresspdf.html" class="btn" target="_blank" onclick="recordFeatureUsage('Kompresi PDF')">Kompresi PDF</a>
+                    <a id="convertpdftoexcel" href="convertpdftoexcel.html" class="btn" target="_blank" onclick="recordFeatureUsage('Konversi PDF - Excel')">Konversi PDF ke Excel</a>
                     <!-- <a id="printSP" href="comingsoon.html" class="btn" target="_blank">Print SP</a> -->
                 </div>
             </div>
@@ -59,9 +59,9 @@
                 <h2>Kumpulan Email</h2>
                 <p>Di sini adalah kumpulan email cabang, marketing, & divisi lain</p>
                 <div class="sub-buttons">
-                    <a id="emailCabang" href="emailcabang.html" class="btn" target="_blank">Email Cabang</a>
-                    <a id="emailMKT" href="emailmarketing.html" class="btn" target="_blank">Email Divisi Marketing</a>
-                    <a id="emailMD" href="emailmd.html" class="btn" target="_blank">Email MD</a>
+                    <a id="emailCabang" href="emailcabang.html" class="btn" target="_blank" onclick="recordFeatureUsage('Email Cabang')">Email Cabang</a>
+                    <a id="emailMKT" href="emailmarketing.html" class="btn" target="_blank" onclick="recordFeatureUsage('Email Divisi Marketing')">Email Divisi Marketing</a>
+                    <a id="emailMD" href="emailmd.html" class="btn" target="_blank" onclick="recordFeatureUsage('Email MD')">Email MD</a>
                 </div>
             </div>
         </div>
@@ -75,7 +75,7 @@
                 <h2>Kumpulan FTP</h2>
                 <p>Di sini adalah kumpulan FTP divisi marketing</p>
                 <div class="sub-buttons">
-                    <a id="emailFTP" href="alamatftp.html" class="btn" target="_blank">FTP Tim Desain</a>
+                    <a id="emailFTP" href="alamatftp.html" class="btn" target="_blank" onclick="recordFeatureUsage('FTP Tim Desain')">FTP Tim Desain</a>
                     <a id="ftpMarketing" class="btn toggleChild">FTP Marketing</a>
                     <div class="child-sub-buttons" id="childFTP">
                         <div id="alamatFTP">
@@ -106,31 +106,31 @@
                     <div class="child-sub-buttons" id="childAdminIndogrosirku">
                         <p>Username: adminho@mail.com
                             <br> Password: 123456</p>
-                        <a href="http://indogrosirku.klikindogrosir.com:8080/cms/login" class="btn child-btn" target="_blank">Website CMS Aplikasi Indogrosirku</a>
+                        <a href="http://indogrosirku.klikindogrosir.com:8080/cms/login" class="btn child-btn" target="_blank" onclick="recordFeatureUsage('Web CMS APK IGR')">Website CMS Aplikasi Indogrosirku</a>
                     </div>
                     <a id="adminWebIndogrosir" class="btn toggleChild">Website Admin CMS Web Indogrosir</a>
                     <div class="child-sub-buttons" id="childAdminWebIndogrosir">
                         <p>Username: adminho@mail.com
                             <br> Password: 123456</p>
-                        <a href="https://indogrosir.co.id/cms/login" class="btn child-btn" target="_blank">Admin CMS Web Indogrosir</a>
+                        <a href="https://indogrosir.co.id/cms/login" class="btn child-btn" target="_blank" onclick="recordFeatureUsage('CMS Web IGR')">Admin CMS Web Indogrosir</a>
                     </div>
                     <a id="permintaanATK" class="btn toggleChild">Website Permintaan ATK</a>
                     <div class="child-sub-buttons" id="childAdminIndogrosirku">
                         <p>Username: MKTHO
                             <br> Password: 12345.</p>
-                        <a href="http://172.20.18.29/atkweb/Account/Login?ReturnUrl=%2Fatkweb%2F" class="btn child-btn" target="_blank">Website Permintaan ATK</a>
+                        <a href="http://172.20.18.29/atkweb/Account/Login?ReturnUrl=%2Fatkweb%2F" class="btn child-btn" target="_blank" onclick="recordFeatureUsage('Web ATK')">Website Permintaan ATK</a>
                     </div>
                     <a id="WebOwncloud" class="btn toggleChild">Website Owncloud Marketing IGR</a>
                     <div class="child-sub-buttons" id="childOwnCloud">
                         <p>Username: mkt_igr
                             <br> Password: Marketingjaya123</p>
-                        <a href="https://oc.indomaret.lan/index.php/login" class="btn child-btn" target="_blank">Website Owncloud Marketing IGR</a>
+                        <a href="https://oc.indomaret.lan/index.php/login" class="btn child-btn" target="_blank" onclick="recordFeatureUsage('Owncloud IGR')">Website Owncloud Marketing IGR</a>
                     </div>
-                    <a id="essIndogrosir" href="http://ess1.indomaret.lan/ESS/HomeEss/Index" class="btn" target="_blank">ESS Indogrosir</a>
-                    <a id="essIndomaret" href="https://ess-online.hrindomaret.com/?redirect=%2Fhomepage" class="btn" target="_blank">ESS Indomaret</a>
-                    <a id="webPortalIndomaret" href="https://portal.hrindomaret.com/portal/dashboard" class="btn" target="_blank">Web Portal Indomaret Group</a>
-                    <a id="inputLembut" href="http://172.20.30.5/tsm/" class="btn" target="_blank">Web Input Lembur</a>
-                    <a id="logoutInetIndomaret" href="http://iam.indomaret.lan" class="btn" target="_blank">Log Out Internet Menara Indomaret</a>
+                    <a id="essIndogrosir" href="http://ess1.indomaret.lan/ESS/HomeEss/Index" class="btn" target="_blank" onclick="recordFeatureUsage('Web ESS IGR')">ESS Indogrosir</a>
+                    <a id="essIndomaret" href="https://ess-online.hrindomaret.com/?redirect=%2Fhomepage" class="btn" target="_blank" onclick="recordFeatureUsage('Web ESS IDM')">ESS Indomaret</a>
+                    <a id="webPortalIndomaret" href="https://portal.hrindomaret.com/portal/dashboard" class="btn" target="_blank" onclick="recordFeatureUsage('Web Portal Indomaret')">Web Portal Indomaret Group</a>
+                    <a id="inputLembut" href="http://172.20.30.5/tsm/" class="btn" target="_blank" onclick="recordFeatureUsage('Web Lembur')">Web Input Lembur</a>
+                    <a id="logoutInetIndomaret" href="http://iam.indomaret.lan" class="btn" target="_blank" onclick="recordFeatureUsage('Log Out Internet')">Log Out Internet Menara Indomaret</a>
                     <!-- <a id="mintaATK" class="btn toggleChild">Permintaan ATK</a>
                     <div class="child-sub-buttons" id="childMintaATK">
                         <p>Username: admin</p>
@@ -150,7 +150,7 @@
                 <h2>Generate QR</h2>
                 <p>Generate QR dengan berbagai opsi</p>
                 <div class="sub-buttons">
-                    <a id="generateQRWithLogo" href="qr.html" class="btn" target="_blank">Generate QR dengan Logo</a>
+                    <a id="generateQRWithLogo" href="qr.html" class="btn" target="_blank" onclick="recordFeatureUsage('Generate QR')">Generate QR dengan Logo</a>
                 </div>
             </div>
         </div>
@@ -296,24 +296,24 @@
                 <h2>Aset Gambar Penting</h2>
                 <p>Di sini adalah kumpulan aset gambar penting</p>
                 <div class="sub-buttons">
-                    <a id="kartuMember" href="https://drive.google.com/drive/u/0/folders/1hGBIp5YnIZ6qCQKESC-7xv_WS-rZ7I2w" class="btn" target="_blank">Kartu Member Indogrosir</a>
-                    <a id="logoIGR" href="https://drive.google.com/drive/u/0/folders/1ehh5hjJ8oC267awGQhOMatOeo1eoFoyq" class="btn" target="_blank">Logo Indogrosir</a>
-                    <a id="logoIndogrosirSuperApp" href="https://drive.google.com/drive/u/0/folders/1T5L8cMPArK0pkkGL99uafE9n459VzJ3N" class="btn" target="_blank">Logo KlikIndogrosir SuperApp</a>
-                    <a id="logoIndogrosirku" href="https://drive.google.com/drive/u/0/folders/1Q8c8mPzPYr-5IopLa6XULiVtvzWBCSbJ" class="btn" target="_blank">Logo Indogrosirku</a>
-                    <a id="logoHoreka" href="https://drive.google.com/drive/u/0/folders/1YxMmgDP8f17wVsV5me-UxhDoNvqHzBE8" class="btn" target="_blank">Logo Horeka</a>
-                    <a id="logoPPOB" href="https://drive.google.com/drive/u/0/folders/1hBMXUwofgCyGXt0soaCg2M2i6jPfOjPu" class="btn" target="_blank">Logo Mitra Indogrosir</a>
-                    <a id="logoKlikIGR" href="https://drive.google.com/drive/u/0/folders/1FT6-lNcXapKaIlqtrA2CwjgdlOCr1Fl8" class="btn" target="_blank">Logo KlikIndogrosir</a>
-                    <a id="logoSPI" href="https://drive.google.com/drive/u/0/folders/1GWm3Rkz6mFORC7zD236pxz-BUjhohxn6" class="btn" target="_blank">Logo SPI</a>
-                    <a id="logoOMI" href="https://drive.google.com/drive/u/0/folders/1uWznz8CMnKENJpOtCjFkxAc3aZY-7Rat" class="btn" target="_blank">Logo OMI</a>
-                    <a id="logoTMI" href="https://drive.google.com/drive/u/0/folders/12pAvJ3KK7j7CVp-lr38eaWzo2QXqZ9Ov" class="btn" target="_blank">Logo TMI</a>
-                    <a id="logoPOINIGR" href="https://drive.google.com/drive/u/0/folders/1V-t4ULfQ3iAjbiH3XEFIEaWSGonrlZu4" class="btn" target="_blank">Logo PoinIGR</a>
-                    <a id="logoISAKU" href="https://drive.google.com/drive/u/0/folders/1u22AKDzXzkZvw2PbLKiHGMavsHf02EbD" class="btn" target="_blank">Logo i.Saku</a>
-                    <a id="logoSuperPromo" href="https://drive.google.com/drive/u/0/folders/1CGWltwDf2Fe28GjnhS8U0qBcIFmEtCuy" class="btn" target="_blank">Logo Super Promo</a>
-                    <a id="logoHargaHemat" href="https://drive.google.com/drive/u/0/folders/1znCeiXLCinSjHbJyhpxFLM2HISwu27WW" class="btn" target="_blank">Logo Harga Hemat</a>
-                    <a id="logoProdukSegar" href="https://drive.google.com/drive/u/0/folders/1TlhXKtrDWiQKbbgeoCaqr4RivcwGjo66" class="btn" target="_blank">Logo Produk Segar</a>
-                    <a id="logoPWE" href="https://drive.google.com/drive/u/0/folders/13KXRCEHW3dRgxqbR46zhq2zCLynbGrJ5" class="btn" target="_blank">Logo Promo Weekend</a>
-                    <a id="logoBH" href="https://drive.google.com/drive/u/0/folders/1FqSktQjPgqJGnsck2AslIerbPVK1iKU7" class="btn" target="_blank">Logo Belanja Hemat</a>
-                    <a id="logoPDL" href="https://drive.google.com/drive/u/0/folders/1_Jp7Psq5eXYB7HpOQ4qVUjtGGycYDQIh" class="btn" target="_blank">Logo Produk Dijamin Laku</a>
+                    <a id="kartuMember" href="https://drive.google.com/drive/u/0/folders/1hGBIp5YnIZ6qCQKESC-7xv_WS-rZ7I2w" class="btn" target="_blank" onclick="recordFeatureUsage('Kartu Member')">Kartu Member Indogrosir</a>
+                    <a id="logoIGR" href="https://drive.google.com/drive/u/0/folders/1ehh5hjJ8oC267awGQhOMatOeo1eoFoyq" class="btn" target="_blank" onclick="recordFeatureUsage('Logo Indogrosir')">Logo Indogrosir</a>
+                    <a id="logoIndogrosirSuperApp" href="https://drive.google.com/drive/u/0/folders/1T5L8cMPArK0pkkGL99uafE9n459VzJ3N" class="btn" target="_blank" onclick="recordFeatureUsage('Logo SuperApp')">Logo KlikIndogrosir SuperApp</a>
+                    <a id="logoIndogrosirku" href="https://drive.google.com/drive/u/0/folders/1Q8c8mPzPYr-5IopLa6XULiVtvzWBCSbJ" class="btn" target="_blank" onclick="recordFeatureUsage('Logo Indogrosirku')">Logo Indogrosirku</a>
+                    <a id="logoHoreka" href="https://drive.google.com/drive/u/0/folders/1YxMmgDP8f17wVsV5me-UxhDoNvqHzBE8" class="btn" target="_blank" onclick="recordFeatureUsage('Logo Horeka')">Logo Horeka</a>
+                    <a id="logoPPOB" href="https://drive.google.com/drive/u/0/folders/1hBMXUwofgCyGXt0soaCg2M2i6jPfOjPu" class="btn" target="_blank" onclick="recordFeatureUsage('Logo PPOB')">Logo Mitra Indogrosir</a>
+                    <a id="logoKlikIGR" href="https://drive.google.com/drive/u/0/folders/1FT6-lNcXapKaIlqtrA2CwjgdlOCr1Fl8" class="btn" target="_blank" onclick="recordFeatureUsage('Logo KlikIGR')">Logo KlikIndogrosir</a>
+                    <a id="logoSPI" href="https://drive.google.com/drive/u/0/folders/1GWm3Rkz6mFORC7zD236pxz-BUjhohxn6" class="btn" target="_blank" onclick="recordFeatureUsage('Logo SPI')">Logo SPI</a>
+                    <a id="logoOMI" href="https://drive.google.com/drive/u/0/folders/1uWznz8CMnKENJpOtCjFkxAc3aZY-7Rat" class="btn" target="_blank" onclick="recordFeatureUsage('Logo OMI')">Logo OMI</a>
+                    <a id="logoTMI" href="https://drive.google.com/drive/u/0/folders/12pAvJ3KK7j7CVp-lr38eaWzo2QXqZ9Ov" class="btn" target="_blank" onclick="recordFeatureUsage('Logo TMI')">Logo TMI</a>
+                    <a id="logoPOINIGR" href="https://drive.google.com/drive/u/0/folders/1V-t4ULfQ3iAjbiH3XEFIEaWSGonrlZu4" class="btn" target="_blank" onclick="recordFeatureUsage('Logo PoinIGR')">Logo PoinIGR</a>
+                    <a id="logoISAKU" href="https://drive.google.com/drive/u/0/folders/1u22AKDzXzkZvw2PbLKiHGMavsHf02EbD" class="btn" target="_blank" onclick="recordFeatureUsage('Logo Isaku')">Logo i.Saku</a>
+                    <a id="logoSuperPromo" href="https://drive.google.com/drive/u/0/folders/1CGWltwDf2Fe28GjnhS8U0qBcIFmEtCuy" class="btn" target="_blank" onclick="recordFeatureUsage('Logo Super Promo')">Logo Super Promo</a>
+                    <a id="logoHargaHemat" href="https://drive.google.com/drive/u/0/folders/1znCeiXLCinSjHbJyhpxFLM2HISwu27WW" class="btn" target="_blank" onclick="recordFeatureUsage('Logo Harga Hemat')">Logo Harga Hemat</a>
+                    <a id="logoProdukSegar" href="https://drive.google.com/drive/u/0/folders/1TlhXKtrDWiQKbbgeoCaqr4RivcwGjo66" class="btn" target="_blank" onclick="recordFeatureUsage('Logo Produk Segar')">Logo Produk Segar</a>
+                    <a id="logoPWE" href="https://drive.google.com/drive/u/0/folders/13KXRCEHW3dRgxqbR46zhq2zCLynbGrJ5" class="btn" target="_blank" onclick="recordFeatureUsage('Logo PWE')">Logo Promo Weekend</a>
+                    <a id="logoBH" href="https://drive.google.com/drive/u/0/folders/1FqSktQjPgqJGnsck2AslIerbPVK1iKU7" class="btn" target="_blank" onclick="recordFeatureUsage('Logo Belanja Hemat')">Logo Belanja Hemat</a>
+                    <a id="logoPDL" href="https://drive.google.com/drive/u/0/folders/1_Jp7Psq5eXYB7HpOQ4qVUjtGGycYDQIh" class="btn" target="_blank" onclick="recordFeatureUsage('Logo PDL')">Logo Produk Dijamin Laku</a>
                     
                 </div>
             </div>
@@ -328,9 +328,9 @@
                 <h2>Manipulasi Gambar</h2>
                 <p>Di sini untuk edit-edit gambar</p>
                 <div class="sub-buttons">
-                    <a id="convFormatGambar" href="imgconverter.html" class="btn" target="_blank">Konversi Format Gambar</a>
-                    <a id="compressGambar" href="compressgambar.html" class="btn" target="_blank">Kompresi Gambar</a>
-                    <a id="removeBackground" href="rembg.html" class="btn" target="_blank">Remove Background</a>
+                    <a id="convFormatGambar" href="imgconverter.html" class="btn" target="_blank" onclick="recordFeatureUsage('Konversi Format Gambar')">Konversi Format Gambar</a>
+                    <a id="compressGambar" href="compressgambar.html" class="btn" target="_blank" onclick="recordFeatureUsage('Kompresi Gambar')">Kompresi Gambar</a>
+                    <a id="removeBackground" href="rembg.html" class="btn" target="_blank" onclick="recordFeatureUsage('Remove Background')">Remove Background</a>
                 </div>
             </div>
         </div>
@@ -358,8 +358,8 @@
                 <h2>Kalkulator</h2>
                 <p>Kamu bisa menggunakan berbagai jenis kalkulator di sini</p>
                 <div class="sub-buttons">
-                    <a id="calc" href="calc.html" class="btn" target="_blank">Scientific Calculator</a>
-                    <a id="calcsed" href="calcsed.html" class="btn" target="_blank">Simple Calculator</a>
+                    <a id="calc" href="calc.html" class="btn" target="_blank" onclick="recordFeatureUsage('Scientific Calculator')">Scientific Calculator</a>
+                    <a id="calcsed" href="calcsed.html" class="btn" target="_blank" onclick="recordFeatureUsage('Simple Calculator')">Simple Calculator</a>
                 </div>
             </div>
         </div>
@@ -373,7 +373,7 @@
                 <h2>Alokasi</h2>
                 <p>Kamu bisa print dan edit alokasi Tambah Untung, Super Promo, dan Kebulan</p>
                 <div class="sub-buttons">
-                    <a id="alokasi" href="hh.html" class="btn" target="_blank">Print Alokasi</a>
+                    <a id="alokasi" href="hh.html" class="btn" target="_blank" onclick="recordFeatureUsage('Alokasi')">Print Alokasi</a>
                 </div>
             </div>
         </div>
@@ -387,7 +387,7 @@
                 <h2>Youtube</h2>
                 <p>Bagi yang youtubenya di-block, ini alternatifnya</p>
                 <div class="sub-buttons">
-                    <a id="generateYoutube" href="ytb.html" class="btn" target="_blank">Youtube</a>
+                    <a id="generateYoutube" href="ytb.html" class="btn" target="_blank" onclick="recordFeatureUsage('Youtube')">Youtube</a>
                 </div>
             </div>
         </div>
@@ -407,6 +407,19 @@
         <p>&copy; Marketing Indogrosir Sub Divisi Desain Grafis 2024</p>
     </footer>
     <script src="js/script.js"></script>
+    <script src="js/cookie.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+    <script src="js/fbconfig.js"></script>
+    <script>
+        // Inisialisasi Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+    </script>
+
     <script>
         // Fungsi untuk mengambil nilai cookie
         function getCookie(name) {
@@ -433,7 +446,9 @@
             marqueeText.innerHTML = `SELAMAT DATANG <strong>${username.toUpperCase()}</strong> DI WEBSITE MARKETING INDOGROSIR - SUB DIVISI DESAIN GRAFIS <img src="assets/img/igr.png" alt="Logo Indogrosir" class="marquee-logo"> <span id="easterEggInfo"></span>`;
         }
     </script>
+    <script src="js/fbconfig.js"></script>
     <script src="js/disablerc.js"></script>
-    <script src="js/logout.js"></script>
+    <script type="module" src="js/logout.js"></script>
+    <script src="js/feature.js"></script>
 </body>
 </html>
