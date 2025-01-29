@@ -373,6 +373,14 @@ async function showSecurityModal() {
         }
     }
 
+    // Event listener untuk submit jawaban dengan tombol Enter
+    securityAnswerInput.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Mencegah submit form bawaan
+            submitSecurityAnswerBtn.click(); // Klik tombol submit secara otomatis
+        }
+    });
+
     // Event listener untuk submit jawaban
     submitSecurityAnswerBtn.onclick = function() {
         const userAnswer = securityAnswerInput.value.trim().toLowerCase();
