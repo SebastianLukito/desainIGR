@@ -264,3 +264,15 @@ footer {
 .info-count {
     cursor: url("../assets/cursor/tap.png"), auto;
 }
+
+#visitorTable tr:nth-child(odd) {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+#visitorTable tr:nth-child(even) {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
+
+#closePopup {
+    cursor: url("../assets/cursor/tap.png"), auto;
+}
