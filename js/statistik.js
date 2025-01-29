@@ -511,6 +511,11 @@ document.getElementById("top5Mode").addEventListener("change", (event) => {
 });
 
 function updateTop5Chart(mode = "total") {
+    if (mode === "feature") {
+        fetchTop5Features(); // Ambil data fitur dari Firestore
+        return;
+    }
+
     const userCountMap = {};
     visitorData.forEach((item) => {
         const username = item.username;
@@ -532,15 +537,40 @@ function updateTop5Chart(mode = "total") {
 
     // TRUNCATE LABEL untuk sumbu X
     const labels = userCountArray.map(item => {
-    const originalName = item.username;
-    return (originalName.length > 8)
-        ? originalName.substring(0, 8) + "..."
-        : originalName;
+        const originalName = item.username;
+        return (originalName.length > 8) ? originalName.substring(0, 8) + "..." : originalName;
     });
 
     const data = userCountArray.map(item => item.count);
 
-    // Warna untuk bar chart
+    drawTop5Chart(labels, data, (mode === "total") ? "Top 5 Pengunjung Terbanyak" : "Top 5 Pengunjung Unik");
+}
+
+// Fungsi untuk mengambil Top 5 fitur dari Firestore
+function fetchTop5Features() {
+    db.collection("featureLogs").get().then((snapshot) => {
+        const featureCountMap = {};
+
+        snapshot.docs.forEach((doc) => {
+            const feature = doc.data().feature;
+            featureCountMap[feature] = (featureCountMap[feature] || 0) + 1;
+        });
+
+        let featureCountArray = Object.entries(featureCountMap).map(([feature, count]) => ({ feature, count }));
+        featureCountArray.sort((a, b) => b.count - a.count);
+        featureCountArray = featureCountArray.slice(0, 5);
+
+        const labels = featureCountArray.map(item => item.feature.length > 12 ? item.feature.substring(0, 12) + "..." : item.feature);
+        const data = featureCountArray.map(item => item.count);
+
+        drawTop5Chart(labels, data, "Top 5 Fitur yang Digunakan");
+    }).catch((error) => {
+        console.error("Gagal mengambil data fitur:", error);
+    });
+}
+
+// Fungsi umum untuk menggambar Top 5 Chart
+function drawTop5Chart(labels, data, chartTitle) {
     const colorPalette = [
         "rgba(255, 99, 132, 0.6)",
         "rgba(54, 162, 235, 0.6)",
@@ -562,16 +592,13 @@ function updateTop5Chart(mode = "total") {
     // Hancurkan chart sebelumnya jika ada
     if (top5ChartInstance) top5ChartInstance.destroy();
 
-    // Buat chart
     const ctx = document.getElementById("top5Chart").getContext("2d");
     top5ChartInstance = new Chart(ctx, {
         type: "bar",
         data: {
             labels,
             datasets: [{
-                label: (mode === "total")
-                    ? "Top 5 by Total Frequency"
-                    : "Top 5 (1–5 visits)",
+                label: chartTitle,
                 data,
                 backgroundColor: backgroundColors,
                 borderColor: borderColors,
@@ -581,12 +608,13 @@ function updateTop5Chart(mode = "total") {
         options: {
             responsive: true,
             scales: {
-                x: { title: { display: true, text: "Pengunjung" } },
-                y: { title: { display: true, text: "Jumlah Kunjungan" }, beginAtZero: true }
+                x: { title: { display: true, text: "Kategori" } },
+                y: { title: { display: true, text: "Jumlah Penggunaan" }, beginAtZero: true }
             }
         }
     });
 }
+
 
 function updateDateTime() {
     const now = new Date();
