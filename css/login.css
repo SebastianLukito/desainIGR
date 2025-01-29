@@ -302,7 +302,7 @@ body {
     scale: 1.1;
 }
 
-.motor-animation, .motor-baruteks {
+.motor-animation {
     height: 35vw;
     width: auto;
     animation: motorMove 1.5s infinite;
