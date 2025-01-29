@@ -129,6 +129,7 @@ footer {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 #top5Chart {
@@ -139,7 +140,6 @@ footer {
         height: auto;
         max-height: 600px; /* Turunkan dari 800px agar tidak terlalu panjang */
     
-        margin: 0 auto;
         display: block;
         /* padding bisa diperpendek jika terlalu lebar: */
         padding: 10px; 
@@ -148,18 +148,24 @@ footer {
         border-radius: 10px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         box-sizing: border-box;
+        margin-top: -20px;
 }
 
 /* Dropdown gaya */
 .dropdown {
-    margin-bottom: 20px;
+    margin-bottom: -15px;
     text-align: center;
+    background-color: rgb(10, 66, 101);
+    background-image: url("/assets/img/45-degree-fabric-light.png");
+    padding-inline: 25px;
+    padding-block: 10px;
+    border-radius: 10px;
 }
 
 .dropdown label {
     font-weight: bold;
     margin-right: 10px;
-    color: #000;
+    color: #ffffff;
     user-select: none;
 }
 
