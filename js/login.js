@@ -131,15 +131,16 @@ window.addEventListener('load', () => {
 async function recordLogin(username) {
     if (!username) {
         console.error("Username tidak valid!");
-        return; 
+        return;
     }
     console.log(`Mencatat login untuk username: ${username}`);
+
     try {
         await db.collection("visitors").add({
             username: username,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
-        console.log(`Statistik login untuk "${username}" berhasil dicatat!`);
+        console.log(`Statistik login untuk "${username}" berhasil dicatat di Firestore!`);
     } catch (error) {
         console.error("Error mencatat statistik login:", error);
     }
@@ -277,48 +278,46 @@ async function signInWithGoogle() {
         const result = await auth.signInWithPopup(provider);
         
         // Dapatkan user info
-        const user   = result.user;            // firebase.User object
-        const email  = user.email;            // misal: "example@gmail.com"
-        const uid    = user.uid;              // UID yang unik
-        const name   = user.displayName;      // misal: "John Doe"
-    
-        // (Opsional) Simpan user ke Firestore, atau validasi user
-        // Contoh: cek user di "allowedUsernames" jika Anda pakai e-mail
-        // atau simpan user doc di 'users' collection.
-    
-        // Misalnya: cek data user di Firestore
+        const user = result.user;
+        const email = user.email; // misal: "example@gmail.com"
+        const name = user.displayName; // Nama pengguna Google
+
+        console.log(`Google Sign-In berhasil: ${name} (${email})`);
+
+        // (Opsional) Simpan user ke Firestore jika belum ada
         const userDocRef = db.collection('users').doc(email);
         const userDocSnap = await userDocRef.get();
         if (!userDocSnap.exists) {
-            // Jika belum terdaftar, opsional: buat data minimal
             await userDocRef.set({
                 username: email,
                 displayName: name,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             });
         }
-    
-        // Set cookie (opsional) untuk username
+
+        // Simpan informasi login dalam cookie
         setCookie('username', email, 1440);
-        // Set login status
         setCookie('loggedIn', 'user', 1440);
-    
+
         // Reset percobaan gagal setelah login sukses
         resetFailedAttempts();
-    
-        // Redirect ke halaman sesuai role
-        // (Sesuaikan logika, misal cek admin / user)
-        recordLogin(email); // Catat statistik login
+
+        // **Mencatat login di Firestore**
+        console.log(`Sebelum memanggil recordLogin: ${email}`);
+        await recordLogin(email);
+        console.log(`Setelah memanggil recordLogin: ${email}`);
+
+        // Redirect ke halaman loading
         window.location.href = 'loading.html';
     
     } catch (error) {
         console.error("Google Sign-In error:", error);
         document.getElementById('errorMessage').innerText = 
         'Login dengan Google gagal: ' + (error.message || '');
-        // Tangani kegagalan login dengan Google
         handleFailedLogin();
     }
 }
+
 
 // Pasang event listener
 googleLoginBtn.addEventListener('click', () => {

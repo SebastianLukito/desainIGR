@@ -10,5 +10,3 @@ const firebaseConfig = {
     measurementId: "G-7FLVT90LNX"
 };
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
