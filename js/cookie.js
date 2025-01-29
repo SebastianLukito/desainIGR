@@ -9,6 +9,17 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
+// function addVisitorToFirestore(username) {
+//     db.collection("visitors").add({
+//         username: username,
+//         timestamp: firebase.firestore.FieldValue.serverTimestamp()
+//     }).then(() => {
+//         console.log("Pengunjung ditambahkan ke Firestore.");
+//     }).catch((error) => {
+//         console.error("Gagal menambahkan pengunjung:", error);
+//     });
+// }
+
 // Validasi cookie login
 const loggedIn = getCookie('loggedIn');
 const username = getCookie('username');
@@ -43,7 +54,4 @@ if (!loggedIn || !username) {
     if (marqueeText) {
         marqueeText.innerHTML = `SELAMAT DATANG <strong>${username.toUpperCase()}</strong> DI WEBSITE MARKETING INDOGROSIR - SUB DIVISI DESAIN GRAFIS <img src="assets/img/igr.png" alt="Logo Indogrosir" class="marquee-logo">`;
     }
-
-    // Tambahkan data pengunjung ke Firestore (jika login berhasil)
-    addVisitorToFirestore(username);
 }

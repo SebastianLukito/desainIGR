@@ -128,19 +128,21 @@ window.addEventListener('load', () => {
     }
 });
 
-function recordLogin(username) {
-    if (!username) return; // Pastikan username valid
-    db.collection("visitors")
-        .add({
+async function recordLogin(username) {
+    if (!username) {
+        console.error("Username tidak valid!");
+        return; 
+    }
+    console.log(`Mencatat login untuk username: ${username}`);
+    try {
+        await db.collection("visitors").add({
             username: username,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(), // Waktu login
-        })
-        .then(() => {
-            console.log(`Statistik login untuk "${username}" berhasil dicatat!`);
-        })
-        .catch((error) => {
-            console.error("Error mencatat statistik login:", error);
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
+        console.log(`Statistik login untuk "${username}" berhasil dicatat!`);
+    } catch (error) {
+        console.error("Error mencatat statistik login:", error);
+    }
 }
 
 
@@ -185,7 +187,9 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             // Jika bukan admin, redirect ke halaman pengguna biasa
             else {
                 setCookie('loggedIn', 'user', 1440); // Set cookie untuk login status pengguna biasa
+                console.log("Sebelum memanggil recordLogin:", username);
                 recordLogin(username);
+                console.log("Setelah memanggil recordLogin");
                 window.location.href = 'loading.html';
             }
         } else {

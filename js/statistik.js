@@ -1,3 +1,4 @@
+
 // Variabel global
 let visitorData = [];   // data asli dari Firestore
 let filteredData = [];  // data setelah difilter
@@ -704,16 +705,12 @@ function updateMaxDayMonth() {
         monthLabel = `${monthNames[+m2 - 1]} ${+y2}`;
     }
 
-    // Tampilkan di DOM
     document.getElementById("maxMonthLabel").textContent = monthLabel || "-";
     document.getElementById("maxMonthCount").textContent = maxMonthCount || "0";
 
-    // --- 3) Pasang event listener untuk animasi scramble ---
-    // (Jika data berubah, kita update event listener agar memakai finalValue terbaru)
     const dayBox = document.getElementById("maxDayBox");
     const monthBox = document.getElementById("maxMonthBox");
 
-    // Ganti ke .onclick = ... agar tidak menumpuk listener
     dayBox.onclick = () => {
         scrambleCount("maxDayCount", maxDayCount, 2000);
     };
@@ -722,10 +719,6 @@ function updateMaxDayMonth() {
     };
 }
 
-/**
- * Animasi “scramble” angka selama `duration` ms,
- * lalu menampilkan `finalValue` di element .info-count.
- */
 function scrambleCount(elementId, finalValue, duration) {
     const element = document.getElementById(elementId);
     const startTime = performance.now();
@@ -735,7 +728,6 @@ function scrambleCount(elementId, finalValue, duration) {
         const elapsed = now - startTime;
 
         if (elapsed < duration) {
-            // Tampilkan angka acak antara 0 sampai finalValue
             let randomVal = Math.floor(Math.random() * (finalValue + 1) * 1000000);
             element.textContent = randomVal;
         } else {
