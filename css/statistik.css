@@ -527,7 +527,7 @@ footer {
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
+    z-index: 200;
     transform: translate(-50%, -50%) scale(0.7);
     opacity: 0;
 }
@@ -552,7 +552,7 @@ footer {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
+    z-index: 130;
 }
 
 /* Tombol Tutup */
@@ -562,11 +562,12 @@ footer {
     justify-content:flex-start;
     align-items: center;
     padding-bottom: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
     background-color: rgb(10, 66, 101);
     background-image: url("/assets/img/45-degree-fabric-light.png");
     padding: 10px 15px;
     border-radius: 8px 8px 0 0;
+    z-index: 200;
 }
 
 /* Gaya logo dalam header */
@@ -574,6 +575,7 @@ footer {
     height: 30px; /* Sesuaikan ukuran */
     width: 90px;
     margin-left: 20px;
+    z-index: 200;
 }
 
 /* Gaya judul popup */
@@ -586,6 +588,9 @@ footer {
     margin-right: -120px;
     margin-left: 10px;
     align-items: left;
+    z-index: 200;
+    background-color: rgb(10, 66, 101);
+    background-image: url("/assets/img/45-degree-fabric-light.png");
 }
 
 /* Gaya tombol tutup */
@@ -600,17 +605,19 @@ footer {
     font-weight: bold;
     transition: 0.3s;
     margin-left: 150px;
+    z-index: 200;
 }
 
 /* 🔹 STYLE TABEL DALAM POPUP 🔹 */
 #featurePopupContent {
     max-height: 400px;
     overflow-y: auto;
-    padding: 15px;
+    padding-bottom: 15px;
+    padding-inline: 2px;
     font-size: 16px;
     color: #333; /* Warna lebih gelap agar kontras */
     border-radius: 0 0 8px 8px;
-    margin-top: -40px;
+    z-index: 150;
 }
 
 /* Gaya untuk judul dalam konten popup */
@@ -622,6 +629,7 @@ footer {
     text-align: left;
     padding: 10px;
     border-radius: 5px;
+    z-index: 150;
 }
 
 /* Gaya untuk teks jika tidak ada fitur */
@@ -634,6 +642,7 @@ footer {
     background: #f7f7f7;
     padding: 10px;
     border-radius: 5px;
+    z-index: 150;
 }
 
 /* Gaya tabel agar lebih menarik */
