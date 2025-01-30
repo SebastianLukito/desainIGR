@@ -1,6 +1,6 @@
 console.log("Firebase DB instance:", db);
 
-const allowedUsernames = ["sebastian", "naufal"];
+const allowedUsernames = ["sebastian", "naufal", "developer"];
 const adminUsername = ["admin"];
 
 // Konstanta untuk batas percobaan dan durasi blokir

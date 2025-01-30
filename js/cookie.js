@@ -1,5 +1,5 @@
 // Daftar username admin
-const adminUsers = ["sebastian", "naufal"];
+const adminUsers = ["sebastian", "naufal", "developer"];
 const adminSpecial = ["admin"];
 
 // Fungsi untuk mengambil nilai cookie
