@@ -26,7 +26,10 @@ document.getElementById('registrasiForm').addEventListener('submit', async funct
             document.getElementById('errorMessage').innerText = 'Username sudah terdaftar. Silakan pilih username lain.';
         } else {
             // Tambahkan pengguna baru ke Firestore
-            await db.collection("users").doc(username).set({ password });
+            await db.collection("users").doc(username).set({ 
+                username: username, 
+                password: password 
+            });
             document.getElementById('errorMessage').innerText = 'Registrasi Berhasil. Silakan Login.';
 
             // Mengganti form registrasi dengan dua tombol
