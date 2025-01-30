@@ -525,17 +525,16 @@ function updateTop5Chart(mode = "total") {
     let userCountArray = Object.entries(userCountMap).map(([username, count]) => ({ username, count }));
 
     if (mode === "total") {
-        // Sort descending
+        // Urutkan dari yang paling banyak ke yang paling sedikit
         userCountArray.sort((a, b) => b.count - a.count);
         userCountArray = userCountArray.slice(0, 5);
     } else if (mode === "unique") {
-        // Filter user dengan 1-5 kunjungan
-        const filtered = userCountArray.filter(item => item.count >= 1 && item.count <= 5);
-        filtered.sort((a, b) => b.count - a.count);
-        userCountArray = filtered.slice(0, 5);
+        // Urutkan dari yang paling sedikit ke yang paling banyak
+        userCountArray.sort((a, b) => a.count - b.count);
+        userCountArray = userCountArray.slice(0, 5); // Ambil 5 pengunjung dengan jumlah kunjungan paling sedikit
     }
 
-    // TRUNCATE LABEL untuk sumbu X
+    // Truncate label untuk sumbu X
     const labels = userCountArray.map(item => {
         const originalName = item.username;
         return (originalName.length > 8) ? originalName.substring(0, 8) + "..." : originalName;
