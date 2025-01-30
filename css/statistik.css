@@ -92,6 +92,7 @@ footer {
 
 #visitorTable th {
     background-color: rgb(255, 208, 0);
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     color: #000;
     font-weight: bold;
     user-select: none;
