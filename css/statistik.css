@@ -1,7 +1,7 @@
 /* Gaya dasar */
 body {
     background-color: rgb(10, 66, 101);
-    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     color: #e0e0e0;
     font-family: Helvetica, sans-serif;
     margin: 0;
@@ -258,14 +258,17 @@ footer {
 
 #exportExcelBtn {
     background-color: rgb(6, 87, 6);
+    background-image: url("../assets/img/45-degree-fabric-light.png");
 }
 
 #exportPDFBtn {
     background-color: rgb(129, 3, 3);
+    background-image: url("../assets/img/45-degree-fabric-light.png");
 }
 
 #exportCSVBtn {
     background-color: rgb(20, 57, 105);
+    background-image: url("../assets/img/45-degree-fabric-light.png");
 }
 
 /* Ringkasan di Left Panel */
