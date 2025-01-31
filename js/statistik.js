@@ -20,7 +20,7 @@ function fetchVisitorData() {
                 no: index + 1,
                 username: doc.data().username,
                 timestamp: doc.data().timestamp
-                    ? new Date(doc.data().timestamp.seconds * 1000).toLocaleString()
+                    ? formatTimestamp(new Date(doc.data().timestamp.seconds * 1000))
                     : "Waktu tidak tersedia",
             }));
 
@@ -42,6 +42,26 @@ function fetchVisitorData() {
 
             updateMaxDayMonth();
         });
+}
+
+// FUNGSI TIMESTAMP
+function formatTimestamp(dateObj) {
+    const dayNames = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+    const monthNames = [
+        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+    ];
+
+    const day = dateObj.getDate();
+    const month = monthNames[dateObj.getMonth()];
+    const year = dateObj.getFullYear();
+    
+    let hours = dateObj.getHours();
+    let minutes = dateObj.getMinutes();
+
+    if (minutes < 10) minutes = "0" + minutes;
+
+    return `${day} ${month} ${year} - ${hours}:${minutes} WIB`;
 }
 
 /* -------------------------------------------

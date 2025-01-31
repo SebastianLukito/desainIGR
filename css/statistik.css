@@ -158,7 +158,7 @@ footer {
     margin-bottom: -15px;
     text-align: center;
     background-color: rgb(10, 66, 101);
-    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     padding-inline: 25px;
     padding-block: 10px;
     border-radius: 10px;
@@ -433,7 +433,7 @@ footer {
 
 .pengunjung-terbanyak {
     background-color: rgb(10, 66, 101);
-    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     padding-top: 5px;
     padding-bottom: 2px;
     padding-inline: 20px;
@@ -575,7 +575,7 @@ footer {
     padding-bottom: 10px;
     margin-bottom: 0px;
     background-color: rgb(10, 66, 101);
-    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     padding: 10px 15px;
     border-radius: 8px 8px 0 0;
     z-index: 200;
@@ -601,7 +601,7 @@ footer {
     align-items: left;
     z-index: 200;
     background-color: rgb(10, 66, 101);
-    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-image: url("../assets/img/45-degree-fabric-light.png");
 }
 
 /* Gaya tombol tutup */
