@@ -1,6 +1,6 @@
 body {
     background-color: rgb(10, 66, 101);
-    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     color: #e0e0e0;
     font-family: Helvetica, sans-serif;
     margin: 0;
@@ -36,6 +36,10 @@ body {
     flex: 1;
     min-width: 300px;
     box-sizing: border-box;
+}
+
+.left-panel {
+    min-height: 490px;
 }
 
 .left-panel:hover, .right-panel:hover {
@@ -81,7 +85,7 @@ button {
     margin-bottom: 10px;
     margin-top: 0px;
     background-color: rgb(35, 35, 35);
-    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     color: #e0e0e0;
     border: none;
     border-radius: 25px;
@@ -100,7 +104,7 @@ button:hover {
 .qr-display {
     background: rgba(11, 11, 11, 0.92); /* Efek transparan */
     backdrop-filter: blur(15px);
-    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     padding: 20px;
     border: 1px solid #444;
     border-radius: 10px;
@@ -127,7 +131,7 @@ button:hover {
     align-content: center;
     background: rgba(255, 255, 255, 0.72); /* Efek transparan */
     backdrop-filter: blur(15px);
-    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     color: #000000;
     font-weight: bold;
     cursor: pointer;
@@ -148,7 +152,7 @@ button:hover {
 
 .penjelasan {
     background-color: rgb(255, 255, 255);
-    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     padding: 10px;
     /* border: 3px solid #444; */
     border-radius: 10px;
@@ -179,7 +183,7 @@ button:hover {
 
 .file-item {
     background-color: #444;
-    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     color: #e0e0e0;
     padding: 10px;
     border-radius: 5px;
