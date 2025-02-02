@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
     let currentKeyIndex = 0;
 
-    // Channel yang ditampilkan
+    // Daftar channel yang akan ditampilkan
     const scienceChannels = [
         'UCpdwWrQYnGSyWJSRy-eGhCg',  // Tekotok
         'UCfQHaUbD0oEBH_FRYHE5qIg',  // Sepulang Sekolah
@@ -58,9 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let videoDurationFilter = 'medium';
 
     // Fungsi mendapatkan API key yang sedang dipakai
-    const getCurrentApiKey = () => {
-        return API_KEYS[currentKeyIndex];
-    };
+    const getCurrentApiKey = () => API_KEYS[currentKeyIndex];
 
     // Fungsi menggeser ke API key berikutnya
     const rotateApiKey = () => {
@@ -76,27 +74,22 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     hideLoading();
 
-    // Toggle panel kiri (dengan padding untuk tombol)
+    // Toggle panel kiri
     const leftPanel = document.querySelector('.left-panel');
     const rightPanel = document.querySelector('.right-panel');
     const toggleLeftPanelButton = document.createElement('button');
 
-    // Tambahkan latar belakang sebagai gambar
+    // Set gambar latar untuk tombol toggle
     toggleLeftPanelButton.style.backgroundImage = 'url("../assets/cursor/minimize.png")';
-    toggleLeftPanelButton.style.backgroundSize = '50%'; // Gambar latar menempati 50% dari tombol
-    toggleLeftPanelButton.style.backgroundRepeat = 'no-repeat'; // Tidak mengulang gambar
-    toggleLeftPanelButton.style.backgroundPosition = 'center'; // Gambar berada di tengah
-
-    // Tambahkan ukuran tombol dan padding
-    toggleLeftPanelButton.style.width = '50px'; // Lebar tombol
-    toggleLeftPanelButton.style.height = '50px'; // Tinggi tombol
-    toggleLeftPanelButton.style.padding = '10px'; // Tambahkan padding untuk ruang di sekitar gambar
-
-    // Tambahkan kelas dan masukkan tombol ke dalam body
+    toggleLeftPanelButton.style.backgroundSize = '50%';
+    toggleLeftPanelButton.style.backgroundRepeat = 'no-repeat';
+    toggleLeftPanelButton.style.backgroundPosition = 'center';
+    toggleLeftPanelButton.style.width = '50px';
+    toggleLeftPanelButton.style.height = '50px';
+    toggleLeftPanelButton.style.padding = '10px';
     toggleLeftPanelButton.classList.add('toggle-left-panel');
     document.body.appendChild(toggleLeftPanelButton);
 
-    // Tambahkan event listener untuk klik tombol
     toggleLeftPanelButton.addEventListener('click', () => {
         if (leftPanel.style.display === 'none') {
             leftPanel.style.display = 'block';
@@ -112,15 +105,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-
-    // Fungsi ini menghasilkan tanggal 1 tahun ke belakang dalam format ISO8601
+    // Fungsi menghasilkan tanggal 1 tahun yang lalu (format ISO8601)
     function getOneYearAgoDate() {
         const now = new Date();
         const oneYearAgo = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
-        return oneYearAgo.toISOString(); 
+        return oneYearAgo.toISOString();
     }
 
-    // Fungsi untuk mengacak urutan array (menggunakan Fisher-Yates Shuffle)
+    // Fungsi untuk mengacak urutan array (Fisher-Yates Shuffle)
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -129,118 +121,81 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ---------------------
-    // FUNGSI LOAD VIDEO "POPULER" / REKOMENDASI PADA CHANNEL
+    // LOAD VIDEO "POPULER" / REKOMENDASI PADA CHANNEL
     // ---------------------
     const loadPopularVideos = async () => {
-        showLoading(); // Tampilkan loading spinner
-        searchResults.innerHTML = ''; // Kosongkan hasil pencarian sebelumnya
-    
-        // Acak urutan channel sebelum memulai
+        showLoading();
+        searchResults.innerHTML = '';
         shuffleArray(scienceChannels);
-    
-        const publishedAfter = getOneYearAgoDate(); // Tanggal 1 tahun ke belakang
-        const videoMap = {}; // Tempat menyimpan video dari setiap channel (key: channelId)
-    
-        // Ambil 10 video dari setiap channel
+        const publishedAfter = getOneYearAgoDate();
+        const videoMap = {};
+
+        // Ambil video dari masing-masing channel
         for (let i = 0; i < scienceChannels.length; i++) {
             const channelId = scienceChannels[i];
             const apiKey = getCurrentApiKey();
-    
-            const url = `https://www.googleapis.com/youtube/v3/search
-                ?part=snippet
-                &type=video
-                &channelId=${channelId}
-                &key=${apiKey}
-                &maxResults=1
-                &order=viewCount
-                &publishedAfter=${publishedAfter}
-                &videoDuration=${videoDurationFilter}
-                &regionCode=US
-                &relevanceLanguage=en`
-                .replace(/\s+/g, ''); // Hapus spasi tambahan
-    
+            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&channelId=${channelId}&key=${apiKey}&maxResults=1&order=viewCount&publishedAfter=${publishedAfter}&videoDuration=${videoDurationFilter}&regionCode=US&relevanceLanguage=en`
+                .replace(/\s+/g, '');
             try {
                 const response = await fetch(url);
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
-    
                 if (data.items.length > 0) {
-                    videoMap[channelId] = data.items; // Simpan 10 video dari setiap channel
+                    videoMap[channelId] = data.items;
                 }
             } catch (error) {
                 console.error(`Error fetching videos from channel ${channelId}:`, error);
-                rotateApiKey(); // Gunakan API key berikutnya jika gagal
+                rotateApiKey();
             }
         }
-    
-        // Round-robin: Ambil satu video dari setiap channel secara bergantian
+
+        // Ambil video secara round-robin dari setiap channel
         const videoPool = [];
         let finished = false;
         let index = 0;
-    
         while (!finished) {
-            finished = true; // Asumsi selesai kecuali ada video yang tersisa
+            finished = true;
             for (const channelId of scienceChannels) {
                 const videos = videoMap[channelId];
                 if (videos && videos[index]) {
-                    videoPool.push(videos[index]); // Ambil video ke-n dari channel ini
-                    finished = false; // Masih ada video yang bisa diambil
+                    videoPool.push(videos[index]);
+                    finished = false;
                 }
             }
-            index++; // Lanjut ke video berikutnya di setiap channel
+            index++;
         }
-    
-        // Render video yang telah diatur ulang
+
         videoPool.forEach((video) => {
             renderSearchResult(video);
         });
-    
-        hideLoading(); // Sembunyikan loading spinner
+
+        hideLoading();
     };
-    
-    
 
     // ---------------------
-    // FUNGSI SEARCH VIDEO (saat user mengetik di search bar)
+    // SEARCH VIDEO (saat user mengetik di search bar)
     // ---------------------
     const searchVideos = async (query, pageToken = '') => {
         if (isLoading) return;
         isLoading = true;
         showLoading();
         let success = false;
-
-        // Param durasi
         let videoDurationParam = '';
         if (videoDurationFilter !== 'any') {
             videoDurationParam = `&videoDuration=${videoDurationFilter}`;
         }
-
         for (let i = 0; i < API_KEYS.length; i++) {
             const apiKey = getCurrentApiKey();
-
-            const url = `https://www.googleapis.com/youtube/v3/search
-                ?part=snippet
-                &type=video
-                &q=${encodeURIComponent(query)}
-                &order=${sortOrder}
-                &key=${apiKey}
-                &maxResults=10
-                &pageToken=${pageToken}
-                ${videoDurationParam}`
+            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${encodeURIComponent(query)}&order=${sortOrder}&key=${apiKey}&maxResults=10&pageToken=${pageToken}${videoDurationParam}`
                 .replace(/\s+/g, '');
-
             try {
                 const response = await fetch(url);
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
-
                 nextPageToken = data.nextPageToken || null;
-
-                // Jika tidak ada item
                 if (data.items.length === 0 && !pageToken) {
                     searchResults.innerHTML = '<p>No videos found.</p>';
                 }
-
                 data.items.forEach(item => renderSearchResult(item));
                 success = true;
                 break;
@@ -249,102 +204,117 @@ document.addEventListener('DOMContentLoaded', () => {
                 rotateApiKey();
             }
         }
-
         if (!success) {
             searchResults.innerHTML = '<p>All API keys failed. Please try again later.</p>';
         }
-
         hideLoading();
         isLoading = false;
     };
 
-    // Menampilkan hasil pencarian di panel kiri
+    // Tampilkan hasil pencarian di panel kiri
     const renderSearchResult = (item) => {
         const videoId = item.id.videoId;
         const title = item.snippet.title;
         const thumbnail = item.snippet.thumbnails.medium.url;
-
         const resultItem = document.createElement('div');
         resultItem.classList.add('result-item');
         resultItem.innerHTML = `
             <img src="${thumbnail}" alt="${title}">
             <p>${title}</p>
         `;
-
-        // Klik salah satu hasil => load video
         resultItem.addEventListener('click', () => {
-            // Hilangkan 'selected' di item lain
             document.querySelectorAll('.result-item').forEach(el => el.classList.remove('selected'));
             resultItem.classList.add('selected');
             loadVideo(videoId);
         });
-
         searchResults.appendChild(resultItem);
     };
 
-    // Memuat video ke iframe dan memanggil fetchComments
-    const loadVideo = (videoId) => {
-        showLoading();
+    // ------------
+    // Inisialisasi YouTube Iframe API untuk kontrol kualitas video
+    // ------------
+    let player = null;
+    let currentVideoId = '';
 
-        const videoPlaceholder = document.getElementById('videoPlaceholder');
-        const videoPlayer = document.getElementById('videoPlayer');
-    
-        // Sembunyikan placeholder, tampilkan iframe
-        videoPlaceholder.style.display = 'none';
-        videoPlayer.style.display = 'block';
-    
-        videoPlayer.src = `https://www.youtube.com/embed/${videoId}`;
-        videoPlayer.onload = () => {
-            hideLoading();
-            // Reset pagination untuk komentar
-            nextCommentsPageToken = null;
-            commentsContainer.innerHTML = '';
-            fetchComments(videoId);
-        };
+    // Fungsi callback global (dipanggil oleh API YouTube)
+    window.onYouTubeIframeAPIReady = function() {
+        player = new YT.Player('videoPlayer', {
+            height: '415',
+            width: '100%',
+            videoId: '',
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
     };
 
-    // Ambil komentar
+    function onPlayerReady(event) {
+        // Player sudah siap
+    }
+
+    function onPlayerStateChange(event) {
+        console.log('Player state changed:', event.data);
+        if (event.data === YT.PlayerState.PLAYING) {
+            hideLoading();
+            nextCommentsPageToken = null;
+            commentsContainer.innerHTML = '';
+            console.log('Memulai fetchComments untuk video:', currentVideoId);
+            fetchComments(currentVideoId);
+        }
+    }
+    
+    // Memuat video menggunakan player API dan paksa kualitas rendah ("small")
+    const loadVideo = (videoId) => {
+        showLoading();
+        currentVideoId = videoId;
+        const videoPlaceholder = document.getElementById('videoPlaceholder');
+        videoPlaceholder.style.display = 'none';
+        videoPlayer.style.display = 'block';
+        if (player && typeof player.loadVideoById === 'function') {
+            player.loadVideoById(videoId);
+            player.setPlaybackQuality('small');
+        } else {
+            // Fallback: jika player belum siap, gunakan cara lama
+            videoPlayer.src = `https://www.youtube.com/embed/${videoId}?vq=small&autoplay=1`;
+            videoPlayer.onload = () => {
+                hideLoading();
+                nextCommentsPageToken = null;
+                commentsContainer.innerHTML = '';
+                fetchComments(videoId);
+            };
+        }
+    };
+
+    // Ambil komentar video
     const fetchComments = async (videoId, pageToken = '') => {
         if (isLoadingComments) return;
         isLoadingComments = true;
-
         let success = false;
         for (let i = 0; i < API_KEYS.length; i++) {
             const apiKey = getCurrentApiKey();
-            const url = `https://www.googleapis.com/youtube/v3/commentThreads
-                ?part=snippet
-                &videoId=${videoId}
-                &key=${apiKey}
-                &maxResults=10
-                &pageToken=${pageToken}`
-                .replace(/\s+/g, '');
-
+            const url = `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=${videoId}&key=${apiKey}&maxResults=10&pageToken=${pageToken}`.replace(/\s+/g, '');
             try {
                 const response = await fetch(url);
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
-
                 nextCommentsPageToken = data.nextPageToken || null;
-
                 if (!data.items || data.items.length === 0) {
                     if (!pageToken) {
                         commentsContainer.innerHTML = '<p>No comments available.</p>';
                     }
                     return;
                 }
-
                 data.items.forEach(item => {
                     const comment = item.snippet.topLevelComment.snippet;
                     const author = comment.authorDisplayName;
                     const text = comment.textDisplay;
-
                     const commentItem = document.createElement('div');
                     commentItem.classList.add('comment-item');
                     commentItem.innerHTML = `
                         <p class="comment-author">${author}</p>
                         <p class="comment-text">${text}</p>
                     `;
-
                     commentsContainer.appendChild(commentItem);
                 });
                 success = true;
@@ -354,21 +324,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 rotateApiKey();
             }
         }
-
         if (!success) {
             commentsContainer.innerHTML = '<p>Pengunggah menonaktifkan komentar</p>';
         }
-
         isLoadingComments = false;
     };
 
-    // Ambil metadata video (dipakai saat user paste link)
+    // Ambil metadata video (digunakan saat user paste link)
     const fetchVideoMetadata = async (videoId) => {
         const apiKey = getCurrentApiKey();
-        const url = `https://www.googleapis.com/youtube/v3/videos
-            ?part=snippet
-            &id=${videoId}
-            &key=${apiKey}`
+        const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${apiKey}`
             .replace(/\s+/g, '');
         try {
             const response = await fetch(url);
@@ -387,14 +352,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const startSearch = async () => {
         const input = searchInput.value.trim();
         if (!input) {
-            // Kalau input kosong, langsung load rekomendasi (video terbaru channel)
+            // Jika input kosong, tampilkan video rekomendasi
             loadPopularVideos();
             return;
         }
-
         const videoId = extractVideoId(input);
         if (videoId) {
-            // Kalau user paste link
+            // Jika user paste link video
             const metadata = await fetchVideoMetadata(videoId);
             if (metadata) {
                 loadVideo(videoId);
@@ -406,21 +370,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             return;
         }
-
         currentQuery = input;
         searchResults.innerHTML = '';
         nextPageToken = null;
         searchVideos(currentQuery);
     };
 
-    // Helper untuk extract video ID dari URL
+    // Helper: ekstrak video ID dari URL YouTube
     const extractVideoId = (url) => {
         const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/.*v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
         const match = url.match(regex);
         return match ? match[1] : null;
     };
 
-    // Event pada tombol Search & enter di input
+    // Event listener untuk tombol search dan input enter
     searchBtn.addEventListener('click', startSearch);
     searchInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') startSearch();
@@ -437,7 +400,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Infinite scroll untuk comments
+    // Infinite scroll untuk komentar
     commentsContainer.addEventListener('scroll', () => {
         if (
             commentsContainer.scrollTop + commentsContainer.clientHeight >=
@@ -449,41 +412,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Ketika user mengubah pilihan sort
+    // Saat user mengubah pilihan sort
     sortSelect.addEventListener('change', () => {
-        sortOrder = sortSelect.value;  // relevance, viewCount, date
+        sortOrder = sortSelect.value;
         if (currentQuery) {
-            // Jika sedang ada query, ulangi pencarian
             searchResults.innerHTML = '';
             nextPageToken = null;
             searchVideos(currentQuery);
         } else {
-            // Jika tidak ada query, reload rekomendasi
             loadPopularVideos();
         }
     });
 
-    // Ketika user mengubah pilihan filter
+    // Saat user mengubah pilihan filter
     filterSelect.addEventListener('change', () => {
-        videoDurationFilter = filterSelect.value;  // any, short, long, dsb.
+        videoDurationFilter = filterSelect.value;
         if (currentQuery) {
-            // Jika sedang ada query, ulangi pencarian
             searchResults.innerHTML = '';
             nextPageToken = null;
             searchVideos(currentQuery);
         } else {
-            // Jika tidak ada query, reload rekomendasi
             loadPopularVideos();
         }
     });
 
-    // Klik logo => refresh
+    // Klik logo untuk refresh halaman
     const logoYtb = document.querySelector('.logoYtb');
     logoYtb.addEventListener('click', () => {
         window.location.reload();
     });
 
-    // Saat pertama load, tampilkan video "populer" (rekomendasi channel)
+    // Tampilkan video rekomendasi saat pertama load
     loadPopularVideos();
 
     // Tambahkan komentar default
