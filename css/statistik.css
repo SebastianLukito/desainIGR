@@ -39,7 +39,7 @@ body {
     flex: 1;
     min-width: 620px;
     max-width: 690px;
-    min-height: 1190px;
+    min-height: 1250px;
     box-sizing: border-box;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     justify-items: center;
@@ -85,18 +85,28 @@ footer {
 }
 
 #visitorTable th, #visitorTable td {
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
     text-align: center;
-    padding: 10px;
+    padding: 12px;
     user-select: none;
 }
 
+/* Styling untuk header tabel */
 #visitorTable th {
-    background-color: rgb(255, 208, 0);
+    background-color: rgb(75, 75, 75);
     background-image: url("../assets/img/45-degree-fabric-light.png");
-    color: #000;
+    color: #ffffff;
     font-weight: bold;
     user-select: none;
+}
+
+/* Tambahkan border-radius hanya pada kolom pertama dan terakhir */
+#visitorTable th:first-child {
+    border-radius: 8px 0 0 0;
+}
+
+#visitorTable th:last-child {
+    border-radius: 0 8px 0 0;
 }
 
 #visitorTable tr:nth-child(odd) {
@@ -105,6 +115,15 @@ footer {
 
 #visitorTable tr:nth-child(even) {
     background-color: #ffffff;
+}
+
+/* Target hanya baris ke-14 untuk border-radius */
+#visitorTable tr:nth-child(14) td:first-child {
+    border-radius: 0 0 0 10px;
+}
+
+#visitorTable tr:nth-child(14) td:last-child {
+    border-radius: 0 0 10px 0;
 }
 
 #visitorTable tr:hover {
