@@ -93,9 +93,8 @@ footer {
 
 /* Styling untuk header tabel */
 #visitorTable th {
-    background-color: rgb(10, 66, 101);
-    background-image: url("../assets/img/45-degree-fabric-light.png");
-    color: #ffffff;
+    color: #050505;
+    background-color: rgb(255, 208, 0);
     font-weight: bold;
     user-select: none;
 }
