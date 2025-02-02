@@ -117,9 +117,8 @@ footer {
     /* Lebar penuhnya mengikuti kontainer */
     width: 100%;
     max-width: 100%; 
-    /* Untuk tinggi, bisa dikelola fleksibel, misalnya: */
     height: auto;
-    max-height: 600px; /* Turunkan dari 800px agar tidak terlalu panjang */
+    max-height: 300px; /* Turunkan dari 800px agar tidak terlalu panjang */
 
     margin: 0 auto;
     display: block;
@@ -140,7 +139,7 @@ footer {
         max-width: 100%; 
         /* Untuk tinggi, bisa dikelola fleksibel, misalnya: */
         height: auto;
-        max-height: 600px; /* Turunkan dari 800px agar tidak terlalu panjang */
+        max-height: 300px; /* Turunkan dari 800px agar tidak terlalu panjang */
     
         display: block;
         /* padding bisa diperpendek jika terlalu lebar: */

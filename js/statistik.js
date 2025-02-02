@@ -239,20 +239,78 @@ function updateChart(timeRange) {
             datasets: [{
                 label: `Pengunjung (${timeRange})`,
                 data: groupedData.data,
-                borderColor: "rgb(33, 34, 34)",
-                tension: 0.1,
-                fill: false,
+                borderColor: "#212222",                  // Warna garis
+                backgroundColor: "rgba(163, 255, 255, 0.5)",  // Warna isian area di bawah garis
+                tension: 0.35,                             // Membuat garis lebih halus
+                fill: true,                               // Mengaktifkan fill area
+                pointBackgroundColor: "rgb(0, 68, 68)",          // Warna titik data
+                pointRadius: 4,                           // Ukuran titik data
+                pointHoverRadius: 6                       // Ukuran titik saat hover
             }],
         },
         options: {
             responsive: true,
-            scales: {
-                x: { title: { display: true, text: "Waktu" } },
-                y: { title: { display: true, text: "Jumlah Pengunjung" }, beginAtZero: true },
+            maintainAspectRatio: false,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: "top",
+                    labels: {
+                        font: {
+                            size: 14,
+                            family: "Helvetica, Arial, sans-serif",
+                            weight: "bold"
+                        }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: "rgba(36, 7, 105, 0.7)",
+                    titleFont: { size: 16 },
+                    bodyFont: { size: 14 },
+                    padding: 10,
+                    cornerRadius: 4
+                }
             },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: "Waktu",
+                        font: { size: 16, weight: "bold" }
+                    },
+                    grid: {
+                        display: true,
+                        color: "rgba(1, 11, 93, 0.1)"
+                    },
+                    ticks: {
+                        font: { size: 12 }
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: "Jumlah Pengunjung",
+                        font: { size: 16, weight: "bold" }
+                    },
+                    grid: {
+                        display: true,
+                        color: "rgba(0, 0, 0, 0.1)"
+                    },
+                    ticks: {
+                        font: { size: 12 }
+                    },
+                    beginAtZero: true
+                }
+            },
+            animation: {
+                duration: 2000,
+                easing: "easeOutQuart"
+            }
         },
     });
 }
+
 
 // Grupkan data berdasarkan rentang waktu
 function groupDataByTimeRange(timeRange) {
@@ -606,6 +664,7 @@ function drawTop5Chart(labels, data, chartTitle) {
         "rgba(153, 102, 255, 1)"
     ];
 
+    // Buat array warna untuk background dan border
     const backgroundColors = data.map((_, i) => colorPalette[i % colorPalette.length]);
     const borderColors = data.map((_, i) => borderPalette[i % borderPalette.length]);
 
@@ -616,10 +675,10 @@ function drawTop5Chart(labels, data, chartTitle) {
     top5ChartInstance = new Chart(ctx, {
         type: "bar",
         data: {
-            labels,
+            labels: labels,
             datasets: [{
                 label: chartTitle,
-                data,
+                data: data,
                 backgroundColor: backgroundColors,
                 borderColor: borderColors,
                 borderWidth: 1
@@ -627,9 +686,61 @@ function drawTop5Chart(labels, data, chartTitle) {
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false, // Agar tinggi dapat diatur via CSS/container
+            plugins: {
+                legend: {
+                    display: true,
+                    position: "top",
+                    labels: {
+                        font: {
+                            size: 14,
+                            family: "Helvetica, Arial, sans-serif",
+                            weight: "bold"
+                        }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: "rgba(0, 0, 0, 0.7)",
+                    titleFont: { size: 16 },
+                    bodyFont: { size: 14 },
+                    padding: 10,
+                    cornerRadius: 4
+                }
+            },
             scales: {
-                x: { title: { display: true, text: "Kategori" } },
-                y: { title: { display: true, text: "Jumlah Penggunaan" }, beginAtZero: true }
+                x: {
+                    title: {
+                        display: true,
+                        text: "Kategori",
+                        font: { size: 16, weight: "bold" }
+                    },
+                    grid: {
+                        display: true,
+                        color: "rgba(0, 0, 0, 0.1)"
+                    },
+                    ticks: {
+                        font: { size: 12 }
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: "Jumlah Penggunaan",
+                        font: { size: 16, weight: "bold" }
+                    },
+                    grid: {
+                        display: true,
+                        color: "rgba(0, 0, 0, 0.1)"
+                    },
+                    ticks: {
+                        font: { size: 12 }
+                    },
+                    beginAtZero: true
+                }
+            },
+            animation: {
+                duration: 1000,
+                easing: "easeOutQuart"
             }
         }
     });
