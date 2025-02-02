@@ -276,3 +276,7 @@ footer {
 #closePopup {
     cursor: url("../assets/cursor/tap.png"), auto;
 }
+
+#visitorTable th {
+    cursor: url("../assets/cursor/cursor.png"), auto;
+}
