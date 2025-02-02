@@ -121,19 +121,15 @@ function updateTable() {
     const tableBody = document.querySelector("#visitorTable tbody");
     tableBody.innerHTML = "";
 
-    // Gunakan filteredData sebagai sumber data untuk tabel
     const dataToShow = filteredData;
 
-    // Hitung total pages
     const totalItems = dataToShow.length;
     const totalPages = Math.ceil(totalItems / rowsPerPage);
 
-    // Pastikan currentPage tidak melebihi totalPages
     if (currentPage > totalPages && totalPages !== 0) {
         currentPage = totalPages;
     }
 
-    // Hitung indeks data berdasarkan halaman
     const startIndex = (currentPage - 1) * rowsPerPage;
     const endIndex = startIndex + rowsPerPage;
 
@@ -144,8 +140,35 @@ function updateTable() {
         emptyRow.innerHTML = `<td colspan="3" style="text-align: center;">Tidak ada data pengunjung</td>`;
         tableBody.appendChild(emptyRow);
     } else {
+        let lastDate = "";
+        let colorIndex = 0;
+        const colors = ["rgb(244, 255, 255)", "rgb(255, 254, 240)", "rgb(255, 243, 255)", "rgb(255, 243, 243)", "rgb(243, 255, 248)"];
+        const hoverColor = "rgb(220, 220, 220)"; // Warna abu-abu muda saat hover
+
         pageData.forEach((visitor) => {
             const row = document.createElement("tr");
+
+            // Ambil hanya tanggal (tanpa jam)
+            const visitDate = new Date(visitor.timestamp).toLocaleDateString();
+
+            // Jika tanggal berubah, ganti warna latar belakang
+            if (visitDate !== lastDate) {
+                colorIndex = (colorIndex + 1) % colors.length;
+                lastDate = visitDate;
+            }
+
+            const originalColor = colors[colorIndex];
+            row.style.backgroundColor = originalColor;
+
+            // Efek hover
+            row.addEventListener("mouseenter", () => {
+                row.style.backgroundColor = hoverColor;
+            });
+
+            row.addEventListener("mouseleave", () => {
+                row.style.backgroundColor = originalColor;
+            });
+
             row.innerHTML = `
                 <td>${visitor.no}</td>
                 <td>${visitor.username}</td>
@@ -157,6 +180,8 @@ function updateTable() {
 
     updatePagination(totalPages);
 }
+
+
 
 /* -------------------------------------------
 FUNGSI updatePagination()
