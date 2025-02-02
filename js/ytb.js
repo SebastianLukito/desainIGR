@@ -44,6 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const sortSelect = document.getElementById('sortSelect');
     const filterSelect = document.getElementById('filterSelect');
     
+    // Ambil container download dan tombol download dari HTML
+    const downloadContainer = document.getElementById('downloadContainer');
+    const downloadButton = document.getElementById('downloadButton');
+    // Pastikan container download disembunyikan secara default
+    downloadContainer.style.display = 'none';
+
     // Variabel penunjang
     let nextPageToken = null;
     let nextCommentsPageToken = null;
@@ -236,6 +242,18 @@ document.addEventListener('DOMContentLoaded', () => {
     let player = null;
     let currentVideoId = '';
 
+    // Ambil downloadContainer dan downloadButton sudah dari HTML (lihat di atas)
+    downloadButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log("Download button clicked");
+        if (currentVideoId) {
+            console.log("Current video ID:", currentVideoId);
+            downloadVideo(currentVideoId);
+        } else {
+            console.log("Tidak ada video yang dipilih.");
+        }
+    });
+
     // Fungsi callback global (dipanggil oleh API YouTube)
     window.onYouTubeIframeAPIReady = function() {
         player = new YT.Player('videoPlayer', {
@@ -254,36 +272,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function onPlayerStateChange(event) {
-        console.log('Player state changed:', event.data);
         if (event.data === YT.PlayerState.PLAYING) {
             hideLoading();
+            // Tampilkan container download (yang sudah diatur secara center melalui CSS)
+            downloadContainer.style.display = 'flex';
             nextCommentsPageToken = null;
             commentsContainer.innerHTML = '';
-            console.log('Memulai fetchComments untuk video:', currentVideoId);
             fetchComments(currentVideoId);
         }
     }
-    
-    // Memuat video menggunakan player API dan paksa kualitas rendah ("small")
+
+    // Memuat video menggunakan YouTube Player API dan paksa kualitas rendah ("small")
     const loadVideo = (videoId) => {
         showLoading();
         currentVideoId = videoId;
         const videoPlaceholder = document.getElementById('videoPlaceholder');
         videoPlaceholder.style.display = 'none';
         videoPlayer.style.display = 'block';
+        // Sembunyikan container download sebelum video dimuat kembali
+        downloadContainer.style.display = 'none';
         if (player && typeof player.loadVideoById === 'function') {
             player.loadVideoById(videoId);
             player.setPlaybackQuality('small');
         } else {
-            // Fallback: jika player belum siap, gunakan cara lama
+            // Fallback: jika player belum siap, gunakan metode lama
             videoPlayer.src = `https://www.youtube.com/embed/${videoId}?vq=small&autoplay=1`;
             videoPlayer.onload = () => {
                 hideLoading();
+                downloadContainer.style.display = 'flex';
                 nextCommentsPageToken = null;
                 commentsContainer.innerHTML = '';
                 fetchComments(videoId);
             };
         }
+    };
+
+    // Fungsi download video dengan membuka jendela baru ke Y2mate dengan URL khusus
+    const downloadVideo = (videoId) => {
+        // Contoh: mengarahkan ke Y2Mate dengan menyisipkan videoId sebagai parameter (perhatikan URL ini hanyalah contoh)
+        // Pastikan Anda mengecek apakah layanan tersebut menerima parameter videoId secara langsung
+        const url = `https://www.y2mate.com/youtube/${videoId}`;
+        window.open(url, '_blank');
     };
 
     // Ambil komentar video
@@ -293,7 +322,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let success = false;
         for (let i = 0; i < API_KEYS.length; i++) {
             const apiKey = getCurrentApiKey();
-            const url = `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=${videoId}&key=${apiKey}&maxResults=10&pageToken=${pageToken}`.replace(/\s+/g, '');
+            const url = `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=${videoId}&key=${apiKey}&maxResults=10&pageToken=${pageToken}`
+                .replace(/\s+/g, '');
             try {
                 const response = await fetch(url);
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -352,13 +382,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const startSearch = async () => {
         const input = searchInput.value.trim();
         if (!input) {
-            // Jika input kosong, tampilkan video rekomendasi
             loadPopularVideos();
             return;
         }
         const videoId = extractVideoId(input);
         if (videoId) {
-            // Jika user paste link video
             const metadata = await fetchVideoMetadata(videoId);
             if (metadata) {
                 loadVideo(videoId);

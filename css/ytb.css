@@ -305,7 +305,7 @@ footer {
 
 /* Komentar */
 .comments-section {
-    margin-top: 20px;
+    margin-top: 15px;
     padding: 10px;
     background: rgba(255, 255, 255, 0.72); /* Efek transparan */
     backdrop-filter: blur(15px);
@@ -497,4 +497,37 @@ footer {
     outline: none;
     border-color: #ff5555;
     box-shadow: 0 0 0 3px rgba(255, 85, 85, 0.2);
+}
+
+.download-container {
+    display: flex;
+    justify-content: center; /* Center secara horizontal */
+    align-items: center;
+    margin-top: 15px;
+    padding-inline: 10px;
+    padding-block: 7px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.download-label {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #000000; /* Sesuaikan dengan tema Anda */
+    font-weight: bold;
+}
+
+.download-button {
+    background-color: #FF0000;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+    background-color: #CC0000;
 }
