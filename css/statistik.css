@@ -793,7 +793,6 @@ footer {
 #featurePopupContent tr:hover {
     background: #dfdfdf;
     color: white;
-    transition: 0.2s ease-in-out;
 }
 
 /* Responsif untuk layar kecil */
