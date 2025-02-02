@@ -88,9 +88,22 @@
                         <!-- Data pengunjung akan dimuat secara dinamis -->
                     </tbody>
                 </table>
-                <button id="exportExcelBtn" class="export-btn">Export to Excel</button>
-                <button id="exportCSVBtn" class="export-btn">Export to CSV</button>
-                <button id="exportPDFBtn" class="export-btn">Export to PDF</button>
+                <div class="export-section">
+                    <div class="ex-header">
+                        <span class="export-label">Download Data: </span>
+                        <select id="exportDataType" class="export-data-type">
+                        <option value="visitor" selected>Data Pengunjung</option>
+                        <option value="feature">Data Fitur Yang Dipakai Pengunjung</option>
+                    </select>
+                    </div>
+                    
+                    <div class="export-buttons">
+                        <button id="exportExcelBtn" class="export-btn">Export to Excel</button>
+                        <button id="exportCSVBtn" class="export-btn">Export to CSV</button>
+                        <button id="exportPDFBtn" class="export-btn">Export to PDF</button>
+                    </div>
+                </div>
+                
                 <div id="pagination" class="pagination"></div>
 
                 

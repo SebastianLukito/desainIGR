@@ -39,7 +39,7 @@ body {
     flex: 1;
     min-width: 620px;
     max-width: 690px;
-    min-height: 990px;
+    min-height: 1190px;
     box-sizing: border-box;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     justify-items: center;
@@ -242,35 +242,100 @@ footer {
     cursor: not-allowed;
 }
 
+/* Container untuk keseluruhan export section */
+.export-section {
+    display: flex;
+    flex-direction: column; /* Susun secara vertikal */
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+    background-color: rgb(10, 66, 101);
+    background-image: url("../assets/img/45-degree-fabric-light.png");
+    padding-bottom: 20px;
+    padding-top: 15px;
+    padding-inline: 20px;
+    border-radius: 10px;
+}
+
+/* Container keseluruhan export section */
+.export-section {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+/* Container header untuk label dan dropdown */
+.export-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Label di sebelah dropdown */
+.export-label {
+    font-size: 16px;
+    color: #000000;
+    font-weight: bold;
+}
+
+.ex-header {
+    background-color: rgb(255, 213, 0);
+    padding-inline: 25px;
+    padding-block: 10px;
+    border-radius: 10px;
+}
+
+/* Styling untuk dropdown */
+.export-data-type {
+    padding: 10px 15px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+    margin-left: 10px;
+}
+
+/* Container untuk tombol export agar tersusun secara horizontal */
+.export-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Styling umum untuk tombol export */
 .export-btn {
-    display: inline-block;
-    margin-right: 10px; /* atau terserah */
-    padding: 10px;
-    color: #fff;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     font-weight: bold;
+    color: #fff;
+    font-size: 16px;
     cursor: pointer;
-    margin-top: 15px;
-    user-select: none;
-}
-.export-btn:hover {
-    transform: scale(1.05);
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
+/* Warna spesifik untuk masing-masing tombol export */
 #exportExcelBtn {
     background-color: rgb(6, 87, 6);
-    background-image: url("../assets/img/45-degree-fabric-light.png");
-}
-
-#exportPDFBtn {
-    background-color: rgb(129, 3, 3);
-    background-image: url("../assets/img/45-degree-fabric-light.png");
 }
 
 #exportCSVBtn {
     background-color: rgb(20, 57, 105);
-    background-image: url("../assets/img/45-degree-fabric-light.png");
+}
+
+#exportPDFBtn {
+    background-color: rgb(129, 3, 3);
+}
+
+/* Efek hover untuk tombol export */
+.export-btn:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
 }
 
 /* Ringkasan di Left Panel */
@@ -346,13 +411,15 @@ footer {
     flex-wrap: wrap;
     gap: 10px;
     align-items: center;
-    background-color: rgb(255, 246, 207) ;
+    background-color: rgb(10, 66, 101);
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     padding-inline: 10px;
     padding-block: 7px;
     border-radius: 10px;
     margin-bottom: -5px;
     margin-top: 5px;
     user-select: none;
+    padding-left: 15px;
 }
 
 .date-filter-section input[type="date"] {
@@ -363,13 +430,14 @@ footer {
 }
 
 .date-filter-section label {
-    color: #000;
+    color: #dadada;
     font-size: 17px;
+    font-weight: bold;
 }
 
 #filterBtn {
-    background-color: rgb(83, 83, 83); 
-    color: white;
+    background-color: rgb(255, 225, 0); 
+    color: rgb(0, 0, 0);
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
@@ -570,38 +638,42 @@ footer {
 /* Header Popup */
 #featurePopupHeader {
     display: flex;
-    justify-content:flex-start;
+    justify-content: space-between; /* Menyebarkan elemen secara merata */
     align-items: center;
-    padding-bottom: 10px;
-    margin-bottom: 0px;
+    padding: 10px 15px;
     background-color: rgb(10, 66, 101);
     background-image: url("../assets/img/45-degree-fabric-light.png");
-    padding: 10px 15px;
     border-radius: 8px 8px 0 0;
     z-index: 200;
 }
 
+
 /* Gaya logo dalam header */
 #featurePopupHeader img {
-    height: 30px; /* Sesuaikan ukuran */
-    width: 90px;
-    margin-left: 20px;
-    z-index: 200;
+    height: 30px; /* Sesuaikan tinggi sesuai kebutuhan */
+    width: 90px;  /* Sesuaikan lebar sesuai kebutuhan */
+    margin: 0 10px; /* Jarak horizontal agar tidak menempel */
 }
+
+/* #featurePopupHeader button {
+    background: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+} */
 
 /* Gaya judul popup */
 #featurePopupHeader h3 {
+    margin: 0;
     font-size: 18px;
     font-weight: bold;
     color: #ffffff;
-    margin: 0;
-    flex-grow: 1; /* Agar judul tetap di tengah */
-    margin-right: -120px;
-    margin-left: 10px;
-    align-items: left;
-    z-index: 200;
-    background-color: rgb(10, 66, 101);
-    background-image: url("../assets/img/45-degree-fabric-light.png");
+    flex-grow: 1;    /* Memastikan judul mengisi ruang yang tersedia */
+    margin-left: 10px; /* Jarak antara tepi kiri dan judul */
 }
 
 /* Gaya tombol tutup */

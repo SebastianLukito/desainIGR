@@ -165,3 +165,73 @@ function hideFeaturePopup() {
 
 // Event listener untuk tombol tutup
 document.getElementById("closePopup").addEventListener("click", hideFeaturePopup);
+
+
+// Fungsi untuk mengambil semua data featureLogs untuk ekspor
+function fetchAllFeatureData(callback) {
+    db.collection("featureLogs").get().then((snapshot) => {
+        const featureExportData = snapshot.docs.map((doc, index) => {
+            const data = doc.data();
+            return {
+                No: index + 1,
+                Username: data.username,
+                Feature: data.feature,
+                Timestamp: data.timestamp
+                    ? new Date(data.timestamp.seconds * 1000).toLocaleString()
+                    : "N/A"
+            };
+        });
+        callback(featureExportData);
+    }).catch((error) => {
+        console.error("Gagal mengambil data feature:", error);
+    });
+}
+
+// Export ke Excel untuk data fitur
+function exportAllRowsFeature(data) {
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Feature Data");
+    XLSX.writeFile(workbook, "feature_data.xlsx");
+    console.log("File Excel untuk feature data berhasil diunduh!");
+}
+
+// Export ke CSV untuk data fitur
+function exportToCSVFeature(data) {
+    const headers = ["No", "Username", "Feature", "Timestamp"];
+    const csvRows = [];
+    csvRows.push(headers.join(","));
+    data.forEach((item) => {
+        const row = [item.No, item.Username, item.Feature, item.Timestamp];
+        csvRows.push(row.join(","));
+    });
+    const csvString = csvRows.join("\n");
+    const blob = new Blob([csvString], { type: "text/csv" });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "feature_data.csv";
+    link.click();
+    window.URL.revokeObjectURL(url);
+    console.log("File CSV untuk feature data berhasil diunduh!");
+}
+
+// Export ke PDF untuk data fitur
+function exportToPDFFeature(data) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.setFontSize(14);
+    doc.text("Feature Data", 10, 10);
+    let yPos = 20;
+    data.forEach((item, idx) => {
+        const line = `${item.No}. ${item.Username} - ${item.Feature} - ${item.Timestamp}`;
+        doc.text(line, 10, yPos);
+        yPos += 10;
+        if (yPos > 280) {
+            doc.addPage();
+            yPos = 20;
+        }
+    });
+    doc.save("feature_data.pdf");
+    console.log("File PDF untuk feature data berhasil diunduh!");
+}

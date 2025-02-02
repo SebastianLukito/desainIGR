@@ -363,19 +363,40 @@ XLSX.writeFile(workbook, "visitor_statistics.xlsx");
 console.log("File Excel berhasil diunduh (filtered, tanpa grouping)!");
 }
 
-// Event listener untuk tombol Export to Excel
+// Export ke Excel
 document.getElementById("exportExcelBtn").addEventListener("click", () => {
-    // Gunakan filteredData
-    exportAllRows(filteredData);
+    const dataType = document.getElementById("exportDataType").value;
+    if (dataType === "visitor") {
+        exportAllRows(filteredData);  // fungsi yang sudah ada untuk visitor data
+    } else if (dataType === "feature") {
+        fetchAllFeatureData((data) => {
+            exportAllRowsFeature(data);
+        });
+    }
 });
 
-// Misalnya setelah Anda definisikan event untuk exportExcelBtn:
+// Export ke CSV
 document.getElementById("exportCSVBtn").addEventListener("click", () => {
-    exportToCSV(filteredData);
+    const dataType = document.getElementById("exportDataType").value;
+    if (dataType === "visitor") {
+        exportToCSV(filteredData);  // fungsi yang sudah ada untuk visitor data
+    } else if (dataType === "feature") {
+        fetchAllFeatureData((data) => {
+            exportToCSVFeature(data);
+        });
+    }
 });
 
+// Export ke PDF
 document.getElementById("exportPDFBtn").addEventListener("click", () => {
-    exportToPDF(filteredData);
+    const dataType = document.getElementById("exportDataType").value;
+    if (dataType === "visitor") {
+        exportToPDF(filteredData);  // fungsi yang sudah ada untuk visitor data
+    } else if (dataType === "feature") {
+        fetchAllFeatureData((data) => {
+            exportToPDFFeature(data);
+        });
+    }
 });
 
 function exportToCSV(data) {
