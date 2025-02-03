@@ -321,9 +321,9 @@ const easterEggContainer = document.createElement('div');
 easterEggContainer.classList.add('buttonContainer1');
 easterEggContainer.style.display = 'none'; // Default tidak ditampilkan
 easterEggContainer.innerHTML = `
-        <a href="games/2048/index.html" class="btn" target="_blank">2048</a>
-        <a href="monster.html" class="btn" target="_blank">Monster</a>
-        <a href="solar_system.html" class="btn" target="_blank">Planetes</a>
+        <a href="games/2048/index.html" class="btn" target="_blank" onclick="recordFeatureUsage('Game 2048')">2048</a>
+        <a href="monster.html" class="btn" target="_blank" onclick="recordFeatureUsage('Monster')">Monster</a>
+        <a href="solar_system.html" class="btn" target="_blank" onclick="recordFeatureUsage('Planetes')">Planetes</a>
 `;
 // Tambahkan ke DOM di akhir .mainContainer
 document.querySelector('.mainContainer').appendChild(easterEggContainer);
