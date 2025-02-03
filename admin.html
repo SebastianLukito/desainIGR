@@ -47,6 +47,21 @@
             </div>
         </div>
 
+        <!-- print dokumen button -->
+        <div class="buttonContainer">
+            <img src="assets/img/printer.png" alt="Icon alokasi" class="icon">
+            <button class="btn" id="alokasiBtn"><b>Print Dokumen</b></button>
+            <div class="popupContainer" id="popupMenuAlokasi">
+                <button class="close-btn" id="closePopupAlokasi">&times;</button>
+                <h2>Print Dokumen Rutin</h2>
+                <p>Kamu bisa print dokumen rutin di sini seperti Leaflet TU dan alokasi Tambah Untung, Super Promo, dan Kebulan</p>
+                <div class="sub-buttons">
+                    <a id="printHH" href="print.html" class="btn" target="_blank" onclick="recordFeatureUsage('Print TU')">Print Tambah Untung</a>
+                    <a id="alokasi" href="hh.html" class="btn" target="_blank" onclick="recordFeatureUsage('Alokasi')">Print Alokasi TU, Kebulan, SP</a>
+                </div>
+            </div>
+        </div>
+
         <!-- Manipulasi PDF button -->
         <div class="buttonContainer">
             <img src="assets/img/pdf.png" alt="Icon Manipulasi PDF" class="icon">
@@ -56,7 +71,6 @@
                 <h2>Manipulasi PDF</h2>
                 <p>Ini untuk edit-edit PDF sesuai kebutuhan tim desain grafis Indogrosir</p>
                 <div class="sub-buttons">
-                    <a id="printHH" href="print.html" class="btn" target="_blank" onclick="recordFeatureUsage('Print TU')">Print Tambah Untung</a>
                     <a id="mergepdf" href="mergepdf.html" class="btn" target="_blank" onclick="recordFeatureUsage('Merge PDF')">Gabungkan PDF</a>
                     <a id="splitpdf" href="splitpdf.html" class="btn" target="_blank" onclick="recordFeatureUsage('Split PDF')">Pisahkan PDF</a>
                     <a id="mergePS" href="mergePS.html" class="btn" target="_blank" onclick="recordFeatureUsage('Merge PDF Produk Segar')">Merge PDF Khusus Produk Segar</a>
@@ -378,20 +392,6 @@
                 <div class="sub-buttons">
                     <a id="calc" href="calc.html" class="btn" target="_blank" onclick="recordFeatureUsage('Scientific Calculator')">Scientific Calculator</a>
                     <a id="calcsed" href="calcsed.html" class="btn" target="_blank" onclick="recordFeatureUsage('Simple Calculator')">Simple Calculator</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- alokasi button -->
-        <div class="buttonContainer">
-            <img src="assets/img/excel.png" alt="Icon alokasi" class="icon">
-            <button class="btn" id="alokasiBtn"><b>Alokasi</b></button>
-            <div class="popupContainer" id="popupMenuAlokasi">
-                <button class="close-btn" id="closePopupAlokasi">&times;</button>
-                <h2>Alokasi</h2>
-                <p>Kamu bisa print dan edit alokasi Tambah Untung, Super Promo, dan Kebulan</p>
-                <div class="sub-buttons">
-                    <a id="alokasi" href="hh.html" class="btn" target="_blank" onclick="recordFeatureUsage('Alokasi')">Print Alokasi</a>
                 </div>
             </div>
         </div>
