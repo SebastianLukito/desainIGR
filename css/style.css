@@ -463,7 +463,10 @@ footer:hover {
 }
 
 #searchBar:focus {
-    border-color: #fefefe;
-    box-shadow: 0 0 10px rgba(104, 88, 1, 0.5);
+    box-shadow: 0 0 30px rgba(29, 0, 34, 0.2);
     transform: scale(1.22);
+    background-color: rgba(255, 255, 255, 1);
+    margin-bottom: 20px;
+    margin-top: 40px;
+    border-radius: 30px;
 }
