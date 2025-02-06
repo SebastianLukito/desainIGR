@@ -85,7 +85,7 @@ body {
     background-size: cover;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    transition: background 0.9s ease;
+    transition: all 0.9s ease;
 }
 
 .buttonContainer1 {
@@ -96,13 +96,14 @@ body {
     background: transparent;
     background-image: url("../assets/img/45-degree-fabric-light.png");
     background-size: cover;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(167, 167, 167, 0.2);
     padding: 20px;
-    transition: background 0.9s ease;
+    transition: all 0.9s ease;
 }
 
 .buttonContainer:hover {
-    background: #ffd609;
+    background: #454545;
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     box-shadow: 0 0 50px rgb(206, 255, 166);
 }
 
@@ -114,13 +115,13 @@ body {
     background-color: white;
     border-radius: 10px;
     padding: 10px;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
     user-select: none;
 }
 
 .buttonContainer .icon:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    transform: translateY(-11px);
+    transform: translateY(-5px) scale(0.97);
 }
 
 .btn {
@@ -160,7 +161,7 @@ body {
     visibility: hidden;
     padding: 2rem;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    transition: all 0.4s linear;
+    transition: all 0.4 linear;
     z-index: 1001;
     max-height: 70vh;
     overflow-y: auto;
@@ -171,7 +172,7 @@ body {
 .popupActive {
     visibility: visible;
     transform: translate(-50%, -50%) scale(1);
-    animation: popin 0.8s ease;
+    animation: popin 0.7s ease;
 }
 
 @keyframes popin {
@@ -453,13 +454,14 @@ footer:hover {
 
 #searchBar {
     width: 60%;
-    padding-inline: 20px;
+    padding-inline: 30px;
     padding-block: 10px;
     font-size: 16px;
     border-radius: 10px;
     transition: all 0.3s ease;
     margin-top: 20px;
     background-color: rgba(255, 255, 255, 0.95);
+    transition: all 0.2s linear;
 }
 
 #searchBar:focus {
@@ -469,4 +471,9 @@ footer:hover {
     margin-bottom: 20px;
     margin-top: 40px;
     border-radius: 30px;
+    padding-inline: 30px;
+}
+
+#searchBar:focus::placeholder  {
+    visibility: hidden;
 }
