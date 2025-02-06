@@ -465,4 +465,5 @@ footer:hover {
 #searchBar:focus {
     border-color: #fefefe;
     box-shadow: 0 0 10px rgba(104, 88, 1, 0.5);
+    transform: scale(1.22);
 }
