@@ -1,7 +1,7 @@
 /* Gaya dasar */
 body {
     background-color: rgb(10, 66, 101);
-    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     color: #e0e0e0;
     font-family: Helvetica, sans-serif;
     margin: 0;
@@ -90,7 +90,7 @@ body {
 /* Panel kiri - daftar user */
 .name-list {
     background-color: #cecece;
-    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     padding: 20px;
     border: 3px dashed #444;
     border-radius: 10px;
@@ -102,7 +102,8 @@ body {
 }
 
 .name-item {
-    background-color: #444;
+    background-color: #2c2c2c;
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     color: #e0e0e0;
     padding: 10px;
     border-radius: 5px;
@@ -120,13 +121,14 @@ body {
 
 .name-item.selected {
     background-color: #0a0a0a;
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     color: #ffffff;
 }
 
 /* Panel kanan - daftar FTP */
 .ftp-display {
     background-color: #1a1a1a;
-    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     padding: 20px;
     border: 1px solid #444;
     border-radius: 10px;
@@ -167,7 +169,7 @@ body {
     padding: 5px 10px;
     margin: 5px;
     background-color: rgb(157, 157, 157);
-    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     color: #1c1c1c;
     border: none;
     border-radius: 5px;
@@ -191,7 +193,7 @@ body {
     padding: 5px 10px;
     margin: 5px;
     background-color: #dba809;
-    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     color: #000000;
     border: none;
     border-radius: 5px;
@@ -212,6 +214,7 @@ body {
     display: inline-block;
     padding: 8px 12px;
     background-color: #008f39;
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -225,6 +228,7 @@ body {
 .add-ftp-btn:hover {
     transform: scale(1.02);
     background-color: #00d44e;
+    background-image: url("../assets/img/45-degree-fabric-light.png");
 }
 
 /* Tombol delete */
@@ -235,7 +239,7 @@ body {
     padding: 5px 10px;
     margin: 5px;
     background-color: #e30505; /* Warna merah menandakan aksi hapus */
-    background-image: url("/assets/img/45-degree-fabric-light.png");
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -335,4 +339,88 @@ footer {
     margin: 0;
     font-size: 1em;
     word-break: break-word; /* agar teks panjang bisa wrap */
+}
+
+/* Overlay umum */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Pastikan di atas segalanya */
+}
+
+/* Konten modal */
+.modal-content {
+    background: #ffffff;
+    color: #000000;
+    padding: 20px 20px;
+    border-radius: 8px;
+    width: 600px;
+    text-align: center;
+    position: relative;
+}
+
+/* Judul modal */
+#modal-title,
+#confirm-title {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+/* Deskripsi modal */
+#modal-desc,
+#confirm-desc {
+    margin-bottom: 1rem;
+}
+
+/* Input modal (untuk tambah/edit FTP) */
+#modal-input {
+    width: 95%;
+    padding: 8px;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: 2px solid #383838;
+}
+
+/* Tombol di dalam modal */
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.modal-buttons button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#modal-cancel-btn, 
+#confirm-cancel-btn {
+    background: #888; 
+    color: #fff;
+}
+
+#modal-confirm-btn, 
+#confirm-ok-btn {
+    background: #008f39; 
+    color: #fff;
+}
+
+#modal-cancel-btn:hover, 
+#confirm-cancel-btn:hover {
+    background: #666;
+}
+
+#modal-confirm-btn:hover, 
+#confirm-ok-btn:hover {
+    background: #00b246;
 }
