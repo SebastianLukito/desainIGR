@@ -9,13 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let allUsers = [];
     let currentSelectedUser = null;
 
-    // Ambil data dari Firestore (collection ftpUsers)
+    // Ambil data Firestore
     db.collection("ftpUsers").get()
     .then((snapshot) => {
         snapshot.forEach((doc) => {
         const userData = doc.data();
         if (!userData.name || typeof userData.name !== "string") {
-            console.warn("Skipping doc with missing or invalid name field:", doc.id, userData);
+            console.warn("Skipping doc with missing name field:", doc.id, userData);
             return;
         }
 
@@ -84,11 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Tombol copy
         const copyBtn = document.createElement('button');
         copyBtn.classList.add('copy-btn');
-        copyBtn.innerHTML = 'COPY';
+        copyBtn.textContent = 'COPY';
         copyBtn.addEventListener('click', () => {
         navigator.clipboard.writeText(ftpAddress)
             .then(() => showPopup(`FTP berhasil disalin: ${ftpAddress}`))
-            .catch((err) => console.error('Gagal menyalin FTP:', err));
+            .catch((err) => console.error('Gagal menyalin:', err));
         });
 
         // Tombol edit
@@ -96,20 +96,20 @@ document.addEventListener('DOMContentLoaded', () => {
         editBtn.classList.add('edit-btn');
         editBtn.textContent = 'EDIT';
         editBtn.addEventListener('click', () => {
-        // Pakai modal form
+        // Modal form
         openModalForm({
             title: 'Edit Alamat FTP',
             description: 'Ubah alamat FTP di bawah:',
             defaultValue: ftpAddress,
             onConfirm: (newVal) => {
             if (newVal && newVal !== ftpAddress) {
-                const index = user.ftp.indexOf(ftpAddress);
-                if (index !== -1) {
-                user.ftp[index] = newVal;
+                const idx = user.ftp.indexOf(ftpAddress);
+                if (idx !== -1) {
+                user.ftp[idx] = newVal;
                 db.collection("ftpUsers").doc(user.docId)
                     .update({ ftp: user.ftp })
                     .then(() => {
-                    showPopup(`Alamat FTP berhasil diubah menjadi: ${newVal}`);
+                    showPopup(`Alamat FTP berhasil diubah: ${newVal}`);
                     showFtp(user);
                     })
                     .catch((err) => console.error("Gagal update:", err));
@@ -124,22 +124,28 @@ document.addEventListener('DOMContentLoaded', () => {
         deleteBtn.classList.add('delete-btn');
         deleteBtn.textContent = 'DELETE';
         deleteBtn.addEventListener('click', () => {
-        // Pakai modal konfirmasi
+        // Konfirmasi pertama
         openConfirmModal({
             title: 'Konfirmasi Hapus',
-            description: `Yakin ingin menghapus alamat FTP: ${ftpAddress}?`,
+            description: `Yakin ingin menghapus alamat FTP: "${ftpAddress}"?`,
             onYes: () => {
-            const index = user.ftp.indexOf(ftpAddress);
-            if (index !== -1) {
-                user.ftp.splice(index, 1);
-                db.collection("ftpUsers").doc(user.docId)
-                .update({ ftp: user.ftp })
-                .then(() => {
-                    showPopup(`Alamat FTP berhasil dihapus: ${ftpAddress}`);
-                    showFtp(user);
-                })
-                .catch((err) => console.error("Gagal menghapus FTP:", err));
-            }
+            // Buka captcha modal (barier kedua)
+            openCaptchaModal({
+                onSuccess: () => {
+                // Jika captcha benar, baru hapus
+                const index = user.ftp.indexOf(ftpAddress);
+                if (index !== -1) {
+                    user.ftp.splice(index, 1);
+                    db.collection("ftpUsers").doc(user.docId)
+                    .update({ ftp: user.ftp })
+                    .then(() => {
+                        showPopup(`Alamat FTP berhasil dihapus: ${ftpAddress}`);
+                        showFtp(user);
+                    })
+                    .catch((err) => console.error("Gagal menghapus FTP:", err));
+                }
+                }
+            });
             }
         });
         });
@@ -148,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ftpContainer.appendChild(copyBtn);
         ftpContainer.appendChild(editBtn);
         ftpContainer.appendChild(deleteBtn);
-
         ftpDisplay.appendChild(ftpContainer);
     });
     }
@@ -167,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     });
 
-    // Tambah FTP (pakai modal form)
+    // Tambah FTP
     addFtpBtn.addEventListener('click', () => {
     if (!currentSelectedUser) return;
     openModalForm({
@@ -190,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// ========== FUNGSI POPUP SINGKAT (NOTIF) ==========
+// ========== POPUP SINGKAT (NOTIF) ==========
 function showPopup(message) {
     const popupOverlay = document.getElementById('popup-message');
     const popupText = document.getElementById('popup-text');
@@ -198,20 +203,15 @@ function showPopup(message) {
     popupText.textContent = message;
     popupOverlay.style.display = 'flex';
 
-    // Klik di luar konten => tutup popup
-    popupOverlay.addEventListener('click', () => {
-    popupOverlay.style.display = 'none';
-    });
-
-    // Mencegah popup menutup jika user klik area konten
-    const popupContent = document.getElementById('popup-content');
-    popupContent.addEventListener('click', (event) => {
-    event.stopPropagation();
+    // Tutup jika klik di luar konten
+    popupOverlay.addEventListener('click', (e) => {
+    if (e.target.id === 'popup-message') {
+        popupOverlay.style.display = 'none';
+    }
     });
 }
 
-// ========== FUNGSI MODAL FORM (TAMBAH/EDIT) ==========
-// Memunculkan modal dengan 1 input text
+// ========== MODAL FORM (TAMBAH/EDIT) ==========
 function openModalForm({ title, description, defaultValue, onConfirm }) {
     const modalOverlay = document.getElementById('modal-overlay');
     const modalTitle = document.getElementById('modal-title');
@@ -220,34 +220,36 @@ function openModalForm({ title, description, defaultValue, onConfirm }) {
     const cancelBtn = document.getElementById('modal-cancel-btn');
     const confirmBtn = document.getElementById('modal-confirm-btn');
 
-    // Set isi modal
     modalTitle.textContent = title || 'Form';
     modalDesc.textContent = description || '';
     modalInput.value = defaultValue || '';
-    modalInput.style.display = 'block';  // Pastikan input ditampilkan
+    modalInput.style.display = 'block';
 
-    // Tampilkan modal
     modalOverlay.style.display = 'flex';
 
-    // Action tombol Batal
+    // Klik di luar konten => tutup modal
+    modalOverlay.addEventListener('click', (e) => {
+    if (e.target.id === 'modal-overlay') {
+        modalOverlay.style.display = 'none';
+    }
+    });
+
+    // Batal
     cancelBtn.onclick = () => {
     modalOverlay.style.display = 'none';
     };
 
-    // Action tombol OK
+    // OK
     confirmBtn.onclick = () => {
     const newValue = modalInput.value.trim();
     modalOverlay.style.display = 'none';
-
-    // Panggil callback
     if (typeof onConfirm === 'function') {
         onConfirm(newValue);
     }
     };
 }
 
-// ========== FUNGSI MODAL KONFIRMASI (HAPUS) ==========
-// Memunculkan modal konfirmasi dengan tombol Ya/Tidak
+// ========== MODAL KONFIRMASI (LANGKAH 1 DELETE) ==========
 function openConfirmModal({ title, description, onYes }) {
     const confirmOverlay = document.getElementById('confirm-overlay');
     const confirmTitle = document.getElementById('confirm-title');
@@ -255,22 +257,80 @@ function openConfirmModal({ title, description, onYes }) {
     const cancelBtn = document.getElementById('confirm-cancel-btn');
     const okBtn = document.getElementById('confirm-ok-btn');
 
-    // Set isi
     confirmTitle.textContent = title || 'Konfirmasi';
     confirmDesc.textContent = description || 'Yakin?';
-
     confirmOverlay.style.display = 'flex';
 
-    // Batal / Tutup
+    // Klik di luar => tutup
+    confirmOverlay.addEventListener('click', (e) => {
+    if (e.target.id === 'confirm-overlay') {
+        confirmOverlay.style.display = 'none';
+    }
+    });
+
+    // Batal
     cancelBtn.onclick = () => {
     confirmOverlay.style.display = 'none';
     };
 
-    // OK / Ya
+    // Ya
     okBtn.onclick = () => {
     confirmOverlay.style.display = 'none';
     if (typeof onYes === 'function') {
         onYes();
     }
     };
+}
+
+// ========== MODAL CAPTCHA (LANGKAH 2 DELETE) ==========
+function openCaptchaModal({ onSuccess }) {
+    const captchaOverlay = document.getElementById('captcha-overlay');
+    const captchaTextEl = document.getElementById('captcha-text');
+    const captchaInput = document.getElementById('captcha-input');
+    const captchaCancelBtn = document.getElementById('captcha-cancel-btn');
+    const captchaOkBtn = document.getElementById('captcha-ok-btn');
+
+    // Buat captcha random (contoh 5 huruf/angka)
+    const captcha = generateRandomCaptcha(5);
+    captchaTextEl.textContent = `Ketik: ${captcha}`;
+    captchaInput.value = '';
+
+    captchaOverlay.style.display = 'flex';
+
+    // Klik di luar => tutup
+    captchaOverlay.addEventListener('click', (e) => {
+    if (e.target.id === 'captcha-overlay') {
+        captchaOverlay.style.display = 'none';
+    }
+    });
+
+    // Batal
+    captchaCancelBtn.onclick = () => {
+    captchaOverlay.style.display = 'none';
+    };
+
+    // OK
+    captchaOkBtn.onclick = () => {
+    const userInput = captchaInput.value.trim();
+    if (userInput === captcha) {
+        // Tutup overlay
+        captchaOverlay.style.display = 'none';
+        // Lanjutkan hapus
+        if (typeof onSuccess === 'function') {
+        onSuccess();
+        }
+    } else {
+        showPopup('Captcha salah, coba lagi!');
+    }
+    };
+}
+
+// ========== FUNGSI BANTU GENERATE CAPTCHA ==========
+function generateRandomCaptcha(length = 5) {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
 }
