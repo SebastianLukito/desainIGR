@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-    
+
         <!-- Manipulasi PDF button -->
         <div class="buttonContainer">
             <img src="assets/img/pdf.png" alt="Icon Manipulasi PDF" class="icon">
@@ -56,7 +56,7 @@
                 <div class="sub-buttons">
                     <a id="mergepdf" href="mergepdf.html" class="btn" target="_blank" onclick="recordFeatureUsage('Merge PDF')">Gabungkan PDF</a>
                     <a id="splitpdf" href="splitpdf.html" class="btn" target="_blank" onclick="recordFeatureUsage('Split PDF')">Pisahkan PDF</a>
-                    <a id="mergePS" href="mergePS.html" class="btn" target="_blank" onclick="recordFeatureUsage('Merge PDF Produk Segar')">Merge PDF Khusus Produk Segar</a>
+                    <a id="mergePS" href="mergePS.html" class="btn" target="_blank" onclick="recordFeatureUsage('Finalisasi PDF Produk Segar')">Finalisasi PDF Produk Segar</a>
                     <a id="webpconverter" href="webp.html" class="btn" target="_blank" onclick="recordFeatureUsage('Konversi PDF - Gambar')">Konversi PDF ke Gambar</a>
                     <a id="compresspdf" href="compresspdf.html" class="btn" target="_blank" onclick="recordFeatureUsage('Kompresi PDF')">Kompresi PDF</a>
                     <a id="convertpdftoexcel" href="convertpdftoexcel.html" class="btn" target="_blank" onclick="recordFeatureUsage('Konversi PDF - Excel')">Konversi PDF ke Excel</a>
@@ -116,7 +116,7 @@
                 <h2>Kumpulan Link</h2>
                 <p>Di bawah ini adalah kumpulan-kumpulan link yang sering dipakai oleh Tim Marketing Indogrosir</p>
                 <div class="sub-buttons">
-                    <a id="isReport" href="kumpulan_isreport.html" class="btn" target="_blank">Kumpulan ISReport</a>
+                    <a id="isReport" href="kumpulan_isreport.html" class="btn" target="_blank" onclick="recordFeatureUsage('ISReport')">Kumpulan ISReport</a>
                     <a id="adminIndogrosirku" class="btn toggleChild">Website Admin Aplikasi Indogrosirku</a>
                     <div class="child-sub-buttons" id="childAdminIndogrosirku">
                         <p>Username: adminho@mail.com
@@ -179,7 +179,7 @@
                 <h2>Informasi</h2>
                 <p>Kumpulan Informasi</p>
                 <div class="sub-buttons">
-                    <a id="itemLarangan" class="btn toggleChild">Item Larangan</a>
+                    <a id="itemLarangan" class="btn toggleChild" onclick="recordFeatureUsage('Item Larangan')">Item Larangan</a>
                     <div class="child-sub-buttons" id="childItemLarangan">
                         <p>Kecuali Pembelian Rokok, Pulsa Elektronik, Top-Up i.saku, Top-Up Mitra Indogrosir, Minyakita, Telur (Toko Tertentu), Susu Bayi Di Bawah 1 Tahun & Beras/Tepung/Gula (Bulky ≥ 20kg)</p>
                         <button class="copy-btn" onclick="copyToClipboard('childItemLarangan')">
@@ -187,7 +187,7 @@
                             <p> Klik di sini untuk copy</p>
                         </button>
                     </div>
-                    <a id="bankGambar" class="btn toggleChild">Bank Gambar</a>
+                    <a id="bankGambar" class="btn toggleChild" onclick="recordFeatureUsage('Bank Gambar')">Bank Gambar</a>
                     <div class="child-sub-buttons" id="childBankGambar">
                         <p>\\0200MKTDES-SDNA\Bank Gambar</p>
                         <button class="copy-btn" onclick="copyToClipboard('childBankGambar')">
@@ -196,7 +196,7 @@
                         </button>
                     </div>
                     <a id="ftpMarketing" class="btn toggleChild">FTP Marketing</a>
-                    <div class="child-sub-buttons" id="childFTP">
+                    <div class="child-sub-buttons" id="childFTP" onclick="recordFeatureUsage('FTP Marketing')">
                         <div id="alamatFTP">
                             <p>ftp://172.31.16.69/MKT/</p>
                         </div>
@@ -207,7 +207,7 @@
                         <h4>Username: ftpigrho <br> 
                         Password: xftpigrhox</h4>
                     </div>
-                    <a id="extIT" class="btn toggleChild">Extention IT Menara Indomaret</a>
+                    <a id="extIT" class="btn toggleChild" onclick="recordFeatureUsage('Extention IT')">Extention IT Menara Indomaret</a>
                     <div class="child-sub-buttons" id="childExtIT">
                             <table class="tabel">
                                 <thead>
@@ -233,7 +233,7 @@
                                 </tbody>
                             </table>
                     </div>
-                    <a id="extMKT" class="btn toggleChild">Extention MKT IGR</a>
+                    <a id="extMKT" class="btn toggleChild" onclick="recordFeatureUsage('Extention Marketing')">Extention MKT IGR</a>
                     <div class="child-sub-buttons" id="childExtMKT">
                             <table class="tabel">
                                 <thead>
@@ -378,8 +378,6 @@
                 </div>
             </div>
         </div>
-
-        
 
         <!-- Youtube button -->
         <div class="buttonContainer">
