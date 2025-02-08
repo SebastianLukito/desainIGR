@@ -39,6 +39,8 @@ body {
     flex: 1;
     min-width: 300px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 .left-panel:hover,
@@ -59,10 +61,7 @@ body {
     user-select: none;
 }
 
-.right-panel {
-    display: flex;
-    flex-direction: column;
-}
+
 
 /* Panel Kanan */
 .right-panel p {
@@ -102,13 +101,15 @@ body {
 }
 
 .name-item {
-    background-color: #2c2c2c;
+    display: flex;               /* Membuat kontainer flex */
+    align-items: center;         /* Vertically align center */
+    justify-content: space-between; /* Nama user di kiri, tombol di kanan */
+    background-color: #000000;      /* Contoh latar belakang */
     background-image: url("../assets/img/45-degree-fabric-light.png");
     color: #e0e0e0;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 5px;
-    display: block;
     border: 1px solid #555;
     transition: background-color 0.3s ease;
     cursor: pointer;
@@ -120,7 +121,7 @@ body {
 }
 
 .name-item.selected {
-    background-color: #0a0a0a;
+    background-color: #470101;
     background-image: url("../assets/img/45-degree-fabric-light.png");
     color: #ffffff;
 }
@@ -231,6 +232,25 @@ body {
     background-image: url("../assets/img/45-degree-fabric-light.png");
 }
 
+.add-user-btn {
+    background-color: #008f39;
+    background-image: url("../assets/img/45-degree-fabric-light.png");
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding-inline: 80px;
+}
+
+.add-user-btn:hover {
+    transform: scale(1.02);
+    background-color: #00d44e;
+    background-image: url("../assets/img/45-degree-fabric-light.png");
+}
+
 /* Tombol delete */
 .delete-btn {
     display: inline-flex;
@@ -253,8 +273,54 @@ body {
 .delete-btn:hover {
     transform: scale(1.01);
     background-color: #ff0000; /* Warna merah lebih cerah saat hover */
+    background-image: url("../assets/img/45-degree-fabric-light.png");
 }
 
+.delete-user-btn {
+    background-color: #e30505; /* Merah */
+    background-image: url("../assets/img/45-degree-fabric-light.png");
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 10px;    /* spasi dari teks */
+    transition: background-color 0.3s ease;
+}
+.delete-user-btn:hover {
+    background-color: #ff0000; /* merah lebih cerah saat hover */
+    background-image: url("../assets/img/45-degree-fabric-light.png");
+}
+
+/* Contoh gaya untuk tombol toggle “DELETE MODE” */
+.toggle-delete-mode-btn {
+    background-color: #444;
+    background-image: url("../assets/img/45-degree-fabric-light.png");
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding-inline: 80px;
+    
+}
+
+.toggle-delete-mode-btn:hover {
+    background-color: #000000;
+    background-image: url("../assets/img/45-degree-fabric-light.png");
+}
+
+.top-buttons {
+    display: flex;                
+    justify-content: center;      /* Pusatkan secara horizontal */
+    align-items: center;          /* Vertikal rata tengah */
+    gap: 8px;                     /* Jarak horizontal antar tombol */
+    margin-bottom: 15px;          /* Jarak bawah ke elemen selanjutnya */
+    flex-wrap: wrap;
+}
 
 /* Responsif */
 @media (max-width: 768px) {
