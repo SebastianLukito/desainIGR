@@ -124,6 +124,7 @@ body {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    height: 850px;
 }
 
 .left-panel:hover,
@@ -204,10 +205,11 @@ body {
     border: none;
     border-radius: 5px;
     padding-block: 10px;
-    padding-inline: 55px;
+    padding-inline: 35px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 17px;
 }
 
 .add-user-btn:hover {
@@ -221,10 +223,11 @@ body {
     border: none;
     border-radius: 5px;
     padding-block: 10px;
-    padding-inline: 55px;
+    padding-inline: 35px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 17px;
 }
 
 .toggle-delete-mode-btn:hover {
@@ -240,7 +243,7 @@ body {
     text-align: left;
     color: #000;
     min-height: 400px;
-    max-height: 500px;
+    max-height: 600px;
     overflow-y: auto;
 }
 
@@ -353,6 +356,10 @@ body {
     text-align: center;
     background: rgb(0, 0, 0);
     background-image: url("../assets/img/45-degree-fabric-light.png");
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .registrasi-box h2 {
@@ -369,10 +376,12 @@ body {
 
 .registrasi-box h3 {
     margin-bottom: 20px;
-    background-color: #d1d1d1;
+    background-color: #ffd000;
     background-image: url("../assets/img/45-degree-fabric-light.png");
     padding-block: 5px;
     border-radius: 10px;
+    padding-inline: 50px;
+    width: 90%;
 }
 
 .registrasi-box .inputBox {
@@ -383,18 +392,20 @@ body {
 }
 
 .inputBox input {
-    width: 100%;
     padding: 10px 15px;
     background: transparent;
     background: rgb(255, 255, 255);
     border: 1px solid #ccc;
     border-radius: 8px;
     outline: none;
-    font-size: 16px;
+    font-size: 20px;
     color: #333;
     transition: all 0.3s ease;
     user-select: none;
     cursor: url("../assets/cursor/cursor.png");
+    text-align: center;
+    font-weight: bold;
+    width: 90%;
 }
 
 .inputBox label {
@@ -406,6 +417,7 @@ body {
     transition: all 0.3s ease;
     user-select: none;
     cursor: url("../assets/cursor/cursor.png");
+    
 }
 
 
@@ -497,6 +509,12 @@ body {
     background-image: url("../assets/img/45-degree-fabric-light.png");
 }
 
+.delete-user-btn:hover {
+    background-color: #470101;
+    background-image: url("../assets/img/45-degree-fabric-light.png");
+    color: #ffffff;
+}
+
 /* Modal Ganti Password */
 .modal-overlay {
     position: fixed;
@@ -514,37 +532,50 @@ body {
 .modal-content {
     background: #ffffff;
     color: #000000;
-    padding: 20px;
+    padding-inline: 20px;
     border-radius: 8px;
     width: 400px;
     text-align: center;
+    padding-block: 20px;
+}
+
+.modal-content h2 {
+    background-color: rgb(255, 200, 0);
+    background-image: url("../assets/img/45-degree-fabric-light.png");
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
 .modal-content .inputBox input {
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 
 .modal-buttons {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .modal-buttons button {
-    padding: 8px 16px;
+    padding: 8px 46px;
     border-radius: 4px;
     border: none;
     cursor: pointer;
     font-weight: bold;
+    font-size: 18px;
+    margin-top: 20px;
 }
 
 #cancelChangePasswordBtn {
     background: #888;
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     color: #fff;
 }
 
 #confirmChangePasswordBtn {
     background: #008f39;
+    background-image: url("../assets/img/45-degree-fabric-light.png");
     color: #fff;
 }
 
@@ -578,6 +609,7 @@ body {
     width: 80%;
     align-self: center; 
     transition: all 0.3s ease;
+    font-size: 17px;
 }
 
 #changePasswordBtn:hover {
@@ -596,6 +628,7 @@ body {
     align-self: center;
     transition: all 0.3s ease;
     margin-top: 10px;
+    font-size: 17px;
 }
 
 #changeEmailBtn:hover {
@@ -614,6 +647,7 @@ body {
     width: 50%;
     align-self: center;
     transition: all 0.3s ease;
+    font-size: 17px;
 }
 
 #closeDetailBtn:hover {
