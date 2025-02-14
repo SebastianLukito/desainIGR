@@ -184,10 +184,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="modal-content">
                     <h2>Tambah Password</h2>
                     <div class="inputBox">
-                        <input type="password" id="newPasswordAdd" placeholder="Masukkan Password">
+                        <input type="password" id="newPasswordAdd" placeholder="Masukkan Password" autocomplete="off">
                     </div>
                     <div class="inputBox">
-                        <input type="password" id="confirmPasswordAdd" placeholder="Konfirmasi Password Baru">
+                        <input type="password" id="confirmPasswordAdd" placeholder="Konfirmasi Password Baru" autocomplete="off">
                     </div>
                     <div class="modal-buttons">
                         <button id="cancelAddPasswordBtn">Batal</button>
@@ -233,10 +233,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="modal-content">
                     <h2>Ganti Password</h2>
                     <div class="inputBox">
-                        <input type="password" id="oldPasswordInput" placeholder="Masukkan Password Lama">
+                        <input type="password" id="oldPasswordInput" placeholder="Masukkan Password Lama" autocomplete="off">
                     </div>
                     <div class="inputBox">
-                        <input type="password" id="newPasswordInputModal" placeholder="Masukkan Password Baru">
+                        <input type="password" id="newPasswordInputModal" placeholder="Masukkan Password Baru" autocomplete="off">
                     </div>
                     <div class="modal-buttons">
                         <button id="cancelChangePasswordBtn">Batal</button>
@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="modal-content">
                 <h2>${currentSelectedUser.email === "" ? "Tambah Email" : "Ganti Email"}</h2>
                 <div class="inputBox">
-                    <input type="email" id="newEmailInput" placeholder="Masukkan Email Baru">
+                    <input type="email" id="newEmailInput" placeholder="Masukkan Email Baru" autocomplete="off">
                 </div>
                 <div class="modal-buttons">
                     <button id="cancelChangeEmailBtn">Batal</button>
@@ -341,19 +341,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h2>Tambah Pengguna</h2>
                         <form id="addUserForm">
                             <div class="inBox">
-                                <input type="text" id="newUsername" required placeholder="Username">
+                                <input type="text" id="newUsername" required placeholder="Username" autocomplete="off">
                                 
                             </div>
                             <div class="inBox">
-                                <input type="password" id="newPassword" required placeholder="Password">
+                                <input type="password" id="newPassword" required placeholder="Password" autocomplete="off">
                                 
                             </div>
                             <div class="inBox">
-                                <input type="password" id="confirmPassword" required placeholder="Konfirmasi Password">
+                                <input type="password" id="confirmPassword" required placeholder="Konfirmasi Password" autocomplete="off">
                                 
                             </div>
                             <div class="inBox">
-                                <input type="email" id="newEmail" required placeholder="Email">
+                                <input type="email" id="newEmail" required placeholder="Email" autocomplete="off">
                                 
                             </div>
                             <button type="submit" class="btn">Tambah Pengguna</button>
