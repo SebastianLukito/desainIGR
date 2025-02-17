@@ -133,6 +133,78 @@ document.addEventListener('DOMContentLoaded', () => {
         displayUsers(searchInput.value.trim());
     });
 
+    // Jawaban benar -> ubah tipe input password menjadi text
+    const passwordField = document.getElementById('passwordField');
+    if (passwordField) {
+        passwordField.type = 'text';
+    }
+
+    // Sembunyikan tombol "Lihat Password"
+    const revealPasswordBtn = document.getElementById('revealPasswordBtn');
+    if (revealPasswordBtn) {
+        revealPasswordBtn.style.display = 'none';
+    }
+
+    // Modal Security Question
+    function openSecurityQuestionModal() {
+        const securityModal = document.getElementById('securityModal');
+        const closeSecurityModal = document.getElementById('closeSecurityModal');
+        const securityQuestion = document.getElementById('securityQuestion');
+        const securityAnswer = document.getElementById('securityAnswer');
+        const submitBtn = document.getElementById('submitSecurityAnswer');
+        const securityError = document.getElementById('securityError');
+    
+        securityAnswer.value = '';
+        securityError.textContent = '';
+    
+        securityModal.style.display = 'block';
+    
+        closeSecurityModal.onclick = function() {
+            securityModal.style.display = 'none';
+        };
+    
+        window.onclick = function(event) {
+            if (event.target === securityModal) {
+                securityModal.style.display = 'none';
+            }
+        };
+    
+        fetch('assets/list/tanya.json')
+            .then(response => response.json())
+            .then(questions => {
+                const randomIndex = Math.floor(Math.random() * questions.length);
+                const selectedQuestion = questions[randomIndex];
+                securityQuestion.textContent = selectedQuestion.pertanyaan;
+    
+                submitBtn.onclick = function() {
+                    const userAnswer = securityAnswer.value.trim().toLowerCase();
+                    const correctAnswer = selectedQuestion.jawaban.toLowerCase();
+    
+                    if (userAnswer === correctAnswer) {
+                        // Jawaban benar -> ubah tipe input password menjadi text
+                        const passwordField = document.getElementById('passwordField');
+                        if (passwordField) {
+                            passwordField.type = 'text';
+                        }
+    
+                        // Sembunyikan tombol "Lihat Password"
+                        const revealPasswordBtn = document.getElementById('revealPasswordBtn');
+                        if (revealPasswordBtn) {
+                            revealPasswordBtn.style.display = 'none';
+                        }
+    
+                        securityModal.style.display = 'none';
+                    } else {
+                        securityError.textContent = 'Jawaban salah, silakan coba lagi!';
+                    }
+                };
+            })
+            .catch(error => {
+                console.error('Error memuat pertanyaan keamanan:', error);
+                securityQuestion.textContent = 'Gagal memuat pertanyaan keamanan.';
+            });
+    }
+
     // Menampilkan detail pengguna di panel kanan (termasuk Email Pengguna)
     function showUserDetails(user) {
         userInfo.innerHTML = `
@@ -141,16 +213,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="inputBox">
                     <input type="text" value="${user.username}" readonly>
                 </div>
+
                 <h3>Password Pengguna</h3>
                 <div class="inputBox">
-                    <input type="text" value="${user.password}" readonly>
+                    <!-- Menggunakan type="password" agar disembunyikan -->
+                    <input id="passwordField" type="password" value="${user.password}" readonly>
+                    <!-- Tombol "Lihat Password" untuk menampilkan modal security -->
+                    <button id="revealPasswordBtn" class="btn" style="margin-top:10px;">Lihat Password</button>
                 </div>
+
                 <h3>Email Pengguna</h3>
                 <div class="inputBox">
                     <input type="text" value="${user.email}" readonly>
+                    
                 </div>
             </div>
         `;
+
         // Update teks tombol untuk password
         if (user.password === "") {
             changePasswordBtn.textContent = "Tambah Password";
@@ -170,6 +249,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // Tampilkan tombol "Tutup Detail"
         closeDetailBtn.textContent = "Tutup Detail";
         closeDetailBtn.style.display = 'block';
+
+        // Event listener tombol "Lihat Password"
+        const revealPasswordBtn = document.getElementById('revealPasswordBtn');
+        if (revealPasswordBtn) {
+            revealPasswordBtn.addEventListener('click', () => {
+                // Fungsi ini memunculkan modal security question
+                openSecurityQuestionModal();
+            });
+        }
     }
 
     // Update/tambah password pengguna
@@ -342,19 +430,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         <form id="addUserForm">
                             <div class="inBox">
                                 <input type="text" id="newUsername" required placeholder="Username" autocomplete="off">
-                                
                             </div>
                             <div class="inBox">
                                 <input type="password" id="newPassword" required placeholder="Password" autocomplete="off">
-                                
                             </div>
                             <div class="inBox">
                                 <input type="password" id="confirmPassword" required placeholder="Konfirmasi Password" autocomplete="off">
-                                
                             </div>
                             <div class="inBox">
                                 <input type="email" id="newEmail" required placeholder="Email" autocomplete="off">
-                                
                             </div>
                             <button type="submit" class="btn">Tambah Pengguna</button>
                         </form>
@@ -407,9 +491,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-    
+
 /* --- Utility Functions: Modal & Popup --- */
-    
+
 function showPopup(message) {
     const popupOverlay = document.getElementById('popup-message');
     const popupText = document.getElementById('popup-text');
@@ -421,7 +505,7 @@ function showPopup(message) {
         }
     });
 }
-    
+
 function openModalForm({ title, description, defaultValue, onConfirm }) {
     const modalOverlay = document.getElementById('modal-overlay');
     const modalTitle = document.getElementById('modal-title');
@@ -448,7 +532,7 @@ function openModalForm({ title, description, defaultValue, onConfirm }) {
         }
     });
 }
-    
+
 function openConfirmModal({ title, description, onYes }) {
     const confirmOverlay = document.getElementById('confirm-overlay');
     const confirmTitle = document.getElementById('confirm-title');
@@ -471,7 +555,7 @@ function openConfirmModal({ title, description, onYes }) {
         }
     });
 }
-    
+
 function openCaptchaModal({ onSuccess }) {
     const captchaOverlay = document.getElementById('captcha-overlay');
     const captchaTextEl = document.getElementById('captcha-text');
@@ -500,7 +584,7 @@ function openCaptchaModal({ onSuccess }) {
         }
     });
 }
-    
+
 function generateRandomCaptcha(length = 5) {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
