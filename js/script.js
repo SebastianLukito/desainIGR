@@ -218,7 +218,7 @@ function copyToClipboard(elementId) {
   const element = document.getElementById(elementId);
   const text = element.querySelector('p').innerText;
   navigator.clipboard.writeText(text).then(() => {
-      alert("Sudah di-copy, bosku!");
+      alert("Berhasil Dicopy");
   }).catch(err => {
       console.error('Failed to copy text: ', err);
   });
