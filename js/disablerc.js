@@ -30,7 +30,7 @@ document.addEventListener('keydown', function (e) {
     }
 
     // Disable Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+Shift+J
-    if (e.ctrlKey && e.shiftKey && ['I', 'C', 'J', 'K'].includes(e.key)) {
+    if (e.ctrlKey && e.shiftKey && ['I', 'C', 'J', 'K', 'P'].includes(e.key)) {
         e.preventDefault();
         showPopup('Maaf, Developer Tools tidak diizinkan.');
     }
@@ -103,14 +103,6 @@ document.addEventListener('keyup', (e) => {
 
 document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && e.key == 'p') {
-        showPopup('Maaf, print halaman tidak diizinkan.');
-        e.preventDefault();
-        
-    }
-});
-
-document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.shiftKey) {
         showPopup('Maaf, print halaman tidak diizinkan.');
         e.preventDefault();
         
