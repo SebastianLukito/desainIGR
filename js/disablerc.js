@@ -110,6 +110,14 @@ document.addEventListener('keydown', (e) => {
 });
 
 document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey) {
+        showPopup('Maaf, print halaman tidak diizinkan.');
+        e.preventDefault();
+        
+    }
+});
+
+document.addEventListener('keydown', (e) => {
     if (e.shiftKey && e.metaKey) {
         navigator.clipboard.writeText('');
         e.stopImmediatePropagation();
